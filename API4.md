@@ -44,7 +44,14 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
     - `/op`
     - `/deop`
 
-
+#### 設定 Configuration
+- ワールドのプリセットは`pocketmine.yml`の`preset`キーとして利用できるようになりました: 以前は`generator`キー
+- 新たに以下のオプションが`pocketmine.yml`に追加されます
+    - `chunk-ticking.blocks-per-subchunk-per-tick`(デフォルト `3`):この値を増加させるとランダムブロックアップデートの確率が上がります。(例. 草の成長)
+    - `network.enable-encryption`(デフォルト`true`): Minecraftネットワークパケットを暗号化するか否かを決定できます。
+- 以下のオプションが`pocketmine.yml`から削除されました。
+    - `chunk-ticking.light-updates`: 明るさ計算は基本的なバニラの機能を動作させるのに必要なため、チャンクチックを無効化することなくこの機能を停止することは意味がありません。もし、明るさ計算をしたくなければチャンクチックと共に無効化するようにしてください。
+    - `player.anti-cheat.allow-movement-cheats`
 
 ## 開発者向け情報
 ### DevTools API4対応版の配布場所
