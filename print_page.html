@@ -65,7 +65,7 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
-    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
       <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
@@ -246,49 +246,25 @@
   
   
   
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
-      
-      <label class="md-nav__link" for="__nav_2">
-        Md
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Md" data-md-level="1">
-        <label class="md-nav__title" for="__nav_2">
-          <span class="md-nav__icon md-icon"></span>
-          Md
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
     <li class="md-nav__item">
-      <a href="md/API4.html" class="md-nav__link">
+      <a href="API4.html" class="md-nav__link">
         API4
       </a>
     </li>
   
 
-          
-            
+    
+      
+      
+      
+
   
   
   
     <li class="md-nav__item">
-      <a href="md/link.html" class="md-nav__link">
+      <a href="link.html" class="md-nav__link">
         リンク集
       </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
     </li>
   
 
@@ -349,25 +325,26 @@
 <p>散ってしまった情報を一つにまとめます。改善点があればIssueやPull Request願います。</p>
 <h2 id="index-_1">現在の情報一覧</h2>
 <ul>
-<li><a href="#md-api4.md">API4関連情報</a></li>
-<li><a href="#md-link.md">PocketMine-MP関連サービス・サイトリンク</a></li>
-</ul></section><h1 class='nav-section-title'>Md</h1><section class="print-page" id="md-api4"><h1 id="md-api4-api4">API4</h1>
+<li>API4関連情報</li>
+<li>PocketMine-MP関連サービス・サイトリンク</li>
+</ul>
+<p><a href="https://famima65536.github.io/Defragmentation-of-PocketMine-Information/">https://famima65536.github.io/Defragmentation-of-PocketMine-Information/</a>を参照</p></section><section class="print-page" id="api4"><h1 id="api4-api4">API4</h1>
 <p>コンテンツリスト
-- <a href="#md-api4-変更点の抄訳">変更点の抄訳</a>
-- <a href="#md-api4-開発者向け情報">開発者向け情報</a></p>
-<h2 id="md-api4-_1">変更点の抄訳</h2>
+- <a href="#api4-変更点の抄訳">変更点の抄訳</a>
+- <a href="#api4-開発者向け情報">開発者向け情報</a></p>
+<h2 id="api4-_1">変更点の抄訳</h2>
 <p>翻訳元 <a href="https://github.com/pmmp/PocketMine-MP/blob/master/changelogs/4.0.md">https://github.com/pmmp/PocketMine-MP/blob/master/changelogs/4.0.md</a></p>
 <p>全訳は<a href="#api4changelogs.md">API4changelogs</a>より</p>
-<h3 id="md-api4-beta1">BETA1</h3>
+<h3 id="api4-beta1">BETA1</h3>
 <p>2021.9.7リリース
 API4は重要なAPIの変更,新しいワールド形式のサポート,パフォーマンスの向上やネットワークの刷新を含めたコア全体の重要な変更に焦点を当てています。</p>
-<h4 id="md-api4-_2">内容</h4>
+<h4 id="api4-_2">内容</h4>
 <ul>
-<li><a href="#md-api4-一般-general">一般</a></li>
-<li><a href="#md-api4-コマンド-commands">コマンド</a></li>
-<li><a href="#md-api4-設定-configuration">設定</a></li>
+<li><a href="#api4-一般-general">一般</a></li>
+<li><a href="#api4-コマンド-commands">コマンド</a></li>
+<li><a href="#api4-設定-configuration">設定</a></li>
 </ul>
-<h5 id="md-api4-general">一般 General</h5>
+<h5 id="api4-general">一般 General</h5>
 <ul>
 <li>"プラグイングレーリスト"機能が導入されます。ローディング時からプラグインをホワイトリスト化もしくはブラックリスト化することができます。</li>
 <li>Remote Console (RCON) は削除されました。<a href="https://github.com/pmmp/RconServer">RconServer</a>プラグインが代わりに提供されます。</li>
@@ -390,7 +367,7 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 </li>
 <li>高い維持コストのわりに恩恵が少ないためプリプロセッサーはビルドから削除されました。現在、プリプロセッサー利用は非推奨です。</li>
 </ul>
-<h4 id="md-api4-commands">コマンド Commands</h4>
+<h4 id="api4-commands">コマンド Commands</h4>
 <ul>
 <li><code>/reload</code> コマンドは削除されました。</li>
 <li><code>/effect</code> コマンドは数字IDをサポートしなくなりました。現在では名前が要求されます。</li>
@@ -404,7 +381,7 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 </ul>
 </li>
 </ul>
-<h4 id="md-api4-configuration">設定 Configuration</h4>
+<h4 id="api4-configuration">設定 Configuration</h4>
 <ul>
 <li>ワールドのプリセットは<code>pocketmine.yml</code>の<code>preset</code>キーとして利用できるようになりました: 以前は<code>generator</code>キー</li>
 <li>新たに以下のオプションが<code>pocketmine.yml</code>に追加されます<ul>
@@ -418,16 +395,16 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 </ul>
 </li>
 </ul>
-<h2 id="md-api4-_3">開発者向け情報</h2>
-<h3 id="md-api4-devtools-api4">DevTools API4対応版の配布場所</h3>
-<p>poggit上でダウンロード可 <a href="https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools">https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools</a> の Build History:master により最新版がダウンロード可能</p></section><section class="print-page" id="md-link"><h1 id="md-link-_1">リンク集</h1>
+<h2 id="api4-_3">開発者向け情報</h2>
+<h3 id="api4-devtools-api4">DevTools API4対応版の配布場所</h3>
+<p>poggit上でダウンロード可 <a href="https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools">https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools</a> の Build History:master により最新版がダウンロード可能</p></section><section class="print-page" id="link"><h1 id="link-_1">リンク集</h1>
 <ul>
 <li>poggit <a href="https://poggit.pmmp.io/">https://poggit.pmmp.io/</a> レビューされたプラグインやその他開発中のプラグインをダウンロード可能</li>
 <li>Forums <a href="https://forums.pmmp.io/">https://forums.pmmp.io/</a> 公式フォーラム(英語)</li>
 <li>MCBEフォーラム <a href="https://forum.mcbe.jp/">https://forum.mcbe.jp/</a> 非公式日本語フォーラム</li>
 <li>マインクラフト非公式フォーラム <a href="https://forum.minecraft.study/">https://forum.minecraft.study/</a> </li>
 <li>MCServers.JP <a href="https://mcservers.jp/">https://mcservers.jp/</a> 新しいサーバーリスト</li>
-</ul></section><h1 class='nav-section-title-end'>Ended: Md</h1></div>
+</ul></section></div>
                 
               
 
@@ -473,7 +450,7 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-<script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+<script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
 
 <script src="https://unpkg.com/iframe-worker/polyfill"></script>
