@@ -9,8 +9,8 @@ on:
     branches:
       - master
     paths: 
-      - "/*.md"
-      - "/**/*.md"
+      - "*.md"
+      - "**/*.md"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
