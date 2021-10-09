@@ -1,4 +1,6 @@
 # リンク集
+- 公式ドキュメント <https://pmmp.readthedocs.io/en/rtfd/> インストール方法やアップデート方法、プラグインについてやよくある質問を見ることが可能。
+- pmmp/PocketMine-MP(GitHub) <https://github.com/pmmp/PocketMine-MP> Releaseから最新版をダウンロード可能
 - poggit <https://poggit.pmmp.io/> レビューされたプラグインやその他開発中のプラグインをダウンロード可能
 - Forums <https://forums.pmmp.io/> 公式フォーラム(英語)
 - MCBEフォーラム <https://forum.mcbe.jp/> 非公式日本語フォーラム
