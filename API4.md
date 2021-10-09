@@ -1,9 +1,5 @@
 # API4
 
-コンテンツリスト
-- [変更点の抄訳](#変更点の抄訳)
-- [開発者向け情報](#開発者向け情報)
-
 ## 変更点の抄訳
 翻訳元 <https://github.com/pmmp/PocketMine-MP/blob/master/changelogs/4.0.md>
 
