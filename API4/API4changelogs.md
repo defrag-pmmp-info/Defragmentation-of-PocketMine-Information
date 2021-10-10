@@ -1,4 +1,5 @@
-# 訳に関して
+# API4Changelogs全訳
+## 訳に関して
 <https://github.com/pmmp/PocketMine-MP/commit/9e6d7405709560c0025e072324602983213276dd> 版より翻訳
 翻訳漏れの内容に気を配りますが、書かれていない項目がある場合PRを送ってもらえると助かります。
 
