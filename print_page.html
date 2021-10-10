@@ -290,6 +290,18 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API4/API4changelogs.html" class="md-nav__link">
+        訳に関して
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -423,7 +435,7 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <li><a href="#api4-index-コマンド-commands">コマンド</a></li>
 <li><a href="#api4-index-設定-configuration">設定</a></li>
 </ul>
-<h5 id="api4-index-general">一般 General</h5>
+<h4 id="api4-index-general">一般 General</h4>
 <ul>
 <li>"プラグイングレーリスト"機能が導入されます。ローディング時からプラグインをホワイトリスト化もしくはブラックリスト化することができます。</li>
 <li>Remote Console (RCON) は削除されました。<a href="https://github.com/pmmp/RconServer">RconServer</a>プラグインが代わりに提供されます。</li>
@@ -450,7 +462,7 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <ul>
 <li><code>/reload</code> コマンドは削除されました。</li>
 <li><code>/effect</code> コマンドは数字IDをサポートしなくなりました。現在では名前が要求されます。</li>
-<li><code>/enchat</code> コマンドは数学IDをサポートしなくなりました。現在では名前が要求されます。</li>
+<li><code>/enchant</code> コマンドは数学IDをサポートしなくなりました。現在では名前が要求されます。</li>
 <li><code>/clear</code> コマンドが追加されました。バニラのMinecraftのものと機能的に同等のものです。</li>
 <li>以下のコマンドの出力は選択した言語にローカライズされました。<ul>
 <li><code>/gc</code></li>
@@ -476,19 +488,83 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 </ul>
 <h2 id="api4-index-_4">開発者向け情報</h2>
 <h3 id="api4-index-devtools-api4">DevTools API4対応版の配布場所</h3>
-<p>poggit上でダウンロード可 <a href="https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools">https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools</a> の Build History:master により最新版がダウンロード可能</p></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Dictionary</h1><section class="print-page" id="dictionary-poggit"><h1 id="dictionary-poggit-poggit">Poggit</h1>
+<p>poggit上でダウンロード可 <a href="https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools">https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools</a> の Build History:master により最新版がダウンロード可能</p></section><section class="print-page" id="api4-api4changelogs"><h1 id="api4-api4changelogs-_1">訳に関して</h1>
+<p><a href="https://github.com/pmmp/PocketMine-MP/commit/9e6d7405709560c0025e072324602983213276dd">https://github.com/pmmp/PocketMine-MP/commit/9e6d7405709560c0025e072324602983213276dd</a> 版より翻訳
+翻訳漏れの内容に気を配りますが、書かれていない項目がある場合PRを送ってもらえると助かります。</p>
+<h1 id="api4-api4changelogs-400-beta1">4.0.0-BETA1</h1>
+<p>2021.9.7リリース
+このメジャーバージョンAPI4は重要なAPIの変更,新しいワールド形式のサポート,パフォーマンスの向上やネットワークの刷新を含めたコア全体の重要な変更に焦点を当てています。</p>
+<p>これはベータリリースであり、最終版でないことを注意してください。 現在からリリースまでに重大な変更はない予定ですがAPIはまだ変更される可能性があります。</p>
+<p>さらに、このチェンジログはベストエフォートに基づいて提供されていて、すべての変更点が言及されていない可能性があることに注意してください。何か洩れがあった場合追加するためにプルリクエストをお願いします。(すなわち pmmp公式へ)</p>
+<h2 id="api4-api4changelogs-_2">警告</h2>
+<p>これは安定版リリースでは<strong>ありません</strong>。PMMPはこのビルドを使用したことによる損害のいかなる責任を負いません。
+<strong>テスト</strong>目的にのみ使用してください。</p>
+<h2 id="api4-api4changelogs-_3">コア</h2>
+<h3 id="api4-api4changelogs-general">一般 General</h3>
+<ul>
+<li>"プラグイングレーリスト"機能が導入されます。ローディング時からプラグインをホワイトリスト化もしくはブラックリスト化することができます。</li>
+<li>Remote Console (RCON) は削除されました。<a href="https://github.com/pmmp/RconServer">RconServer</a>プラグインが代わりに提供されます。</li>
+<li>スポーンプロテクションは削除されました。<a href="https://github.com/pmmp/BasicSpawnProtection">BasicSpawnProtection</a>プラグインが代わりに提供されます。</li>
+<li>Ctrl+Cシグナルハンドリングは削除されました。[PcnltSignalHandler]プラグインが代わりに提供されます。</li>
+<li>プレイヤー移動アンチチートは削除されました。</li>
+<li>GS4 QueryはRakLibが無効化されても停止されなくなりました。</li>
+<li><code>pocketmine_chunkutils</code> PHP拡張は使われなくなりました。</li>
+<li>新しいPHP拡張がこのバージョンから必要になりました。<ul>
+<li><a href="https://github.com/pmmp/ext-chunkutils2">chunkutils2</a></li>
+<li><a href="https://github.com/pmmp/ext-morton">morton</a></li>
+</ul>
+</li>
+<li>プレイヤーリスポーン時の多くのバグが修正されました。<ul>
+<li>生成されていない地形でリスポーンする際に岩盤下にスポーンするバグ</li>
+<li>非常に遅いマシン上で初回サーバー参加時に岩盤下にスポーンするバグ</li>
+<li>カスタムスポーン地点がセットされている状態でリスポーンしたときにブロック内(または上空)にスポーンするバグ</li>
+<li>プレイヤースポーン地点がワールドスポーンが変わった時に以前の場所になってしまうバグ</li>
+</ul>
+</li>
+<li>高い維持コストのわりに恩恵が少ないためプリプロセッサーはビルドから削除されました。現在、プリプロセッサー利用は非推奨です。</li>
+</ul>
+<h3 id="api4-api4changelogs-commands">コマンド Commands</h3>
+<ul>
+<li><code>/reload</code> コマンドは削除されました。</li>
+<li><code>/effect</code> コマンドは数字IDをサポートしなくなりました。現在では名前が要求されます。</li>
+<li><code>/enchant</code> コマンドは数学IDをサポートしなくなりました。現在では名前が要求されます。</li>
+<li><code>/clear</code> コマンドが追加されました。バニラのMinecraftのものと機能的に同等のものです。</li>
+<li>以下のコマンドの出力は選択した言語にローカライズされました。<ul>
+<li><code>/gc</code></li>
+<li><code>/status</code></li>
+<li><code>/op</code></li>
+<li><code>/deop</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="api4-api4changelogs-configuration">設定 Configuration</h3>
+<ul>
+<li>ワールドのプリセットは<code>pocketmine.yml</code>の<code>preset</code>キーとして利用できるようになりました: 以前は<code>generator</code>キー</li>
+<li>新たに以下のオプションが<code>pocketmine.yml</code>に追加されます<ul>
+<li><code>chunk-ticking.blocks-per-subchunk-per-tick</code>(デフォルト <code>3</code>):この値を増加させるとランダムブロックアップデートの確率が上がります。(例. 草の成長)</li>
+<li><code>network.enable-encryption</code>(デフォルト<code>true</code>): Minecraftネットワークパケットを暗号化するか否かを決定できます。</li>
+</ul>
+</li>
+<li>以下のオプションが<code>pocketmine.yml</code>から削除されました。<ul>
+<li><code>chunk-ticking.light-updates</code>: 明るさ計算は基本的なバニラの機能を動作させるのに必要なため、チャンクチックを無効化することなくこの機能を停止することは意味がありません。もし、明るさ計算をしたくなければチャンクチックと共に無効化するようにしてください。</li>
+<li><code>player.anti-cheat.allow-movement-cheats</code></li>
+</ul>
+</li>
+</ul></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Dictionary</h1><section class="print-page" id="dictionary-poggit"><h1 id="dictionary-poggit-poggit">Poggit</h1>
 <p>PocketMineの公式プラグインレポジトリです。
 ここにあるプラグインは以下の二つに分けられます</p>
 <ul>
 <li>
-<p><strong>Release</strong> Poggitスタッフに承認されたプラグインがダウンロードでき、評価をつけることもできます。</p>
+<p><strong>Releases</strong> Poggitスタッフに承認されたプラグインがダウンロードでき、評価をつけることもできます。</p>
 </li>
 <li>
 <p><strong>Dev</strong> 開発中のプラグインがダウンロードできます。動作の確認がされているとは限りません。</p>
 </li>
 </ul>
 <h2 id="dictionary-poggit-_1">使い方</h2>
-<p>...画像をつけた説明の追加</p></section><h1 class='nav-section-title-end'>Ended: Dictionary</h1></div>
+<!-- 画像をつける -->
+<p>ReleasesやDevタブからプラグインを探すことができます。
+Relesesでは初期状態ではすべてのプラグインが表示されていますが<code>All Caregories</code>となっているプルダウンメニューから自分の探したいジャンル、<code>All API Versions</code>となっているメニューから対応するバージョンを絞って探すことができます。</p></section><h1 class='nav-section-title-end'>Ended: Dictionary</h1></div>
                 
               
 
