@@ -1,4 +1,4 @@
-# API4 Changelogs全訳(7%完了)
+# API4 Changelogs全訳(12%完了)
 ## 訳に関して
 <https://github.com/pmmp/PocketMine-MP/commit/9e6d7405709560c0025e072324602983213276dd> 版より翻訳
 
@@ -107,3 +107,61 @@
     - 一時的な状態固有のロジックの存在を許可する(例えばリソースパックのより厳格なダウンロードチェック)
 - パケットハンドラーはほとんどいたるところで`Player`からなくなり、代わりにそのパケットハンドラー専用のユニットに存在しまるようになりました。
 - 以前まで`Player`のパケットハンドラー内部に絡み合っていたほぼすべてのゲームロジックは新たなAPIメソッドへと展開されました。詳しくはPlayer APIの変更をご覧ください。
+
+### API
+#### 一般
+- 以前まで`callable`を許容していた大半の個所は、現在では`/Closure`のみを許可します。これはクロージャーがより一貫性のある振る舞いをして性能がより高いためです。
+- `void`と`?nullable` パラメータおよび返り値の型指定は多くの箇所に適用されました。
+- `pocketmine\metadeta`名前空間にあるすべてのものとそれに関連する実装は削除されました。
+
+
+#### `plugin.yml`の変更
+##### パーミッションのネスト
+パーミッションのネストは`plugin.yml`内ではサポートされなくなりました。 `plugin.yml`内で(デフォルトにより)パーミッションのグループ化には、非常に混乱しやすく一貫性のないふるまいがありました。
+ネストによるパーミッションの宣言の代わりに、宣言はそれぞればらばらになさなければならなりません。
+
+_Before_:
+```
+permissions:
+   pmmp:
+     default: op
+	 children:
+	     pmmp.something:
+		     default: op
+         pmmp.somethingElse
+		     default: op
+```
+
+_After_:
+```
+permissions:
+    pmmp.something:
+        default: op
+    pmmp.somethingElse
+        default: op
+```
+
+##### `src-namespace-prefix`
+新しい指示文`src-namespace-prefix`が導入されます。これにより以下のようなプラグイン構造にある無駄なサブディレクトリを取り除くことができます。
+例えば、以前では`pmmp\TesterPlugin\Main`がメインクラスであるようなプラグインはこのような構造でした。
+```
+|-- plugin.yml
+|-- src/
+    |-- pmmp/
+        |-- TesterPlugin/
+            |-- Main.php
+            |-- SomeOtherClass.php
+            |-- SomeNamespace/
+                |-- SomeNamespacedClass.php
+```
+しかし、`src-namespace-prefix:pmmp\TesterPlugin`を`plugin.yml`に付けくわえることで無駄なディレクトリを取り除き、このような構造にすることができます。
+```
+|-- plugin.yml
+|-- src/
+    |-- Main.php
+    |-- SomeOtherClass.php
+    |-- SomeNamespace/
+        |-- SomeNamespacedClass.php
+```
+
+**ノート**: 昔の構造でもちゃんと動きます。これは必ず変えなければならない変更ではありません。
