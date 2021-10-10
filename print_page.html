@@ -579,7 +579,7 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <li><code>Timings</code>はより正確なパフォーマンスメトリクスを収集するため<code>hrtime()</code>により提供される高精度なタイマーを使うようになります。</li>
 <li>Z階数曲線(モートンコード)がブロックとチャンク座標のハッシュのために使用されます。これはハッシュテーブルキーハッシュ衝突問題を解決することにより広い範囲でパフォーマンスを非常に改善します。影響がある範囲には爆発や明るさ計算などを含みます。</li>
 <li><a href="https://github.com/ebiggers/libdeflate"><code>libdeflate</code></a>が(オプションで)外方向へのMinecraftパケット圧縮に使用できます。これは多くのケースで<code>zlib</code>の2倍以上高速で、パケットブロードキャストとネットワーク全体の性能を向上させます。</li>
-<li>クロージャーは現在内部イベントハンダラーの呼び出しのために使用されています。これにより3.xシステムよりも10-20%の性能向上ができます。3.xシステムはイベントコールのたびに動的にコーラブルを解決する必要がありました。</li>
+<li>クロージャーは現在内部イベントハンドラーの呼び出しのために使用されています。これにより3.xシステムよりも10-20%の性能向上ができます。3.xシステムはイベントコールのたびに動的にコーラブルを解決する必要がありました。</li>
 </ul>
 <h4 id="api4-api4changelogs-logger">Logger刷新</h4>
 <ul>
@@ -592,7 +592,18 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <ul>
 <li>これはハッカーがプレイヤーのログインを盗聴し利用することによる反射攻撃を防ぎます。</li>
 <li>新たな設定<code>network.enable-encryption</code>が<code>pocketmine.yml</code>に追加されました。デフォルトでは<code>true</code>です。</li>
-</ul></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Dictionary</h1><section class="print-page" id="dictionary-poggit"><h1 id="dictionary-poggit-poggit">Poggit</h1>
+</ul>
+<h5 id="api4-api4changelogs-_9">パケット受信エラーハンドリングが整備されました</h5>
+<ul>
+<li>今は<code>BadPacketException</code>のみがパケットのデコード、ハンドリング時にキャッチされます。これにはすべてのデコードが適切なエラーチェックを行うことが<strong>必須</strong>とされます。<ul>
+<li>デコードで<code>BadPacketException</code>を投げるとプレイヤーは<code>Packet processing error</code>メッセージでキックされます。</li>
+<li>切断メッセージにはサーバーオーナーがプレイヤーから報告された問題を特定しやすくするためのランダムな16進数IDが含まれます。</li>
+</ul>
+</li>
+<li>そのほかの例外を投げるとサーバーはクラッシュします。<code>Internal server error</code>は削除されました。</li>
+<li>現在ではサーバーに対するクライアント方向へのパケットの送信は不当なものになりました。これを行うとクライアントは<code>Unexpected non-serverbound packet</code>メッセージでキックされます。</li>
+</ul>
+<h5 id="api4-api4changelogs-_10">新たなパケットハンドラーシステム</h5></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Dictionary</h1><section class="print-page" id="dictionary-poggit"><h1 id="dictionary-poggit-poggit">Poggit</h1>
 <p>PocketMineの公式プラグインレポジトリです。
 ここにあるプラグインは以下の二つに分けられます</p>
 <ul>
