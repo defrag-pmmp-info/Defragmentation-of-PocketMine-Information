@@ -357,6 +357,48 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Hosting
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Hosting" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Hosting
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="hosting/index.html" class="md-nav__link">
+        サーバー構築
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
     <li class="md-nav__item">
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
@@ -656,7 +698,14 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
     |-- SomeNamespace/
         |-- SomeNamespacedClass.php
 </code></pre></div></p>
-<p><strong>ノート</strong>: 昔の構造でもちゃんと動きます。これは必ず変えなければならない変更ではありません。</p></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Dictionary</h1><section class="print-page" id="dictionary-poggit"><h1 id="dictionary-poggit-poggit">Poggit</h1>
+<p><strong>ノート</strong>: 昔の構造でもちゃんと動きます。これは必ず変えなければならない変更ではありません。</p>
+<h4 id="api4-api4changelogs-block">Block</h4>
+<ul>
+<li>新たに<code>VanillaBlocks</code>クラスが追加されました。このクラスは現在知られているどのブロックタイプでも生成できる静的メソッドを保有しています。 これは定数が使われている場合に<code>BlockFactory::get()</code>の代わりとしてしようされることが好ましいです。</li>
+<li>ブロックは<code>Position</code>を継承するかわりにポジションを保有します。<code>Block-&gt;getBlockPosition()</code>が追加されました。</li>
+<li>256以上のIDをもつブロックがサポートされました。</li>
+<li>ブロックの状態と変数のメタデータは分離されました。</li>
+</ul></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Dictionary</h1><section class="print-page" id="dictionary-poggit"><h1 id="dictionary-poggit-poggit">Poggit</h1>
 <p>PocketMineの公式プラグインレポジトリです。
 ここにあるプラグインは以下の二つに分けられます。</p>
 <ul>
@@ -670,14 +719,14 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <h2 id="dictionary-poggit-_1">使い方</h2>
 <!-- 画像をつける -->
 <p>ReleasesやDevタブからプラグインを探すことができます。
-Relesesでは初期状態ではすべてのプラグインが表示されていますが<code>All Caregories</code>となっているプルダウンメニューから自分の探したいジャンル、<code>All API Versions</code>となっているメニューから対応するバージョンを絞って探すことができます。</p></section><h1 class='nav-section-title-end'>Ended: Dictionary</h1></div>
+Relesesでは初期状態ではすべてのプラグインが表示されていますが<code>All Caregories</code>となっているプルダウンメニューから自分の探したいジャンル、<code>All API Versions</code>となっているメニューから対応するバージョンを絞って探すことができます。</p></section><h1 class='nav-section-title-end'>Ended: Dictionary</h1><h1 class='nav-section-title'>Hosting</h1><section class="print-page" id="hosting-index"><h1 id="hosting-index-_1">サーバー構築</h1></section><h1 class='nav-section-title-end'>Ended: Hosting</h1></div>
                 
               
 
   
     <div class="md-source-date">
       <small>
-          Authors: <span class='git-page-authors git-authors'><a href='mailto:famima65536@gmail.com'>famima65536</a> (88.89%), <a href='mailto:25810983+UramnOIL@users.noreply.github.com'>うらむんオイル</a> (11.11%)</span>
+          Authors: <span class='git-page-authors git-authors'><a href='mailto:famima65536@gmail.com'>famima65536</a></span>
       </small>
     </div>
   
