@@ -547,10 +547,37 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 </ul>
 </li>
 <li>以下のオプションが<code>pocketmine.yml</code>から削除されました。<ul>
-<li><code>chunk-ticking.light-updates</code>: 明るさ計算は基本的なバニラの機能を動作させるのに必要なため、チャンクチックを無効化することなくこの機能を停止することは意味がありません。もし、明るさ計算をしたくなければチャンクチックと共に無効化するようにしてください。</li>
+<li><code>chunk-ticking.light-updates</code>: 光処理は基本的なバニラの機能を動作させるのに必要なため、チャンクチックを無効化することなくこの機能を停止することは意味がありません。もし、明るさ計算をしたくなければチャンクチックと共に無効化するようにしてください。</li>
 <li><code>player.anti-cheat.allow-movement-cheats</code></li>
 </ul>
 </li>
+</ul>
+<h3 id="api4-api4changelogs-_4">ワールドハンドリング</h3>
+<h4 id="api4-api4changelogs-_5">インターフェイス</h4>
+<ul>
+<li>最初のワールド生成時にスポーン地形チャンク生成の進度が表示されるようになりました。</li>
+</ul>
+<h4 id="api4-api4changelogs-_6">機能</h4>
+<ul>
+<li>1.12.xまでのMinecraft Bedrockのワールドがサポートされました。(1.13より上はまた別の形式変更によりまだ<strong>サポートされていません</strong>。対応には非常に労力を要します。)</li>
+<li>非推奨のワールド形式の自動変換が実装されました。</li>
+<li><code>leveldb</code>以外のすべての形式は非推奨となりました。以下のワールド形式は<strong>ロード時に自動的に新しい形式に変換されます</strong>:</li>
+<li><code>mcregion</code></li>
+<li><code>anvil</code></li>
+<li><code>pmanvil</code></li>
+<li>建築上限256はすべてのワールドでサポートされます。(自動変換により)</li>
+<li>追加ブロックがサポートされます。(自動変換により)</li>
+<li>光処理はディスク上に保存・ロードされなくなりました。</li>
+<li>かわりに必要に応じてすぐに算出されます。これは以前からあった多くのバグを修正します。</li>
+</ul>
+<h4 id="api4-api4changelogs-_7">パフォーマンス</h4>
+<ul>
+<li><code>leveldb</code>は現在、基本のサポートされたワールド形式です。優れた設計により生来よりリージョンベース形式よりも高速です。</li>
+<li>部分的なチャンク保存(変更されたチャンクの子要素のみを保存する)が実装されました。これによりチャンク保存時に書き込む必要のあるデータ量を徹底的に減らすことができます。また、同様に<strong>ワールド保存にかかる時間も徹底的に減らします</strong>。 これは<code>leveldb</code>ワールド形式のモジュール設計に可能になりました。リージョンベース形式ではこの強化はできません。</li>
+<li>光処理はすべてのチャンクで利用可能であるとは限らなくなります。必要に応じてすぐに算出されます。</li>
+<li><code>/op</code>, <code>/deop</code>, <code>/whitelist add</code> and <code>/whitelist remove</code> は理由なくプレイヤーデータを読み込まないようになりました。</li>
+<li><code>Timings</code>はより正確なパフォーマンスメトリクスを収集するため<code>hrtime()</code>により提供される高精度なタイマーを使うようになります。</li>
+<li>Z階数曲線(モートンコード)がブロックとチャンク座標のハッシュのために使用されます。</li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Dictionary</h1><section class="print-page" id="dictionary-poggit"><h1 id="dictionary-poggit-poggit">Poggit</h1>
 <p>PocketMineの公式プラグインレポジトリです。
 ここにあるプラグインは以下の二つに分けられます</p>
