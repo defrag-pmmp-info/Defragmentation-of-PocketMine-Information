@@ -17,7 +17,7 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 - [一般](#一般-general)
 - [コマンド](#コマンド-commands)
 - [設定](#設定-configuration)
-##### 一般 General
+#### 一般 General
 - "プラグイングレーリスト"機能が導入されます。ローディング時からプラグインをホワイトリスト化もしくはブラックリスト化することができます。
 - Remote Console (RCON) は削除されました。[RconServer](https://github.com/pmmp/RconServer)プラグインが代わりに提供されます。
 - スポーンプロテクションは削除されました。[BasicSpawnProtection](https://github.com/pmmp/BasicSpawnProtection)プラグインが代わりに提供されます。
