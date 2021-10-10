@@ -425,16 +425,10 @@
 <a href="https://qiita.com/bbo51dog/items/414b6270682f1a028bfe">https://qiita.com/bbo51dog/items/414b6270682f1a028bfe</a> (Ubuntu)</p>
 <h2 id="api4-index-_2">変更点の抄訳</h2>
 <p>翻訳元 <a href="https://github.com/pmmp/PocketMine-MP/blob/master/changelogs/4.0.md">https://github.com/pmmp/PocketMine-MP/blob/master/changelogs/4.0.md</a></p>
-<p>全訳は<a href="#api4changelogs.md">API4changelogs</a>より</p>
+<p>全訳は<a href="#api4-api4changelogs">API4changelogs</a>より</p>
 <h3 id="api4-index-beta1">BETA1</h3>
 <p>2021.9.7リリース
 API4は重要なAPIの変更,新しいワールド形式のサポート,パフォーマンスの向上やネットワークの刷新を含めたコア全体の重要な変更に焦点を当てています。</p>
-<h4 id="api4-index-_3">内容</h4>
-<ul>
-<li><a href="#api4-index-一般-general">一般</a></li>
-<li><a href="#api4-index-コマンド-commands">コマンド</a></li>
-<li><a href="#api4-index-設定-configuration">設定</a></li>
-</ul>
 <h4 id="api4-index-general">一般 General</h4>
 <ul>
 <li>"プラグイングレーリスト"機能が導入されます。ローディング時からプラグインをホワイトリスト化もしくはブラックリスト化することができます。</li>
@@ -486,7 +480,7 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 </ul>
 </li>
 </ul>
-<h2 id="api4-index-_4">開発者向け情報</h2>
+<h2 id="api4-index-_3">開発者向け情報</h2>
 <h3 id="api4-index-devtools-api4">DevTools API4対応版の配布場所</h3>
 <p>poggit上でダウンロード可 <a href="https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools">https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools</a> の Build History:master により最新版がダウンロード可能</p></section><section class="print-page" id="api4-api4changelogs"><h1 id="api4-api4changelogs-api4-changelogs7">API4 Changelogs全訳(7%完了)</h1>
 <h2 id="api4-api4changelogs-_1">訳に関して</h2>
@@ -603,7 +597,17 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <li>そのほかの例外を投げるとサーバーはクラッシュします。<code>Internal server error</code>は削除されました。</li>
 <li>現在ではサーバーに対するクライアント方向へのパケットの送信は不当なものになりました。これを行うとクライアントは<code>Unexpected non-serverbound packet</code>メッセージでキックされます。</li>
 </ul>
-<h5 id="api4-api4changelogs-_10">新たなパケットハンドラーシステム</h5></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Dictionary</h1><section class="print-page" id="dictionary-poggit"><h1 id="dictionary-poggit-poggit">Poggit</h1>
+<h5 id="api4-api4changelogs-_10">新たなパケットハンドラーシステム</h5>
+<ul>
+<li>パケットハンドラーはネットワークセッションから分離され、専用のパケットハンダラー構造に分かれました。</li>
+<li>ネットワークセッションは正確に1つのハンドラーをその時点で持つことができます。ハンドラーは可変ありいつでも置き換えられます。これによりパケットハンドリングのロジックを複数のステージへと分離することができます。<ul>
+<li>不正なタイミングで不正なパケットを送信することを防ぐ(今では何事もなくドロップされます)</li>
+<li>一時的な状態固有のロジックの存在を許可する(例えばリソースパックのより厳格なダウンロードチェック)</li>
+</ul>
+</li>
+<li>パケットハンドラーはほとんどいたるところで<code>Player</code>からなくなり、代わりにそのパケットハンドラー専用のユニットに存在しまるようになりました。</li>
+<li>以前まで<code>Player</code>のパケットハンドラー内部に絡み合っていたほぼすべてのゲームロジックは新たなAPIメソッドへと展開されました。詳しくはPlayer APIの変更をご覧ください。</li>
+</ul></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Dictionary</h1><section class="print-page" id="dictionary-poggit"><h1 id="dictionary-poggit-poggit">Poggit</h1>
 <p>PocketMineの公式プラグインレポジトリです。
 ここにあるプラグインは以下の二つに分けられます。</p>
 <ul>
