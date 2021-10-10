@@ -296,7 +296,7 @@
   
     <li class="md-nav__item">
       <a href="API4/API4changelogs.html" class="md-nav__link">
-        API4Changelogs全訳
+        API4changelogs
       </a>
     </li>
   
@@ -488,19 +488,18 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 </ul>
 <h2 id="api4-index-_4">開発者向け情報</h2>
 <h3 id="api4-index-devtools-api4">DevTools API4対応版の配布場所</h3>
-<p>poggit上でダウンロード可 <a href="https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools">https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools</a> の Build History:master により最新版がダウンロード可能</p></section><section class="print-page" id="api4-api4changelogs"><h1 id="api4-api4changelogs-api4changelogs">API4Changelogs全訳</h1>
-<h2 id="api4-api4changelogs-_1">訳に関して</h2>
-<p><a href="https://github.com/pmmp/PocketMine-MP/commit/9e6d7405709560c0025e072324602983213276dd">https://github.com/pmmp/PocketMine-MP/commit/9e6d7405709560c0025e072324602983213276dd</a> 版より翻訳
+<p>poggit上でダウンロード可 <a href="https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools">https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools</a> の Build History:master により最新版がダウンロード可能</p></section><section class="print-page" id="api4-api4changelogs"><p><strong>訳に関して</strong>
+<a href="https://github.com/pmmp/PocketMine-MP/commit/9e6d7405709560c0025e072324602983213276dd">https://github.com/pmmp/PocketMine-MP/commit/9e6d7405709560c0025e072324602983213276dd</a> 版より翻訳
 翻訳漏れの内容に気を配りますが、書かれていない項目がある場合PRを送ってもらえると助かります。</p>
 <h1 id="api4-api4changelogs-400-beta1">4.0.0-BETA1</h1>
 <p>2021.9.7リリース
 このメジャーバージョンAPI4は重要なAPIの変更,新しいワールド形式のサポート,パフォーマンスの向上やネットワークの刷新を含めたコア全体の重要な変更に焦点を当てています。</p>
 <p>これはベータリリースであり、最終版でないことを注意してください。 現在からリリースまでに重大な変更はない予定ですがAPIはまだ変更される可能性があります。</p>
 <p>さらに、このチェンジログはベストエフォートに基づいて提供されていて、すべての変更点が言及されていない可能性があることに注意してください。何か洩れがあった場合追加するためにプルリクエストをお願いします。(すなわち pmmp公式へ)</p>
-<h2 id="api4-api4changelogs-_2">警告</h2>
+<h2 id="api4-api4changelogs-_1">警告</h2>
 <p>これは安定版リリースでは<strong>ありません</strong>。PMMPはこのビルドを使用したことによる損害のいかなる責任を負いません。
 <strong>テスト</strong>目的にのみ使用してください。</p>
-<h2 id="api4-api4changelogs-_3">コア</h2>
+<h2 id="api4-api4changelogs-_2">コア</h2>
 <h3 id="api4-api4changelogs-general">一般 General</h3>
 <ul>
 <li>"プラグイングレーリスト"機能が導入されます。ローディング時からプラグインをホワイトリスト化もしくはブラックリスト化することができます。</li>
@@ -552,12 +551,12 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 </ul>
 </li>
 </ul>
-<h3 id="api4-api4changelogs-_4">ワールドハンドリング</h3>
-<h4 id="api4-api4changelogs-_5">インターフェイス</h4>
+<h3 id="api4-api4changelogs-_3">ワールドハンドリング</h3>
+<h4 id="api4-api4changelogs-_4">インターフェイス</h4>
 <ul>
 <li>最初のワールド生成時にスポーン地形チャンク生成の進度が表示されるようになりました。</li>
 </ul>
-<h4 id="api4-api4changelogs-_6">機能</h4>
+<h4 id="api4-api4changelogs-_5">機能</h4>
 <ul>
 <li>1.12.xまでのMinecraft Bedrockのワールドがサポートされました。(1.13より上はまた別の形式変更によりまだ<strong>サポートされていません</strong>。対応には非常に労力を要します。)</li>
 <li>非推奨のワールド形式の自動変換が実装されました。</li>
@@ -570,7 +569,7 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <li>光処理はディスク上に保存・ロードされなくなりました。</li>
 <li>かわりに必要に応じてすぐに算出されます。これは以前からあった多くのバグを修正します。</li>
 </ul>
-<h4 id="api4-api4changelogs-_7">パフォーマンス</h4>
+<h4 id="api4-api4changelogs-_6">パフォーマンス</h4>
 <ul>
 <li><code>leveldb</code>は現在、基本のサポートされたワールド形式です。優れた設計により生来よりリージョンベース形式よりも高速です。</li>
 <li>部分的なチャンク保存(変更されたチャンクの子要素のみを保存する)が実装されました。これによりチャンク保存時に書き込む必要のあるデータ量を徹底的に減らすことができます。また、同様に<strong>ワールド保存にかかる時間も徹底的に減らします</strong>。 これは<code>leveldb</code>ワールド形式のモジュール設計に可能になりました。リージョンベース形式ではこの強化はできません。</li>
