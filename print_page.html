@@ -546,18 +546,14 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <li>プレイヤー移動アンチチートは削除されました。</li>
 <li>GS4 QueryはRakLibが無効化されても停止されなくなりました。</li>
 <li><code>pocketmine_chunkutils</code> PHP拡張は使われなくなりました。</li>
-<li>新しいPHP拡張がこのバージョンから必要になりました。<ul>
-<li><a href="https://github.com/pmmp/ext-chunkutils2">chunkutils2</a></li>
-<li><a href="https://github.com/pmmp/ext-morton">morton</a></li>
-</ul>
-</li>
-<li>プレイヤーリスポーン時の多くのバグが修正されました。<ul>
-<li>生成されていない地形でリスポーンする際に岩盤下にスポーンするバグ</li>
-<li>非常に遅いマシン上で初回サーバー参加時に岩盤下にスポーンするバグ</li>
-<li>カスタムスポーン地点がセットされている状態でリスポーンしたときにブロック内(または上空)にスポーンするバグ</li>
-<li>プレイヤースポーン地点がワールドスポーンが変わった時に以前の場所になってしまうバグ</li>
-</ul>
-</li>
+<li>新しいPHP拡張がこのバージョンから必要になりました。
+        - <a href="https://github.com/pmmp/ext-chunkutils2">chunkutils2</a>
+        - <a href="https://github.com/pmmp/ext-morton">morton</a></li>
+<li>プレイヤーリスポーン時の多くのバグが修正されました。
+        - 生成されていない地形でリスポーンする際に岩盤下にスポーンするバグ
+        - 非常に遅いマシン上で初回サーバー参加時に岩盤下にスポーンするバグ
+        - カスタムスポーン地点がセットされている状態でリスポーンしたときにブロック内(または上空)にスポーンするバグ
+        - プレイヤースポーン地点がワールドスポーンが変わった時に以前の場所になってしまうバグ</li>
 <li>高い維持コストのわりに恩恵が少ないためプリプロセッサーはビルドから削除されました。現在、プリプロセッサー利用は非推奨です。</li>
 </ul>
 <h4 id="api4-api4changelogs-commands">コマンド Commands</h4>
@@ -566,27 +562,21 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <li><code>/effect</code> コマンドは数字IDをサポートしなくなりました。現在では名前が要求されます。</li>
 <li><code>/enchant</code> コマンドは数学IDをサポートしなくなりました。現在では名前が要求されます。</li>
 <li><code>/clear</code> コマンドが追加されました。バニラのMinecraftのものと機能的に同等のものです。</li>
-<li>以下のコマンドの出力は選択した言語にローカライズされました。<ul>
-<li><code>/gc</code></li>
-<li><code>/status</code></li>
-<li><code>/op</code></li>
-<li><code>/deop</code></li>
-</ul>
-</li>
+<li>以下のコマンドの出力は選択した言語にローカライズされました。
+        - <code>/gc</code>
+        - <code>/status</code>
+        - <code>/op</code>
+        - <code>/deop</code></li>
 </ul>
 <h4 id="api4-api4changelogs-configuration">設定 Configuration</h4>
 <ul>
 <li>ワールドのプリセットは<code>pocketmine.yml</code>の<code>preset</code>キーとして利用できるようになりました: 以前は<code>generator</code>キー</li>
-<li>新たに以下のオプションが<code>pocketmine.yml</code>に追加されます<ul>
-<li><code>chunk-ticking.blocks-per-subchunk-per-tick</code>(デフォルト <code>3</code>):この値を増加させるとランダムブロックアップデートの確率が上がります。(例. 草の成長)</li>
-<li><code>network.enable-encryption</code>(デフォルト<code>true</code>): Minecraftネットワークパケットを暗号化するか否かを決定できます。</li>
-</ul>
-</li>
-<li>以下のオプションが<code>pocketmine.yml</code>から削除されました。<ul>
-<li><code>chunk-ticking.light-updates</code>: 光処理は基本的なバニラの機能を動作させるのに必要なため、チャンクチックを無効化することなくこの機能を停止することは意味がありません。もし、明るさ計算をしたくなければチャンクチックと共に無効化するようにしてください。</li>
-<li><code>player.anti-cheat.allow-movement-cheats</code></li>
-</ul>
-</li>
+<li>新たに以下のオプションが<code>pocketmine.yml</code>に追加されます
+        - <code>chunk-ticking.blocks-per-subchunk-per-tick</code>(デフォルト <code>3</code>):この値を増加させるとランダムブロックアップデートの確率が上がります。(例. 草の成長)
+        - <code>network.enable-encryption</code>(デフォルト<code>true</code>): Minecraftネットワークパケットを暗号化するか否かを決定できます。</li>
+<li>以下のオプションが<code>pocketmine.yml</code>から削除されました。
+        - <code>chunk-ticking.light-updates</code>: 光処理は基本的なバニラの機能を動作させるのに必要なため、チャンクチックを無効化することなくこの機能を停止することは意味がありません。もし、明るさ計算をしたくなければチャンクチックと共に無効化するようにしてください。
+        - <code>player.anti-cheat.allow-movement-cheats</code></li>
 </ul>
 <h4 id="api4-api4changelogs-_4">ワールドハンドリング</h4>
 <h5 id="api4-api4changelogs-_5">インターフェイス</h5>
@@ -597,10 +587,12 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <ul>
 <li>1.12.xまでのMinecraft Bedrockのワールドがサポートされました。(1.13より上はまた別の形式変更によりまだ<strong>サポートされていません</strong>。対応には非常に労力を要します。)</li>
 <li>非推奨のワールド形式の自動変換が実装されました。</li>
-<li><code>leveldb</code>以外のすべての形式は非推奨となりました。以下のワールド形式は<strong>ロード時に自動的に新しい形式に変換されます</strong>:</li>
+<li><code>leveldb</code>以外のすべての形式は非推奨となりました。以下のワールド形式は<strong>ロード時に自動的に新しい形式に変換されます</strong>:<ul>
 <li><code>mcregion</code></li>
 <li><code>anvil</code></li>
 <li><code>pmanvil</code></li>
+</ul>
+</li>
 <li>建築上限256はすべてのワールドでサポートされます。(自動変換により)</li>
 <li>追加ブロックがサポートされます。(自動変換により)</li>
 <li>光処理はディスク上に保存・ロードされなくなりました。</li>
@@ -631,22 +623,18 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 </ul>
 <h5 id="api4-api4changelogs-_9">パケット受信エラーハンドリングが整備されました</h5>
 <ul>
-<li>今は<code>BadPacketException</code>のみがパケットのデコード、ハンドリング時にキャッチされます。これにはすべてのデコードが適切なエラーチェックを行うことが<strong>必須</strong>とされます。<ul>
-<li>デコードで<code>BadPacketException</code>を投げるとプレイヤーは<code>Packet processing error</code>メッセージでキックされます。</li>
-<li>切断メッセージにはサーバーオーナーがプレイヤーから報告された問題を特定しやすくするためのランダムな16進数IDが含まれます。</li>
-</ul>
-</li>
+<li>今は<code>BadPacketException</code>のみがパケットのデコード、ハンドリング時にキャッチされます。これにはすべてのデコードが適切なエラーチェックを行うことが<strong>必須</strong>とされます。
+        - デコードで<code>BadPacketException</code>を投げるとプレイヤーは<code>Packet processing error</code>メッセージでキックされます。
+        - 切断メッセージにはサーバーオーナーがプレイヤーから報告された問題を特定しやすくするためのランダムな16進数IDが含まれます。</li>
 <li>そのほかの例外を投げるとサーバーはクラッシュします。<code>Internal server error</code>は削除されました。</li>
 <li>現在ではサーバーに対するクライアント方向へのパケットの送信は不当なものになりました。これを行うとクライアントは<code>Unexpected non-serverbound packet</code>メッセージでキックされます。</li>
 </ul>
 <h5 id="api4-api4changelogs-_10">新たなパケットハンドラーシステム</h5>
 <ul>
 <li>パケットハンドラーはネットワークセッションから分離され、専用のパケットハンダラー構造に分かれました。</li>
-<li>ネットワークセッションは正確に1つのハンドラーをその時点で持つことができます。ハンドラーは可変ありいつでも置き換えられます。これによりパケットハンドリングのロジックを複数のステージへと分離することができます。<ul>
-<li>不正なタイミングで不正なパケットを送信することを防ぐ(今では何事もなくドロップされます)</li>
-<li>一時的な状態固有のロジックの存在を許可する(例えばリソースパックのより厳格なダウンロードチェック)</li>
-</ul>
-</li>
+<li>ネットワークセッションは正確に1つのハンドラーをその時点で持つことができます。ハンドラーは可変ありいつでも置き換えられます。これによりパケットハンドリングのロジックを複数のステージへと分離することができます。
+        - 不正なタイミングで不正なパケットを送信することを防ぐ(今では何事もなくドロップされます)
+        - 一時的な状態固有のロジックの存在を許可する(例えばリソースパックのより厳格なダウンロードチェック)</li>
 <li>パケットハンドラーはほとんどいたるところで<code>Player</code>からなくなり、代わりにそのパケットハンドラー専用のユニットに存在しまるようになりました。</li>
 <li>以前まで<code>Player</code>のパケットハンドラー内部に絡み合っていたほぼすべてのゲームロジックは新たなAPIメソッドへと展開されました。詳しくはPlayer APIの変更をご覧ください。</li>
 </ul>
@@ -663,20 +651,20 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 ネストによるパーミッションの宣言の代わりに、宣言はそれぞればらばらになさなければならなりません。</p>
 <p><em>Before</em>:
 <div class="highlight"><pre><span></span><code>permissions:
-   pmmp:
-     default: op
-     children:
-         pmmp.something:
-             default: op
-         pmmp.somethingElse
-             default: op
+    pmmp:
+        default: op
+    children:
+        pmmp.something:
+            default: op
+            pmmp.somethingElse
+            default: op
 </code></pre></div></p>
 <p><em>After</em>:
 <div class="highlight"><pre><span></span><code>permissions:
     pmmp.something:
         default: op
     pmmp.somethingElse
-        default: op
+            default: op
 </code></pre></div></p>
 <h5 id="api4-api4changelogs-src-namespace-prefix"><code>src-namespace-prefix</code></h5>
 <p>新しい指示文<code>src-namespace-prefix</code>が導入されます。これにより以下のようなプラグイン構造にある無駄なサブディレクトリを取り除くことができます。
@@ -699,22 +687,20 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
         |-- SomeNamespacedClass.php
 </code></pre></div></p>
 <p><strong>ノート</strong>: 昔の構造でもちゃんと動きます。これは必ず変えなければならない変更ではありません。</p>
-<h4 id="api4-api4changelogs-block">Block</h4>
+<h5 id="api4-api4changelogs-block">Block</h5>
 <ul>
 <li>新たに<code>VanillaBlocks</code>クラスが追加されました。このクラスは現在知られているどのブロックタイプでも生成できる静的メソッドを保有しています。 これは定数が使われている場合に<code>BlockFactory::get()</code>の代わりとしてしようされることが好ましいです。</li>
 <li>ブロックは<code>Position</code>を継承するかわりにポジションを保有します。<code>Block-&gt;getBlockPosition()</code>が追加されました。</li>
 <li>256以上のIDをもつブロックがサポートされました。</li>
-<li>ブロックのステートとバリアントメタデータは分離されました。<ul>
-<li>バリアントはIDの拡張と考えられ、不変です。(解説:これは回転や開閉といった状態を含まないことを表す)</li>
-<li><code>Block-&gt;setDamage()</code>は削除されました。</li>
-<li>すべてのブロックにはブロックプロパティ相応のゲッターとセッターが備わりました。例えば<code>facing</code> どの向きか,<code>lit/unlit</code> 着火/消火, <code>colour</code> 色などです。これらはメタデータの代わりに利用されるべきです。</li>
-</ul>
-</li>
+<li>ブロックのステートとバリアントメタデータは分離されました。
+        - バリアントはIDの拡張と考えられ、不変です。(解説:これは回転や開閉といった状態を含まないことを表す)
+        - <code>Block-&gt;setDamage()</code>は削除されました。
+        - すべてのブロックにはブロックプロパティ相応のゲッターとセッターが備わりました。例えば<code>facing</code> どの向きか,<code>lit/unlit</code> 着火/消火, <code>colour</code> 色などです。これらはメタデータの代わりに利用されるべきです。</li>
 <li>タイルエンティティは,タイルエンティティを必要とするブロックが<code>World-&gt;setBlock()</code>されたときに自動的に作成/削除されるようになります。</li>
 <li>いくつかのタイルエンティティのAPIは,タイルエンティティが非推奨となると同時に対応する<code>Block</code>クラスで公開されるようになりました。</li>
 <li>名前空間<code>pocketmine\tile</code>は<code>pocketmine\block\tile</code>に移動されました。</li>
 <li><code>Block-&gt;recalculateBoundingBox()</code>と<code>Block-&gt;recalculateCollisionBoxes()</code>は自身の位置基準ではなく<code>0,0,0</code>に基準のAABBsを返すようになります。</li>
-<li>ブロックの破壊情報は新しい動的な<code>BlockBreakInfo</code>ユニットへと展開されました。以下のメソッドが移動されます。</li>
+<li>ブロックの破壊情報は新しい動的な<code>BlockBreakInfo</code>ユニットへと展開されました。以下のメソッドが移動されます。<ul>
 <li><code>Block-&gt;getBlastResistance()</code> -&gt; <code>BlockBreakInfo-&gt;getBlastResistance()</code></li>
 <li><code>Block-&gt;getBreakTime()</code> -&gt; <code>BlockBreakInfo-&gt;getBreakTime()</code></li>
 <li><code>Block-&gt;getHardness()</code> -&gt; <code>BlockBreakInfo-&gt;getHardness()</code></li>
@@ -722,34 +708,48 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <li><code>Block-&gt;getToolType()</code> -&gt; <code>BlockBreakInfo-&gt;getToolType()</code></li>
 <li><code>Block-&gt;isBreakable()</code> -&gt; <code>BlockBreakInfo-&gt;isBreakable()</code></li>
 <li><code>Block-&gt;isCompatibleWithTool()</code> -&gt; <code>BlockBreakInfo-&gt;isToolCompatible()</code></li>
-<li>以下のAPIメソッドが追加されました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドが追加されました。<ul>
 <li><code>Block-&gt;asItem()</code>: ブロックに対応するアイテムスタックを返す。</li>
 <li><code>Block-&gt;isSameState()</code>: ステート情報を含めてブロックが同じパラメータであるかを返す。</li>
 <li><code>Block-&gt;isSameType()</code>: ステート情報を含めずにブロックが同じパラメータであるかを返す。</li>
 <li><code>Block-&gt;isFullCube()</code></li>
-<li>以下のフックが追加されました。</li>
+</ul>
+</li>
+<li>以下のフックが追加されました。<ul>
 <li><code>Block-&gt;onAttack()</code>: サバイバルモードのプレイヤーがブロックを左クリックしブロックの破壊をし始めた時に呼ばれる。</li>
 <li><code>Block-&gt;onEntityLand()</code>: エンティティが(高さによらず)落下後にブロック上に乗ったときに呼ばれる。</li>
 <li><code>Block-&gt;onPostPlace()</code>: ワールドにおかれた直後に呼ばれ、レール接続やチェストの連結をハンドルする。</li>
-<li>以下のAPIメソッドがリネームされました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドがリネームされました。<ul>
 <li><code>Block-&gt;getDamage()</code> -&gt; <code>Block-&gt;getMeta()</code></li>
 <li><code>Block-&gt;onActivate()</code> -&gt; <code>Block-&gt;onInteract()</code></li>
 <li><code>Block-&gt;onEntityCollide()</code> -&gt; <code>Block-&gt;onEntityInside()</code></li>
-<li>以下のAPIメソッドはシグネチャが変わりました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドはシグネチャが変わりました。<ul>
 <li><code>Block-&gt;onInteract()</code> は現在ではシグネチャ <code>onInteract(Item $item, int $face, Vector3 $clickVector, ?Player $player = null) : bool</code> を持ちます。</li>
 <li><code>Block-&gt;getCollisionBoxes()</code> はファイナルになりました。 子クラスは<code>recalculateCollisionBoxes()</code>をオーバーライドするべきです.</li>
-<li>以下のAPIメソッドは削除されました。</li>
-<li><code>Block-&gt;canPassThrough()</code></li>
-<li><code>Block-&gt;setDamage()</code></li>
+</ul>
+</li>
+<li>以下のAPIメソッドは削除されました。
+        - <code>Block-&gt;canPassThrough()</code>
+        - <code>Block-&gt;setDamage()</code><ul>
 <li><code>Block::get()</code>: これはずいぶん前に <code>BlockFactory::get()</code>に置き換えられています。</li>
 <li><code>Block-&gt;getBoundingBox()</code></li>
-<li>以下のクラスはリネームされました。</li>
+</ul>
+</li>
+<li>以下のクラスはリネームされました。<ul>
 <li><code>BlockIds</code> -&gt; <code>BlockLegacyIds</code></li>
 <li><code>CobblestoneWall</code> -&gt; <code>Wall</code></li>
 <li><code>NoteBlock</code> -&gt; <code>Note</code></li>
 <li><code>SignPost</code> -&gt; <code>Sign</code></li>
 <li><code>StandingBanner</code> -&gt; <code>Banner</code></li>
-<li>以下のクラスは削除されました。</li>
+</ul>
+</li>
+<li>以下のクラスは削除されました。<ul>
 <li><code>Bricks</code></li>
 <li><code>BurningFurnace</code></li>
 <li><code>CobblestoneStairs</code></li>
@@ -787,6 +787,8 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <li><code>WallBanner</code></li>
 <li><code>WallSign</code></li>
 <li><code>Wood2</code></li>
+</ul>
+</li>
 <li><code>BlockToolType</code>の定数は<code>TYPE_</code>プレフィックスを削除する形でリネームされました。</li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Dictionary</h1><section class="print-page" id="dictionary-poggit"><h1 id="dictionary-poggit-poggit">Poggit</h1>
 <p>PocketMineの公式プラグインレポジトリです。
