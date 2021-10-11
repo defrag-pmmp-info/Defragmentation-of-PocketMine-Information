@@ -260,3 +260,75 @@ permissions:
   - `Command->setPermission()` nullableではありますが、引数が必須になりました
   - `CommandSender->setScreenLineHeight()` nullableではありますが、引数が必須になりました
 - 名前に空白を含むコマンドはサポートされなくなりました
+
+### Entity
+#### 一般
+- `Entity`は`Location`を継承しなくなります。 代わりに`Entity->getLocation()`や`Entity->getPosition()`を使ってください。
+- 以下のフィールドは削除されました。
+  - `Entity->chunk`: エンティティはどのチャンクにいるのかを知らなくなります (かわりに`World`がそれを管理します).
+  - `Entity->height`: `EntitySizeInfo`に移動しました。 代わりに`Entity->size`を使ってください。
+  - `Entity->width`: `EntitySizeInfo`に移動しました。 代わりに`Entity->size`を使ってください。
+  - `Entity->eyeHeight`: `EntitySizeInfo`に移動しました。 代わりに `Entity->size`を使ってください。
+- 以下のAPIメソッドが追加されました。
+  - `Entity->getFallDistance()`
+  - `Entity->setFallDistance()`
+  - `ItemEntity->getDespawnDelay()`
+  - `ItemEntity->setDespawnDelay()`
+  - `Living->calculateFallDamage()`: これは`protected`です。 サブクラスにより、これをオーバーライドすることでダメージロジックをカスタマイズできます。
+  - `Human->getHungerManager()`
+  - `Human->getXpManager()`
+- 以下のAPIメソッドはシグネチャが変わりました。
+  - `Entity->entityBaseTick()`は`protected`になりました。
+  - `Entity->move()`は`protected`になりました。
+  - `Living->knockBack()`は`float, float, float`を受け入れるようになりました。 (最初の２つのパラメーターは削除されました).
+  - `Living->getEffects()`は`Effect[]`の代わりに`EffectManager`を返すようになりました。
+- 以下のクラスは削除されました。 
+  - `effect\EffectManager`は`Living`から、エフェクトを管理する機能を利用するようになりました。
+  - `HungerManager`は`Human`から、空腹を管理する機能を利用するようになりました。 
+  - `ExperienceManager`は`Human`から経験値を管理する機能を利用するようになりました。
+- 以下のAPIメソッドは移動、またはリネームされました。
+  - `Entity->fall()` -> `Entity->onHitGround()` (また、目に見える変化では`public`から`protected`になりました。)
+  - `Living->removeAllEffects()` -> `EffectManager->clear()`
+  - `Living->removeEffect()` -> `EffectManager->remove()`
+  - `Living->addEffect()` -> `EffectManager->add()`
+  - `Living->getEffect()` -> `EffectManager->get()`
+  - `Living->hasEffect()` -> `EffectManager->has()`
+  - `Living->hasEffects()` -> `EffectManager->hasEffects()`
+  - `Living->getEffects()` -> `EffectManager->all()`
+  - `Human->getFood()` -> `HungerManager->getFood()`
+  - `Human->setFood()` -> `HungerManager->setFood()`
+  - `Human->getMaxFood()` -> `HungerManager->getMaxFood()`
+  - `Human->addFood()` -> `HungerManager->addFood()`
+  - `Human->isHungry()` -> `HungerManager->isHungry()`
+  - `Human->getSaturation()` -> `HungerManager->getSaturation()`
+  - `Human->setSaturation()` -> `HungerManager->setSaturation()`
+  - `Human->addSaturation()` -> `HungerManager->addSaturation()`
+  - `Human->getExhaustion()` -> `HungerManager->getExhaustion()`
+  - `Human->setExhaustion()` -> `HungerManager->setExhaustion()`
+  - `Human->exhaust()` -> `HungerManager->exhaust()`
+  - `Human->getXpLevel()` -> `ExperienceManager->getXpLevel()`
+  - `Human->setXpLevel()` -> `ExperienceManager->setXpLevel()`
+  - `Human->addXpLevels()` -> `ExperienceManager->addXpLevels()`
+  - `Human->subtractXpLevels()` -> `ExperienceManager->subtractXpLevels()`
+  - `Human->getXpProgress()` -> `ExperienceManager->getXpProgress()`
+  - `Human->setXpProgress()` -> `ExperienceManager->setXpProgress()`
+  - `Human->getRemainderXp()` -> `ExperienceManager->getRemainderXp()`
+  - `Human->getCurrentTotalXp()` -> `ExperienceManager->getCurrentTotalXp()`
+  - `Human->setCurrentTotalXp()` -> `ExperienceManager->setCurrentTotalXp()`
+  - `Human->addXp()` -> `ExperienceManager->addXp()`
+  - `Human->subtractXp()` -> `ExperienceManager->subtractXp()`
+  - `Human->getLifetimeTotalXp()` -> `ExperienceManager->getLifetimeTotalXp()`
+  - `Human->setLifetimeTotalXp()` -> `ExperienceManager->setLifetimeTotalXp()`
+  - `Human->canPickupXp()` -> `ExperienceManager->canPickupXp()`
+  - `Human->onPickupXp()` -> `ExperienceManager->onPickupXp()`
+  - `Human->resetXpCooldown()` -> `ExperienceManager->resetXpCooldown()`
+-　以下のAPiメソッドは削除されました
+  - `Human->getRawUniqueId()`は、代わりに`Human->getUniqueId()->toBinary()`を使うようになりました。
+- 以下のクラスは削除されました
+  - `Creature`
+  - `Damageable`
+  - `Monster`
+  - `NPC`
+  - `Rideable`
+  - `Vehicle`
+- `Skin`無効なデータを受け取ると例外を投げるようになりました。
