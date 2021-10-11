@@ -322,9 +322,9 @@ permissions:
   - `Human->canPickupXp()` -> `ExperienceManager->canPickupXp()`
   - `Human->onPickupXp()` -> `ExperienceManager->onPickupXp()`
   - `Human->resetXpCooldown()` -> `ExperienceManager->resetXpCooldown()`
--　以下のAPiメソッドは削除されました
+- 以下のAPiメソッドは削除されました。
   - `Human->getRawUniqueId()`は、代わりに`Human->getUniqueId()->toBinary()`を使うようになりました。
-- 以下のクラスは削除されました
+- 以下のクラスは削除されました。
   - `Creature`
   - `Damageable`
   - `Monster`
