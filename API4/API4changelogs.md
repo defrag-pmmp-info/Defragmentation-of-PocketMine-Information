@@ -252,3 +252,11 @@ permissions:
     - `WallSign`
     - `Wood2`
 - `BlockToolType`の定数は`TYPE_`プレフィックスを削除する形でリネームされました。
+
+### Command
+- 以下のクラスは削除されました。
+  - `RemoteConsoleCommandSender`
+- 以下のAPIメソッドはシグネチャが変わりました。
+  - `Command->setPermission()` nullableではありますが、引数が必須になりました
+  - `CommandSender->setScreenLineHeight()` nullableではありますが、引数が必須になりました
+- 名前に空白を含むコマンドはサポートされなくなりました
