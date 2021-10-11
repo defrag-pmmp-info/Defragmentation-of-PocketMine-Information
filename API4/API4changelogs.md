@@ -1,4 +1,4 @@
-# API4 Changelogs全訳(12%完了)
+# API4 Changelogs全訳(18%完了)
 ## 訳に関して
 <https://github.com/pmmp/PocketMine-MP/commit/9e6d7405709560c0025e072324602983213276dd> 版より翻訳
 
@@ -112,7 +112,7 @@
 #### 一般
 - 以前まで`callable`を許容していた大半の個所は、現在では`/Closure`のみを許可します。これはクロージャーがより一貫性のある振る舞いをして性能がより高いためです。
 - `void`と`?nullable` パラメータおよび返り値の型指定は多くの箇所に適用されました。
-- `pocketmine\metadeta`名前空間にあるすべてのものとそれに関連する実装は削除されました。
+- `pocketmine\metadeta`にあるすべてのものとそれに関連する実装は削除されました。
 
 
 #### `plugin.yml`の変更
@@ -170,4 +170,85 @@ permissions:
 - 新たに`VanillaBlocks`クラスが追加されました。このクラスは現在知られているどのブロックタイプでも生成できる静的メソッドを保有しています。 これは定数が使われている場合に`BlockFactory::get()`の代わりとしてしようされることが好ましいです。
 - ブロックは`Position`を継承するかわりにポジションを保有します。`Block->getBlockPosition()`が追加されました。
 - 256以上のIDをもつブロックがサポートされました。
-- ブロックの状態と変数のメタデータは分離されました。
+- ブロックのステートとバリアントメタデータは分離されました。
+    - バリアントはIDの拡張と考えられ、不変です。(解説:これは回転や開閉といった状態を含まないことを表す)
+    - `Block->setDamage()`は削除されました。
+    - すべてのブロックにはブロックプロパティ相応のゲッターとセッターが備わりました。例えば`facing` どの向きか,`lit/unlit` 着火/消火, `colour` 色などです。これらはメタデータの代わりに利用されるべきです。
+- タイルエンティティは,タイルエンティティを必要とするブロックが`World->setBlock()`されたときに自動的に作成/削除されるようになります。
+- いくつかのタイルエンティティのAPIは,タイルエンティティが非推奨となると同時に対応する`Block`クラスで公開されるようになりました。
+- 名前空間`pocketmine\tile`は`pocketmine\block\tile`に移動されました。
+- `Block->recalculateBoundingBox()`と`Block->recalculateCollisionBoxes()`は自身の位置基準ではなく`0,0,0`に基準のAABBsを返すようになります。
+- ブロックの破壊情報は新しい動的な`BlockBreakInfo`ユニットへと展開されました。以下のメソッドが移動されます。
+  - `Block->getBlastResistance()` -> `BlockBreakInfo->getBlastResistance()`
+  - `Block->getBreakTime()` -> `BlockBreakInfo->getBreakTime()`
+  - `Block->getHardness()` -> `BlockBreakInfo->getHardness()`
+  - `Block->getToolHarvestLevel()` -> `BlockBreakInfo->getToolHarvestLevel()`
+  - `Block->getToolType()` -> `BlockBreakInfo->getToolType()`
+  - `Block->isBreakable()` -> `BlockBreakInfo->isBreakable()`
+  - `Block->isCompatibleWithTool()` -> `BlockBreakInfo->isToolCompatible()`
+- 以下のAPIメソッドが追加されました。
+  - `Block->asItem()`: ブロックに対応するアイテムスタックを返す。
+  - `Block->isSameState()`: ステート情報を含めてブロックが同じパラメータであるかを返す。
+  - `Block->isSameType()`: ステート情報を含めずにブロックが同じパラメータであるかを返す。
+  - `Block->isFullCube()`
+- 以下のフックが追加されました。
+  - `Block->onAttack()`: サバイバルモードのプレイヤーがブロックを左クリックしブロックの破壊をし始めた時に呼ばれる。
+  - `Block->onEntityLand()`: エンティティが(高さによらず)落下後にブロック上に乗ったときに呼ばれる。
+  - `Block->onPostPlace()`: ワールドにおかれた直後に呼ばれ、レール接続やチェストの連結をハンドルする。
+- 以下のAPIメソッドがリネームされました。
+  - `Block->getDamage()` -> `Block->getMeta()`
+  - `Block->onActivate()` -> `Block->onInteract()`
+  - `Block->onEntityCollide()` -> `Block->onEntityInside()`
+- 以下のAPIメソッドはシグネチャが変わりました。
+  - `Block->onInteract()` は現在ではシグネチャ `onInteract(Item $item, int $face, Vector3 $clickVector, ?Player $player = null) : bool` を持ちます。
+  - `Block->getCollisionBoxes()` はファイナルになりました。 子クラスは`recalculateCollisionBoxes()`をオーバーライドするべきです.
+- 以下のAPIメソッドは削除されました。
+  - `Block->canPassThrough()`
+  - `Block->setDamage()`
+  - `Block::get()`: これはずいぶん前に `BlockFactory::get()`に置き換えられています。
+  - `Block->getBoundingBox()`
+- 以下のクラスはリネームされました。
+  - `BlockIds` -> `BlockLegacyIds`
+  - `CobblestoneWall` -> `Wall`
+  - `NoteBlock` -> `Note`
+  - `SignPost` -> `Sign`
+  - `StandingBanner` -> `Banner`
+- 以下のクラスは削除されました。
+  - `Bricks`
+  - `BurningFurnace`
+  - `CobblestoneStairs`
+  - `Dandelion`
+  - `DoubleSlab`
+  - `DoubleStoneSlab`
+  - `EndStone`
+  - `GlowingRedstoneOre`
+  - `GoldOre`
+  - `Gold`
+  - `IronDoor`
+  - `IronOre`
+  - `IronTrapdoor`
+  - `Iron`
+  - `Lapis`
+  - `NetherBrickFence`
+  - `NetherBrickStairs`
+  - `Obsidian`
+  - `PurpurStairs`
+  - `Purpur`
+  - `QuartzStairs`
+  - `Quartz`
+  - `RedSandstoneStairs`
+  - `RedSandstone`
+  - `SandstoneStairs`
+  - `Sandstone`
+  - `StainedClay`
+  - `StainedGlassPane`
+  - `StainedGlass`
+  - `StoneBrickStairs`
+  - `StoneBricks`
+  - `StoneSlab2`
+  - `StoneSlab`
+  - `Stone`
+  - `WallBanner`
+  - `WallSign`
+  - `Wood2`
+- `BlockToolType`の定数は`TYPE_`プレフィックスを削除する形でリネームされました。
