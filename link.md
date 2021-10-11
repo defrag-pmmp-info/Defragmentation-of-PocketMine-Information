@@ -1,6 +1,7 @@
 # リンク集
 ## バイナリやソースコードの配布先
 - [pmmp/PocketMine-MP(GitHub)](https://github.com/pmmp/PocketMine-MP) - Releaseから最新版をダウンロード可能
+- [PHP8 Binary](https://dev.azure.com/pocketmine/PHP-Builds/_build?definitionId=3&_a=summary) - publishedから、︙をクリックでダウンロードできます。
 
 ## ドキュメント
 - [公式ドキュメント](https://pmmp.readthedocs.io/en/rtfd) - インストール方法やアップデート方法、プラグインについてやよくある質問を見ることができます。
