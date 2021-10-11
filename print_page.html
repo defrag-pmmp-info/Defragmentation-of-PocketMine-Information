@@ -296,7 +296,7 @@
   
     <li class="md-nav__item">
       <a href="API4/API4changelogs.html" class="md-nav__link">
-        API4 Changelogs全訳(12%完了)
+        API4 Changelogs全訳(18%完了)
       </a>
     </li>
   
@@ -524,7 +524,7 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 </ul>
 <h2 id="api4-index-_3">開発者向け情報</h2>
 <h3 id="api4-index-devtools-api4">DevTools API4対応版の配布場所</h3>
-<p>poggit上でダウンロード可 <a href="https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools">https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools</a> の Build History:master により最新版がダウンロード可能</p></section><section class="print-page" id="api4-api4changelogs"><h1 id="api4-api4changelogs-api4-changelogs12">API4 Changelogs全訳(12%完了)</h1>
+<p>poggit上でダウンロード可 <a href="https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools">https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools</a> の Build History:master により最新版がダウンロード可能</p></section><section class="print-page" id="api4-api4changelogs"><h1 id="api4-api4changelogs-api4-changelogs18">API4 Changelogs全訳(18%完了)</h1>
 <h2 id="api4-api4changelogs-_1">訳に関して</h2>
 <p><a href="https://github.com/pmmp/PocketMine-MP/commit/9e6d7405709560c0025e072324602983213276dd">https://github.com/pmmp/PocketMine-MP/commit/9e6d7405709560c0025e072324602983213276dd</a> 版より翻訳</p>
 <p>翻訳漏れの無いように気を配りますが、書かれていない項目がある場合PRを送ってもらえると助かります。</p>
@@ -655,7 +655,7 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <ul>
 <li>以前まで<code>callable</code>を許容していた大半の個所は、現在では<code>/Closure</code>のみを許可します。これはクロージャーがより一貫性のある振る舞いをして性能がより高いためです。</li>
 <li><code>void</code>と<code>?nullable</code> パラメータおよび返り値の型指定は多くの箇所に適用されました。</li>
-<li><code>pocketmine\metadeta</code>名前空間にあるすべてのものとそれに関連する実装は削除されました。</li>
+<li><code>pocketmine\metadeta</code>にあるすべてのものとそれに関連する実装は削除されました。</li>
 </ul>
 <h4 id="api4-api4changelogs-pluginyml"><code>plugin.yml</code>の変更</h4>
 <h5 id="api4-api4changelogs-_12">パーミッションのネスト</h5>
@@ -704,7 +704,90 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <li>新たに<code>VanillaBlocks</code>クラスが追加されました。このクラスは現在知られているどのブロックタイプでも生成できる静的メソッドを保有しています。 これは定数が使われている場合に<code>BlockFactory::get()</code>の代わりとしてしようされることが好ましいです。</li>
 <li>ブロックは<code>Position</code>を継承するかわりにポジションを保有します。<code>Block-&gt;getBlockPosition()</code>が追加されました。</li>
 <li>256以上のIDをもつブロックがサポートされました。</li>
-<li>ブロックの状態と変数のメタデータは分離されました。</li>
+<li>ブロックのステートとバリアントメタデータは分離されました。<ul>
+<li>バリアントはIDの拡張と考えられ、不変です。(解説:これは回転や開閉といった状態を含まないことを表す)</li>
+<li><code>Block-&gt;setDamage()</code>は削除されました。</li>
+<li>すべてのブロックにはブロックプロパティ相応のゲッターとセッターが備わりました。例えば<code>facing</code> どの向きか,<code>lit/unlit</code> 着火/消火, <code>colour</code> 色などです。これらはメタデータの代わりに利用されるべきです。</li>
+</ul>
+</li>
+<li>タイルエンティティは,タイルエンティティを必要とするブロックが<code>World-&gt;setBlock()</code>されたときに自動的に作成/削除されるようになります。</li>
+<li>いくつかのタイルエンティティのAPIは,タイルエンティティが非推奨となると同時に対応する<code>Block</code>クラスで公開されるようになりました。</li>
+<li>名前空間<code>pocketmine\tile</code>は<code>pocketmine\block\tile</code>に移動されました。</li>
+<li><code>Block-&gt;recalculateBoundingBox()</code>と<code>Block-&gt;recalculateCollisionBoxes()</code>は自身の位置基準ではなく<code>0,0,0</code>に基準のAABBsを返すようになります。</li>
+<li>ブロックの破壊情報は新しい動的な<code>BlockBreakInfo</code>ユニットへと展開されました。以下のメソッドが移動されます。</li>
+<li><code>Block-&gt;getBlastResistance()</code> -&gt; <code>BlockBreakInfo-&gt;getBlastResistance()</code></li>
+<li><code>Block-&gt;getBreakTime()</code> -&gt; <code>BlockBreakInfo-&gt;getBreakTime()</code></li>
+<li><code>Block-&gt;getHardness()</code> -&gt; <code>BlockBreakInfo-&gt;getHardness()</code></li>
+<li><code>Block-&gt;getToolHarvestLevel()</code> -&gt; <code>BlockBreakInfo-&gt;getToolHarvestLevel()</code></li>
+<li><code>Block-&gt;getToolType()</code> -&gt; <code>BlockBreakInfo-&gt;getToolType()</code></li>
+<li><code>Block-&gt;isBreakable()</code> -&gt; <code>BlockBreakInfo-&gt;isBreakable()</code></li>
+<li><code>Block-&gt;isCompatibleWithTool()</code> -&gt; <code>BlockBreakInfo-&gt;isToolCompatible()</code></li>
+<li>以下のAPIメソッドが追加されました。</li>
+<li><code>Block-&gt;asItem()</code>: ブロックに対応するアイテムスタックを返す。</li>
+<li><code>Block-&gt;isSameState()</code>: ステート情報を含めてブロックが同じパラメータであるかを返す。</li>
+<li><code>Block-&gt;isSameType()</code>: ステート情報を含めずにブロックが同じパラメータであるかを返す。</li>
+<li><code>Block-&gt;isFullCube()</code></li>
+<li>以下のフックが追加されました。</li>
+<li><code>Block-&gt;onAttack()</code>: サバイバルモードのプレイヤーがブロックを左クリックしブロックの破壊をし始めた時に呼ばれる。</li>
+<li><code>Block-&gt;onEntityLand()</code>: エンティティが(高さによらず)落下後にブロック上に乗ったときに呼ばれる。</li>
+<li><code>Block-&gt;onPostPlace()</code>: ワールドにおかれた直後に呼ばれ、レール接続やチェストの連結をハンドルする。</li>
+<li>以下のAPIメソッドがリネームされました。</li>
+<li><code>Block-&gt;getDamage()</code> -&gt; <code>Block-&gt;getMeta()</code></li>
+<li><code>Block-&gt;onActivate()</code> -&gt; <code>Block-&gt;onInteract()</code></li>
+<li><code>Block-&gt;onEntityCollide()</code> -&gt; <code>Block-&gt;onEntityInside()</code></li>
+<li>以下のAPIメソッドはシグネチャが変わりました。</li>
+<li><code>Block-&gt;onInteract()</code> は現在ではシグネチャ <code>onInteract(Item $item, int $face, Vector3 $clickVector, ?Player $player = null) : bool</code> を持ちます。</li>
+<li><code>Block-&gt;getCollisionBoxes()</code> はファイナルになりました。 子クラスは<code>recalculateCollisionBoxes()</code>をオーバーライドするべきです.</li>
+<li>以下のAPIメソッドは削除されました。</li>
+<li><code>Block-&gt;canPassThrough()</code></li>
+<li><code>Block-&gt;setDamage()</code></li>
+<li><code>Block::get()</code>: これはずいぶん前に <code>BlockFactory::get()</code>に置き換えられています。</li>
+<li><code>Block-&gt;getBoundingBox()</code></li>
+<li>以下のクラスはリネームされました。</li>
+<li><code>BlockIds</code> -&gt; <code>BlockLegacyIds</code></li>
+<li><code>CobblestoneWall</code> -&gt; <code>Wall</code></li>
+<li><code>NoteBlock</code> -&gt; <code>Note</code></li>
+<li><code>SignPost</code> -&gt; <code>Sign</code></li>
+<li><code>StandingBanner</code> -&gt; <code>Banner</code></li>
+<li>以下のクラスは削除されました。</li>
+<li><code>Bricks</code></li>
+<li><code>BurningFurnace</code></li>
+<li><code>CobblestoneStairs</code></li>
+<li><code>Dandelion</code></li>
+<li><code>DoubleSlab</code></li>
+<li><code>DoubleStoneSlab</code></li>
+<li><code>EndStone</code></li>
+<li><code>GlowingRedstoneOre</code></li>
+<li><code>GoldOre</code></li>
+<li><code>Gold</code></li>
+<li><code>IronDoor</code></li>
+<li><code>IronOre</code></li>
+<li><code>IronTrapdoor</code></li>
+<li><code>Iron</code></li>
+<li><code>Lapis</code></li>
+<li><code>NetherBrickFence</code></li>
+<li><code>NetherBrickStairs</code></li>
+<li><code>Obsidian</code></li>
+<li><code>PurpurStairs</code></li>
+<li><code>Purpur</code></li>
+<li><code>QuartzStairs</code></li>
+<li><code>Quartz</code></li>
+<li><code>RedSandstoneStairs</code></li>
+<li><code>RedSandstone</code></li>
+<li><code>SandstoneStairs</code></li>
+<li><code>Sandstone</code></li>
+<li><code>StainedClay</code></li>
+<li><code>StainedGlassPane</code></li>
+<li><code>StainedGlass</code></li>
+<li><code>StoneBrickStairs</code></li>
+<li><code>StoneBricks</code></li>
+<li><code>StoneSlab2</code></li>
+<li><code>StoneSlab</code></li>
+<li><code>Stone</code></li>
+<li><code>WallBanner</code></li>
+<li><code>WallSign</code></li>
+<li><code>Wood2</code></li>
+<li><code>BlockToolType</code>の定数は<code>TYPE_</code>プレフィックスを削除する形でリネームされました。</li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Dictionary</h1><section class="print-page" id="dictionary-poggit"><h1 id="dictionary-poggit-poggit">Poggit</h1>
 <p>PocketMineの公式プラグインレポジトリです。
 ここにあるプラグインは以下の二つに分けられます。</p>
