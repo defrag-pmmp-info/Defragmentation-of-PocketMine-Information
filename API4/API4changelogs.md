@@ -282,9 +282,9 @@ permissions:
   - `Entity->move()`は`protected`になりました。
   - `Living->knockBack()`は`float, float, float`を受け入れるようになりました。 (最初の２つのパラメーターは削除されました).
   - `Living->getEffects()`は`Effect[]`の代わりに`EffectManager`を返すようになりました。
-- 以下のクラスは追加されました。 
+- 以下のクラスは追加されました。
   - `effect\EffectManager`: `Living`から展開されたエフェクト管理の機能群を保持します。
-  - `HungerManager`: `Human`から展開された空腹管理の機能群を保持します。 
+  - `HungerManager`: `Human`から展開された空腹管理の機能群を保持します。
   - `ExperienceManager`: `Human`から展開された経験値管理の機能群を保持します。
 - 以下のAPIメソッドは移動、またはリネームされました。
   - `Entity->fall()` -> `Entity->onHitGround()` (また、可視性が`public`から`protected`になりました。)
@@ -332,3 +332,24 @@ permissions:
   - `Rideable`
   - `Vehicle`
 - `Skin`無効なデータを受け取ると例外を投げるようになりました。
+
+#### Effect
+- 全ての`Effect`に関連したクラスは`pocketmine\entity\effect`の名前空間に移動しました。
+- `Effect`クラスに入っていたエフェクト機能はいくつかのクラスに分けられました。以下のクラスが新しく追加されました。
+  - `AbsorptionEffect`
+  - `HealthBoostEffect`
+  - `HungerEffect`
+  - `InstantDamageEffect`
+  - `InstantEffect`
+  - `InstantHealthEffect`
+  - `InvisibilityEffect`
+  - `LevitationEffect`
+  - `PoisonEffect`
+  - `RegenerationEffect`
+  - `SaturationEffect`
+  - `SlownessEffect`
+  - `SpeedEffect`
+  - `WitherEffect`
+- `VanillaEffects`クラスが追加されました。これは全てのバニラエフェクトタイプを静的メソッドで表現し、`Effect::getEffect()`よりもきれいに書けるようになります。
+  - 例: `Effect::getEffect(Effect::NIGHT_VISION)`は`VanillaEffects::NIGHT_VISION()`に置き換えることができます。
+  <!-- Negative effect amplifiersのPMMP的邦訳がわからないため省略 -->
