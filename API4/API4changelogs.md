@@ -376,3 +376,25 @@ permissions:
 - NBTからのエンティティの読み込みは現在では`EntityFactory`にハンドルされるようになりました。`Entity::createEntity()`の動作とはかなり違った動作をします。 `YourEntity::class`を一式のMinecraft save IDに登録する代わりに、 あるNBTと`World`が与えられたときにエンティティを構築するコールバックを与える必要があります。
   - 生成コールバックは`EntityFactory::register()`を用いて登録されます。
   - 生成コールバックはシグネチャ`function(World, CompoundTag) : Entity`を持つ必要があります。
+  - これにより`Entity`の子クラスはそれぞれにふさわしいコンストラクタ引数を持てるようになりました。
+  - また、特定のデータが常に与えられるように要求することも可能になります。(例えば、`FallingBlock`をどの種類のブロックかを指定することなく生成するというのは理解できません。)
+  - 例:
+    - `ItemEntity`は現在では`Item`をコンストラクタで要求するようになりました。そのため、生成コールバックは`Item`をコンストラクタに渡されたNBTからデコードするものです。
+    - `Painting`は現在では`PaintingMotive`をコンストラクタで要求するようになりました。そのため、生成コールバックはどの`PaintingMotive`を与えるべきかを受け取ったNBTに応じて決定するものです。
+    - さらなる例は`EntityFactory`をご覧ください。
+- `EntityFactory::register()`(以前の`Entity::registerEntity()`)はエラー発生時に`false`のかわりに例外を投げるようになりました。
+- 以下のAPIメソッドが移動しました。
+  - `Entity::registerEntity()` -> `EntityFactory::register()`
+- 以下のクラスはコンストラクタが変更されました。
+  - すべての発射物の子クラスは現在では`?Entity $thrower`パラメータを必要とします。
+  - `Arrow->__construct()`は現在では`bool $critical` パラメータを必要とします。
+  - `ExperienceOrb->__construct()`は現在では`int $xpValue`パラメータを必要とします。
+  - `FallingBlock->__construct()`は現在では`Block $block`パラメータを必要とします。
+  - `ItemEntity->__construct()`は現在では`Item $item`パラメータを必要とします。
+  - `Painting->__construct()`は現在では`PaintingMotive $motive`を必要とします。
+  - `SplashPotion->__construct()`は現在では`int $potionId`を必要とします。
+- 以下のAPIメソッドは削除されました。
+  - `Entity::createBaseNBT()`: `new YourEntity`と適切なAPIメソッドが利用されるべきです。
+  - `Entity->getSaveId()`
+  - `Entity::getKnownEntityTypes()`
+  - `Entity::createEntity()`: `new YourEntity`をかわりに利用してください。 
