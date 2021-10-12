@@ -464,14 +464,28 @@
 <li>PocketMine-MP関連サービス・サイトリンク</li>
 </ul>
 <p><a href="https://famima65536.github.io/Defragmentation-of-PocketMine-Information/">https://famima65536.github.io/Defragmentation-of-PocketMine-Information/</a>を参照</p></section><section class="print-page" id="link"><h1 id="link-_1">リンク集</h1>
+<h2 id="link-_2">バイナリやソースコードの配布先</h2>
 <ul>
-<li>公式ドキュメント <a href="https://pmmp.readthedocs.io/en/rtfd/">https://pmmp.readthedocs.io/en/rtfd/</a> インストール方法やアップデート方法、プラグインについてやよくある質問を見ることができます。</li>
-<li>pmmp/PocketMine-MP(GitHub) <a href="https://github.com/pmmp/PocketMine-MP">https://github.com/pmmp/PocketMine-MP</a> Releaseから最新版をダウンロード可能</li>
-<li>poggit <a href="https://poggit.pmmp.io/">https://poggit.pmmp.io/</a> レビューされたプラグインやその他開発中のプラグインをダウンロードできます。</li>
-<li>Forums <a href="https://forums.pmmp.io/">https://forums.pmmp.io/</a> 公式フォーラム(英語)</li>
-<li>MCBEフォーラム <a href="https://forum.mcbe.jp/">https://forum.mcbe.jp/</a> 非公式日本語フォーラム</li>
-<li>マインクラフト非公式フォーラム <a href="https://forum.minecraft.study/">https://forum.minecraft.study/</a> </li>
-<li>MCServers.JP <a href="https://mcservers.jp/">https://mcservers.jp/</a> 新しいサーバーリスト</li>
+<li><a href="https://github.com/pmmp/PocketMine-MP">pmmp/PocketMine-MP(GitHub)</a> - Releaseから最新版をダウンロード可能</li>
+<li><a href="https://dev.azure.com/pocketmine/PHP-Builds/_build?definitionId=3&amp;_a=summary">PHP8 Binary</a> - publishedから、︙をクリックでダウンロードできます。</li>
+</ul>
+<h2 id="link-_3">ドキュメント</h2>
+<ul>
+<li><a href="https://pmmp.readthedocs.io/en/rtfd">公式ドキュメント</a> - インストール方法やアップデート方法、プラグインについてやよくある質問を見ることができます。</li>
+</ul>
+<h2 id="link-_4">フォーラム</h2>
+<ul>
+<li><a href="https://forums.pmmp.io">Forums</a> - 公式フォーラム(英語)</li>
+<li><a href="https://forum.mcbe.jp">MCBEフォーラム</a> - 非公式日本語フォーラム</li>
+<li><a href="https://forum.minecraft.study/">マインクラフト非公式フォーラム</a></li>
+</ul>
+<h2 id="link-_5">サーバーリスト</h2>
+<ul>
+<li><a href="https://mcservers.jp/">MCServers.JP</a></li>
+</ul>
+<h2 id="link-_6">プラグイン配布先</h2>
+<ul>
+<li><a href="https://poggit.pmmp.io/">poggit</a> - レビューされたプラグインやその他開発中のプラグインをダウンロードできます。</li>
 </ul></section><h1 class='nav-section-title'>API4</h1><section class="print-page" id="api4-index"><h1 id="api4-index-api4">API4</h1>
 <h2 id="api4-index-_1">インストールについて</h2>
 <p>現在(2021.10.9) API4.0.0はベータ段階であり、安定版ではありません。テスト目的でのみ使用してください。
@@ -802,6 +816,88 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 </ul>
 </li>
 <li><code>BlockToolType</code>の定数は<code>TYPE_</code>プレフィックスを削除する形でリネームされました。</li>
+</ul>
+<h3 id="api4-api4changelogs-command">Command</h3>
+<ul>
+<li>以下のクラスは削除されました。</li>
+<li><code>RemoteConsoleCommandSender</code></li>
+<li>以下のAPIメソッドはシグネチャが変わりました。</li>
+<li><code>Command-&gt;setPermission()</code> nullableではありますが、引数が必須になりました</li>
+<li><code>CommandSender-&gt;setScreenLineHeight()</code> nullableではありますが、引数が必須になりました</li>
+<li>名前に空白を含むコマンドはサポートされなくなりました</li>
+</ul>
+<h3 id="api4-api4changelogs-entity">Entity</h3>
+<h4 id="api4-api4changelogs-_13">一般</h4>
+<ul>
+<li><code>Entity</code>は<code>Location</code>を継承しなくなります。 代わりに<code>Entity-&gt;getLocation()</code>や<code>Entity-&gt;getPosition()</code>を使ってください。</li>
+<li>以下のフィールドは削除されました。</li>
+<li><code>Entity-&gt;chunk</code>: エンティティはどのチャンクにいるのかを自身では記憶しなくなりました (かわりに<code>World</code>がそれを管理します)。</li>
+<li><code>Entity-&gt;height</code>: <code>EntitySizeInfo</code>に移動しました。 代わりに<code>Entity-&gt;size</code>を使ってください。</li>
+<li><code>Entity-&gt;width</code>: <code>EntitySizeInfo</code>に移動しました。 代わりに<code>Entity-&gt;size</code>を使ってください。</li>
+<li><code>Entity-&gt;eyeHeight</code>: <code>EntitySizeInfo</code>に移動しました。 代わりに <code>Entity-&gt;size</code>を使ってください。</li>
+<li>以下のAPIメソッドが追加されました。</li>
+<li><code>Entity-&gt;getFallDistance()</code></li>
+<li><code>Entity-&gt;setFallDistance()</code></li>
+<li><code>ItemEntity-&gt;getDespawnDelay()</code></li>
+<li><code>ItemEntity-&gt;setDespawnDelay()</code></li>
+<li><code>Living-&gt;calculateFallDamage()</code>: これは<code>protected</code>です。 サブクラスにより、これをオーバーライドすることでダメージロジックをカスタマイズできます。</li>
+<li><code>Human-&gt;getHungerManager()</code></li>
+<li><code>Human-&gt;getXpManager()</code></li>
+<li>以下のAPIメソッドはシグネチャが変わりました。</li>
+<li><code>Entity-&gt;entityBaseTick()</code>は<code>protected</code>になりました。</li>
+<li><code>Entity-&gt;move()</code>は<code>protected</code>になりました。</li>
+<li><code>Living-&gt;knockBack()</code>は<code>float, float, float</code>を受け入れるようになりました。 (最初の２つのパラメーターは削除されました).</li>
+<li><code>Living-&gt;getEffects()</code>は<code>Effect[]</code>の代わりに<code>EffectManager</code>を返すようになりました。</li>
+<li>以下のクラスは追加されました。 </li>
+<li><code>effect\EffectManager</code>: <code>Living</code>から展開されたエフェクト管理の機能群を保持します。</li>
+<li><code>HungerManager</code>: <code>Human</code>から展開された空腹管理の機能群を保持します。 </li>
+<li><code>ExperienceManager</code>: <code>Human</code>から展開された経験値管理の機能群を保持します。</li>
+<li>以下のAPIメソッドは移動、またはリネームされました。</li>
+<li><code>Entity-&gt;fall()</code> -&gt; <code>Entity-&gt;onHitGround()</code> (また、可視性が<code>public</code>から<code>protected</code>になりました。)</li>
+<li><code>Living-&gt;removeAllEffects()</code> -&gt; <code>EffectManager-&gt;clear()</code></li>
+<li><code>Living-&gt;removeEffect()</code> -&gt; <code>EffectManager-&gt;remove()</code></li>
+<li><code>Living-&gt;addEffect()</code> -&gt; <code>EffectManager-&gt;add()</code></li>
+<li><code>Living-&gt;getEffect()</code> -&gt; <code>EffectManager-&gt;get()</code></li>
+<li><code>Living-&gt;hasEffect()</code> -&gt; <code>EffectManager-&gt;has()</code></li>
+<li><code>Living-&gt;hasEffects()</code> -&gt; <code>EffectManager-&gt;hasEffects()</code></li>
+<li><code>Living-&gt;getEffects()</code> -&gt; <code>EffectManager-&gt;all()</code></li>
+<li><code>Human-&gt;getFood()</code> -&gt; <code>HungerManager-&gt;getFood()</code></li>
+<li><code>Human-&gt;setFood()</code> -&gt; <code>HungerManager-&gt;setFood()</code></li>
+<li><code>Human-&gt;getMaxFood()</code> -&gt; <code>HungerManager-&gt;getMaxFood()</code></li>
+<li><code>Human-&gt;addFood()</code> -&gt; <code>HungerManager-&gt;addFood()</code></li>
+<li><code>Human-&gt;isHungry()</code> -&gt; <code>HungerManager-&gt;isHungry()</code></li>
+<li><code>Human-&gt;getSaturation()</code> -&gt; <code>HungerManager-&gt;getSaturation()</code></li>
+<li><code>Human-&gt;setSaturation()</code> -&gt; <code>HungerManager-&gt;setSaturation()</code></li>
+<li><code>Human-&gt;addSaturation()</code> -&gt; <code>HungerManager-&gt;addSaturation()</code></li>
+<li><code>Human-&gt;getExhaustion()</code> -&gt; <code>HungerManager-&gt;getExhaustion()</code></li>
+<li><code>Human-&gt;setExhaustion()</code> -&gt; <code>HungerManager-&gt;setExhaustion()</code></li>
+<li><code>Human-&gt;exhaust()</code> -&gt; <code>HungerManager-&gt;exhaust()</code></li>
+<li><code>Human-&gt;getXpLevel()</code> -&gt; <code>ExperienceManager-&gt;getXpLevel()</code></li>
+<li><code>Human-&gt;setXpLevel()</code> -&gt; <code>ExperienceManager-&gt;setXpLevel()</code></li>
+<li><code>Human-&gt;addXpLevels()</code> -&gt; <code>ExperienceManager-&gt;addXpLevels()</code></li>
+<li><code>Human-&gt;subtractXpLevels()</code> -&gt; <code>ExperienceManager-&gt;subtractXpLevels()</code></li>
+<li><code>Human-&gt;getXpProgress()</code> -&gt; <code>ExperienceManager-&gt;getXpProgress()</code></li>
+<li><code>Human-&gt;setXpProgress()</code> -&gt; <code>ExperienceManager-&gt;setXpProgress()</code></li>
+<li><code>Human-&gt;getRemainderXp()</code> -&gt; <code>ExperienceManager-&gt;getRemainderXp()</code></li>
+<li><code>Human-&gt;getCurrentTotalXp()</code> -&gt; <code>ExperienceManager-&gt;getCurrentTotalXp()</code></li>
+<li><code>Human-&gt;setCurrentTotalXp()</code> -&gt; <code>ExperienceManager-&gt;setCurrentTotalXp()</code></li>
+<li><code>Human-&gt;addXp()</code> -&gt; <code>ExperienceManager-&gt;addXp()</code></li>
+<li><code>Human-&gt;subtractXp()</code> -&gt; <code>ExperienceManager-&gt;subtractXp()</code></li>
+<li><code>Human-&gt;getLifetimeTotalXp()</code> -&gt; <code>ExperienceManager-&gt;getLifetimeTotalXp()</code></li>
+<li><code>Human-&gt;setLifetimeTotalXp()</code> -&gt; <code>ExperienceManager-&gt;setLifetimeTotalXp()</code></li>
+<li><code>Human-&gt;canPickupXp()</code> -&gt; <code>ExperienceManager-&gt;canPickupXp()</code></li>
+<li><code>Human-&gt;onPickupXp()</code> -&gt; <code>ExperienceManager-&gt;onPickupXp()</code></li>
+<li><code>Human-&gt;resetXpCooldown()</code> -&gt; <code>ExperienceManager-&gt;resetXpCooldown()</code></li>
+<li>以下のAPIメソッドは削除されました。</li>
+<li><code>Human-&gt;getRawUniqueId()</code>は、代わりに<code>Human-&gt;getUniqueId()-&gt;toBinary()</code>を使うようになりました。</li>
+<li>以下のクラスは削除されました。</li>
+<li><code>Creature</code></li>
+<li><code>Damageable</code></li>
+<li><code>Monster</code></li>
+<li><code>NPC</code></li>
+<li><code>Rideable</code></li>
+<li><code>Vehicle</code></li>
+<li><code>Skin</code>無効なデータを受け取ると例外を投げるようになりました。</li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Building</h1><section class="print-page" id="building-index"><h1 id="building-index-_1">サーバー構築</h1>
 <p>ここではサーバー構築について記述します
 API4.0.0(ベータ版)での構築は<a href="#building-build-in-api4">API4.0.0での構築</a>を参照してください</p></section><section class="print-page" id="building-build-in-api4"><h1 id="building-build-in-api4-api4">API4でのサーバー構築</h1>
