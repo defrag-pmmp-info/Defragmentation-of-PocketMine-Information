@@ -363,3 +363,16 @@ permissions:
   - `Effect::getEffectByName()` -> `VanillaEffects::fromString()`
 - 以下のAPIメソッドが追加されました。
   - `Effect->getRuntimeId()`: これは**動的ID**でありエフェクトタイプの比較に用いることができます。**これは決して保持されないため、configやNBTでは利用しないでください！**
+
+##### 実行時エンティティNBTの削除
+- エンティティは実行時にNBTを存在させ続けなくなりました。
+  - `Entity->namedtag`は削除されました。
+  - `Entity->saveNBT()`はその場で前のNBTに変更を加えるのではなく、現在では新規生成された`CompoundTag`を返すようになりました。
+  - `Entity->initEntity()`は現在では`CompoundTag`パラメータを受け付けます。
+
+##### エンティティ生成
+- `Entity::createEntity()`は削除されました。もはや実行時に新たなエンティティを生成するためには必要なくなりました。代わりに、単に`new YourEntity`のようにしてください。
+- `Entity`の子クラスのコンストラクタは普通のクラスと同様にどのようなシグネチャでも持つことができます。
+- NBTからのエンティティの読み込みは現在では`EntityFactory`にハンドルされるようになりました。`Entity::createEntity()`の動作とはかなり違った動作をします。 `YourEntity::class`を一式のMinecraft save IDに登録する代わりに、 あるNBTと`World`が与えられたときにエンティティを構築するコールバックを与える必要があります。
+  - 生成コールバックは`EntityFactory::register()`を用いて登録されます。
+  - 生成コールバックはシグネチャ`function(World, CompoundTag) : Entity`を持つ必要があります。
