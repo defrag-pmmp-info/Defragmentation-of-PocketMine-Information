@@ -265,7 +265,7 @@ permissions:
 #### 一般
 - `Entity`は`Location`を継承しなくなります。 代わりに`Entity->getLocation()`や`Entity->getPosition()`を使ってください。
 - 以下のフィールドは削除されました。
-  - `Entity->chunk`: エンティティはどのチャンクにいるのかを知らなくなります (かわりに`World`がそれを管理します).
+  - `Entity->chunk`: エンティティはどのチャンクにいるのかを自身では記憶しなくなりました (かわりに`World`がそれを管理します)。
   - `Entity->height`: `EntitySizeInfo`に移動しました。 代わりに`Entity->size`を使ってください。
   - `Entity->width`: `EntitySizeInfo`に移動しました。 代わりに`Entity->size`を使ってください。
   - `Entity->eyeHeight`: `EntitySizeInfo`に移動しました。 代わりに `Entity->size`を使ってください。
@@ -282,12 +282,12 @@ permissions:
   - `Entity->move()`は`protected`になりました。
   - `Living->knockBack()`は`float, float, float`を受け入れるようになりました。 (最初の２つのパラメーターは削除されました).
   - `Living->getEffects()`は`Effect[]`の代わりに`EffectManager`を返すようになりました。
-- 以下のクラスは削除されました。 
-  - `effect\EffectManager`は`Living`から、エフェクトを管理する機能を利用するようになりました。
-  - `HungerManager`は`Human`から、空腹を管理する機能を利用するようになりました。 
-  - `ExperienceManager`は`Human`から経験値を管理する機能を利用するようになりました。
+- 以下のクラスは追加されました。 
+  - `effect\EffectManager`: `Living`から展開されたエフェクト管理の機能群を保持します。
+  - `HungerManager`: `Human`から展開された空腹管理の機能群を保持します。 
+  - `ExperienceManager`: `Human`から展開された経験値管理の機能群を保持します。
 - 以下のAPIメソッドは移動、またはリネームされました。
-  - `Entity->fall()` -> `Entity->onHitGround()` (また、目に見える変化では`public`から`protected`になりました。)
+  - `Entity->fall()` -> `Entity->onHitGround()` (また、可視性が`public`から`protected`になりました。)
   - `Living->removeAllEffects()` -> `EffectManager->clear()`
   - `Living->removeEffect()` -> `EffectManager->remove()`
   - `Living->addEffect()` -> `EffectManager->add()`
@@ -322,7 +322,7 @@ permissions:
   - `Human->canPickupXp()` -> `ExperienceManager->canPickupXp()`
   - `Human->onPickupXp()` -> `ExperienceManager->onPickupXp()`
   - `Human->resetXpCooldown()` -> `ExperienceManager->resetXpCooldown()`
-- 以下のAPiメソッドは削除されました。
+- 以下のAPIメソッドは削除されました。
   - `Human->getRawUniqueId()`は、代わりに`Human->getUniqueId()->toBinary()`を使うようになりました。
 - 以下のクラスは削除されました。
   - `Creature`
