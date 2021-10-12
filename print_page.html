@@ -927,6 +927,30 @@ children:
 <li>NBTからのエンティティの読み込みは現在では<code>EntityFactory</code>にハンドルされるようになりました。<code>Entity::createEntity()</code>の動作とはかなり違った動作をします。 <code>YourEntity::class</code>を一式のMinecraft save IDに登録する代わりに、 あるNBTと<code>World</code>が与えられたときにエンティティを構築するコールバックを与える必要があります。</li>
 <li>生成コールバックは<code>EntityFactory::register()</code>を用いて登録されます。</li>
 <li>生成コールバックはシグネチャ<code>function(World, CompoundTag) : Entity</code>を持つ必要があります。</li>
+<li>これにより<code>Entity</code>の子クラスはそれぞれにふさわしいコンストラクタ引数を持てるようになりました。</li>
+<li>また、特定のデータが常に与えられるように要求することも可能になります。(例えば、<code>FallingBlock</code>をどの種類のブロックかを指定することなく生成するというのは理解できません。)</li>
+<li>例:<ul>
+<li><code>ItemEntity</code>は現在では<code>Item</code>をコンストラクタで要求するようになりました。そのため、生成コールバックは<code>Item</code>をコンストラクタに渡されたNBTからデコードするものです。</li>
+<li><code>Painting</code>は現在では<code>PaintingMotive</code>をコンストラクタで要求するようになりました。そのため、生成コールバックはどの<code>PaintingMotive</code>を与えるべきかを受け取ったNBTに応じて決定するものです。</li>
+<li>さらなる例は<code>EntityFactory</code>をご覧ください。</li>
+</ul>
+</li>
+<li><code>EntityFactory::register()</code>(以前の<code>Entity::registerEntity()</code>)はエラー発生時に<code>false</code>のかわりに例外を投げるようになりました。</li>
+<li>以下のAPIメソッドが移動しました。</li>
+<li><code>Entity::registerEntity()</code> -&gt; <code>EntityFactory::register()</code></li>
+<li>以下のクラスはコンストラクタが変更されました。</li>
+<li>すべての発射物の子クラスは現在では<code>?Entity $thrower</code>パラメータを必要とします。</li>
+<li><code>Arrow-&gt;__construct()</code>は現在では<code>bool $critical</code> パラメータを必要とします。</li>
+<li><code>ExperienceOrb-&gt;__construct()</code>は現在では<code>int $xpValue</code>パラメータを必要とします。</li>
+<li><code>FallingBlock-&gt;__construct()</code>は現在では<code>Block $block</code>パラメータを必要とします。</li>
+<li><code>ItemEntity-&gt;__construct()</code>は現在では<code>Item $item</code>パラメータを必要とします。</li>
+<li><code>Painting-&gt;__construct()</code>は現在では<code>PaintingMotive $motive</code>を必要とします。</li>
+<li><code>SplashPotion-&gt;__construct()</code>は現在では<code>int $potionId</code>を必要とします。</li>
+<li>以下のAPIメソッドは削除されました。</li>
+<li><code>Entity::createBaseNBT()</code>: <code>new YourEntity</code>と適切なAPIメソッドが利用されるべきです。</li>
+<li><code>Entity-&gt;getSaveId()</code></li>
+<li><code>Entity::getKnownEntityTypes()</code></li>
+<li><code>Entity::createEntity()</code>: <code>new YourEntity</code>をかわりに利用してください。 </li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Building</h1><section class="print-page" id="building-index"><h1 id="building-index-_1">サーバー構築</h1>
 <p>ここではサーバー構築について記述します
 API4.0.0(ベータ版)での構築は<a href="#building-build-in-api4">API4.0.0での構築</a>を参照してください</p></section><section class="print-page" id="building-build-in-api4"><h1 id="building-build-in-api4-api4">API4でのサーバー構築</h1>
