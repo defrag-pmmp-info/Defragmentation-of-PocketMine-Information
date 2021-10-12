@@ -65,7 +65,7 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
-    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
       <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
@@ -390,10 +390,49 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
+      
+      <label class="md-nav__link" for="__nav_5_1">
+        Poggit
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Poggit" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Poggit
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
     <li class="md-nav__item">
-      <a href="dictionary/poggit.html" class="md-nav__link">
+      <a href="dictionary/poggit/poggit.html" class="md-nav__link">
         Poggit
       </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="dictionary/poggit/virion.html" class="md-nav__link">
+        Virion
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -966,7 +1005,7 @@ children:
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Building</h1><section class="print-page" id="building-index"><h1 id="building-index-_1">サーバー構築</h1>
 <p>ここではサーバー構築について記述します
 API4.0.0(ベータ版)での構築は<a href="#building-build-in-api4">API4.0.0での構築</a>を参照してください</p></section><section class="print-page" id="building-build-in-api4"><h1 id="building-build-in-api4-api4">API4でのサーバー構築</h1>
-<p>🚧</p></section><h1 class='nav-section-title-end'>Ended: Building</h1><h1 class='nav-section-title'>Dictionary</h1><section class="print-page" id="dictionary-poggit"><h1 id="dictionary-poggit-poggit">Poggit</h1>
+<p>🚧</p></section><h1 class='nav-section-title-end'>Ended: Building</h1><h1 class='nav-section-title'>Dictionary</h1><h2 class='nav-section-title'>Poggit</h1><section class="print-page" id="dictionary-poggit-poggit"><h1 id="dictionary-poggit-poggit-poggit">Poggit</h1>
 <p>PocketMineの公式プラグインレポジトリです。
 ここにあるプラグインは以下の二つに分けられます。</p>
 <ul>
@@ -977,17 +1016,239 @@ API4.0.0(ベータ版)での構築は<a href="#building-build-in-api4">API4.0.0�
 <p><strong>Dev</strong> 開発中のプラグインがダウンロードできます。動作の確認がされているとは限りません。</p>
 </li>
 </ul>
-<h2 id="dictionary-poggit-_1">使い方</h2>
+<h2 id="dictionary-poggit-poggit-_1">使い方</h2>
 <!-- 画像をつける -->
 <p>ReleasesやDevタブからプラグインを探すことができます。
-Relesesでは初期状態ではすべてのプラグインが表示されていますが<code>All Caregories</code>となっているプルダウンメニューから自分の探したいジャンル、<code>All API Versions</code>となっているメニューから対応するバージョンを絞って探すことができます。</p></section><h1 class='nav-section-title-end'>Ended: Dictionary</h1></div>
+Relesesでは初期状態ではすべてのプラグインが表示されていますが<code>All Caregories</code>となっているプルダウンメニューから自分の探したいジャンル、<code>All API Versions</code>となっているメニューから対応するバージョンを絞って探すことができます。</p></section><section class="print-page" id="dictionary-poggit-virion"><h1 id="dictionary-poggit-virion-virion">Virion</h1>
+<p>Poggit Virion(以下Virion)はPocketMineプラグイン専用のPHPライブラリです。
+このドキュメントでは、Virionの開発と使用についてのワークフローについての情報を提供します。</p>
+<h2 id="dictionary-poggit-virion-virion_1">Virionの目的</h2>
+<p>ソフトウェア開発においてライブラリは素晴らしいものですが、複数のプラグインが同じライブラリを使用する場合、同じPHPランタイムで実行されるために間違ったバージョンのライブラリが使用される可能性があります。Virionフレームワークでは、クラスをシェーディング(名前空間の操作)することでこの問題を解決することを目指しています。</p>
+<h2 id="dictionary-poggit-virion-_1">前置き</h2>
+<p>Virionはプラグインや他のVirionによって使用されます。
+このドキュメントでは、<code>Virionユーザ</code>は、Virionを使用するプラグインまたはVirionを指します。</p>
+<h2 id="dictionary-poggit-virion-_2">ワークフロー</h2>
+<h3 id="dictionary-poggit-virion-virion_2">Virionの開発</h3>
+<p>Virionはメインクラスを含む必要はありませんが、virion が宣言するすべてのシンボル (クラス・インターフェース・trait・名前空間関数・名前空間定数) は、<strong>Antigen</strong>と呼ばれるVirionの名前空間、またはAntigenのサブ名前空間の下になければなりません。
+Antigenはビリオンに固有のものでなければなりません。
+他のVirionやプラグインは、Antigenの名前空間またはその下位の名前空間の下でシンボルを宣言することはできません。</p>
+<p>名前空間内に置くことができない他の名前付きグローバルリソースを登録する場合、その名前は、Virionのランタイム名前空間に依存するか、Virionユーザが提供する文字列に依存する必要があります。
+例えば、VirionがAsyncTaskスレッドストアを使用する場合、<code>AsyncTask::saveToThreadStore()</code>に渡されるキーは<strong>クラスの構文上の名前空間の参照 (<a href="#dictionary-poggit-virion-構文的参照">構文的参照</a>) から生成されるか、Virionユーザから渡された値から生成されなければなりません</strong>。
+stream_wrapper_register()`も同様のケースで、プロトコル名Virionによってハードコードされてはなりません。</p>
+<p>Virionフレームワークには、<code>PSR-0</code>のソースファイルとVirionのマニフェストファイル <code>virion.yml</code> が含まれています。
+<code>virion.yml</code>には以下の属性が含まれます。</p>
+<table>
+<thead>
+<tr>
+<th align="center">名前</th>
+<th align="center">説明</th>
+<th align="center">例</th>
+<th align="center">必須/任意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>name</code></td>
+<td align="center">現在は使用されていませんが、Poggitのプロジェクト名と一致する必要があります。</td>
+<td align="center"><code>libasynql</code></td>
+<td align="center">必須</td>
+</tr>
+<tr>
+<td align="center"><code>version</code></td>
+<td align="center">セマンティック・バージョニングを用いたVirionのバージョン</td>
+<td align="center"><code>0.1.0-beta</code></td>
+<td align="center">必須</td>
+</tr>
+<tr>
+<td align="center"><code>antigen</code></td>
+<td align="center">Antigen(名前空間)</td>
+<td align="center"><code>poggit\libasynql</code></td>
+<td align="center">必須</td>
+</tr>
+<tr>
+<td align="center"><code>api</code></td>
+<td align="center">このVirionが使用できる<strong>唯一</strong>のPocketMine APIのバージョンです。plugin.yml の<code>api</code>と同じシステムを使用します。</td>
+<td align="center"><code>[1.4.0, 2.0.0, 3.0.0-ALPHA1]</code></td>
+<td align="center"><code>api</code>か<code>php</code>のどちらか</td>
+</tr>
+<tr>
+<td align="center"><code>php</code></td>
+<td align="center">このVirionが使用できる<strong>唯一</strong>の PHP バージョンです。plugin.ymlの<code>api</code> と同様のシステムを使用します。</td>
+<td align="center"><code>[5.6, 7.0]</code></td>
+<td align="center"><code>api</code>か<code>php</code>のどちらか</td>
+</tr>
+<tr>
+<td align="center"><code>authors</code></td>
+<td align="center">製作者名。文字列かリストが指定できます。</td>
+<td align="center"><code>[SOFe, PEMapModder]</code></td>
+<td align="center">任意</td>
+</tr>
+<tr>
+<td align="center"><code>description</code></td>
+<td align="center">説明文</td>
+<td align="center"><code>Simple asynchronous SQL access</code></td>
+<td align="center">任意</td>
+</tr>
+</tbody>
+</table>
+<p>異なるプラグインで使用されている同じVirionが相互に作用してはいけません。</p>
+<h3 id="dictionary-poggit-virion-virion_3">Virionユーザの開発</h3>
+<p>virion ユーザーは、virion によって宣言されたシンボルが正常にロードされることを前提に開発することができます。ただし、これらのシンボルへのすべての参照は、<a href="#dictionary-poggit-virion-構文的参照">構文的</a>でなければなりません。</p>
+<h3 id="dictionary-poggit-virion-virion_4">Virionやプラグインのテスト</h3>
+<p>Virion用テスターの役割を果たすプラグインを作ることが推奨されます。</p>
+<p>Poggitは<a href="https://poggit.pmmp.io/p/DEVirion">DEVirion</a>を提供しています。詳しい使い方はPoggitのリリースページにあるプラグインの説明を参照してください。
+このプラグインを使うと、Phar形式またはフォルダ形式のVirionまたはプラグインでサーバーを動かすことができます。</p>
+<p><strong>デバッグ以外の理由でDEVirionを使用しないでください</strong>。
+DEVirionはvirionのクラスを影で支えているわけではないので、DEVirionを使った複数のプラグインがあっても互換性の問題が発生し、virionフレームワークの意味がなくなってしまいます。</p>
+<h3 id="dictionary-poggit-virion-poggitvirion">PoggitでVirionをビルドする</h3>
+<p>Virionプロジェクトは、プラグインプロジェクトと同様にリポジトリの<code>.poggit.yml</code>で宣言することができますが、プロジェクト属性が 2 つ追加されます。</p>
+<div class="highlight"><pre><span></span><code><span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">library</span>
+<span class="nt">model</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">virion</span>
+</code></pre></div>
+<p>例:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">projects</span><span class="p">:</span>
+  <span class="nt">libasynql</span><span class="p">:</span>
+    <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">path/to/libasynql</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">library</span>
+    <span class="nt">model</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">virion</span>
+</code></pre></div>
+<h3 id="dictionary-poggit-virion-virion_5">ローカルでVirionをビルドする</h3>
+<p>Virionをローカルで直接コンパイルする公式ツールは作成されていませんが、ビルドスクリプトは簡単に作成することができます。</p>
+<p>基本的にVirionはプラグインと同じフォーマットですが、4つの違いがあります。
+- <code>plugin.yml</code>が<code>virion.yml</code>になります。
+- <code>resources</code> はサポートされていません (将来的に追加される可能性があります)。
+- <code>virion.php</code>というファイルと、<code>virion_stub.php</code>というファイルがpharに含まれている必要があります。これらのファイルは、<a href="https://github.com/poggit/poggit/tree/beta/assets/php/"></a>からダウンロードすることができます。
+    - <code>virion_stub.php</code>はビルド用のCLIを提供します。
+    - <code>virion.php</code>には、実際にVirionを注入するコードが含まれています。
+- pharのスタブは<code>virion.php</code>を直接読み込む必要があります。以下は有効なスタブの例です。</p>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span> <span class="k">require</span> <span class="s2">&quot;phar://&quot;</span> <span class="o">.</span> <span class="no">__FILE__</span> <span class="o">.</span> <span class="s2">&quot;/virion_stub.php&quot;</span><span class="p">;</span> <span class="nx">__HALT_COMPILER</span><span class="p">();</span>
+</code></pre></div>
+<p><a href="https://github.com/poggit/poggit/blob/d587ecf3891270bd37940bf5640fca1eb7e374ad/src/poggit/ci/builder/PoggitVirionBuilder.php?utf8=%E2%9C%93#L50-L52">参考</a></p>
+<h3 id="dictionary-poggit-virion-poggitvirion_1">PoggitでVirionユーザをビルドする</h3>
+<p>Virionユーザ(Virionを使用するプラグインやVirion本体)は、<code>.poggit.yml</code>で使用するVirionを宣言することができ、プラグインのビルド時にPoggitが自動的にVirionを注入します。Virionは、プラグインプロジェクトの<code>libs</code>属性でリストアップできます。利用する各Virionの宣言は下記の属性を含みます。</p>
+<table>
+<thead>
+<tr>
+<th align="center">名前</th>
+<th align="center">説明</th>
+<th align="center">形式・例</th>
+<th align="center">必須/任意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>format</code></td>
+<td align="center">ライブラリのフォーマット</td>
+<td align="center"><code>virion</code> (現在この値のみ選択可能)</td>
+<td align="center">任意 (デフォルト：<code>virion</code>)</td>
+</tr>
+<tr>
+<td align="center"><code>vendor</code></td>
+<td align="center">Virionのインポート元</td>
+<td align="center"><code>poggit-project</code> または <code>raw</code></td>
+<td align="center">任意 (デフォルト：<code>poggit-project</code>)</td>
+</tr>
+<tr>
+<td align="center"><code>src</code> (<code>vendor</code>属性で<code>poggit-project</code>を選択した場合)</td>
+<td align="center">Poggitプロジェクトのフルパス</td>
+<td align="center"><code>/projectName</code> (同じリポジトリのプロジェクト) OR <code>repoOwner/repoName/projectName</code></td>
+<td align="center">必須</td>
+</tr>
+<tr>
+<td align="center"><code>src</code> (<code>vendor</code>属性で<code>raw</code>)を選択した場合</td>
+<td align="center">ダウンロード先URL(HTTP/HTTPS)、またはプロジェクトからの相対パス</td>
+<td align="center"><code>https://example.com/virion.phar</code> または <code>libs/virion.phar</code></td>
+<td align="center">必須</td>
+</tr>
+<tr>
+<td align="center"><code>version</code> (<code>vendor: poggit-project</code>)</td>
+<td align="center"><a href="https://getcomposer.org/doc/articles/versions.md">セマンティックバージョニング</a>で指定</td>
+<td align="center"><code>^1.0</code></td>
+<td align="center"><code>vender</code>属性で<code>poggit-project</code>を指定した場合のみ必須</td>
+</tr>
+<tr>
+<td align="center"><code>shade</code></td>
+<td align="center">シェーディングストラテジ</td>
+<td align="center"><code>syntax</code> または <code>single</code> または <code>double</code></td>
+<td align="center">任意 (デフォルト：<code>syntax</code>)</td>
+</tr>
+<tr>
+<td align="center"><code>branch</code> (<code>vendor</code>属性で<code>poggit-project</code>を選択した場合)</td>
+<td align="center">ブランチの指定</td>
+<td align="center"><code>ブランチ名</code> または <code>:default</code>(デフォルトブランチ) または <code>*</code>/<code>%</code>(全てのブランチ)</td>
+<td align="center">任意(デフォルト：<code>:default</code>)</td>
+</tr>
+<tr>
+<td align="center"><code>epitope</code></td>
+<td align="center">追加の名前空間</td>
+<td align="center"><code>.random</code>(ランダム) または <code>.sha</code>(ハッシュ) または <code>.none</code> または <code>任意の名前空間</code></td>
+<td align="center">任意 (デフォルト：<code>libs</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意</strong></p>
+<p>セキュリティ上の理由から、Poggitでのビルドではローカルのvirion.phpを無視し、常に最新のvirion.phpを使用します。</p>
+<h3 id="dictionary-poggit-virion-virion_6">ローカルでVirionユーザをコンパイルする</h3>
+<p>ビルドされたVirionには、<code>virion_stub.php</code>および<code>virion.php</code>ファイルが含まれている必要があります。これらのファイルはVirionをVirionユーザに注入するためのCLIを提供します。</p>
+<p>基本的な使い方：</p>
+<div class="highlight"><pre><span></span><code>php used_virion.phar virion_user.phar <span class="si">${</span><span class="nv">ANTIBODY_PREFIX</span><span class="si">}</span>
+</code></pre></div>
+<p><code>${ANTIBODY_PREFIX}</code>はビリオンユーザーのメインの名前空間（プラグインの場合はメインクラスの名前空間、ビリオンの場合はAntigenの名前空間）でなければなりません。バックスラッシュ等はエスケープする必要があります。</p>
+<h2 id="dictionary-poggit-virion-cli">CLI機能の拡張</h2>
+<p>Virionは、プロジェクトルートに<code>cli-map.json</code>というファイルを追加することで、カスタムコマンドを追加することができます。このファイルには、コマンド名と実行ファイルをマッピングしたオブジェクトを記述します。</p>
+<p><code>cli-map.json</code>が存在する場合、Poggitはsrcディレクトリのオートローダーのための<code>cli-autoload.php</code>を作成します。</p>
+<p>コマンド名は<code>.phar</code>で終わらないようにしてください。</p>
+<h2 id="dictionary-poggit-virion-_3">制限事項</h2>
+<ul>
+<li>Virionユーザは、自分のAPIでVirionのクラスを公開してはいけません。もしそのようなオブジェクトをAPIで公開しなければならない場合は、Virionユーザが宣言したインターフェースでラップしなければなりません。</li>
+</ul>
+<h2 id="dictionary-poggit-virion-_4">付録</h2>
+<h3 id="dictionary-poggit-virion-_5">構文的参照</h3>
+<p>基本的に、構文参照は以下のように定義されます。</p>
+<blockquote>
+<p>A <code>T_NAMESPACE</code> (<code>namespace</code>), <code>T_USE</code> (<code>use</code>) or <code>T_NS_SEPARATOR</code> (<code>\</code>) token, or <code>T_USE</code> + <code>T_FUNCTION</code> (<code>use function</code>) or <code>T_USE</code> + <code>T_CONST</code> (<code>use const</code>), followed by a consecutive series of <code>T_STRING</code> (a non-keyword set of characters, i.e. part of the namespace) and <code>T_NS_SEPARATOR</code> (<code>\</code>).</p>
+</blockquote>
+<p>Virionの<code>クラス</code>・<code>関数</code>・<code>定数</code>の名前空間を参照する際には、以下のような形式で<strong>のみ</strong>行うことができます。</p>
+<p><div class="highlight"><pre><span></span><code><span class="x">namespace name\space;</span>
+<span class="x">use name\space\Clazz;</span>
+<span class="x">use function name\space\func;</span>
+<span class="x">use const name\space\CONSTANT;</span>
+<span class="x">\name\space\Clazz::method();</span>
+</code></pre></div>
+<code>poggit\libasynql</code>というAntigenのVirionの例：</p>
+<div class="highlight"><pre><span></span><code><span class="x">// syntactic reference</span>
+<span class="x">use poggit\libasynql\SqlResult as Result; </span>
+<span class="x">$result = new Result;</span>
+
+<span class="x">// syntactic reference</span>
+<span class="x">$result = new \poggit\libasynql\SqlResult;</span>
+
+<span class="x">// syntactic reference</span>
+<span class="x">use poggit\libasynql\SqlResult as Result;</span>
+<span class="x">$class = new \ReflectionClass(Result::class);</span>
+
+<span class="x">// syntactic reference</span>
+<span class="x">$class = new \ReflectionClass(\poggit\libasynql\SqlResult::class);</span>
+
+<span class="x">// syntactic references, from the scope of a class method in poggit\libasynql\SqlResult</span>
+<span class="x">$class = new \ReflectionClass(self::class);</span>
+<span class="x">$class = new \ReflectionClass(static::class);</span>
+<span class="x">$class = new \ReflectionClass(get_class());</span>
+<span class="x">$class = new \ReflectionClass(__CLASS__);</span>
+<span class="x">$class = new \ReflectionClass(__NAMESPACE__ . &quot;\\SqlResult&quot;); // a boundary case barely acceptable</span>
+
+<span class="x">// non-syntactic reference</span>
+<span class="x">$class = new \ReflectionClass(&quot;poggit\\libasynql\\SqlResult&quot;);</span>
+<span class="x">$class = new \ReflectionClass(&#39;poggit\libasynql\SqlResult&#39;);</span>
+</code></pre></div>
+<p>名前空間からの相対参照はシェーディングされないため、<strong>Virionの名前空間への相対参照は使用しないでください</strong>。例えば、Virion のAntigenが<code>namespace poggit\libasynql</code>である場合、Virionユーザでは<code>namespace poggit</code>で始まるコードを書いてはいけません。</p></section><h1 class='nav-section-title-end'>Ended: Poggit</h1><h1 class='nav-section-title-end'>Ended: Dictionary</h1></div>
                 
               
 
   
     <div class="md-source-date">
       <small>
-          Authors: <span class='git-page-authors git-authors'><a href='mailto:famima65536@gmail.com'>famima65536</a> (88.89%), <a href='mailto:25810983+UramnOIL@users.noreply.github.com'>うらむんオイル</a> (11.11%)</span>
+          Authors: <span class='git-page-authors git-authors'><a href='mailto:25810983+UramnOIL@users.noreply.github.com'>うらむんオイル</a></span>
       </small>
     </div>
   
@@ -1026,7 +1287,7 @@ Relesesでは初期状態ではすべてのプラグインが表示されてい�
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-<script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+<script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
 
 <script src="https://unpkg.com/iframe-worker/polyfill"></script>
