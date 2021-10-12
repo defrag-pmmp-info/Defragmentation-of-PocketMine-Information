@@ -1,4 +1,4 @@
-# API4 Changelogs全訳(18%完了)
+# API4 Changelogs全訳(30%完了)
 ## 訳に関して
 <https://github.com/pmmp/PocketMine-MP/commit/9e6d7405709560c0025e072324602983213276dd> 版より翻訳
 
@@ -398,3 +398,15 @@ permissions:
   - `Entity->getSaveId()`
   - `Entity::getKnownEntityTypes()`
   - `Entity::createEntity()`: `new YourEntity`をかわりに利用してください。 
+
+##### やりかけ エンティティのネットワークメタデータの削除
+- 定数に関するすべてのネットワークメタデータは`Entity`クラスから削除され、プロトコル層へ移動されました。これはネットワークメタデータをAPIから全体的に削除することを意図していますが、完了はしていません。
+  - 定数`Entity::DATA_FLAG_*`は`pocketmine\network\mcpe\protocol\types\entity\EntityMetadataFlags`に移動されました。
+  - 定数`Entity::DATA_TYPE_*`は`pocketmine\network\mcpe\protocol\types\entity\EntityMetadataTypes`に移動されました。
+  - 定数`Entity::DATA_*`は`pocketmine\network\mcpe\protocol\types\entity\EntityMetadataProperties`に移動されました。
+- `DataPropertyManager`は 名前空間`pocketmine\network\mcpe\protocol\types\entity`に移動され、したがってAPIの一部ではないものとして扱われます。
+- 導入された内部の`Entity`は`syncNetworkData()`をフックします。この関数はエンティティのプロパティをエンティティはエンティティのネットワークデータセット同期することが期待されます。
+- 内部のエンティティのプロパティを保存するためのネットワークメタデータセットの内部利用は削除されました。エンティティは現在では正規のクラスプロパティを使用し、ネットワークデータセットを同期することが期待されます。
+- `Entity->propertyManager`は`Entity->networkProperties`にリネームされました。
+- `Entity->getDataPropertyManager()`は`Entity->getNetworkProperties()`にリネームされました。
+
