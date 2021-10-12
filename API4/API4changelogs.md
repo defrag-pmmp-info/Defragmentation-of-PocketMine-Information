@@ -354,3 +354,12 @@ permissions:
   - 例: `Effect::getEffect(Effect::NIGHT_VISION)`は`VanillaEffects::NIGHT_VISION()`に置き換えることができます。
 - エフェクトの強さ(amplifiers)を負の値にすることは現在では明確に禁止されます。エフェクトの生み出す効果が定義されていないためです。
 - MCPEのエフェクトIDとPocketMine-MP内部のIDの境目がより明確になりました。
+  - IDハンドリングは`pocketmine\data\bedrock\EffectIdMap`へ移動しました。
+  - すべてのエフェクトID定数は`Effect`から削除されました。何らかの理由でレガシーエフェクトIDが必要なら`pocketmine\data\bedrock\EffectIds`を利用してください。
+- 以下のAPIメソッドは移動しました。
+  - `Effect->getId()` -> `EffectIdMap->toId()`
+  - `Effect::registerEffect()` -> `EffectIdMap->register()`
+  - `Effect::getEffect()` -> `EffectIdMap->fromId()`
+  - `Effect::getEffectByName()` -> `VanillaEffects::fromString()`
+- 以下のAPIメソッドが追加されました。
+  - `Effect->getRuntimeId()`: これは**動的ID**でありエフェクトタイプの比較に用いることができます。**これは決して保持されないため、configやNBTでは利用しないでください！**
