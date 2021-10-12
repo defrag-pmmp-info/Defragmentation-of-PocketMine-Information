@@ -352,4 +352,5 @@ permissions:
   - `WitherEffect`
 - `VanillaEffects`クラスが追加されました。これは全てのバニラエフェクトタイプを静的メソッドで表現し、`Effect::getEffect()`よりもきれいに書けるようになります。
   - 例: `Effect::getEffect(Effect::NIGHT_VISION)`は`VanillaEffects::NIGHT_VISION()`に置き換えることができます。
-  <!-- Negative effect amplifiersのPMMP的邦訳がわからないため省略 -->
+- エフェクトの強さ(amplifiers)を負の値にすることは現在では明確に禁止されます。エフェクトの生み出す効果が定義されていないためです。
+- MCPEのエフェクトIDとPocketMine-MP内部のIDの境目がより明確になりました。
