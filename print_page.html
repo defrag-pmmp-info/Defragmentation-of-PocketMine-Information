@@ -848,9 +848,9 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <li><code>Entity-&gt;move()</code>は<code>protected</code>になりました。</li>
 <li><code>Living-&gt;knockBack()</code>は<code>float, float, float</code>を受け入れるようになりました。 (最初の２つのパラメーターは削除されました).</li>
 <li><code>Living-&gt;getEffects()</code>は<code>Effect[]</code>の代わりに<code>EffectManager</code>を返すようになりました。</li>
-<li>以下のクラスは追加されました。 </li>
+<li>以下のクラスは追加されました。</li>
 <li><code>effect\EffectManager</code>: <code>Living</code>から展開されたエフェクト管理の機能群を保持します。</li>
-<li><code>HungerManager</code>: <code>Human</code>から展開された空腹管理の機能群を保持します。 </li>
+<li><code>HungerManager</code>: <code>Human</code>から展開された空腹管理の機能群を保持します。</li>
 <li><code>ExperienceManager</code>: <code>Human</code>から展開された経験値管理の機能群を保持します。</li>
 <li>以下のAPIメソッドは移動、またはリネームされました。</li>
 <li><code>Entity-&gt;fall()</code> -&gt; <code>Entity-&gt;onHitGround()</code> (また、可視性が<code>public</code>から<code>protected</code>になりました。)</li>
@@ -898,6 +898,29 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <li><code>Rideable</code></li>
 <li><code>Vehicle</code></li>
 <li><code>Skin</code>無効なデータを受け取ると例外を投げるようになりました。</li>
+</ul>
+<h4 id="api4-api4changelogs-effect">Effect</h4>
+<ul>
+<li>全ての<code>Effect</code>に関連したクラスは<code>pocketmine\entity\effect</code>の名前空間に移動しました。</li>
+<li><code>Effect</code>クラスに入っていたエフェクト機能はいくつかのクラスに分けられました。以下のクラスが新しく追加されました。</li>
+<li><code>AbsorptionEffect</code></li>
+<li><code>HealthBoostEffect</code></li>
+<li><code>HungerEffect</code></li>
+<li><code>InstantDamageEffect</code></li>
+<li><code>InstantEffect</code></li>
+<li><code>InstantHealthEffect</code></li>
+<li><code>InvisibilityEffect</code></li>
+<li><code>LevitationEffect</code></li>
+<li><code>PoisonEffect</code></li>
+<li><code>RegenerationEffect</code></li>
+<li><code>SaturationEffect</code></li>
+<li><code>SlownessEffect</code></li>
+<li><code>SpeedEffect</code></li>
+<li><code>WitherEffect</code></li>
+<li><code>VanillaEffects</code>クラスが追加されました。これは全てのバニラエフェクトタイプを静的メソッドで表現し、<code>Effect::getEffect()</code>よりもきれいに書けるようになります。</li>
+<li>例: <code>Effect::getEffect(Effect::NIGHT_VISION)</code>は<code>VanillaEffects::NIGHT_VISION()</code>に置き換えることができます。
+  <!-- Negative effect amplifiersのPMMP的邦訳がわからないため省略 -->
+</li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Building</h1><section class="print-page" id="building-index"><h1 id="building-index-_1">サーバー構築</h1>
 <p>ここではサーバー構築について記述します
 API4.0.0(ベータ版)での構築は<a href="#building-build-in-api4">API4.0.0での構築</a>を参照してください</p></section><section class="print-page" id="building-build-in-api4"><h1 id="building-build-in-api4-api4">API4でのサーバー構築</h1>
