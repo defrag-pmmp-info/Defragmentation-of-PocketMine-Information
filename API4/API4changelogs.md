@@ -253,7 +253,7 @@ permissions:
   - `Wood2`
 - `BlockToolType`の定数は`TYPE_`プレフィックスを削除する形でリネームされました。
 
-### Command
+#### Command
 - 以下のクラスは削除されました。
   - `RemoteConsoleCommandSender`
 - 以下のAPIメソッドはシグネチャが変わりました。
@@ -261,8 +261,8 @@ permissions:
   - `CommandSender->setScreenLineHeight()` nullableではありますが、引数が必須になりました
 - 名前に空白を含むコマンドはサポートされなくなりました
 
-### Entity
-#### 一般
+#### Entity
+##### 一般
 - `Entity`は`Location`を継承しなくなります。 代わりに`Entity->getLocation()`や`Entity->getPosition()`を使ってください。
 - 以下のフィールドは削除されました。
   - `Entity->chunk`: エンティティはどのチャンクにいるのかを自身では記憶しなくなりました (かわりに`World`がそれを管理します)。
@@ -333,7 +333,7 @@ permissions:
   - `Vehicle`
 - `Skin`無効なデータを受け取ると例外を投げるようになりました。
 
-#### Effect
+##### Effect
 - 全ての`Effect`に関連したクラスは`pocketmine\entity\effect`の名前空間に移動しました。
 - `Effect`クラスに入っていたエフェクト機能はいくつかのクラスに分けられました。以下のクラスが新しく追加されました。
   - `AbsorptionEffect`
