@@ -1,0 +1,3 @@
+# Virion
+VirionはPocketMineプラグイン専用のPHPライブラリです。
+Poggitではプラグインのビルドに自動的にVirionライブラリを含めることができます。
