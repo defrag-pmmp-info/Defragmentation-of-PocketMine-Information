@@ -912,6 +912,21 @@ children:
 <li><code>Effect::getEffectByName()</code> -&gt; <code>VanillaEffects::fromString()</code></li>
 <li>以下のAPIメソッドが追加されました。</li>
 <li><code>Effect-&gt;getRuntimeId()</code>: これは<strong>動的ID</strong>でありエフェクトタイプの比較に用いることができます。<strong>これは決して保持されないため、configやNBTでは利用しないでください！</strong></li>
+</ul>
+<h5 id="api4-api4changelogs-nbt">実行時エンティティNBTの削除</h5>
+<ul>
+<li>エンティティは実行時にNBTを存在させ続けなくなりました。</li>
+<li><code>Entity-&gt;namedtag</code>は削除されました。</li>
+<li><code>Entity-&gt;saveNBT()</code>はその場で前のNBTに変更を加えるのではなく、現在では新規生成された<code>CompoundTag</code>を返すようになりました。</li>
+<li><code>Entity-&gt;initEntity()</code>は現在では<code>CompoundTag</code>パラメータを受け付けます。</li>
+</ul>
+<h5 id="api4-api4changelogs-_14">エンティティ生成</h5>
+<ul>
+<li><code>Entity::createEntity()</code>は削除されました。もはや実行時に新たなエンティティを生成するためには必要なくなりました。代わりに、単に<code>new YourEntity</code>のようにしてください。</li>
+<li><code>Entity</code>の子クラスのコンストラクタは普通のクラスと同様にどのようなシグネチャでも持つことができます。</li>
+<li>NBTからのエンティティの読み込みは現在では<code>EntityFactory</code>にハンドルされるようになりました。<code>Entity::createEntity()</code>の動作とはかなり違った動作をします。 <code>YourEntity::class</code>を一式のMinecraft save IDに登録する代わりに、 あるNBTと<code>World</code>が与えられたときにエンティティを構築するコールバックを与える必要があります。</li>
+<li>生成コールバックは<code>EntityFactory::register()</code>を用いて登録されます。</li>
+<li>生成コールバックはシグネチャ<code>function(World, CompoundTag) : Entity</code>を持つ必要があります。</li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Building</h1><section class="print-page" id="building-index"><h1 id="building-index-_1">サーバー構築</h1>
 <p>ここではサーバー構築について記述します
 API4.0.0(ベータ版)での構築は<a href="#building-build-in-api4">API4.0.0での構築</a>を参照してください</p></section><section class="print-page" id="building-build-in-api4"><h1 id="building-build-in-api4-api4">API4でのサーバー構築</h1>
