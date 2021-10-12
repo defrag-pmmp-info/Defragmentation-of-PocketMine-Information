@@ -296,7 +296,7 @@
   
     <li class="md-nav__item">
       <a href="API4/API4changelogs.html" class="md-nav__link">
-        API4 Changelogs全訳(18%完了)
+        API4 Changelogs全訳(30%完了)
       </a>
     </li>
   
@@ -550,7 +550,7 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 </ul>
 <h2 id="api4-index-_3">開発者向け情報</h2>
 <h3 id="api4-index-devtools-api4">DevTools API4対応版の配布場所</h3>
-<p>poggit上でダウンロード可 <a href="https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools">https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools</a> の Build History:master により最新版がダウンロード可能</p></section><section class="print-page" id="api4-api4changelogs"><h1 id="api4-api4changelogs-api4-changelogs18">API4 Changelogs全訳(18%完了)</h1>
+<p>poggit上でダウンロード可 <a href="https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools">https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools</a> の Build History:master により最新版がダウンロード可能</p></section><section class="print-page" id="api4-api4changelogs"><h1 id="api4-api4changelogs-api4-changelogs30">API4 Changelogs全訳(30%完了)</h1>
 <h2 id="api4-api4changelogs-_1">訳に関して</h2>
 <p><a href="https://github.com/pmmp/PocketMine-MP/commit/9e6d7405709560c0025e072324602983213276dd">https://github.com/pmmp/PocketMine-MP/commit/9e6d7405709560c0025e072324602983213276dd</a> 版より翻訳</p>
 <p>翻訳漏れの無いように気を配りますが、書かれていない項目がある場合PRを送ってもらえると助かります。</p>
@@ -951,6 +951,18 @@ children:
 <li><code>Entity-&gt;getSaveId()</code></li>
 <li><code>Entity::getKnownEntityTypes()</code></li>
 <li><code>Entity::createEntity()</code>: <code>new YourEntity</code>をかわりに利用してください。 </li>
+</ul>
+<h5 id="api4-api4changelogs-_15">やりかけ エンティティのネットワークメタデータの削除</h5>
+<ul>
+<li>定数に関するすべてのネットワークメタデータは<code>Entity</code>クラスから削除され、プロトコル層へ移動されました。これはネットワークメタデータをAPIから全体的に削除することを意図していますが、完了はしていません。</li>
+<li>定数<code>Entity::DATA_FLAG_*</code>は<code>pocketmine\network\mcpe\protocol\types\entity\EntityMetadataFlags</code>に移動されました。</li>
+<li>定数<code>Entity::DATA_TYPE_*</code>は<code>pocketmine\network\mcpe\protocol\types\entity\EntityMetadataTypes</code>に移動されました。</li>
+<li>定数<code>Entity::DATA_*</code>は<code>pocketmine\network\mcpe\protocol\types\entity\EntityMetadataProperties</code>に移動されました。</li>
+<li><code>DataPropertyManager</code>は 名前空間<code>pocketmine\network\mcpe\protocol\types\entity</code>に移動され、したがってAPIの一部ではないものとして扱われます。</li>
+<li>導入された内部の<code>Entity</code>は<code>syncNetworkData()</code>をフックします。この関数はエンティティのプロパティをエンティティはエンティティのネットワークデータセット同期することが期待されます。</li>
+<li>内部のエンティティのプロパティを保存するためのネットワークメタデータセットの内部利用は削除されました。エンティティは現在では正規のクラスプロパティを使用し、ネットワークデータセットを同期することが期待されます。</li>
+<li><code>Entity-&gt;propertyManager</code>は<code>Entity-&gt;networkProperties</code>にリネームされました。</li>
+<li><code>Entity-&gt;getDataPropertyManager()</code>は<code>Entity-&gt;getNetworkProperties()</code>にリネームされました。</li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Building</h1><section class="print-page" id="building-index"><h1 id="building-index-_1">サーバー構築</h1>
 <p>ここではサーバー構築について記述します
 API4.0.0(ベータ版)での構築は<a href="#building-build-in-api4">API4.0.0での構築</a>を参照してください</p></section><section class="print-page" id="building-build-in-api4"><h1 id="building-build-in-api4-api4">API4でのサーバー構築</h1>
