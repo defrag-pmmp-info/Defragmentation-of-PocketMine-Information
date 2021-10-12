@@ -287,7 +287,7 @@ permissions:
   - `HungerManager`: `Human`から展開された空腹管理の機能群を保持します。
   - `ExperienceManager`: `Human`から展開された経験値管理の機能群を保持します。
 - 以下のAPIメソッドは移動、またはリネームされました。
-  - `Entity->fall()` -> `Entity->onHitGround()` (また、可視性が`public`から`protected`になりました。)
+  - `Entity->fall()` -> `Entity->onHitGround()` (また、アクセス権が`public`から`protected`になりました。)
   - `Living->removeAllEffects()` -> `EffectManager->clear()`
   - `Living->removeEffect()` -> `EffectManager->remove()`
   - `Living->addEffect()` -> `EffectManager->add()`
