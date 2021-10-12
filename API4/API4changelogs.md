@@ -252,3 +252,83 @@ permissions:
     - `WallSign`
     - `Wood2`
 - `BlockToolType`の定数は`TYPE_`プレフィックスを削除する形でリネームされました。
+
+### Command
+- 以下のクラスは削除されました。
+  - `RemoteConsoleCommandSender`
+- 以下のAPIメソッドはシグネチャが変わりました。
+  - `Command->setPermission()` nullableではありますが、引数が必須になりました
+  - `CommandSender->setScreenLineHeight()` nullableではありますが、引数が必須になりました
+- 名前に空白を含むコマンドはサポートされなくなりました
+
+### Entity
+#### 一般
+- `Entity`は`Location`を継承しなくなります。 代わりに`Entity->getLocation()`や`Entity->getPosition()`を使ってください。
+- 以下のフィールドは削除されました。
+  - `Entity->chunk`: エンティティはどのチャンクにいるのかを自身では記憶しなくなりました (かわりに`World`がそれを管理します)。
+  - `Entity->height`: `EntitySizeInfo`に移動しました。 代わりに`Entity->size`を使ってください。
+  - `Entity->width`: `EntitySizeInfo`に移動しました。 代わりに`Entity->size`を使ってください。
+  - `Entity->eyeHeight`: `EntitySizeInfo`に移動しました。 代わりに `Entity->size`を使ってください。
+- 以下のAPIメソッドが追加されました。
+  - `Entity->getFallDistance()`
+  - `Entity->setFallDistance()`
+  - `ItemEntity->getDespawnDelay()`
+  - `ItemEntity->setDespawnDelay()`
+  - `Living->calculateFallDamage()`: これは`protected`です。 サブクラスにより、これをオーバーライドすることでダメージロジックをカスタマイズできます。
+  - `Human->getHungerManager()`
+  - `Human->getXpManager()`
+- 以下のAPIメソッドはシグネチャが変わりました。
+  - `Entity->entityBaseTick()`は`protected`になりました。
+  - `Entity->move()`は`protected`になりました。
+  - `Living->knockBack()`は`float, float, float`を受け入れるようになりました。 (最初の２つのパラメーターは削除されました).
+  - `Living->getEffects()`は`Effect[]`の代わりに`EffectManager`を返すようになりました。
+- 以下のクラスは追加されました。 
+  - `effect\EffectManager`: `Living`から展開されたエフェクト管理の機能群を保持します。
+  - `HungerManager`: `Human`から展開された空腹管理の機能群を保持します。 
+  - `ExperienceManager`: `Human`から展開された経験値管理の機能群を保持します。
+- 以下のAPIメソッドは移動、またはリネームされました。
+  - `Entity->fall()` -> `Entity->onHitGround()` (また、可視性が`public`から`protected`になりました。)
+  - `Living->removeAllEffects()` -> `EffectManager->clear()`
+  - `Living->removeEffect()` -> `EffectManager->remove()`
+  - `Living->addEffect()` -> `EffectManager->add()`
+  - `Living->getEffect()` -> `EffectManager->get()`
+  - `Living->hasEffect()` -> `EffectManager->has()`
+  - `Living->hasEffects()` -> `EffectManager->hasEffects()`
+  - `Living->getEffects()` -> `EffectManager->all()`
+  - `Human->getFood()` -> `HungerManager->getFood()`
+  - `Human->setFood()` -> `HungerManager->setFood()`
+  - `Human->getMaxFood()` -> `HungerManager->getMaxFood()`
+  - `Human->addFood()` -> `HungerManager->addFood()`
+  - `Human->isHungry()` -> `HungerManager->isHungry()`
+  - `Human->getSaturation()` -> `HungerManager->getSaturation()`
+  - `Human->setSaturation()` -> `HungerManager->setSaturation()`
+  - `Human->addSaturation()` -> `HungerManager->addSaturation()`
+  - `Human->getExhaustion()` -> `HungerManager->getExhaustion()`
+  - `Human->setExhaustion()` -> `HungerManager->setExhaustion()`
+  - `Human->exhaust()` -> `HungerManager->exhaust()`
+  - `Human->getXpLevel()` -> `ExperienceManager->getXpLevel()`
+  - `Human->setXpLevel()` -> `ExperienceManager->setXpLevel()`
+  - `Human->addXpLevels()` -> `ExperienceManager->addXpLevels()`
+  - `Human->subtractXpLevels()` -> `ExperienceManager->subtractXpLevels()`
+  - `Human->getXpProgress()` -> `ExperienceManager->getXpProgress()`
+  - `Human->setXpProgress()` -> `ExperienceManager->setXpProgress()`
+  - `Human->getRemainderXp()` -> `ExperienceManager->getRemainderXp()`
+  - `Human->getCurrentTotalXp()` -> `ExperienceManager->getCurrentTotalXp()`
+  - `Human->setCurrentTotalXp()` -> `ExperienceManager->setCurrentTotalXp()`
+  - `Human->addXp()` -> `ExperienceManager->addXp()`
+  - `Human->subtractXp()` -> `ExperienceManager->subtractXp()`
+  - `Human->getLifetimeTotalXp()` -> `ExperienceManager->getLifetimeTotalXp()`
+  - `Human->setLifetimeTotalXp()` -> `ExperienceManager->setLifetimeTotalXp()`
+  - `Human->canPickupXp()` -> `ExperienceManager->canPickupXp()`
+  - `Human->onPickupXp()` -> `ExperienceManager->onPickupXp()`
+  - `Human->resetXpCooldown()` -> `ExperienceManager->resetXpCooldown()`
+- 以下のAPIメソッドは削除されました。
+  - `Human->getRawUniqueId()`は、代わりに`Human->getUniqueId()->toBinary()`を使うようになりました。
+- 以下のクラスは削除されました。
+  - `Creature`
+  - `Damageable`
+  - `Monster`
+  - `NPC`
+  - `Rideable`
+  - `Vehicle`
+- `Skin`無効なデータを受け取ると例外を投げるようになりました。
