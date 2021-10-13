@@ -61,10 +61,10 @@ model: virion
 
 ```yaml
 projects:
-    libasynql:
-        path: path/to/libasynql
-        type: library
-        model: virion
+  libasynql:
+    path: path/to/libasynql
+    type: library
+    model: virion
 ```
 
 ### ローカルでVirionをビルドする
@@ -74,8 +74,8 @@ Virionをローカルで直接コンパイルする公式ツールは作成さ�
 - `plugin.yml`が`virion.yml`になります。
 - `resources` はサポートされていません (将来的に追加される可能性があります)。
 - `virion.php`というファイルと、`virion_stub.php`というファイルがpharに含まれている必要があります。これらのファイルは、[](https://github.com/poggit/poggit/tree/beta/assets/php/)からダウンロードすることができます。
-        - `virion_stub.php`はビルド用のCLIを提供します。
-        - `virion.php`には、実際にVirionを注入するコードが含まれています。
+    - `virion_stub.php`はビルド用のCLIを提供します。
+    - `virion.php`には、実際にVirionを注入するコードが含まれています。
 - pharのスタブは`virion.php`を直接読み込む必要があります。以下は有効なスタブの例です。
 
 ```php
