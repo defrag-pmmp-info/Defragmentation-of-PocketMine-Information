@@ -463,3 +463,47 @@ permissions:
   - `PlayerPreLoginEvent->getPlayer()`
 - 以下のAPIメソッドは移動/リネームされました。
   - `InventoryPickupItemEvent->getItem()` -> `InventoryPickupItemEvent->getItemEntity()`
+
+##### その他の変更
+- イベントの間にプレイヤーが切断されてもサーバーはクラッシュしなくなりました。(それでも他の副作用を引き起こす可能性があります)
+- `PlayerKickEvent`は最初のログインシークエンスが完了する以前に発生した切断では着火されなくなりました。(例 リソースパックのダウンロード完了時)
+- キャンセル可能なイベントはインターフェースの要件を満たすために必要なキャンセル可能なコンポーネントを得るための`CancellableTrait`を実装する必要があります。`Event`はこれらのメソッドをスタブを持たなくなりました。
+- `PlayerInteractEvent`はプレイヤーがアイテムをアクティベートしたときに着火されなくなりました。これは古くからの問題であった`PlayerInteractEvent`が一回触った時にも繰り返し発火されてしまう問題を修正します。以下の定数は削除されました。
+  - `PlayerInteractEvent::LEFT_CLICK_AIR`
+  - `PlayerInteractEvent::RIGHT_CLICK_AIR`
+  - `PlayerInteractEvent::PHYSICAL`
+- 以下のイベントが追加されます。
+  - `PlayerEntityInteractEvent`: プレイヤーがエンティティを右クリック(スマホでは長押し)した時のイベント
+  - `PlayerItemUseEvent`: プレイヤーが持っているアイテムをアクティベートした時のイベント, 例えば雪玉を投げるなど。
+  - `BlockTeleportEvent`: ブロックがテレポートした時のイベント、例えばエンドラの卵が攻撃されたときなど。
+  - `PlayerDisplayNameChangeEvent`
+  - `EntityItemPickupEvent`: プレイヤーやエンティティが落ちているアイテム(か矢)を拾った時のイベント。 `InventoryPickupItemEvent`と`InventoryPickupArrowEvent`の置き換え
+    - 置き換え前とは違って、アイテムが入るインベントリを変更することができます。
+    - もし入るインベントリを`null`にすると、アイテムは破棄されます。これはインベントリが満杯の状態でクリエイティブのプレイヤーが拾うときに見られる動作です。
+  - `EntityTrampleFarmlandEvent`: 農地上でmobやプレイヤーがジャンプをして土に変化させるときのイベント。
+  - `StructureGrowEvent`: 木や竹、その他の複数ブロックの苗木構造物が成長するときに呼ばれます。
+- 以下のイベントは削除されました。
+  - `EntityArmorChangeEvent`
+  - `EntityInventoryChangeEvent`
+  - `EntityLevelChangeEvent` - `EntityTeleportEvent`にてワールドの確認をすることで代用してください。
+  - `InventoryPickupItemEvent` - `EntityItemPickupEvent`を代わりに使用してください。
+  - `InventoryPickupArrowEvent` - `EntityItemPickupEvent`を代わり使用してください。
+  - `NetworkInterfaceCrashEvent`
+  - `PlayerCheatEvent`
+  - `PlayerIllegalMoveEvent`
+- 以下のAPIメソッドが追加されました。
+  - `EntityDeathEvent->getXpDropAmount()`
+  - `EntityDeathEvent->setXpDropAmount()`
+  - `PlayerDeathEvent->getXpDropAmount()`
+  - `PlayerDeathEvent->setXpDropAmount()`
+- 以下のメソッドは削除されました。
+  - `PlayerPreLoginEvent->getPlayer()`
+  - `Cancellable->setCancelled()`: これにより`Cancellable`実装はそのイベント特有のキャンセル機構を実装できるようになりました。例えば`PlayerPreLoginEvent`における複雑な機構などです。
+- 以下のAPIメソッドは移動されました。
+  - `Event->isCancelled()` -> `CancellableTrait->isCancelled()`: これはクラスが`Cancellable`を実装していなかった場合に`BadMethodCallException`を投げるスタブでした。これは現在ではキャンセル不可能なイベントでは単に使えなくなっています。
+  - `Event->setCancelled()`は`cancel()`と`uncancel()`に分割され、`CancellableTrait`に移動しました。
+  - `HandlerList::unregisterAll()` -> `HandlerListManager->unregisterAll()`
+  - `HandlerList::getHandlerListFor()` -> `HandlerListManager->getListFor()`
+  - `HandlerList::getHandlerLists()` -> `HandlerListManager->getAll()`
+- 以下のクラスは移動しました。
+  - `pocketmine\plugin\RegisteredListener` -> `pocketmine\event\RegisteredListener`
