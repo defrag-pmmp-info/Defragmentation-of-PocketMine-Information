@@ -611,14 +611,18 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <li>プレイヤー移動アンチチートは削除されました。</li>
 <li>GS4 QueryはRakLibが無効化されても停止されなくなりました。</li>
 <li><code>pocketmine_chunkutils</code> PHP拡張は使われなくなりました。</li>
-<li>新しいPHP拡張がこのバージョンから必要になりました。</li>
+<li>新しいPHP拡張がこのバージョンから必要になりました。<ul>
 <li><a href="https://github.com/pmmp/ext-chunkutils2">chunkutils2</a></li>
 <li><a href="https://github.com/pmmp/ext-morton">morton</a></li>
-<li>プレイヤーリスポーン時の多くのバグが修正されました。</li>
+</ul>
+</li>
+<li>プレイヤーリスポーン時の多くのバグが修正されました。<ul>
 <li>生成されていない地形でリスポーンする際に岩盤下にスポーンするバグ</li>
 <li>非常に遅いマシン上で初回サーバー参加時に岩盤下にスポーンするバグ</li>
 <li>カスタムスポーン地点がセットされている状態でリスポーンしたときにブロック内(または上空)にスポーンするバグ</li>
 <li>プレイヤースポーン地点がワールドスポーンが変わった時に以前の場所になってしまうバグ</li>
+</ul>
+</li>
 <li>高い維持コストのわりに恩恵が少ないためプリプロセッサーはビルドから削除されました。現在、プリプロセッサー利用は非推奨です。</li>
 </ul>
 <h4 id="api4-api4changelogs-commands">コマンド Commands</h4>
@@ -627,21 +631,27 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <li><code>/effect</code> コマンドは数字IDをサポートしなくなりました。現在では名前が要求されます。</li>
 <li><code>/enchant</code> コマンドは数学IDをサポートしなくなりました。現在では名前が要求されます。</li>
 <li><code>/clear</code> コマンドが追加されました。バニラのMinecraftのものと機能的に同等のものです。</li>
-<li>以下のコマンドの出力は選択した言語にローカライズされました。</li>
+<li>以下のコマンドの出力は選択した言語にローカライズされました。<ul>
 <li><code>/gc</code></li>
 <li><code>/status</code></li>
 <li><code>/op</code></li>
 <li><code>/deop</code></li>
 </ul>
+</li>
+</ul>
 <h4 id="api4-api4changelogs-configuration">設定 Configuration</h4>
 <ul>
 <li>ワールドのプリセットは<code>pocketmine.yml</code>の<code>preset</code>キーとして利用できるようになりました: 以前は<code>generator</code>キー</li>
-<li>新たに以下のオプションが<code>pocketmine.yml</code>に追加されます</li>
+<li>新たに以下のオプションが<code>pocketmine.yml</code>に追加されます<ul>
 <li><code>chunk-ticking.blocks-per-subchunk-per-tick</code>(デフォルト <code>3</code>):この値を増加させるとランダムブロックアップデートの確率が上がります。(例. 草の成長)</li>
 <li><code>network.enable-encryption</code>(デフォルト<code>true</code>): Minecraftネットワークパケットを暗号化するか否かを決定できます。</li>
-<li>以下のオプションが<code>pocketmine.yml</code>から削除されました。</li>
+</ul>
+</li>
+<li>以下のオプションが<code>pocketmine.yml</code>から削除されました。<ul>
 <li><code>chunk-ticking.light-updates</code>: 光処理は基本的なバニラの機能を動作させるのに必要なため、チャンクチックを無効化することなくこの機能を停止することは意味がありません。もし、明るさ計算をしたくなければチャンクチックと共に無効化するようにしてください。</li>
 <li><code>player.anti-cheat.allow-movement-cheats</code></li>
+</ul>
+</li>
 </ul>
 <h4 id="api4-api4changelogs-_4">ワールドハンドリング</h4>
 <h5 id="api4-api4changelogs-_5">インターフェイス</h5>
@@ -652,10 +662,12 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <ul>
 <li>1.12.xまでのMinecraft Bedrockのワールドがサポートされました。(1.13より上はまた別の形式変更によりまだ<strong>サポートされていません</strong>。対応には非常に労力を要します。)</li>
 <li>非推奨のワールド形式の自動変換が実装されました。</li>
-<li><code>leveldb</code>以外のすべての形式は非推奨となりました。以下のワールド形式は<strong>ロード時に自動的に新しい形式に変換されます</strong>:</li>
+<li><code>leveldb</code>以外のすべての形式は非推奨となりました。以下のワールド形式は<strong>ロード時に自動的に新しい形式に変換されます</strong>:<ul>
 <li><code>mcregion</code></li>
 <li><code>anvil</code></li>
 <li><code>pmanvil</code></li>
+</ul>
+</li>
 <li>建築上限256はすべてのワールドでサポートされます。(自動変換により)</li>
 <li>追加ブロックがサポートされます。(自動変換により)</li>
 <li>光処理はディスク上に保存・ロードされなくなりました。</li>
@@ -686,18 +698,22 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 </ul>
 <h5 id="api4-api4changelogs-_9">パケット受信エラーハンドリングが整備されました</h5>
 <ul>
-<li>今は<code>BadPacketException</code>のみがパケットのデコード、ハンドリング時にキャッチされます。これにはすべてのデコードが適切なエラーチェックを行うことが<strong>必須</strong>とされます。</li>
+<li>今は<code>BadPacketException</code>のみがパケットのデコード、ハンドリング時にキャッチされます。これにはすべてのデコードが適切なエラーチェックを行うことが<strong>必須</strong>とされます。<ul>
 <li>デコードで<code>BadPacketException</code>を投げるとプレイヤーは<code>Packet processing error</code>メッセージでキックされます。</li>
 <li>切断メッセージにはサーバーオーナーがプレイヤーから報告された問題を特定しやすくするためのランダムな16進数IDが含まれます。</li>
+</ul>
+</li>
 <li>そのほかの例外を投げるとサーバーはクラッシュします。<code>Internal server error</code>は削除されました。</li>
 <li>現在ではサーバーに対するクライアント方向へのパケットの送信は不当なものになりました。これを行うとクライアントは<code>Unexpected non-serverbound packet</code>メッセージでキックされます。</li>
 </ul>
 <h5 id="api4-api4changelogs-_10">新たなパケットハンドラーシステム</h5>
 <ul>
 <li>パケットハンドラーはネットワークセッションから分離され、専用のパケットハンダラー構造に分かれました。</li>
-<li>ネットワークセッションは正確に1つのハンドラーをその時点で持つことができます。ハンドラーは可変ありいつでも置き換えられます。これによりパケットハンドリングのロジックを複数のステージへと分離することができます。</li>
+<li>ネットワークセッションは正確に1つのハンドラーをその時点で持つことができます。ハンドラーは可変ありいつでも置き換えられます。これによりパケットハンドリングのロジックを複数のステージへと分離することができます。<ul>
 <li>不正なタイミングで不正なパケットを送信することを防ぐ(今では何事もなくドロップされます)</li>
 <li>一時的な状態固有のロジックの存在を許可する(例えばリソースパックのより厳格なダウンロードチェック)</li>
+</ul>
+</li>
 <li>パケットハンドラーはほとんどいたるところで<code>Player</code>からなくなり、代わりにそのパケットハンドラー専用のユニットに存在しまるようになりました。</li>
 <li>以前まで<code>Player</code>のパケットハンドラー内部に絡み合っていたほぼすべてのゲームロジックは新たなAPIメソッドへと展開されました。詳しくはPlayer APIの変更をご覧ください。</li>
 </ul>
@@ -714,40 +730,40 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 ネストによるパーミッションの宣言の代わりに、宣言はそれぞればらばらになさなければならなりません。</p>
 <p><em>Before</em>:
 <div class="highlight"><pre><span></span><code>permissions:
-  pmmp:
-    default: op
-children:
-  pmmp.something:
-    default: op
-      pmmp.somethingElse:
+    pmmp:
         default: op
+children:
+    pmmp.something:
+        default: op
+            pmmp.somethingElse:
+                default: op
 </code></pre></div></p>
 <p><em>After</em>:
 <div class="highlight"><pre><span></span><code>permissions:
-  pmmp.something:
-    default: op
-  pmmp.somethingElse:
-    default: op
+    pmmp.something:
+        default: op
+    pmmp.somethingElse:
+        default: op
 </code></pre></div></p>
 <h5 id="api4-api4changelogs-src-namespace-prefix"><code>src-namespace-prefix</code></h5>
 <p>新しい指示文<code>src-namespace-prefix</code>が導入されます。これにより以下のようなプラグイン構造にある無駄なサブディレクトリを取り除くことができます。
 例えば、以前では<code>pmmp\TesterPlugin\Main</code>がメインクラスであるようなプラグインはこのような構造でした。
 <div class="highlight"><pre><span></span><code>|-- plugin.yml
 |-- src/
-  |-- pmmp/
-    |-- TesterPlugin/
-      |-- Main.php
-      |-- SomeOtherClass.php
-      |-- SomeNamespace/
-        |-- SomeNamespacedClass.php
+    |-- pmmp/
+        |-- TesterPlugin/
+            |-- Main.php
+            |-- SomeOtherClass.php
+            |-- SomeNamespace/
+                |-- SomeNamespacedClass.php
 </code></pre></div>
 しかし、<code>src-namespace-prefix:pmmp\TesterPlugin</code>を<code>plugin.yml</code>に付けくわえることで無駄なディレクトリを取り除き、このような構造にすることができます。
 <div class="highlight"><pre><span></span><code>|-- plugin.yml
 |-- src/
-  |-- Main.php
-  |-- SomeOtherClass.php
-  |-- SomeNamespace/
-    |-- SomeNamespacedClass.php
+    |-- Main.php
+    |-- SomeOtherClass.php
+    |-- SomeNamespace/
+        |-- SomeNamespacedClass.php
 </code></pre></div></p>
 <p><strong>ノート</strong>: 昔の構造でもちゃんと動きます。これは必ず変えなければならない変更ではありません。</p>
 <h5 id="api4-api4changelogs-block">Block</h5>
@@ -755,15 +771,17 @@ children:
 <li>新たに<code>VanillaBlocks</code>クラスが追加されました。このクラスは現在知られているどのブロックタイプでも生成できる静的メソッドを保有しています。 これは定数が使われている場合に<code>BlockFactory::get()</code>の代わりとしてしようされることが好ましいです。</li>
 <li>ブロックは<code>Position</code>を継承するかわりにポジションを保有します。<code>Block-&gt;getBlockPosition()</code>が追加されました。</li>
 <li>256以上のIDをもつブロックがサポートされました。</li>
-<li>ブロックのステートとバリアントメタデータは分離されました。</li>
+<li>ブロックのステートとバリアントメタデータは分離されました。<ul>
 <li>バリアントはIDの拡張と考えられ、不変です。(解説:これは回転や開閉といった状態を含まないことを表す)</li>
 <li><code>Block-&gt;setDamage()</code>は削除されました。</li>
 <li>すべてのブロックにはブロックプロパティ相応のゲッターとセッターが備わりました。例えば<code>facing</code> どの向きか,<code>lit/unlit</code> 着火/消火, <code>colour</code> 色などです。これらはメタデータの代わりに利用されるべきです。</li>
+</ul>
+</li>
 <li>タイルエンティティは,タイルエンティティを必要とするブロックが<code>World-&gt;setBlock()</code>されたときに自動的に作成/削除されるようになります。</li>
 <li>いくつかのタイルエンティティのAPIは,タイルエンティティが非推奨となると同時に対応する<code>Block</code>クラスで公開されるようになりました。</li>
 <li>名前空間<code>pocketmine\tile</code>は<code>pocketmine\block\tile</code>に移動されました。</li>
 <li><code>Block-&gt;recalculateBoundingBox()</code>と<code>Block-&gt;recalculateCollisionBoxes()</code>は自身の位置基準ではなく<code>0,0,0</code>に基準のAABBsを返すようになります。</li>
-<li>ブロックの破壊情報は新しい動的な<code>BlockBreakInfo</code>ユニットへと展開されました。以下のメソッドが移動されます。</li>
+<li>ブロックの破壊情報は新しい動的な<code>BlockBreakInfo</code>ユニットへと展開されました。以下のメソッドが移動されます。<ul>
 <li><code>Block-&gt;getBlastResistance()</code> -&gt; <code>BlockBreakInfo-&gt;getBlastResistance()</code></li>
 <li><code>Block-&gt;getBreakTime()</code> -&gt; <code>BlockBreakInfo-&gt;getBreakTime()</code></li>
 <li><code>Block-&gt;getHardness()</code> -&gt; <code>BlockBreakInfo-&gt;getHardness()</code></li>
@@ -771,34 +789,48 @@ children:
 <li><code>Block-&gt;getToolType()</code> -&gt; <code>BlockBreakInfo-&gt;getToolType()</code></li>
 <li><code>Block-&gt;isBreakable()</code> -&gt; <code>BlockBreakInfo-&gt;isBreakable()</code></li>
 <li><code>Block-&gt;isCompatibleWithTool()</code> -&gt; <code>BlockBreakInfo-&gt;isToolCompatible()</code></li>
-<li>以下のAPIメソッドが追加されました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドが追加されました。<ul>
 <li><code>Block-&gt;asItem()</code>: ブロックに対応するアイテムスタックを返す。</li>
 <li><code>Block-&gt;isSameState()</code>: ステート情報を含めてブロックが同じパラメータであるかを返す。</li>
 <li><code>Block-&gt;isSameType()</code>: ステート情報を含めずにブロックが同じパラメータであるかを返す。</li>
 <li><code>Block-&gt;isFullCube()</code></li>
-<li>以下のフックが追加されました。</li>
+</ul>
+</li>
+<li>以下のフックが追加されました。<ul>
 <li><code>Block-&gt;onAttack()</code>: サバイバルモードのプレイヤーがブロックを左クリックしブロックの破壊をし始めた時に呼ばれる。</li>
 <li><code>Block-&gt;onEntityLand()</code>: エンティティが(高さによらず)落下後にブロック上に乗ったときに呼ばれる。</li>
 <li><code>Block-&gt;onPostPlace()</code>: ワールドにおかれた直後に呼ばれ、レール接続やチェストの連結をハンドルする。</li>
-<li>以下のAPIメソッドがリネームされました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドがリネームされました。<ul>
 <li><code>Block-&gt;getDamage()</code> -&gt; <code>Block-&gt;getMeta()</code></li>
 <li><code>Block-&gt;onActivate()</code> -&gt; <code>Block-&gt;onInteract()</code></li>
 <li><code>Block-&gt;onEntityCollide()</code> -&gt; <code>Block-&gt;onEntityInside()</code></li>
-<li>以下のAPIメソッドはシグネチャが変わりました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドはシグネチャが変わりました。<ul>
 <li><code>Block-&gt;onInteract()</code> は現在ではシグネチャ <code>onInteract(Item $item, int $face, Vector3 $clickVector, ?Player $player = null) : bool</code> を持ちます。</li>
 <li><code>Block-&gt;getCollisionBoxes()</code> はファイナルになりました。 子クラスは<code>recalculateCollisionBoxes()</code>をオーバーライドするべきです。</li>
-<li>以下のAPIメソッドは削除されました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは削除されました。<ul>
 <li><code>Block-&gt;canPassThrough()</code></li>
 <li><code>Block-&gt;setDamage()</code></li>
 <li><code>Block::get()</code>: これはずいぶん前に <code>BlockFactory::get()</code>に置き換えられています。</li>
 <li><code>Block-&gt;getBoundingBox()</code></li>
-<li>以下のクラスはリネームされました。</li>
+</ul>
+</li>
+<li>以下のクラスはリネームされました。<ul>
 <li><code>BlockIds</code> -&gt; <code>BlockLegacyIds</code></li>
 <li><code>CobblestoneWall</code> -&gt; <code>Wall</code></li>
 <li><code>NoteBlock</code> -&gt; <code>Note</code></li>
 <li><code>SignPost</code> -&gt; <code>Sign</code></li>
 <li><code>StandingBanner</code> -&gt; <code>Banner</code></li>
-<li>以下のクラスは削除されました。</li>
+</ul>
+</li>
+<li>以下のクラスは削除されました。<ul>
 <li><code>Bricks</code></li>
 <li><code>BurningFurnace</code></li>
 <li><code>CobblestoneStairs</code></li>
@@ -836,27 +868,35 @@ children:
 <li><code>WallBanner</code></li>
 <li><code>WallSign</code></li>
 <li><code>Wood2</code></li>
+</ul>
+</li>
 <li><code>BlockToolType</code>の定数は<code>TYPE_</code>プレフィックスを削除する形でリネームされました。</li>
 </ul>
 <h4 id="api4-api4changelogs-command">Command</h4>
 <ul>
-<li>以下のクラスは削除されました。</li>
+<li>以下のクラスは削除されました。<ul>
 <li><code>RemoteConsoleCommandSender</code></li>
-<li>以下のAPIメソッドはシグネチャが変わりました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドはシグネチャが変わりました。<ul>
 <li><code>Command-&gt;setPermission()</code> nullableではありますが、引数が必須になりました</li>
 <li><code>CommandSender-&gt;setScreenLineHeight()</code> nullableではありますが、引数が必須になりました</li>
+</ul>
+</li>
 <li>名前に空白を含むコマンドはサポートされなくなりました</li>
 </ul>
 <h4 id="api4-api4changelogs-entity">Entity</h4>
 <h5 id="api4-api4changelogs-_13">一般</h5>
 <ul>
 <li><code>Entity</code>は<code>Location</code>を継承しなくなります。 代わりに<code>Entity-&gt;getLocation()</code>や<code>Entity-&gt;getPosition()</code>を使ってください。</li>
-<li>以下のフィールドは削除されました。</li>
+<li>以下のフィールドは削除されました。<ul>
 <li><code>Entity-&gt;chunk</code>: エンティティはどのチャンクにいるのかを自身では記憶しなくなりました (かわりに<code>World</code>がそれを管理します)。</li>
 <li><code>Entity-&gt;height</code>: <code>EntitySizeInfo</code>に移動しました。 代わりに<code>Entity-&gt;size</code>を使ってください。</li>
 <li><code>Entity-&gt;width</code>: <code>EntitySizeInfo</code>に移動しました。 代わりに<code>Entity-&gt;size</code>を使ってください。</li>
 <li><code>Entity-&gt;eyeHeight</code>: <code>EntitySizeInfo</code>に移動しました。 代わりに <code>Entity-&gt;size</code>を使ってください。</li>
-<li>以下のAPIメソッドが追加されました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドが追加されました。<ul>
 <li><code>Entity-&gt;getFallDistance()</code></li>
 <li><code>Entity-&gt;setFallDistance()</code></li>
 <li><code>ItemEntity-&gt;getDespawnDelay()</code></li>
@@ -864,16 +904,22 @@ children:
 <li><code>Living-&gt;calculateFallDamage()</code>: これは<code>protected</code>です。 サブクラスにより、これをオーバーライドすることでダメージロジックをカスタマイズできます。</li>
 <li><code>Human-&gt;getHungerManager()</code></li>
 <li><code>Human-&gt;getXpManager()</code></li>
-<li>以下のAPIメソッドはシグネチャが変わりました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドはシグネチャが変わりました。<ul>
 <li><code>Entity-&gt;entityBaseTick()</code>は<code>protected</code>になりました。</li>
 <li><code>Entity-&gt;move()</code>は<code>protected</code>になりました。</li>
 <li><code>Living-&gt;knockBack()</code>は<code>float, float, float</code>を受け入れるようになりました。 (最初の２つのパラメーターは削除されました).</li>
 <li><code>Living-&gt;getEffects()</code>は<code>Effect[]</code>の代わりに<code>EffectManager</code>を返すようになりました。</li>
-<li>以下のクラスは追加されました。</li>
+</ul>
+</li>
+<li>以下のクラスは追加されました。<ul>
 <li><code>effect\EffectManager</code>: <code>Living</code>から展開されたエフェクト管理の機能群を保持します。</li>
 <li><code>HungerManager</code>: <code>Human</code>から展開された空腹管理の機能群を保持します。</li>
 <li><code>ExperienceManager</code>: <code>Human</code>から展開された経験値管理の機能群を保持します。</li>
-<li>以下のAPIメソッドは移動、またはリネームされました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは移動、またはリネームされました。<ul>
 <li><code>Entity-&gt;fall()</code> -&gt; <code>Entity-&gt;onHitGround()</code> (また、アクセス権が<code>public</code>から<code>protected</code>になりました。)</li>
 <li><code>Living-&gt;removeAllEffects()</code> -&gt; <code>EffectManager-&gt;clear()</code></li>
 <li><code>Living-&gt;removeEffect()</code> -&gt; <code>EffectManager-&gt;remove()</code></li>
@@ -909,21 +955,27 @@ children:
 <li><code>Human-&gt;canPickupXp()</code> -&gt; <code>ExperienceManager-&gt;canPickupXp()</code></li>
 <li><code>Human-&gt;onPickupXp()</code> -&gt; <code>ExperienceManager-&gt;onPickupXp()</code></li>
 <li><code>Human-&gt;resetXpCooldown()</code> -&gt; <code>ExperienceManager-&gt;resetXpCooldown()</code></li>
-<li>以下のAPIメソッドは削除されました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは削除されました。<ul>
 <li><code>Human-&gt;getRawUniqueId()</code>は、代わりに<code>Human-&gt;getUniqueId()-&gt;toBinary()</code>を使うようになりました。</li>
-<li>以下のクラスは削除されました。</li>
+</ul>
+</li>
+<li>以下のクラスは削除されました。<ul>
 <li><code>Creature</code></li>
 <li><code>Damageable</code></li>
 <li><code>Monster</code></li>
 <li><code>NPC</code></li>
 <li><code>Rideable</code></li>
 <li><code>Vehicle</code></li>
+</ul>
+</li>
 <li><code>Skin</code>無効なデータを受け取ると例外を投げるようになりました。</li>
 </ul>
 <h5 id="api4-api4changelogs-effect">Effect</h5>
 <ul>
 <li>全ての<code>Effect</code>に関連したクラスは<code>pocketmine\entity\effect</code>の名前空間に移動しました。</li>
-<li><code>Effect</code>クラスに入っていたエフェクト機能はいくつかのクラスに分けられました。以下のクラスが新しく追加されました。</li>
+<li><code>Effect</code>クラスに入っていたエフェクト機能はいくつかのクラスに分けられました。以下のクラスが新しく追加されました。<ul>
 <li><code>AbsorptionEffect</code></li>
 <li><code>HealthBoostEffect</code></li>
 <li><code>HungerEffect</code></li>
@@ -938,32 +990,44 @@ children:
 <li><code>SlownessEffect</code></li>
 <li><code>SpeedEffect</code></li>
 <li><code>WitherEffect</code></li>
-<li><code>VanillaEffects</code>クラスが追加されました。これは全てのバニラエフェクトタイプを静的メソッドで表現し、<code>Effect::getEffect()</code>よりもきれいに書けるようになります。</li>
+</ul>
+</li>
+<li><code>VanillaEffects</code>クラスが追加されました。これは全てのバニラエフェクトタイプを静的メソッドで表現し、<code>Effect::getEffect()</code>よりもきれいに書けるようになります。<ul>
 <li>例: <code>Effect::getEffect(Effect::NIGHT_VISION)</code>は<code>VanillaEffects::NIGHT_VISION()</code>に置き換えることができます。</li>
+</ul>
+</li>
 <li>エフェクトの強さ(amplifiers)を負の値にすることは現在では明確に禁止されます。エフェクトの生み出す効果が定義されていないためです。</li>
-<li>MCPEのエフェクトIDとPocketMine-MP内部のIDの境目がより明確になりました。</li>
+<li>MCPEのエフェクトIDとPocketMine-MP内部のIDの境目がより明確になりました。<ul>
 <li>IDハンドリングは<code>pocketmine\data\bedrock\EffectIdMap</code>へ移動しました。</li>
 <li>すべてのエフェクトID定数は<code>Effect</code>から削除されました。何らかの理由でレガシーエフェクトIDが必要なら<code>pocketmine\data\bedrock\EffectIds</code>を利用してください。</li>
-<li>以下のAPIメソッドは移動しました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは移動しました。<ul>
 <li><code>Effect-&gt;getId()</code> -&gt; <code>EffectIdMap-&gt;toId()</code></li>
 <li><code>Effect::registerEffect()</code> -&gt; <code>EffectIdMap-&gt;register()</code></li>
 <li><code>Effect::getEffect()</code> -&gt; <code>EffectIdMap-&gt;fromId()</code></li>
 <li><code>Effect::getEffectByName()</code> -&gt; <code>VanillaEffects::fromString()</code></li>
-<li>以下のAPIメソッドが追加されました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドが追加されました。<ul>
 <li><code>Effect-&gt;getRuntimeId()</code>: これは<strong>動的ID</strong>でありエフェクトタイプの比較に用いることができます。<strong>これは決して保持されないため、configやNBTでは利用しないでください！</strong></li>
+</ul>
+</li>
 </ul>
 <h5 id="api4-api4changelogs-nbt">実行時エンティティNBTの削除</h5>
 <ul>
-<li>エンティティは実行時にNBTを存在させ続けなくなりました。</li>
+<li>エンティティは実行時にNBTを存在させ続けなくなりました。<ul>
 <li><code>Entity-&gt;namedtag</code>は削除されました。</li>
 <li><code>Entity-&gt;saveNBT()</code>はその場で前のNBTに変更を加えるのではなく、現在では新規生成された<code>CompoundTag</code>を返すようになりました。</li>
 <li><code>Entity-&gt;initEntity()</code>は現在では<code>CompoundTag</code>パラメータを受け付けます。</li>
+</ul>
+</li>
 </ul>
 <h5 id="api4-api4changelogs-_14">エンティティ生成</h5>
 <ul>
 <li><code>Entity::createEntity()</code>は削除されました。もはや実行時に新たなエンティティを生成するためには必要なくなりました。代わりに、単に<code>new YourEntity</code>のようにしてください。</li>
 <li><code>Entity</code>の子クラスのコンストラクタは普通のクラスと同様にどのようなシグネチャでも持つことができます。</li>
-<li>NBTからのエンティティの読み込みは現在では<code>EntityFactory</code>にハンドルされるようになりました。<code>Entity::createEntity()</code>の動作とはかなり違った動作をします。 <code>YourEntity::class</code>を一式のMinecraft save IDに登録する代わりに、 あるNBTと<code>World</code>が与えられたときにエンティティを構築するコールバックを与える必要があります。</li>
+<li>NBTからのエンティティの読み込みは現在では<code>EntityFactory</code>にハンドルされるようになりました。<code>Entity::createEntity()</code>の動作とはかなり違った動作をします。 <code>YourEntity::class</code>を一式のMinecraft save IDに登録する代わりに、 あるNBTと<code>World</code>が与えられたときにエンティティを構築するコールバックを与える必要があります。<ul>
 <li>生成コールバックは<code>EntityFactory::register()</code>を用いて登録されます。</li>
 <li>生成コールバックはシグネチャ<code>function(World, CompoundTag) : Entity</code>を持つ必要があります。</li>
 <li>これにより<code>Entity</code>の子クラスはそれぞれにふさわしいコンストラクタ引数を持てるようになりました。</li>
@@ -974,10 +1038,14 @@ children:
 <li>さらなる例は<code>EntityFactory</code>をご覧ください。</li>
 </ul>
 </li>
+</ul>
+</li>
 <li><code>EntityFactory::register()</code>(以前の<code>Entity::registerEntity()</code>)はエラー発生時に<code>false</code>のかわりに例外を投げるようになりました。</li>
-<li>以下のAPIメソッドが移動しました。</li>
+<li>以下のAPIメソッドが移動しました。<ul>
 <li><code>Entity::registerEntity()</code> -&gt; <code>EntityFactory::register()</code></li>
-<li>以下のクラスはコンストラクタが変更されました。</li>
+</ul>
+</li>
+<li>以下のクラスはコンストラクタが変更されました。<ul>
 <li>すべての発射物の子クラスは現在では<code>?Entity $thrower</code>パラメータを必要とします。</li>
 <li><code>Arrow-&gt;__construct()</code>は現在では<code>bool $critical</code> パラメータを必要とします。</li>
 <li><code>ExperienceOrb-&gt;__construct()</code>は現在では<code>int $xpValue</code>パラメータを必要とします。</li>
@@ -985,18 +1053,24 @@ children:
 <li><code>ItemEntity-&gt;__construct()</code>は現在では<code>Item $item</code>パラメータを必要とします。</li>
 <li><code>Painting-&gt;__construct()</code>は現在では<code>PaintingMotive $motive</code>を必要とします。</li>
 <li><code>SplashPotion-&gt;__construct()</code>は現在では<code>int $potionId</code>を必要とします。</li>
-<li>以下のAPIメソッドは削除されました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは削除されました。<ul>
 <li><code>Entity::createBaseNBT()</code>: <code>new YourEntity</code>と適切なAPIメソッドが利用されるべきです。</li>
 <li><code>Entity-&gt;getSaveId()</code></li>
 <li><code>Entity::getKnownEntityTypes()</code></li>
 <li><code>Entity::createEntity()</code>: <code>new YourEntity</code>をかわりに利用してください。 </li>
 </ul>
+</li>
+</ul>
 <h5 id="api4-api4changelogs-_15">やりかけ エンティティのネットワークメタデータの削除</h5>
 <ul>
-<li>定数に関するすべてのネットワークメタデータは<code>Entity</code>クラスから削除され、プロトコル層へ移動されました。これはネットワークメタデータをAPIから全体的に削除することを意図していますが、完了はしていません。</li>
+<li>定数に関するすべてのネットワークメタデータは<code>Entity</code>クラスから削除され、プロトコル層へ移動されました。これはネットワークメタデータをAPIから全体的に削除することを意図していますが、完了はしていません。<ul>
 <li>定数<code>Entity::DATA_FLAG_*</code>は<code>pocketmine\network\mcpe\protocol\types\entity\EntityMetadataFlags</code>に移動されました。</li>
 <li>定数<code>Entity::DATA_TYPE_*</code>は<code>pocketmine\network\mcpe\protocol\types\entity\EntityMetadataTypes</code>に移動されました。</li>
 <li>定数<code>Entity::DATA_*</code>は<code>pocketmine\network\mcpe\protocol\types\entity\EntityMetadataProperties</code>に移動されました。</li>
+</ul>
+</li>
 <li><code>DataPropertyManager</code>は 名前空間<code>pocketmine\network\mcpe\protocol\types\entity</code>に移動され、したがってAPIの一部ではないものとして扱われます。</li>
 <li>導入された内部の<code>Entity</code>は<code>syncNetworkData()</code>をフックします。この関数はエンティティのプロパティをエンティティはエンティティのネットワークデータセット同期することが期待されます。</li>
 <li>内部のエンティティのプロパティを保存するためのネットワークメタデータセットの内部利用は削除されました。エンティティは現在では正規のクラスプロパティを使用し、ネットワークデータセットを同期することが期待されます。</li>
@@ -1006,7 +1080,7 @@ children:
 <h4 id="api4-api4changelogs-event">Event</h4>
 <h5 id="api4-api4changelogs-listener">内部イベントシステムにおける<code>Listener</code>依存の排除</h5>
 <ul>
-<li>内部イベント処理システムは<code>Listener</code>オブジェクトに依存しなくなりました。ハンドラーになるための標準要求さえ満たせば任意のクロージャーが利用できます。</li>
+<li>内部イベント処理システムは<code>Listener</code>オブジェクトに依存しなくなりました。ハンドラーになるための標準要求さえ満たせば任意のクロージャーが利用できます。<ul>
 <li>この変更により、イベントハンドラーの呼び出し性能が15%程改善されます。プラグインが行っていることは何も含まれません。</li>
 <li>以下のクラスが削除されました。<ul>
 <li><code>pocketmine\plugin\EventExecutor</code></li>
@@ -1015,6 +1089,8 @@ children:
 </li>
 <li><code>RegisteredListener-&gt;__construct()</code>は先頭のパラメータとして<code>Listener, EventExecutor</code>の代わりに<code>Closure</code>を必要とします。</li>
 <li><code>RegisteredListener-&gt;getListener()</code>は削除されました。</li>
+</ul>
+</li>
 </ul>
 <h5 id="api4-api4changelogs-_16">デフォルトのキャンセルハンドリングの振る舞いの変化</h5>
 <ul>
@@ -1025,7 +1101,7 @@ children:
 <h5 id="api4-api4changelogs-playerpreloginevent"><code>PlayerPreLoginEvent</code>の変更</h5>
 <ul>
 <li><code>Player</code>オブジェクトはログインのこのフェーズでは存在しなくなりました。代わりに<code>PlayerInfo</code>オブジェクトが接続情報とともに与えられます。</li>
-<li>Ban、サーバーの満員、ホワイトリストの確認は<code>PlayerPreLoginEvent</code>に一元化されます。もはやこの手の切断をハンドルするために<code>PlayerKickEvent</code>に介入する必要はなくなるとともに、介入することはできなくなりました。</li>
+<li>Ban、サーバーの満員、ホワイトリストの確認は<code>PlayerPreLoginEvent</code>に一元化されます。もはやこの手の切断をハンドルするために<code>PlayerKickEvent</code>に介入する必要はなくなるとともに、介入することはできなくなりました。<ul>
 <li>複数のキック理由を使用すると、他にプレイヤーを切断する理由があって内一つが除外されたときにもプレイヤーを確実に切断することができます。例えばあるプレイヤーがBanされていてサーバーが満員であったとすると、Banフラグを除外してもサーバーが満員であることからプレイヤーはそれでも切断されます。</li>
 <li>プラグインはカスタムのキック理由をセットできます。どの理由も絶対的な優先度を持ちます。</li>
 <li>もし複数のフラグがセットされていた場合、キックメッセージには最も優先度が高いものが表示されます。優先度(このスナップショットにおいて)は下記の順に続きます。<ul>
@@ -1035,14 +1111,18 @@ children:
 <li>Ban</li>
 </ul>
 </li>
+</ul>
+</li>
 <li><code>PlayerPreLoginEvent::KICK_REASON_PRIORITY</code>定数は高いほうが先にくるキック理由の優先度のリストを保持します。</li>
-<li>以下の定数が追加されました</li>
+<li>以下の定数が追加されました<ul>
 <li><code>PlayerPreLoginEvent::KICK_REASON_PLUGIN</code></li>
 <li><code>PlayerPreLoginEvent::KICK_REASON_SERVER_FULL</code></li>
 <li><code>PlayerPreLoginEvent::KICK_REASON_SERVER_WHITELISTED</code></li>
 <li><code>PlayerPreLoginEvent::KICK_REASON_BANNED</code></li>
 <li><code>PlayerPreLoginEvent::KICK_REASON_PRIORITY</code></li>
-<li>以下のAPIメソッドが追加されました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドが追加されました。<ul>
 <li><code>PlayerPreLoginEvent-&gt;clearAllKickReasons()</code></li>
 <li><code>PlayerPreLoginEvent-&gt;clearKickReason()</code></li>
 <li><code>PlayerPreLoginEvent-&gt;getFinalKickMessage()</code>: 現在の理由リストでプレイヤーに表示されるメッセージ</li>
@@ -1055,24 +1135,34 @@ children:
 <li><code>PlayerPreLoginEvent-&gt;isKickReasonSet()</code></li>
 <li><code>PlayerPreLoginEvent-&gt;setAuthRequired()</code></li>
 <li><code>PlayerPreLoginEvent-&gt;setKickReason()</code></li>
-<li>以下のAPIメソッドは変更されました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは変更されました。<ul>
 <li><code>PlayerPreLoginEvent-&gt;getKickMessage()</code>は現在ではシグネチャ<code>getKickMessage(int $flag) : ?string</code>を持ちます。</li>
-<li>以下のAPIメソッドは削除されました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは削除されました。<ul>
 <li><code>PlayerPreLoginEvent-&gt;setKickMessage()</code></li>
 <li><code>PlayerPreLoginEvent-&gt;getPlayer()</code></li>
-<li>以下のAPIメソッドは移動/リネームされました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは移動/リネームされました。<ul>
 <li><code>InventoryPickupItemEvent-&gt;getItem()</code> -&gt; <code>InventoryPickupItemEvent-&gt;getItemEntity()</code></li>
+</ul>
+</li>
 </ul>
 <h5 id="api4-api4changelogs-_17">その他の変更</h5>
 <ul>
 <li>イベントの間にプレイヤーが切断されてもサーバーはクラッシュしなくなりました。(それでも他の副作用を引き起こす可能性があります)</li>
 <li><code>PlayerKickEvent</code>は最初のログインシークエンスが完了する以前に発生した切断では着火されなくなりました。(例 リソースパックのダウンロード完了時)</li>
 <li>キャンセル可能なイベントはインターフェースの要件を満たすために必要なキャンセル可能なコンポーネントを得るための<code>CancellableTrait</code>を実装する必要があります。<code>Event</code>はこれらのメソッドをスタブを持たなくなりました。</li>
-<li><code>PlayerInteractEvent</code>はプレイヤーがアイテムをアクティベートしたときに着火されなくなりました。これは古くからの問題であった<code>PlayerInteractEvent</code>が一回触った時にも繰り返し発火されてしまう問題を修正します。以下の定数は削除されました。</li>
+<li><code>PlayerInteractEvent</code>はプレイヤーがアイテムをアクティベートしたときに着火されなくなりました。これは古くからの問題であった<code>PlayerInteractEvent</code>が一回触った時にも繰り返し発火されてしまう問題を修正します。以下の定数は削除されました。<ul>
 <li><code>PlayerInteractEvent::LEFT_CLICK_AIR</code></li>
 <li><code>PlayerInteractEvent::RIGHT_CLICK_AIR</code></li>
 <li><code>PlayerInteractEvent::PHYSICAL</code></li>
-<li>以下のイベントが追加されます。</li>
+</ul>
+</li>
+<li>以下のイベントが追加されます。<ul>
 <li><code>PlayerEntityInteractEvent</code>: プレイヤーがエンティティを右クリック(スマホでは長押し)した時のイベント</li>
 <li><code>PlayerItemUseEvent</code>: プレイヤーが持っているアイテムをアクティベートした時のイベント, 例えば雪玉を投げるなど。</li>
 <li><code>BlockTeleportEvent</code>: ブロックがテレポートした時のイベント、例えばエンドラの卵が攻撃されたときなど。</li>
@@ -1084,7 +1174,9 @@ children:
 </li>
 <li><code>EntityTrampleFarmlandEvent</code>: 農地上でmobやプレイヤーがジャンプをして土に変化させるときのイベント。</li>
 <li><code>StructureGrowEvent</code>: 木や竹、その他の複数ブロックの苗木構造物が成長するときに呼ばれます。</li>
-<li>以下のイベントは削除されました。</li>
+</ul>
+</li>
+<li>以下のイベントは削除されました。<ul>
 <li><code>EntityArmorChangeEvent</code></li>
 <li><code>EntityInventoryChangeEvent</code></li>
 <li><code>EntityLevelChangeEvent</code> - <code>EntityTeleportEvent</code>にてワールドの確認をすることで代用してください。</li>
@@ -1093,22 +1185,32 @@ children:
 <li><code>NetworkInterfaceCrashEvent</code></li>
 <li><code>PlayerCheatEvent</code></li>
 <li><code>PlayerIllegalMoveEvent</code></li>
-<li>以下のAPIメソッドが追加されました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドが追加されました。<ul>
 <li><code>EntityDeathEvent-&gt;getXpDropAmount()</code></li>
 <li><code>EntityDeathEvent-&gt;setXpDropAmount()</code></li>
 <li><code>PlayerDeathEvent-&gt;getXpDropAmount()</code></li>
 <li><code>PlayerDeathEvent-&gt;setXpDropAmount()</code></li>
-<li>以下のメソッドは削除されました。</li>
+</ul>
+</li>
+<li>以下のメソッドは削除されました。<ul>
 <li><code>PlayerPreLoginEvent-&gt;getPlayer()</code></li>
 <li><code>Cancellable-&gt;setCancelled()</code>: これにより<code>Cancellable</code>実装はそのイベント特有のキャンセル機構を実装できるようになりました。例えば<code>PlayerPreLoginEvent</code>における複雑な機構などです。</li>
-<li>以下のAPIメソッドは移動されました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは移動されました。<ul>
 <li><code>Event-&gt;isCancelled()</code> -&gt; <code>CancellableTrait-&gt;isCancelled()</code>: これはクラスが<code>Cancellable</code>を実装していなかった場合に<code>BadMethodCallException</code>を投げるスタブでした。これは現在ではキャンセル不可能なイベントでは単に使えなくなっています。</li>
 <li><code>Event-&gt;setCancelled()</code>は<code>cancel()</code>と<code>uncancel()</code>に分割され、<code>CancellableTrait</code>に移動しました。</li>
 <li><code>HandlerList::unregisterAll()</code> -&gt; <code>HandlerListManager-&gt;unregisterAll()</code></li>
 <li><code>HandlerList::getHandlerListFor()</code> -&gt; <code>HandlerListManager-&gt;getListFor()</code></li>
 <li><code>HandlerList::getHandlerLists()</code> -&gt; <code>HandlerListManager-&gt;getAll()</code></li>
-<li>以下のクラスは移動しました。</li>
+</ul>
+</li>
+<li>以下のクラスは移動しました。<ul>
 <li><code>pocketmine\plugin\RegisteredListener</code> -&gt; <code>pocketmine\event\RegisteredListener</code></li>
+</ul>
+</li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Building</h1><section class="print-page" id="building-index"><h1 id="building-index-_1">サーバー構築</h1>
 <p>ここではサーバー構築について記述します
 API4.0.0(ベータ版)での構築は<a href="#building-build-in-api4">API4.0.0での構築</a>を参照してください</p></section><section class="print-page" id="building-build-in-api4"><h1 id="building-build-in-api4-api4">API4でのサーバー構築</h1>
