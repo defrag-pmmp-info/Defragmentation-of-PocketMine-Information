@@ -1,4 +1,4 @@
-# API4 Changelogs全訳(30%完了)
+# API4 Changelogs全訳(34%完了)
 ## 訳に関して
 <https://github.com/pmmp/PocketMine-MP/commit/9e6d7405709560c0025e072324602983213276dd> 版より翻訳
 
@@ -410,3 +410,56 @@ permissions:
 - `Entity->propertyManager`は`Entity->networkProperties`にリネームされました。
 - `Entity->getDataPropertyManager()`は`Entity->getNetworkProperties()`にリネームされました。
 
+#### Event
+##### 内部イベントシステムにおける`Listener`依存の排除
+- 内部イベント処理システムは`Listener`オブジェクトに依存しなくなりました。ハンドラーになるための標準要求さえ満たせば任意のクロージャーが利用できます。
+  - この変更により、イベントハンドラーの呼び出し性能が15%程改善されます。プラグインが行っていることは何も含まれません。
+  - 以下のクラスが削除されました。
+    - `pocketmine\plugin\EventExecutor`
+    - `pocketmine\plugin\MethodEventExecutor`
+  - `RegisteredListener->__construct()`は先頭のパラメータとして`Listener, EventExecutor`の代わりに`Closure`を必要とします。
+  - `RegisteredListener->getListener()`は削除されました。
+
+##### デフォルトのキャンセルハンドリングの振る舞いの変化
+- ハンドラー関数は**デフォルトではキャンセルされたイベントを受け取らなくなります**。 これは**静かに後方互換性を損なうもの**であり、すなわち直接エラーを吐くことはなくともバグを引き起こす可能性があります。
+- `@ignoreCancelled`は無視されるようになりました。
+- `@handleCancelled`が追加されました。これを用いるとキャンセルされたイベントを _受け取る_ ことができるようになります。(`@ignoreCancelled`の反対です)
+
+
+##### `PlayerPreLoginEvent`の変更
+- `Player`オブジェクトはログインのこのフェーズでは存在しなくなりました。代わりに`PlayerInfo`オブジェクトが接続情報とともに与えられます。
+- Ban、サーバーの満員、ホワイトリストの確認は`PlayerPreLoginEvent`に一元化されます。もはやこの手の切断をハンドルするために`PlayerKickEvent`に介入する必要はなくなるとともに、介入することはできなくなりました。
+  - 複数のキック理由を使用すると、他にプレイヤーを切断する理由があって内一つが除外されたときにもプレイヤーを確実に切断することができます。例えばあるプレイヤーがBanされていてサーバーが満員であったとすると、Banフラグを除外してもサーバーが満員であることからプレイヤーはそれでも切断されます。
+  - プラグインはカスタムのキック理由をセットできます。どの理由も絶対的な優先度を持ちます。
+  - もし複数のフラグがセットされていた場合、キックメッセージには最も優先度が高いものが表示されます。優先度(このスナップショットにおいて)は下記の順に続きます。
+    - カスタム (最優先)
+    - 満員
+    - ホワイトリスト
+    - Ban
+- `PlayerPreLoginEvent::KICK_REASON_PRIORITY`定数は高いほうが先にくるキック理由の優先度のリストを保持します。
+- 以下の定数が追加されました
+  - `PlayerPreLoginEvent::KICK_REASON_PLUGIN`
+  - `PlayerPreLoginEvent::KICK_REASON_SERVER_FULL`
+  - `PlayerPreLoginEvent::KICK_REASON_SERVER_WHITELISTED`
+  - `PlayerPreLoginEvent::KICK_REASON_BANNED`
+  - `PlayerPreLoginEvent::KICK_REASON_PRIORITY`
+- 以下のAPIメソッドが追加されました。
+  - `PlayerPreLoginEvent->clearAllKickReasons()`
+  - `PlayerPreLoginEvent->clearKickReason()`
+  - `PlayerPreLoginEvent->getFinalKickMessage()`: 現在の理由リストでプレイヤーに表示されるメッセージ
+  - `PlayerPreLoginEvent->getIp()`
+  - `PlayerPreLoginEvent->getKickReasons()`: キック理由を示すフラグの配列, 参加できる時には空
+  - `PlayerPreLoginEvent->getPlayerInfo()`
+  - `PlayerPreLoginEvent->getPort()`
+  - `PlayerPreLoginEvent->isAllowed()`
+  - `PlayerPreLoginEvent->isAuthRequired()`: XBL認証が強制されているか
+  - `PlayerPreLoginEvent->isKickReasonSet()`
+  - `PlayerPreLoginEvent->setAuthRequired()`
+  - `PlayerPreLoginEvent->setKickReason()`
+- 以下のAPIメソッドは変更されました。
+  - `PlayerPreLoginEvent->getKickMessage()`は現在ではシグネチャ`getKickMessage(int $flag) : ?string`を持ちます。
+- 以下のAPIメソッドは削除されました。
+  - `PlayerPreLoginEvent->setKickMessage()`
+  - `PlayerPreLoginEvent->getPlayer()`
+- 以下のAPIメソッドは移動/リネームされました。
+  - `InventoryPickupItemEvent->getItem()` -> `InventoryPickupItemEvent->getItemEntity()`
