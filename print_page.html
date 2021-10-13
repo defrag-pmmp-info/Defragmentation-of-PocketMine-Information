@@ -1062,6 +1062,53 @@ children:
 <li><code>PlayerPreLoginEvent-&gt;getPlayer()</code></li>
 <li>以下のAPIメソッドは移動/リネームされました。</li>
 <li><code>InventoryPickupItemEvent-&gt;getItem()</code> -&gt; <code>InventoryPickupItemEvent-&gt;getItemEntity()</code></li>
+</ul>
+<h5 id="api4-api4changelogs-_17">その他の変更</h5>
+<ul>
+<li>イベントの間にプレイヤーが切断されてもサーバーはクラッシュしなくなりました。(それでも他の副作用を引き起こす可能性があります)</li>
+<li><code>PlayerKickEvent</code>は最初のログインシークエンスが完了する以前に発生した切断では着火されなくなりました。(例 リソースパックのダウンロード完了時)</li>
+<li>キャンセル可能なイベントはインターフェースの要件を満たすために必要なキャンセル可能なコンポーネントを得るための<code>CancellableTrait</code>を実装する必要があります。<code>Event</code>はこれらのメソッドをスタブを持たなくなりました。</li>
+<li><code>PlayerInteractEvent</code>はプレイヤーがアイテムをアクティベートしたときに着火されなくなりました。これは古くからの問題であった<code>PlayerInteractEvent</code>が一回触った時にも繰り返し発火されてしまう問題を修正します。以下の定数は削除されました。</li>
+<li><code>PlayerInteractEvent::LEFT_CLICK_AIR</code></li>
+<li><code>PlayerInteractEvent::RIGHT_CLICK_AIR</code></li>
+<li><code>PlayerInteractEvent::PHYSICAL</code></li>
+<li>以下のイベントが追加されます。</li>
+<li><code>PlayerEntityInteractEvent</code>: プレイヤーがエンティティを右クリック(スマホでは長押し)した時のイベント</li>
+<li><code>PlayerItemUseEvent</code>: プレイヤーが持っているアイテムをアクティベートした時のイベント, 例えば雪玉を投げるなど。</li>
+<li><code>BlockTeleportEvent</code>: ブロックがテレポートした時のイベント、例えばエンドラの卵が攻撃されたときなど。</li>
+<li><code>PlayerDisplayNameChangeEvent</code></li>
+<li><code>EntityItemPickupEvent</code>: プレイヤーやエンティティが落ちているアイテム(か矢)を拾った時のイベント。 <code>InventoryPickupItemEvent</code>と<code>InventoryPickupArrowEvent</code>の置き換え<ul>
+<li>置き換え前とは違って、アイテムが入るインベントリを変更することができます。</li>
+<li>もし入るインベントリを<code>null</code>にすると、アイテムは破棄されます。これはインベントリが満杯の状態でクリエイティブのプレイヤーが拾うときに見られる動作です。</li>
+</ul>
+</li>
+<li><code>EntityTrampleFarmlandEvent</code>: 農地上でmobやプレイヤーがジャンプをして土に変化させるときのイベント。</li>
+<li><code>StructureGrowEvent</code>: 木や竹、その他の複数ブロックの苗木構造物が成長するときに呼ばれます。</li>
+<li>以下のイベントは削除されました。</li>
+<li><code>EntityArmorChangeEvent</code></li>
+<li><code>EntityInventoryChangeEvent</code></li>
+<li><code>EntityLevelChangeEvent</code> - <code>EntityTeleportEvent</code>にてワールドの確認をすることで代用してください。</li>
+<li><code>InventoryPickupItemEvent</code> - <code>EntityItemPickupEvent</code>を代わりに使用してください。</li>
+<li><code>InventoryPickupArrowEvent</code> - <code>EntityItemPickupEvent</code>を代わり使用してください。</li>
+<li><code>NetworkInterfaceCrashEvent</code></li>
+<li><code>PlayerCheatEvent</code></li>
+<li><code>PlayerIllegalMoveEvent</code></li>
+<li>以下のAPIメソッドが追加されました。</li>
+<li><code>EntityDeathEvent-&gt;getXpDropAmount()</code></li>
+<li><code>EntityDeathEvent-&gt;setXpDropAmount()</code></li>
+<li><code>PlayerDeathEvent-&gt;getXpDropAmount()</code></li>
+<li><code>PlayerDeathEvent-&gt;setXpDropAmount()</code></li>
+<li>以下のメソッドは削除されました。</li>
+<li><code>PlayerPreLoginEvent-&gt;getPlayer()</code></li>
+<li><code>Cancellable-&gt;setCancelled()</code>: これにより<code>Cancellable</code>実装はそのイベント特有のキャンセル機構を実装できるようになりました。例えば<code>PlayerPreLoginEvent</code>における複雑な機構などです。</li>
+<li>以下のAPIメソッドは移動されました。</li>
+<li><code>Event-&gt;isCancelled()</code> -&gt; <code>CancellableTrait-&gt;isCancelled()</code>: これはクラスが<code>Cancellable</code>を実装していなかった場合に<code>BadMethodCallException</code>を投げるスタブでした。これは現在ではキャンセル不可能なイベントでは単に使えなくなっています。</li>
+<li><code>Event-&gt;setCancelled()</code>は<code>cancel()</code>と<code>uncancel()</code>に分割され、<code>CancellableTrait</code>に移動しました。</li>
+<li><code>HandlerList::unregisterAll()</code> -&gt; <code>HandlerListManager-&gt;unregisterAll()</code></li>
+<li><code>HandlerList::getHandlerListFor()</code> -&gt; <code>HandlerListManager-&gt;getListFor()</code></li>
+<li><code>HandlerList::getHandlerLists()</code> -&gt; <code>HandlerListManager-&gt;getAll()</code></li>
+<li>以下のクラスは移動しました。</li>
+<li><code>pocketmine\plugin\RegisteredListener</code> -&gt; <code>pocketmine\event\RegisteredListener</code></li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Building</h1><section class="print-page" id="building-index"><h1 id="building-index-_1">サーバー構築</h1>
 <p>ここではサーバー構築について記述します
 API4.0.0(ベータ版)での構築は<a href="#building-build-in-api4">API4.0.0での構築</a>を参照してください</p></section><section class="print-page" id="building-build-in-api4"><h1 id="building-build-in-api4-api4">API4でのサーバー構築</h1>
