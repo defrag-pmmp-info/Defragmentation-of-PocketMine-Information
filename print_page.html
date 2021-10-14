@@ -296,7 +296,7 @@
   
     <li class="md-nav__item">
       <a href="API4/API4changelogs.html" class="md-nav__link">
-        API4 Changelogs全訳(34%完了)
+        API4 Changelogs全訳(41%完了)
       </a>
     </li>
   
@@ -589,7 +589,7 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 </ul>
 <h2 id="api4-index-_3">開発者向け情報</h2>
 <h3 id="api4-index-devtools-api4">DevTools API4対応版の配布場所</h3>
-<p>poggit上でダウンロード可 <a href="https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools">https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools</a> の Build History:master により最新版がダウンロード可能</p></section><section class="print-page" id="api4-api4changelogs"><h1 id="api4-api4changelogs-api4-changelogs34">API4 Changelogs全訳(34%完了)</h1>
+<p>poggit上でダウンロード可 <a href="https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools">https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools</a> の Build History:master により最新版がダウンロード可能</p></section><section class="print-page" id="api4-api4changelogs"><h1 id="api4-api4changelogs-api4-changelogs41">API4 Changelogs全訳(41%完了)</h1>
 <h2 id="api4-api4changelogs-_1">訳に関して</h2>
 <p><a href="https://github.com/pmmp/PocketMine-MP/commit/b65e89b605aeba5f7958d3cbb6db47e766cd6f9f">https://github.com/pmmp/PocketMine-MP/commit/b65e89b605aeba5f7958d3cbb6db47e766cd6f9f</a> 版より翻訳</p>
 <p>翻訳漏れの無いように気を配りますが、書かれていない項目がある場合PRを送ってもらえると助かります。</p>
@@ -1213,6 +1213,55 @@ children:
 <li><code>pocketmine\plugin\RegisteredListener</code> -&gt; <code>pocketmine\event\RegisteredListener</code></li>
 </ul>
 </li>
+</ul>
+<h4 id="api4-api4changelogs-inventory">Inventory</h4>
+<ul>
+<li>すべてのクラフトとレシピに関するクラスは名前空間<code>pocketmine\crafting</code>に移動しました。</li>
+<li>以下のクラスが追加されました。</li>
+<li><code>CallbackInventoryChangeListener</code></li>
+<li><code>CreativeInventory</code>: 以前まで<code>pocketmine\item\Item</code>に埋め込まれていた機能群を含みます。詳細はアイテムの変更をご覧ください</li>
+<li><code>InventoryChangeListener</code>: 一つのインベントリのイベントを監視できます(ただし介入はできません)。</li>
+<li><code>transaction\CreateItemAction</code></li>
+<li><code>transaction\DestroyItemAction</code></li>
+<li>以下のクラスはリネーム/移動されました。</li>
+<li><code>ContainerInventory</code> -&gt; <code>pocketmine\block\inventory\BlockInventory</code></li>
+<li>以下のクラスは名前空間<code>pocketmine\block\inventory</code> に移動されました。</li>
+<li><code>AnvilInventory</code></li>
+<li><code>ChestInventory</code></li>
+<li><code>DoubleChestInventory</code></li>
+<li><code>EnchantInventory</code></li>
+<li><code>EnderChestInventory</code></li>
+<li><code>FurnaceInventory</code></li>
+<li>以下のクラスは削除されました。</li>
+<li><code>CustomInventory</code></li>
+<li><code>InventoryEventProcessor</code></li>
+<li><code>Recipe</code></li>
+<li><code>transaction\CreativeInventoryAction</code></li>
+<li>以下のAPIメソッドが追加されました。</li>
+<li><code>Inventory-&gt;addChangeListeners()</code></li>
+<li><code>Inventory-&gt;getChangeListeners()</code></li>
+<li><code>Inventory-&gt;removeChangeListeners()</code></li>
+<li><code>Inventory-&gt;swap()</code>: 二つのスロットのコンテンツを入れ替えます。</li>
+<li>以下のAPIメソッドは削除されました。</li>
+<li><code>BaseInventory-&gt;getDefaultSize()</code></li>
+<li><code>BaseInventory-&gt;setSize()</code></li>
+<li><code>Inventory-&gt;close()</code></li>
+<li><code>Inventory-&gt;dropContents()</code></li>
+<li><code>Inventory-&gt;getName()</code></li>
+<li><code>Inventory-&gt;getTitle()</code></li>
+<li><code>Inventory-&gt;onSlotChange()</code></li>
+<li><code>Inventory-&gt;open()</code></li>
+<li><code>Inventory-&gt;sendContents()</code></li>
+<li><code>Inventory-&gt;sendSlot()</code></li>
+<li><code>InventoryAction-&gt;onExecuteFail()</code></li>
+<li><code>InventoryAction-&gt;onExecuteSuccess()</code></li>
+<li><code>PlayerInventory-&gt;sendCreativeContents()</code></li>
+<li>以下のAPIメソッドはシグネチャが変更されました。</li>
+<li><code>Inventory-&gt;clear()</code>は<code>bool</code>の代わりに現在では<code>void</code>を返します。</li>
+<li><code>Inventory-&gt;setItem()</code>は<code>bool</code>の代わりに現在では<code>void</code>を返します。</li>
+<li><code>InventoryAction-&gt;execute()</code>は<code>bool</code>の代わりに現在では<code>void</code>を返します。</li>
+<li><code>BaseInventory-&gt;construct()</code>は初期化用のアイテムリストを受け取らなくなりました。</li>
+<li><code>PlayerInventory-&gt;setItemInHand()</code>は現在ではそのプレイヤーが見える人にアイテム更新を送信します。</li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1><h1 class='nav-section-title'>Building</h1><section class="print-page" id="building-index"><h1 id="building-index-_1">サーバー構築</h1>
 <p>ここではサーバー構築について記述します
 API4.0.0(ベータ版)での構築は<a href="#building-build-in-api4">API4.0.0での構築</a>を参照してください</p></section><section class="print-page" id="building-build-in-api4"><h1 id="building-build-in-api4-api4">API4でのサーバー構築</h1>
