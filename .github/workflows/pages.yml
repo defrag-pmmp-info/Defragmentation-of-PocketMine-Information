@@ -30,10 +30,11 @@ jobs:
         with:
           fetch-depth: 0
       - name: Run action
-        uses: ldeluigi/markdown-docs@master
+        uses: famima65536/markdown-docs@master
         with:
           src: .
           dst: ./gh-pages
+          language: ja
       - name: Deploy GH Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
