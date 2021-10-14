@@ -35,6 +35,7 @@ jobs:
           src: .
           dst: ./gh-pages
           language: ja
+          site_url: https://famima65536.github.io/Defragmentation-of-PocketMine-Information/
       - name: Deploy GH Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
