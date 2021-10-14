@@ -30,7 +30,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Run action
-        uses: famima65536/markdown-docs@master
+        uses: famima65536/markdown-docs@feature/multi-languages-support
         with:
           src: .
           dst: ./gh-pages
