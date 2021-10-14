@@ -26,7 +26,7 @@ wget -q -O - https://get.pmmp.io | bash -s -
 [3/3] MacOS 64-bit PHP build available, downloading PHP_5.6.10_x86-64_MacOS.tar.gz... checking... regenerating php.ini... done
 [*] Everything done! Run ./start.sh to start PocketMine-MP
 ```
-!!! info inline end
+!!! info
     うまく動作しなかったら手動インストールを試してみてください
 
 ## 手動インストール
