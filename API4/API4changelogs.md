@@ -1,6 +1,6 @@
 # API4 Changelogs全訳(34%完了)
 ## 訳に関して
-<https://github.com/pmmp/PocketMine-MP/commit/9e6d7405709560c0025e072324602983213276dd> 版より翻訳
+<https://github.com/pmmp/PocketMine-MP/commit/b65e89b605aeba5f7958d3cbb6db47e766cd6f9f> 版より翻訳
 
 翻訳漏れの無いように気を配りますが、書かれていない項目がある場合PRを送ってもらえると助かります。
 
@@ -280,6 +280,8 @@ permissions:
 - 以下のAPIメソッドはシグネチャが変わりました。
     - `Entity->entityBaseTick()`は`protected`になりました。
     - `Entity->move()`は`protected`になりました。
+    - `Entity->setPosition()`は`protected`になりました。 (代わりに `Entity->teleport()`を使ってください).
+    - `Entity->setPositionAndRotation()`は`protected` (代わりに`Entity->teleport()`を使ってください).
     - `Living->knockBack()`は`float, float, float`を受け入れるようになりました。 (最初の２つのパラメーターは削除されました).
     - `Living->getEffects()`は`Effect[]`の代わりに`EffectManager`を返すようになりました。
 - 以下のクラスは追加されました。
