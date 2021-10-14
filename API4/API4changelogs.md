@@ -1,4 +1,4 @@
-# API4 Changelogs全訳(34%完了)
+# API4 Changelogs全訳(41%完了)
 ## 訳に関して
 <https://github.com/pmmp/PocketMine-MP/commit/b65e89b605aeba5f7958d3cbb6db47e766cd6f9f> 版より翻訳
 
@@ -509,3 +509,51 @@ permissions:
     - `HandlerList::getHandlerLists()` -> `HandlerListManager->getAll()`
 - 以下のクラスは移動しました。
     - `pocketmine\plugin\RegisteredListener` -> `pocketmine\event\RegisteredListener`
+
+#### Inventory
+- すべてのクラフトとレシピに関するクラスは名前空間`pocketmine\crafting`に移動しました。
+- 以下のクラスが追加されました。
+  - `CallbackInventoryChangeListener`
+  - `CreativeInventory`: 以前まで`pocketmine\item\Item`に埋め込まれていた機能群を含みます。詳細はアイテムの変更をご覧ください
+  - `InventoryChangeListener`: 一つのインベントリのイベントを監視できます(ただし介入はできません)。
+  - `transaction\CreateItemAction`
+  - `transaction\DestroyItemAction`
+- 以下のクラスはリネーム/移動されました。
+  - `ContainerInventory` -> `pocketmine\block\inventory\BlockInventory`
+- 以下のクラスは名前空間`pocketmine\block\inventory` に移動されました。
+  - `AnvilInventory`
+  - `ChestInventory`
+  - `DoubleChestInventory`
+  - `EnchantInventory`
+  - `EnderChestInventory`
+  - `FurnaceInventory`
+- 以下のクラスは削除されました。
+  - `CustomInventory`
+  - `InventoryEventProcessor`
+  - `Recipe`
+  - `transaction\CreativeInventoryAction`
+- 以下のAPIメソッドが追加されました。
+  - `Inventory->addChangeListeners()`
+  - `Inventory->getChangeListeners()`
+  - `Inventory->removeChangeListeners()`
+  - `Inventory->swap()`: 二つのスロットのコンテンツを入れ替えます。
+- 以下のAPIメソッドは削除されました。
+  - `BaseInventory->getDefaultSize()`
+  - `BaseInventory->setSize()`
+  - `Inventory->close()`
+  - `Inventory->dropContents()`
+  - `Inventory->getName()`
+  - `Inventory->getTitle()`
+  - `Inventory->onSlotChange()`
+  - `Inventory->open()`
+  - `Inventory->sendContents()`
+  - `Inventory->sendSlot()`
+  - `InventoryAction->onExecuteFail()`
+  - `InventoryAction->onExecuteSuccess()`
+  - `PlayerInventory->sendCreativeContents()`
+- 以下のAPIメソッドはシグネチャが変更されました。
+  - `Inventory->clear()`は`bool`の代わりに現在では`void`を返します。
+  - `Inventory->setItem()`は`bool`の代わりに現在では`void`を返します。
+  - `InventoryAction->execute()`は`bool`の代わりに現在では`void`を返します。
+  - `BaseInventory->construct()`は初期化用のアイテムリストを受け取らなくなりました。
+- `PlayerInventory->setItemInHand()`は現在ではそのプレイヤーが見える人にアイテム更新を送信します。
