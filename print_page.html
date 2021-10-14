@@ -1446,32 +1446,42 @@ children:
 <h4 id="api4-api4changelogs-inventory">Inventory</h4>
 <ul>
 <li>すべてのクラフトとレシピに関するクラスは名前空間<code>pocketmine\crafting</code>に移動しました。</li>
-<li>以下のクラスが追加されました。</li>
+<li>以下のクラスが追加されました。<ul>
 <li><code>CallbackInventoryChangeListener</code></li>
 <li><code>CreativeInventory</code>: 以前まで<code>pocketmine\item\Item</code>に埋め込まれていた機能群を含みます。詳細はアイテムの変更をご覧ください</li>
 <li><code>InventoryChangeListener</code>: 一つのインベントリのイベントを監視できます(ただし介入はできません)。</li>
 <li><code>transaction\CreateItemAction</code></li>
 <li><code>transaction\DestroyItemAction</code></li>
-<li>以下のクラスはリネーム/移動されました。</li>
+</ul>
+</li>
+<li>以下のクラスはリネーム/移動されました。<ul>
 <li><code>ContainerInventory</code> -&gt; <code>pocketmine\block\inventory\BlockInventory</code></li>
-<li>以下のクラスは名前空間<code>pocketmine\block\inventory</code> に移動されました。</li>
+</ul>
+</li>
+<li>以下のクラスは名前空間<code>pocketmine\block\inventory</code> に移動されました。<ul>
 <li><code>AnvilInventory</code></li>
 <li><code>ChestInventory</code></li>
 <li><code>DoubleChestInventory</code></li>
 <li><code>EnchantInventory</code></li>
 <li><code>EnderChestInventory</code></li>
 <li><code>FurnaceInventory</code></li>
-<li>以下のクラスは削除されました。</li>
+</ul>
+</li>
+<li>以下のクラスは削除されました。<ul>
 <li><code>CustomInventory</code></li>
 <li><code>InventoryEventProcessor</code></li>
 <li><code>Recipe</code></li>
 <li><code>transaction\CreativeInventoryAction</code></li>
-<li>以下のAPIメソッドが追加されました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドが追加されました。<ul>
 <li><code>Inventory-&gt;addChangeListeners()</code></li>
 <li><code>Inventory-&gt;getChangeListeners()</code></li>
 <li><code>Inventory-&gt;removeChangeListeners()</code></li>
 <li><code>Inventory-&gt;swap()</code>: 二つのスロットのコンテンツを入れ替えます。</li>
-<li>以下のAPIメソッドは削除されました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは削除されました。<ul>
 <li><code>BaseInventory-&gt;getDefaultSize()</code></li>
 <li><code>BaseInventory-&gt;setSize()</code></li>
 <li><code>Inventory-&gt;close()</code></li>
@@ -1485,11 +1495,15 @@ children:
 <li><code>InventoryAction-&gt;onExecuteFail()</code></li>
 <li><code>InventoryAction-&gt;onExecuteSuccess()</code></li>
 <li><code>PlayerInventory-&gt;sendCreativeContents()</code></li>
-<li>以下のAPIメソッドはシグネチャが変更されました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドはシグネチャが変更されました。<ul>
 <li><code>Inventory-&gt;clear()</code>は<code>bool</code>の代わりに現在では<code>void</code>を返します。</li>
 <li><code>Inventory-&gt;setItem()</code>は<code>bool</code>の代わりに現在では<code>void</code>を返します。</li>
 <li><code>InventoryAction-&gt;execute()</code>は<code>bool</code>の代わりに現在では<code>void</code>を返します。</li>
 <li><code>BaseInventory-&gt;construct()</code>は初期化用のアイテムリストを受け取らなくなりました。</li>
+</ul>
+</li>
 <li><code>PlayerInventory-&gt;setItemInHand()</code>は現在ではそのプレイヤーが見える人にアイテム更新を送信します。</li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1>
                         <h1 class='nav-section-title' id='section-building'>
