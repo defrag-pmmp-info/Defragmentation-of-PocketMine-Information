@@ -29,14 +29,31 @@ wget -q -O - https://get.pmmp.io | bash -s -
 !!! info
     うまく動作しなかったら手動インストールを試してみてください
 
+## PowerShellスクリプトの利用(Windows 限定)
+PocketMine-MPをインストールしたいディレクトリを作成して、そのディレクトリをPowerShellで開きます。
+````wget https://gist.githubusercontent.com/famima65536/d1493bd3e4713f09aed2c70e428a5064/raw/0935f747077fe3454b329801a93fe30bb1b55919/install.ps1 -OutFile temp-install.ps1; ./temp-install.ps1; Remove-Item temp-install.ps1````
+!!! info
+    うまく動作しなかったら手動インストールを試してみてください
+
 ## 手動インストール
 ### 必要なファイルの準備
 PocketMine-MPを最低限起動するためには
+
 - **PocketMine-MP.phar** サーバーの本体
 - **PHPバイナリ** サーバーを動作させるプログラム
 - **スタート用スクリプト** サーバーを起動するためのファイル
     - start.cmd / start.ps1 (Windows)
     - start.sh (Linux/Mac)
 
-以上の3つが必要です。
+以上の3つが必要です。[リンク集](/link.md)を見てダウンロードしてください。
 
+### ディレクトリ配置
+バイナリはzip形式のため展開し、以下のようにファイルを配置します。
+```
+|-- bin/
+|-- PocketMine-MP.phar
+|-- start.cmd(またはstart.ps1)
+```
+
+### サーバーの起動
+start.cmdまたはstart.ps1を実行することでサーバーが起動されます。
