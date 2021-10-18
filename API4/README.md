@@ -8,7 +8,7 @@
 ## 変更点の抄訳
 翻訳元 <https://github.com/pmmp/PocketMine-MP/blob/master/changelogs/4.0.md>
 
-全訳は[API4changelogs](API4changelogs.html)より
+全訳は[API4changelogs](changelogs.html)より
 ### BETA1
 2021.9.7リリース
 API4は重要なAPIの変更,新しいワールド形式のサポート,パフォーマンスの向上やネットワークの刷新を含めたコア全体の重要な変更に焦点を当てています。
