@@ -321,6 +321,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#powershellwindows" class="md-nav__link">
+    PowerShellスクリプトの利用(Windows 限定)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     手動インストール
   </a>
@@ -331,6 +338,20 @@
           <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     必要なファイルの準備
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    ディレクトリ配置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    サーバーの起動
   </a>
   
 </li>
@@ -434,12 +455,74 @@
       
       
         <label class="md-nav__link" for="__nav_4">
+          API4
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API4" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          API4
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../API4/index.html" class="md-nav__link">
+        API4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../API4/API4changelogs.html" class="md-nav__link">
+        API4 Changelogs全訳(41%完了)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
           単項記事
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="単項記事" data-md-level="1">
-        <label class="md-nav__title" for="__nav_4">
+        <label class="md-nav__title" for="__nav_5">
           <span class="md-nav__icon md-icon"></span>
           単項記事
         </label>
@@ -454,18 +537,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" type="checkbox" id="__nav_4_1" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_4_1">
+        <label class="md-nav__link" for="__nav_5_1">
           Poggit
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Poggit" data-md-level="2">
-        <label class="md-nav__title" for="__nav_4_1">
+        <label class="md-nav__title" for="__nav_5_1">
           <span class="md-nav__icon md-icon"></span>
           Poggit
         </label>
@@ -575,6 +658,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#powershellwindows" class="md-nav__link">
+    PowerShellスクリプトの利用(Windows 限定)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     手動インストール
   </a>
@@ -585,6 +675,20 @@
           <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     必要なファイルの準備
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    ディレクトリ配置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    サーバーの起動
   </a>
   
 </li>
@@ -638,15 +742,34 @@ API4.0.0(ベータ版)での構築は<a href="./build-in-API4.html">API4.0.0で�
 <p class="admonition-title">Info</p>
 <p>うまく動作しなかったら手動インストールを試してみてください</p>
 </div>
+<h2 id="powershellwindows">PowerShellスクリプトの利用(Windows 限定)</h2>
+<p>PocketMine-MPをインストールしたいディレクトリを作成して、そのディレクトリをPowerShellで開きます。
+<code>wget https://gist.githubusercontent.com/famima65536/d1493bd3e4713f09aed2c70e428a5064/raw/0935f747077fe3454b329801a93fe30bb1b55919/install.ps1 -OutFile temp-install.ps1; ./temp-install.ps1; Remove-Item temp-install.ps1</code></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>うまく動作しなかったら手動インストールを試してみてください</p>
+</div>
 <h2 id="_2">手動インストール</h2>
 <h3 id="_3">必要なファイルの準備</h3>
-<p>PocketMine-MPを最低限起動するためには
-- <strong>PocketMine-MP.phar</strong> サーバーの本体
-- <strong>PHPバイナリ</strong> サーバーを動作させるプログラム
-- <strong>スタート用スクリプト</strong> サーバーを起動するためのファイル
-    - start.cmd / start.ps1 (Windows)
-    - start.sh (Linux/Mac)</p>
-<p>以上の3つが必要です。</p>
+<p>PocketMine-MPを最低限起動するためには</p>
+<ul>
+<li><strong>PocketMine-MP.phar</strong> サーバーの本体</li>
+<li><strong>PHPバイナリ</strong> サーバーを動作させるプログラム</li>
+<li><strong>スタート用スクリプト</strong> サーバーを起動するためのファイル<ul>
+<li>start.cmd / start.ps1 (Windows)</li>
+<li>start.sh (Linux/Mac)</li>
+</ul>
+</li>
+</ul>
+<p>以上の3つが必要です。<a href="/link.md">リンク集</a>を見てダウンロードしてください。</p>
+<h3 id="_4">ディレクトリ配置</h3>
+<p>バイナリはzip形式のため展開し、以下のようにファイルを配置します。
+<div class="highlight"><pre><span></span><code>|-- bin/
+|-- PocketMine-MP.phar
+|-- start.cmd(またはstart.ps1)
+</code></pre></div></p>
+<h3 id="_5">サーバーの起動</h3>
+<p>start.cmdまたはstart.ps1を実行することでサーバーが起動されます。</p>
                 
                   
                     
@@ -655,7 +778,7 @@ API4.0.0(ベータ版)での構築は<a href="./build-in-API4.html">API4.0.0で�
 <div class="md-source-date">
   <small>
     
-      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 14, 2021 22:46:13</span>
+      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 18, 2021 06:24:42</span>
       
         <br>作成した: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 11, 2021 12:44:50</span> 
       
