@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://famima65536.github.io/Defragmentation-of-PocketMine-Information/print_page.html">
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.3">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.4">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.5143246d.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.db9e7362.min.css">
       
         
         <link rel="stylesheet" href="assets/stylesheets/palette.3f5d1f46.min.css">
@@ -67,7 +67,7 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
-    <script>function __prefix(e){return new URL("/Defragmentation-of-PocketMine-Information/",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
       <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
@@ -492,6 +492,54 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Plugins
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Plugins" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Plugins
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="plugins/api-versioning.html" class="md-nav__link">
+        APIバージョニング: API versioning
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
     <li class="md-nav__item">
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
@@ -591,6 +639,26 @@
   <a href="#section-dictionary" class="md-nav__link">
     Dictionary
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-plugins" class="md-nav__link">
+    Plugins
+  </a>
+  
+    <nav class="md-nav" aria-label="Plugins">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugins-api-versioning" class="md-nav__link">
+    APIバージョニング: API versioning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -697,6 +765,26 @@
   <a href="#section-dictionary" class="md-nav__link">
     Dictionary
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-plugins" class="md-nav__link">
+    Plugins
+  </a>
+  
+    <nav class="md-nav" aria-label="Plugins">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugins-api-versioning" class="md-nav__link">
+    APIバージョニング: API versioning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1790,7 +1878,82 @@ DEVirionはvirionのクラスを影で支えているわけではないので、
 <span class="x">$class = new \ReflectionClass(&quot;poggit\\libasynql\\SqlResult&quot;);</span>
 <span class="x">$class = new \ReflectionClass(&#39;poggit\libasynql\SqlResult&#39;);</span>
 </code></pre></div>
-<p>名前空間からの相対参照はシェーディングされないため、<strong>Virionの名前空間への相対参照は使用しないでください</strong>。例えば、Virion のAntigenが<code>namespace poggit\libasynql</code>である場合、Virionユーザでは<code>namespace poggit</code>で始まるコードを書いてはいけません。</p></section><h1 class='nav-section-title-end'>Ended: Poggit</h1><h1 class='nav-section-title-end'>Ended: Dictionary</h1></div>
+<p>名前空間からの相対参照はシェーディングされないため、<strong>Virionの名前空間への相対参照は使用しないでください</strong>。例えば、Virion のAntigenが<code>namespace poggit\libasynql</code>である場合、Virionユーザでは<code>namespace poggit</code>で始まるコードを書いてはいけません。</p></section><h1 class='nav-section-title-end'>Ended: Poggit</h1><h1 class='nav-section-title-end'>Ended: Dictionary</h1>
+                        <h1 class='nav-section-title' id='section-plugins'>
+                            Plugins <a class='headerlink' href='#section-plugins' title='Permanent link'>↵</a>
+                        </h1>
+                        <section class="print-page" id="plugins-api-versioning"><h1 id="plugins-api-versioning-api-api-versioning">APIバージョニング: API versioning</h1>
+<p>PocketMine-MPのプラグインはどのAPIバージョンと互換性があるかを宣言する必要があります。これはプラグインをロードするかしないかを決定し、サーバーバージョンと適合しなかったときにデグレードするために用いられます。</p>
+<h2 id="plugins-api-versioning-api">APIバージョンシステムの説明</h2>
+<p>PocketMine-MP 3.0.0現在ではAPIバージョンとサーバーバージョンは一致しています。このバージョンは<a href="https://semver.org/lang/ja/">semantic major.minor.patch version number</a>で表します。</p>
+<h3 id="plugins-api-versioning-_1">定義</h3>
+<p>Semverは大まかには以下のように定義されます。
+- メジャーバージョンアップ: 破壊的な変更 - APIに準じるプラグインが動かなくなるレベルで公開APIが変更される。
+- マイナーバージョンアップ: 機能の追加やAPIを破壊しない程度での大きな変更。これはAPIの非推奨化や新しいAPI機能が追加されることも含みうるが以前のマイナーバージョン向けに作られたプラグインは依然として動作する。
+- パッチバージョンアップ: 大抵バグ修正。APIの破壊やそのバージョンのものに重大な変更があってはならない。</p>
+<p>PocketMine-MPでは<code>==.&gt;=.&gt;=</code>(<code>bash</code>表記では<code>eq.ge.ge</code>)という条件をAPIバージョンの比較時に用いています。つまりこれは以下のことを表します。
+- メジャーバージョンは互換性を持つためには<strong>必ず一致</strong>
+- サーバーのマイナーバージョンは、プラグインのマイナーバージョン<strong>以上が必須</strong>
+- サーバーのパッチバージョンもまた、プラグインのパッチバージョン<strong>以上が必須</strong></p>
+<p>PocketMine-MP開発者はいかなる非メージャーバージョンにおいてもプラグインとAPIの互換性がなくならないようにする努力をします。つまり、<code>3.1.1</code>を対象に書かれたプラグインは<code>3.x.y</code>でも動くはずです。ただし<code>4.0.0</code>や将来のメジャーバージョンで動く保証はありません。</p>
+<h3 id="plugins-api-versioning-_2">例</h3>
+<table>
+<thead>
+<tr>
+<th align="left">サーバーバージョン</th>
+<th align="left">プラグインバージョン</th>
+<th align="center">互換性</th>
+<th align="left">理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">4.0.0</td>
+<td align="left">3.0.0</td>
+<td align="center">無し</td>
+<td align="left">メジャーバージョンが異なる</td>
+</tr>
+<tr>
+<td align="left">3.1.0</td>
+<td align="left">3.0.0</td>
+<td align="center">あり</td>
+<td align="left">サーバーがプラグインよりも高いマイナーバージョンを持ち、互換性が保証されるため</td>
+</tr>
+<tr>
+<td align="left">3.0.0</td>
+<td align="left">3.1.0</td>
+<td align="center">無し</td>
+<td align="left">プラグインがそのサーバーバージョンで持っていない機能を要求している</td>
+</tr>
+<tr>
+<td align="left">3.0.1</td>
+<td align="left">3.0.0</td>
+<td align="center">あり</td>
+<td align="left">サーバーがプラグインよりも高いパッチバージョンを持ち、互換性が保証されるため</td>
+</tr>
+<tr>
+<td align="left">3.0.0</td>
+<td align="left">3.0.1</td>
+<td align="center">無し</td>
+<td align="left">プラグインがそのサーバーバージョンで持っていないバグ修正を要求している</td>
+</tr>
+</tbody>
+</table>
+<h3 id="plugins-api-versioning-api_1">サポートするAPIバージョンを選ぶ方法</h3>
+<p>必要最小限バージョンを選ぶべきです。例えば必要とする機能が<code>3.1.0</code>で追加されているのであれば、現在のサポートされるバージョンが<code>3.2.0</code>であっても<code>3.1.0</code>を一番小さいバージョンとして要求できます。これによりどのバージョンのPocketMine-MPを使っているかによらずより良いUXを与えることができます。</p>
+<p>もちろん、うまく動作することを保証するためにプラグインを最小限のバージョンでテストする必要があります。しかしながら、もう役目を終えている低いバージョンを要求するというのは意味がないこともあります。</p>
+<h3 id="plugins-api-versioning-_3">よくある誤解と落とし穴</h3>
+<ul>
+<li>APIバージョンは<strong>マジックナンバーではありません</strong>。盲目的にバージョンを変えてもそのバージョン向けになっていなければ<strong>プラグインは勝手に動きません</strong>。</li>
+<li><strong>APIバージョンはプラグインマニフェスト内で一つずつ書かなければならないものではありません</strong>。<strong>それぞれのメジャーバージョン内で最小のバージョン</strong>のみが要求されます。<ul>
+<li>良い例: <code>[3.1.0]</code>(単一の最小のバージョン), <code>[3.2.0, 4.0.0]</code>(異なる2つのメジャーバージョンでの最小のバージョン)</li>
+<li><code>[3.1.0, 3.1.1, 3.1.2]</code> - これは望ましく<strong>なく</strong>、余計なバージョンは無視される</li>
+</ul>
+</li>
+<li>プラグインが<strong>実際に指定したバージョンで動くこと</strong>を確かめてください。a) クラッシュするバージョンや b)期待されるように動作しないバージョンはバージョンリストから除外される必要があります。</li>
+</ul>
+<h2 id="plugins-api-versioning-_4">翻訳元</h2>
+<p>https://github.com/pmmp/DeveloperDocs/blob/b72417c924d0c917eeed6a172415edf7b5b3d52e/api-version-spec.md</p></section><h1 class='nav-section-title-end'>Ended: Plugins</h1></div>
                 
               
 
@@ -1832,7 +1995,7 @@ DEVirionはvirionのクラスを影で支えているわけではないので、
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-<script id="__config" type="application/json">{"base": "/Defragmentation-of-PocketMine-Information/", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
+<script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
     
 
 <script src="https://unpkg.com/iframe-worker/polyfill"></script>
@@ -1840,7 +2003,7 @@ DEVirionはvirionのクラスを影で支えているわけではないので、
 
 
     
-      <script src="assets/javascripts/bundle.f89c2efe.min.js"></script>
+      <script src="assets/javascripts/bundle.1e84347e.min.js"></script>
       
         <script src="js/print-site.js"></script>
       
