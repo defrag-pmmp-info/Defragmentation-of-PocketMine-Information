@@ -566,3 +566,111 @@ permissions:
 - `LegacyStringToItemParser`が追加されました。これは少しだけ動的な(しかし推奨はされない)`ItemFactory::fromString()`の置き換えです。
 - `Item->count`はアクセス権がpublicから変更されました。
 - 書き込める本(本と羽ペン,記入済みの本)のヒエラルキーが変更されました。`WritableBook`と`WrittenBook`は現在では`WritableBookBase`を継承します。
+- 以下のAPIはシグネチャが変更されました。
+    - `WritableBookBase->setPages()`は現在では`CompoundTag[]`の代わりに`WritableBookPage[]`を受け付けます。
+    - `ItemFactory::get()`は`string`を`tags`パラメータとして受け付けなくなりました。
+    - `ItemFactory::fromString()`は`$multiple`パラメータを受け取らなくなり、`Item|Item[]`ではなく`Item`のみを返すようになりました。
+- 以下のメソッドはメソッドチェーンが利用できるようになりました。(原文: The following methods are now fluent)
+    - `WritableBookBase->setPages()`
+    - `Item->addEnchantment()`
+    - `Item->removeEnchantment()`
+    - `Item->removeEnchantments()`
+    - `Armor->setCustomColor()`
+    - `WrittenBook->setTitle()`
+    - `WrittenBook->setAuthor()`
+    - `WrittenBook->setGeneration()`
+- 以下のAPIメソッドは削除されました。
+    - `Item->getNamedTagEntry()`
+    - `Item->removeNamedTagEntry()`
+    - `Item->setDamage()`: 現在では`Durable`を実装しているアイテム以外ではダメージは不変です。
+    - `Item->setNamedTagEntry()`
+    - `Item::get()`: これはずいぶん前に`ItemFactory::get()`にとってかわられました。
+    - `Item::fromString()`: これはずいぶん前に`ItemFactory::fromString()`にとってかわられました。
+    - `Item->setCompoundTag()`
+    - `Item->getCompoundTag()`
+    - `Item->hasCompoundTag()`
+    - `Potion::getPotionEffectsById()`
+    - `ProjectileItem->getProjectileEntityType()`
+- 以下の定数は削除されました。
+    - `Potion::ALL` - `PotionType::getAll()`を代わりに使ってください。
+    - `Potion::WATER`
+    - `Potion::MUNDANE`
+    - `Potion::LONG_MUNDANE`
+    - `Potion::THICK`
+    - `Potion::AWKWARD`
+    - `Potion::NIGHT_VISION`
+    - `Potion::LONG_NIGHT_VISION`
+    - `Potion::INVISIBILITY`
+    - `Potion::LONG_INVISIBILITY`
+    - `Potion::LEAPING`
+    - `Potion::LONG_LEAPING`
+    - `Potion::STRONG_LEAPING`
+    - `Potion::FIRE_RESISTANCE`
+    - `Potion::LONG_FIRE_RESISTANCE`
+    - `Potion::SWIFTNESS`
+    - `Potion::LONG_SWIFTNESS`
+    - `Potion::STRONG_SWIFTNESS`
+    - `Potion::SLOWNESS`
+    - `Potion::LONG_SLOWNESS`
+    - `Potion::WATER_BREATHING`
+    - `Potion::LONG_WATER_BREATHING`
+    - `Potion::HEALING`
+    - `Potion::STRONG_HEALING`
+    - `Potion::HARMING`
+    - `Potion::STRONG_HARMING`
+    - `Potion::POISON`
+    - `Potion::LONG_POISON`
+    - `Potion::STRONG_POISON`
+    - `Potion::REGENERATION`
+    - `Potion::LONG_REGENERATION`
+    - `Potion::STRONG_REGENERATION`
+    - `Potion::STRENGTH`
+    - `Potion::LONG_STRENGTH`
+    - `Potion::STRONG_STRENGTH`
+    - `Potion::WEAKNESS`
+    - `Potion::LONG_WEAKNESS`
+    - `Potion::WITHER`
+- 以下のメソッドはリネームされました。
+  - `Item->getDamage()` -> `Item->getMeta()`
+- 以下のメソッドは `pocketmine\inventory\CreativeInventory`へと移動されました:
+  - `Item::addCreativeItem()` -> `CreativeInventory::add()`
+  - `Item::clearCreativeItems()` -> `CreativeInventory::clear()`
+  - `Item::getCreativeItemIndex()` -> `CreativeInventory::getItemIndex()`
+  - `Item::getCreativeItems()` -> `CreativeInventory::getAll()`
+  - `Item::initCreativeItems()` -> `CreativeInventory::init()`
+  - `Item::isCreativeItem()` -> `CreativeInventory::contains()`
+  - `Item::removeCreativeItem()` -> `CreativeInventory::remove()`
+- 以下のクラスが追加されました。
+  - `ArmorTypeInfo`
+  - `Fertilizer`
+  - `LiquidBucket`
+  - `MilkBucket`
+  - `PotionType`: バニラのポーションタイプについての情報を保持する列挙クラス
+  - `WritableBookBase`
+  - `WritableBookPage`
+- 以下のAPIメソッドが追加されました。
+  - `Armor->getArmorSlot()`
+  - `Item->canStackWith()`: 二つのアイテムが数量やサイズ上限は考慮せずに、同じアイテムスロットで保持できるかを返します。
+  - `Potion->getType()`: 適用されるエッふぇくとなどの情報をもつ`PotionType`列挙オブジェクトを返します。
+  - `ProjectileItem->createEntity()`: 投げられるプロジェクタイルエンティティの新規インスタンスを返します。
+- 以下のクラスは削除されました。
+  - `ChainBoots`
+  - `ChainChestplate`
+  - `ChainHelmet`
+  - `ChainLeggings`
+  - `DiamondBoots`
+  - `DiamondChestplate`
+  - `DiamondHelmet`
+  - `DiamondLeggings`
+  - `GoldBoots`
+  - `GoldChestplate`
+  - `GoldHelmet`
+  - `GoldLeggings`
+  - `IronBoots`
+  - `IronChesplate`
+  - `IronHelmet`
+  - `IronLeggings`
+  - `LeatherBoots`
+  - `LeatherCap`
+  - `LeatherPants`
+  - `LeatherTunic`
