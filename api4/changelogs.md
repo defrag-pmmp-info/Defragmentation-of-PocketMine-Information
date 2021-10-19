@@ -1,6 +1,6 @@
 # API4 Changelogs全訳(41%完了)
 ## 訳に関して
-<https://github.com/pmmp/PocketMine-MP/commit/b65e89b605aeba5f7958d3cbb6db47e766cd6f9f> 版より翻訳
+<https://github.com/pmmp/PocketMine-MP/blob/a3f8546ac442d6bbb44dfedc19eb6d3e639a50b6/changelogs/4.0.md> 版より翻訳
 
 翻訳漏れの無いように気を配りますが、書かれていない項目がある場合PRを送ってもらえると助かります。
 
@@ -557,3 +557,12 @@ permissions:
     - `InventoryAction->execute()`は`bool`の代わりに現在では`void`を返します。
     - `BaseInventory->construct()`は初期化用のアイテムリストを受け取らなくなりました。
 - `PlayerInventory->setItemInHand()`は現在ではそのプレイヤーが見える人にアイテム更新を送信します。
+
+#### Item
+##### General
+- 新たに`VanillaItems`クラスが追加されました。すべての既知のアイテムタイプを生成する静的メソッドを含んでいます。これは定数が使われている`ItemFactory::get()`の代わりとして使われることが好ましいです。
+- `StringToItemParser`が追加されました。あらゆる文字列をIDに関係なくアイテムへとマッピングすることができるようになりました。これらのマッピングは`/give`と`/clear`で使われていて、プラグインでのカスタムエイリアスを念頭に置いて作られています。
+    - つまり、見苦しいハックなしに`/give`のカスタムエイリアスが追加できるようになったということです。
+- `LegacyStringToItemParser`が追加されました。これは少しだけ動的な(しかし推奨はされない)`ItemFactory::fromString()`の置き換えです。
+- `Item->count`はアクセス権がpublicから変更されました。
+- 書き込める本(本と羽ペン,記入済みの本)のヒエラルキーが変更されました。`WritableBook`と`WrittenBook`は現在では`WritableBookBase`を継承します。
