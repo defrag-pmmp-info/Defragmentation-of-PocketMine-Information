@@ -720,6 +720,26 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#item" class="md-nav__link">
+    Item
+  </a>
+  
+    <nav class="md-nav" aria-label="Item">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general_1" class="md-nav__link">
+    General
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1178,6 +1198,26 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#item" class="md-nav__link">
+    Item
+  </a>
+  
+    <nav class="md-nav" aria-label="Item">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general_1" class="md-nav__link">
+    General
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1208,7 +1248,7 @@
                 
                 <h1 id="api4-changelogs41">API4 Changelogs全訳(41%完了)</h1>
 <h2 id="_1">訳に関して</h2>
-<p><a href="https://github.com/pmmp/PocketMine-MP/commit/b65e89b605aeba5f7958d3cbb6db47e766cd6f9f">https://github.com/pmmp/PocketMine-MP/commit/b65e89b605aeba5f7958d3cbb6db47e766cd6f9f</a> 版より翻訳</p>
+<p><a href="https://github.com/pmmp/PocketMine-MP/blob/a3f8546ac442d6bbb44dfedc19eb6d3e639a50b6/changelogs/4.0.md">https://github.com/pmmp/PocketMine-MP/blob/a3f8546ac442d6bbb44dfedc19eb6d3e639a50b6/changelogs/4.0.md</a> 版より翻訳</p>
 <p>翻訳漏れの無いように気を配りますが、書かれていない項目がある場合PRを送ってもらえると助かります。</p>
 <h2 id="400-beta1">4.0.0-BETA1</h2>
 <p>2021.9.7リリース
@@ -1894,6 +1934,134 @@ children:
 </li>
 <li><code>PlayerInventory-&gt;setItemInHand()</code>は現在ではそのプレイヤーが見える人にアイテム更新を送信します。</li>
 </ul>
+<h4 id="item">Item</h4>
+<h5 id="general_1">General</h5>
+<ul>
+<li>新たに<code>VanillaItems</code>クラスが追加されました。すべての既知のアイテムタイプを生成する静的メソッドを含んでいます。これは定数が使われている<code>ItemFactory::get()</code>の代わりとして使われることが好ましいです。</li>
+<li><code>StringToItemParser</code>が追加されました。あらゆる文字列をIDに関係なくアイテムへとマッピングすることができるようになりました。これらのマッピングは<code>/give</code>と<code>/clear</code>で使われていて、プラグインでのカスタムエイリアスを念頭に置いて作られています。<ul>
+<li>つまり、見苦しいハックなしに<code>/give</code>のカスタムエイリアスが追加できるようになったということです。</li>
+</ul>
+</li>
+<li><code>LegacyStringToItemParser</code>が追加されました。これは少しだけ動的な(しかし推奨はされない)<code>ItemFactory::fromString()</code>の置き換えです。</li>
+<li><code>Item-&gt;count</code>はアクセス権がpublicから変更されました。</li>
+<li>書き込める本(本と羽ペン,記入済みの本)のヒエラルキーが変更されました。<code>WritableBook</code>と<code>WrittenBook</code>は現在では<code>WritableBookBase</code>を継承します。</li>
+<li>以下のAPIはシグネチャが変更されました。<ul>
+<li><code>WritableBookBase-&gt;setPages()</code>は現在では<code>CompoundTag[]</code>の代わりに<code>WritableBookPage[]</code>を受け付けます。</li>
+<li><code>ItemFactory::get()</code>は<code>string</code>を<code>tags</code>パラメータとして受け付けなくなりました。</li>
+<li><code>ItemFactory::fromString()</code>は<code>$multiple</code>パラメータを受け取らなくなり、<code>Item|Item[]</code>ではなく<code>Item</code>のみを返すようになりました。</li>
+</ul>
+</li>
+<li>以下のメソッドはメソッドチェーンが利用できるようになりました。(原文: The following methods are now fluent)<ul>
+<li><code>WritableBookBase-&gt;setPages()</code></li>
+<li><code>Item-&gt;addEnchantment()</code></li>
+<li><code>Item-&gt;removeEnchantment()</code></li>
+<li><code>Item-&gt;removeEnchantments()</code></li>
+<li><code>Armor-&gt;setCustomColor()</code></li>
+<li><code>WrittenBook-&gt;setTitle()</code></li>
+<li><code>WrittenBook-&gt;setAuthor()</code></li>
+<li><code>WrittenBook-&gt;setGeneration()</code></li>
+</ul>
+</li>
+<li>以下のAPIメソッドは削除されました。<ul>
+<li><code>Item-&gt;getNamedTagEntry()</code></li>
+<li><code>Item-&gt;removeNamedTagEntry()</code></li>
+<li><code>Item-&gt;setDamage()</code>: 現在では<code>Durable</code>を実装しているアイテム以外ではダメージは不変です。</li>
+<li><code>Item-&gt;setNamedTagEntry()</code></li>
+<li><code>Item::get()</code>: これはずいぶん前に<code>ItemFactory::get()</code>にとってかわられました。</li>
+<li><code>Item::fromString()</code>: これはずいぶん前に<code>ItemFactory::fromString()</code>にとってかわられました。</li>
+<li><code>Item-&gt;setCompoundTag()</code></li>
+<li><code>Item-&gt;getCompoundTag()</code></li>
+<li><code>Item-&gt;hasCompoundTag()</code></li>
+<li><code>Potion::getPotionEffectsById()</code></li>
+<li><code>ProjectileItem-&gt;getProjectileEntityType()</code></li>
+</ul>
+</li>
+<li>以下の定数は削除されました。<ul>
+<li><code>Potion::ALL</code> - <code>PotionType::getAll()</code>を代わりに使ってください。</li>
+<li><code>Potion::WATER</code></li>
+<li><code>Potion::MUNDANE</code></li>
+<li><code>Potion::LONG_MUNDANE</code></li>
+<li><code>Potion::THICK</code></li>
+<li><code>Potion::AWKWARD</code></li>
+<li><code>Potion::NIGHT_VISION</code></li>
+<li><code>Potion::LONG_NIGHT_VISION</code></li>
+<li><code>Potion::INVISIBILITY</code></li>
+<li><code>Potion::LONG_INVISIBILITY</code></li>
+<li><code>Potion::LEAPING</code></li>
+<li><code>Potion::LONG_LEAPING</code></li>
+<li><code>Potion::STRONG_LEAPING</code></li>
+<li><code>Potion::FIRE_RESISTANCE</code></li>
+<li><code>Potion::LONG_FIRE_RESISTANCE</code></li>
+<li><code>Potion::SWIFTNESS</code></li>
+<li><code>Potion::LONG_SWIFTNESS</code></li>
+<li><code>Potion::STRONG_SWIFTNESS</code></li>
+<li><code>Potion::SLOWNESS</code></li>
+<li><code>Potion::LONG_SLOWNESS</code></li>
+<li><code>Potion::WATER_BREATHING</code></li>
+<li><code>Potion::LONG_WATER_BREATHING</code></li>
+<li><code>Potion::HEALING</code></li>
+<li><code>Potion::STRONG_HEALING</code></li>
+<li><code>Potion::HARMING</code></li>
+<li><code>Potion::STRONG_HARMING</code></li>
+<li><code>Potion::POISON</code></li>
+<li><code>Potion::LONG_POISON</code></li>
+<li><code>Potion::STRONG_POISON</code></li>
+<li><code>Potion::REGENERATION</code></li>
+<li><code>Potion::LONG_REGENERATION</code></li>
+<li><code>Potion::STRONG_REGENERATION</code></li>
+<li><code>Potion::STRENGTH</code></li>
+<li><code>Potion::LONG_STRENGTH</code></li>
+<li><code>Potion::STRONG_STRENGTH</code></li>
+<li><code>Potion::WEAKNESS</code></li>
+<li><code>Potion::LONG_WEAKNESS</code></li>
+<li><code>Potion::WITHER</code></li>
+</ul>
+</li>
+<li>以下のメソッドはリネームされました。</li>
+<li><code>Item-&gt;getDamage()</code> -&gt; <code>Item-&gt;getMeta()</code></li>
+<li>以下のメソッドは <code>pocketmine\inventory\CreativeInventory</code>へと移動されました:</li>
+<li><code>Item::addCreativeItem()</code> -&gt; <code>CreativeInventory::add()</code></li>
+<li><code>Item::clearCreativeItems()</code> -&gt; <code>CreativeInventory::clear()</code></li>
+<li><code>Item::getCreativeItemIndex()</code> -&gt; <code>CreativeInventory::getItemIndex()</code></li>
+<li><code>Item::getCreativeItems()</code> -&gt; <code>CreativeInventory::getAll()</code></li>
+<li><code>Item::initCreativeItems()</code> -&gt; <code>CreativeInventory::init()</code></li>
+<li><code>Item::isCreativeItem()</code> -&gt; <code>CreativeInventory::contains()</code></li>
+<li><code>Item::removeCreativeItem()</code> -&gt; <code>CreativeInventory::remove()</code></li>
+<li>以下のクラスが追加されました。</li>
+<li><code>ArmorTypeInfo</code></li>
+<li><code>Fertilizer</code></li>
+<li><code>LiquidBucket</code></li>
+<li><code>MilkBucket</code></li>
+<li><code>PotionType</code>: バニラのポーションタイプについての情報を保持する列挙クラス</li>
+<li><code>WritableBookBase</code></li>
+<li><code>WritableBookPage</code></li>
+<li>以下のAPIメソッドが追加されました。</li>
+<li><code>Armor-&gt;getArmorSlot()</code></li>
+<li><code>Item-&gt;canStackWith()</code>: 二つのアイテムが数量やサイズ上限は考慮せずに、同じアイテムスロットで保持できるかを返します。</li>
+<li><code>Potion-&gt;getType()</code>: 適用されるエッふぇくとなどの情報をもつ<code>PotionType</code>列挙オブジェクトを返します。</li>
+<li><code>ProjectileItem-&gt;createEntity()</code>: 投げられるプロジェクタイルエンティティの新規インスタンスを返します。</li>
+<li>以下のクラスは削除されました。</li>
+<li><code>ChainBoots</code></li>
+<li><code>ChainChestplate</code></li>
+<li><code>ChainHelmet</code></li>
+<li><code>ChainLeggings</code></li>
+<li><code>DiamondBoots</code></li>
+<li><code>DiamondChestplate</code></li>
+<li><code>DiamondHelmet</code></li>
+<li><code>DiamondLeggings</code></li>
+<li><code>GoldBoots</code></li>
+<li><code>GoldChestplate</code></li>
+<li><code>GoldHelmet</code></li>
+<li><code>GoldLeggings</code></li>
+<li><code>IronBoots</code></li>
+<li><code>IronChesplate</code></li>
+<li><code>IronHelmet</code></li>
+<li><code>IronLeggings</code></li>
+<li><code>LeatherBoots</code></li>
+<li><code>LeatherCap</code></li>
+<li><code>LeatherPants</code></li>
+<li><code>LeatherTunic</code></li>
+</ul>
                 
                   
                     
@@ -1902,7 +2070,7 @@ children:
 <div class="md-source-date">
   <small>
     
-      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 18, 2021 08:27:31</span>
+      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 19, 2021 23:40:49</span>
       
         <br>作成した: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 18, 2021 08:27:31</span> 
       
@@ -1916,7 +2084,7 @@ children:
   
     <div class="md-source-date">
       <small>
-          Authors: <span class='git-page-authors git-authors'><a href='mailto:famima65536@gmail.com'>famima65536</a> (97.51%), <a href='mailto:maatinosippo@gmail.com'>suinua</a> (1.72%), <a href='mailto:10294990+Yossi1114@users.noreply.github.com'>Yossi1114</a> (0.77%)</span>
+          Authors: <span class='git-page-authors git-authors'><a href='mailto:famima65536@gmail.com'>famima65536</a> (97.96%), <a href='mailto:maatinosippo@gmail.com'>suinua</a> (1.41%), <a href='mailto:10294990+Yossi1114@users.noreply.github.com'>Yossi1114</a> (0.63%)</span>
       </small>
     </div>
   

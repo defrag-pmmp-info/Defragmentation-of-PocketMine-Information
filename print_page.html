@@ -67,7 +67,7 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
-    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL("/Defragmentation-of-PocketMine-Information/",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
       <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
@@ -1000,7 +1000,7 @@ API4は重要なAPIの変更,新しいワールド形式のサポート,パフ�
 <h3 id="api4-index-devtools-api4">DevTools API4対応版の配布場所</h3>
 <p>poggit上でダウンロード可 <a href="https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools">https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools</a> の Build History:master により最新版がダウンロード可能</p></section><section class="print-page" id="api4-changelogs"><h1 id="api4-changelogs-api4-changelogs41">API4 Changelogs全訳(41%完了)</h1>
 <h2 id="api4-changelogs-_1">訳に関して</h2>
-<p><a href="https://github.com/pmmp/PocketMine-MP/commit/b65e89b605aeba5f7958d3cbb6db47e766cd6f9f">https://github.com/pmmp/PocketMine-MP/commit/b65e89b605aeba5f7958d3cbb6db47e766cd6f9f</a> 版より翻訳</p>
+<p><a href="https://github.com/pmmp/PocketMine-MP/blob/a3f8546ac442d6bbb44dfedc19eb6d3e639a50b6/changelogs/4.0.md">https://github.com/pmmp/PocketMine-MP/blob/a3f8546ac442d6bbb44dfedc19eb6d3e639a50b6/changelogs/4.0.md</a> 版より翻訳</p>
 <p>翻訳漏れの無いように気を配りますが、書かれていない項目がある場合PRを送ってもらえると助かります。</p>
 <h2 id="api4-changelogs-400-beta1">4.0.0-BETA1</h2>
 <p>2021.9.7リリース
@@ -1685,6 +1685,134 @@ children:
 </ul>
 </li>
 <li><code>PlayerInventory-&gt;setItemInHand()</code>は現在ではそのプレイヤーが見える人にアイテム更新を送信します。</li>
+</ul>
+<h4 id="api4-changelogs-item">Item</h4>
+<h5 id="api4-changelogs-general_1">General</h5>
+<ul>
+<li>新たに<code>VanillaItems</code>クラスが追加されました。すべての既知のアイテムタイプを生成する静的メソッドを含んでいます。これは定数が使われている<code>ItemFactory::get()</code>の代わりとして使われることが好ましいです。</li>
+<li><code>StringToItemParser</code>が追加されました。あらゆる文字列をIDに関係なくアイテムへとマッピングすることができるようになりました。これらのマッピングは<code>/give</code>と<code>/clear</code>で使われていて、プラグインでのカスタムエイリアスを念頭に置いて作られています。<ul>
+<li>つまり、見苦しいハックなしに<code>/give</code>のカスタムエイリアスが追加できるようになったということです。</li>
+</ul>
+</li>
+<li><code>LegacyStringToItemParser</code>が追加されました。これは少しだけ動的な(しかし推奨はされない)<code>ItemFactory::fromString()</code>の置き換えです。</li>
+<li><code>Item-&gt;count</code>はアクセス権がpublicから変更されました。</li>
+<li>書き込める本(本と羽ペン,記入済みの本)のヒエラルキーが変更されました。<code>WritableBook</code>と<code>WrittenBook</code>は現在では<code>WritableBookBase</code>を継承します。</li>
+<li>以下のAPIはシグネチャが変更されました。<ul>
+<li><code>WritableBookBase-&gt;setPages()</code>は現在では<code>CompoundTag[]</code>の代わりに<code>WritableBookPage[]</code>を受け付けます。</li>
+<li><code>ItemFactory::get()</code>は<code>string</code>を<code>tags</code>パラメータとして受け付けなくなりました。</li>
+<li><code>ItemFactory::fromString()</code>は<code>$multiple</code>パラメータを受け取らなくなり、<code>Item|Item[]</code>ではなく<code>Item</code>のみを返すようになりました。</li>
+</ul>
+</li>
+<li>以下のメソッドはメソッドチェーンが利用できるようになりました。(原文: The following methods are now fluent)<ul>
+<li><code>WritableBookBase-&gt;setPages()</code></li>
+<li><code>Item-&gt;addEnchantment()</code></li>
+<li><code>Item-&gt;removeEnchantment()</code></li>
+<li><code>Item-&gt;removeEnchantments()</code></li>
+<li><code>Armor-&gt;setCustomColor()</code></li>
+<li><code>WrittenBook-&gt;setTitle()</code></li>
+<li><code>WrittenBook-&gt;setAuthor()</code></li>
+<li><code>WrittenBook-&gt;setGeneration()</code></li>
+</ul>
+</li>
+<li>以下のAPIメソッドは削除されました。<ul>
+<li><code>Item-&gt;getNamedTagEntry()</code></li>
+<li><code>Item-&gt;removeNamedTagEntry()</code></li>
+<li><code>Item-&gt;setDamage()</code>: 現在では<code>Durable</code>を実装しているアイテム以外ではダメージは不変です。</li>
+<li><code>Item-&gt;setNamedTagEntry()</code></li>
+<li><code>Item::get()</code>: これはずいぶん前に<code>ItemFactory::get()</code>にとってかわられました。</li>
+<li><code>Item::fromString()</code>: これはずいぶん前に<code>ItemFactory::fromString()</code>にとってかわられました。</li>
+<li><code>Item-&gt;setCompoundTag()</code></li>
+<li><code>Item-&gt;getCompoundTag()</code></li>
+<li><code>Item-&gt;hasCompoundTag()</code></li>
+<li><code>Potion::getPotionEffectsById()</code></li>
+<li><code>ProjectileItem-&gt;getProjectileEntityType()</code></li>
+</ul>
+</li>
+<li>以下の定数は削除されました。<ul>
+<li><code>Potion::ALL</code> - <code>PotionType::getAll()</code>を代わりに使ってください。</li>
+<li><code>Potion::WATER</code></li>
+<li><code>Potion::MUNDANE</code></li>
+<li><code>Potion::LONG_MUNDANE</code></li>
+<li><code>Potion::THICK</code></li>
+<li><code>Potion::AWKWARD</code></li>
+<li><code>Potion::NIGHT_VISION</code></li>
+<li><code>Potion::LONG_NIGHT_VISION</code></li>
+<li><code>Potion::INVISIBILITY</code></li>
+<li><code>Potion::LONG_INVISIBILITY</code></li>
+<li><code>Potion::LEAPING</code></li>
+<li><code>Potion::LONG_LEAPING</code></li>
+<li><code>Potion::STRONG_LEAPING</code></li>
+<li><code>Potion::FIRE_RESISTANCE</code></li>
+<li><code>Potion::LONG_FIRE_RESISTANCE</code></li>
+<li><code>Potion::SWIFTNESS</code></li>
+<li><code>Potion::LONG_SWIFTNESS</code></li>
+<li><code>Potion::STRONG_SWIFTNESS</code></li>
+<li><code>Potion::SLOWNESS</code></li>
+<li><code>Potion::LONG_SLOWNESS</code></li>
+<li><code>Potion::WATER_BREATHING</code></li>
+<li><code>Potion::LONG_WATER_BREATHING</code></li>
+<li><code>Potion::HEALING</code></li>
+<li><code>Potion::STRONG_HEALING</code></li>
+<li><code>Potion::HARMING</code></li>
+<li><code>Potion::STRONG_HARMING</code></li>
+<li><code>Potion::POISON</code></li>
+<li><code>Potion::LONG_POISON</code></li>
+<li><code>Potion::STRONG_POISON</code></li>
+<li><code>Potion::REGENERATION</code></li>
+<li><code>Potion::LONG_REGENERATION</code></li>
+<li><code>Potion::STRONG_REGENERATION</code></li>
+<li><code>Potion::STRENGTH</code></li>
+<li><code>Potion::LONG_STRENGTH</code></li>
+<li><code>Potion::STRONG_STRENGTH</code></li>
+<li><code>Potion::WEAKNESS</code></li>
+<li><code>Potion::LONG_WEAKNESS</code></li>
+<li><code>Potion::WITHER</code></li>
+</ul>
+</li>
+<li>以下のメソッドはリネームされました。</li>
+<li><code>Item-&gt;getDamage()</code> -&gt; <code>Item-&gt;getMeta()</code></li>
+<li>以下のメソッドは <code>pocketmine\inventory\CreativeInventory</code>へと移動されました:</li>
+<li><code>Item::addCreativeItem()</code> -&gt; <code>CreativeInventory::add()</code></li>
+<li><code>Item::clearCreativeItems()</code> -&gt; <code>CreativeInventory::clear()</code></li>
+<li><code>Item::getCreativeItemIndex()</code> -&gt; <code>CreativeInventory::getItemIndex()</code></li>
+<li><code>Item::getCreativeItems()</code> -&gt; <code>CreativeInventory::getAll()</code></li>
+<li><code>Item::initCreativeItems()</code> -&gt; <code>CreativeInventory::init()</code></li>
+<li><code>Item::isCreativeItem()</code> -&gt; <code>CreativeInventory::contains()</code></li>
+<li><code>Item::removeCreativeItem()</code> -&gt; <code>CreativeInventory::remove()</code></li>
+<li>以下のクラスが追加されました。</li>
+<li><code>ArmorTypeInfo</code></li>
+<li><code>Fertilizer</code></li>
+<li><code>LiquidBucket</code></li>
+<li><code>MilkBucket</code></li>
+<li><code>PotionType</code>: バニラのポーションタイプについての情報を保持する列挙クラス</li>
+<li><code>WritableBookBase</code></li>
+<li><code>WritableBookPage</code></li>
+<li>以下のAPIメソッドが追加されました。</li>
+<li><code>Armor-&gt;getArmorSlot()</code></li>
+<li><code>Item-&gt;canStackWith()</code>: 二つのアイテムが数量やサイズ上限は考慮せずに、同じアイテムスロットで保持できるかを返します。</li>
+<li><code>Potion-&gt;getType()</code>: 適用されるエッふぇくとなどの情報をもつ<code>PotionType</code>列挙オブジェクトを返します。</li>
+<li><code>ProjectileItem-&gt;createEntity()</code>: 投げられるプロジェクタイルエンティティの新規インスタンスを返します。</li>
+<li>以下のクラスは削除されました。</li>
+<li><code>ChainBoots</code></li>
+<li><code>ChainChestplate</code></li>
+<li><code>ChainHelmet</code></li>
+<li><code>ChainLeggings</code></li>
+<li><code>DiamondBoots</code></li>
+<li><code>DiamondChestplate</code></li>
+<li><code>DiamondHelmet</code></li>
+<li><code>DiamondLeggings</code></li>
+<li><code>GoldBoots</code></li>
+<li><code>GoldChestplate</code></li>
+<li><code>GoldHelmet</code></li>
+<li><code>GoldLeggings</code></li>
+<li><code>IronBoots</code></li>
+<li><code>IronChesplate</code></li>
+<li><code>IronHelmet</code></li>
+<li><code>IronLeggings</code></li>
+<li><code>LeatherBoots</code></li>
+<li><code>LeatherCap</code></li>
+<li><code>LeatherPants</code></li>
+<li><code>LeatherTunic</code></li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1>
                         <h1 class='nav-section-title' id='section-単項記事'>
                             単項記事 <a class='headerlink' href='#section-単項記事' title='Permanent link'>↵</a>
@@ -1994,7 +2122,7 @@ DEVirionはvirionのクラスを影で支えているわけではないので、
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-<script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
+<script id="__config" type="application/json">{"base": "/Defragmentation-of-PocketMine-Information/", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
     
 
 <script src="https://unpkg.com/iframe-worker/polyfill"></script>
