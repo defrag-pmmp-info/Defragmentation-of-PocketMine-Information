@@ -631,53 +631,70 @@ permissions:
     - `Potion::LONG_WEAKNESS`
     - `Potion::WITHER`
 - 以下のメソッドはリネームされました。
-  - `Item->getDamage()` -> `Item->getMeta()`
+    - `Item->getDamage()` -> `Item->getMeta()`
 - 以下のメソッドは `pocketmine\inventory\CreativeInventory`へと移動されました:
-  - `Item::addCreativeItem()` -> `CreativeInventory::add()`
-  - `Item::clearCreativeItems()` -> `CreativeInventory::clear()`
-  - `Item::getCreativeItemIndex()` -> `CreativeInventory::getItemIndex()`
-  - `Item::getCreativeItems()` -> `CreativeInventory::getAll()`
-  - `Item::initCreativeItems()` -> `CreativeInventory::init()`
-  - `Item::isCreativeItem()` -> `CreativeInventory::contains()`
-  - `Item::removeCreativeItem()` -> `CreativeInventory::remove()`
+    - `Item::addCreativeItem()` -> `CreativeInventory::add()`
+    - `Item::clearCreativeItems()` -> `CreativeInventory::clear()`
+    - `Item::getCreativeItemIndex()` -> `CreativeInventory::getItemIndex()`
+    - `Item::getCreativeItems()` -> `CreativeInventory::getAll()`
+    - `Item::initCreativeItems()` -> `CreativeInventory::init()`
+    - `Item::isCreativeItem()` -> `CreativeInventory::contains()`
+    - `Item::removeCreativeItem()` -> `CreativeInventory::remove()`
 - 以下のクラスが追加されました。
-  - `ArmorTypeInfo`
-  - `Fertilizer`
-  - `LiquidBucket`
-  - `MilkBucket`
-  - `PotionType`: バニラのポーションタイプについての情報を保持する列挙クラス
-  - `WritableBookBase`
-  - `WritableBookPage`
+    - `ArmorTypeInfo`
+    - `Fertilizer`
+    - `LiquidBucket`
+    - `MilkBucket`
+    - `PotionType`: バニラのポーションタイプについての情報を保持する列挙クラス
+    - `WritableBookBase`
+    - `WritableBookPage`
 - 以下のAPIメソッドが追加されました。
-  - `Armor->getArmorSlot()`
-  - `Item->canStackWith()`: 二つのアイテムが数量やサイズ上限は考慮せずに、同じアイテムスロットで保持できるかを返します。
-  - `Potion->getType()`: 適用されるエッふぇくとなどの情報をもつ`PotionType`列挙オブジェクトを返します。
-  - `ProjectileItem->createEntity()`: 投げられるプロジェクタイルエンティティの新規インスタンスを返します。
+    - `Armor->getArmorSlot()`
+    - `Item->canStackWith()`: 二つのアイテムが数量やサイズ上限は考慮せずに、同じアイテムスロットで保持できるかを返します。
+    - `Potion->getType()`: 適用されるエッふぇくとなどの情報をもつ`PotionType`列挙オブジェクトを返します。
+    - `ProjectileItem->createEntity()`: 投げられるプロジェクタイルエンティティの新規インスタンスを返します。
 - 以下のクラスは削除されました。
-  - `ChainBoots`
-  - `ChainChestplate`
-  - `ChainHelmet`
-  - `ChainLeggings`
-  - `DiamondBoots`
-  - `DiamondChestplate`
-  - `DiamondHelmet`
-  - `DiamondLeggings`
-  - `GoldBoots`
-  - `GoldChestplate`
-  - `GoldHelmet`
-  - `GoldLeggings`
-  - `IronBoots`
-  - `IronChesplate`
-  - `IronHelmet`
-  - `IronLeggings`
-  - `LeatherBoots`
-  - `LeatherCap`
-  - `LeatherPants`
-  - `LeatherTunic`
+    - `ChainBoots`
+    - `ChainChestplate`
+    - `ChainHelmet`
+    - `ChainLeggings`
+    - `DiamondBoots`
+    - `DiamondChestplate`
+    - `DiamondHelmet`
+    - `DiamondLeggings`
+    - `GoldBoots`
+    - `GoldChestplate`
+    - `GoldHelmet`
+    - `GoldLeggings`
+    - `IronBoots`
+    - `IronChesplate`
+    - `IronHelmet`
+    - `IronLeggings`
+    - `LeatherBoots`
+    - `LeatherCap`
+    - `LeatherPants`
+    - `LeatherTunic`
 
 ##### NBT handling
 - シリアライズされたNBTバイト配列キャッシュはアイテムスタックに保持されなくなりました。これらのキャッシュはネットワークレイヤーシリアライズに用いられる早すぎる最適化であり、それ自体がネットワークNBT形式に依存していました。
 - 内部NBTの利用は周縁化されます。 もはや即座に変更点をNBTへ書き込む必要はありません。以下のフックが追加されます:
-  - `Item->serializeCompoundTag()`
-  - `Item->deserializeCompoundTag()`
+    - `Item->serializeCompoundTag()`
+    - `Item->deserializeCompoundTag()`
 - 実行時NBTをアイテムから完全に取り除くことが計画されていますが、現段階では未解決の後方互換性の問題があります。
+
+##### Enchantment
+- `VanillaEnchantments`クラスが追加されました。これはバニラのすべてのエンチャントを静的メソッドとして公開していて、 `Enchantment::get()`の意地の悪さを置き換えます。
+    - 例: `Enchantment::get(Enchantment::PROTECTION)`は`VanillaEnchantments::PROTECTION()`で置き換えられました。
+    - これらのメソッドは`Enchantment`の代わりに適切なタイプの情報を静的解析に渡し、コーディングがしやすくなりました。
+- MCPEのエンチャントIDとPocketMine-MP内部のIDの境目がより明確になりました。
+    - IDハンドリングは`pocketmine\data\bedrock\EnchantmentIdMap`へ移動しました。
+    - すべてのエンチャントID定数は`Enchantment`から削除されました。何らかの理由でレガシーエンチャントIDが必要なら`pocketmine\data\bedrock\EnchantmentIds`を利用してください。
+- `Enchantment::RARITY_*`定数は`Rarity`に移動され、`RARITY_`プレフィックスは削除されました。
+- `Enchantment::SLOT_*`定数は`ItemFlags`に移動され、`SLOT_`プレフィックスは削除されました。
+- 以下のAPIメソッドは移動されました。
+    - `Enchantment::registerEnchantment()` -> `EnchantmentIdMap->register()`
+    - `Enchantment::getEnchantment()` -> `EnchantmentIdMap->fromId()`
+    - `Enchantment->getId()` -> `EnchantmentIdMap->toId()`
+    - `Enchantment::getEnchantmentByName()` -> `VanillaEnchantments::fromString()`
+- 以下のAPIメソッドが追加されました。
+    - `Enchantment->getRuntimeId()`: これは**動的ID**でありエンチャントタイプの比較に用いることができます。**これは決して保持されないため、configやNBTでは利用しないでください！**
