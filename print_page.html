@@ -67,7 +67,7 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
-    <script>function __prefix(e){return new URL("/Defragmentation-of-PocketMine-Information/",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
       <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
@@ -1769,9 +1769,11 @@ children:
 <li><code>Potion::WITHER</code></li>
 </ul>
 </li>
-<li>以下のメソッドはリネームされました。</li>
+<li>以下のメソッドはリネームされました。<ul>
 <li><code>Item-&gt;getDamage()</code> -&gt; <code>Item-&gt;getMeta()</code></li>
-<li>以下のメソッドは <code>pocketmine\inventory\CreativeInventory</code>へと移動されました:</li>
+</ul>
+</li>
+<li>以下のメソッドは <code>pocketmine\inventory\CreativeInventory</code>へと移動されました:<ul>
 <li><code>Item::addCreativeItem()</code> -&gt; <code>CreativeInventory::add()</code></li>
 <li><code>Item::clearCreativeItems()</code> -&gt; <code>CreativeInventory::clear()</code></li>
 <li><code>Item::getCreativeItemIndex()</code> -&gt; <code>CreativeInventory::getItemIndex()</code></li>
@@ -1779,7 +1781,9 @@ children:
 <li><code>Item::initCreativeItems()</code> -&gt; <code>CreativeInventory::init()</code></li>
 <li><code>Item::isCreativeItem()</code> -&gt; <code>CreativeInventory::contains()</code></li>
 <li><code>Item::removeCreativeItem()</code> -&gt; <code>CreativeInventory::remove()</code></li>
-<li>以下のクラスが追加されました。</li>
+</ul>
+</li>
+<li>以下のクラスが追加されました。<ul>
 <li><code>ArmorTypeInfo</code></li>
 <li><code>Fertilizer</code></li>
 <li><code>LiquidBucket</code></li>
@@ -1787,12 +1791,16 @@ children:
 <li><code>PotionType</code>: バニラのポーションタイプについての情報を保持する列挙クラス</li>
 <li><code>WritableBookBase</code></li>
 <li><code>WritableBookPage</code></li>
-<li>以下のAPIメソッドが追加されました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドが追加されました。<ul>
 <li><code>Armor-&gt;getArmorSlot()</code></li>
 <li><code>Item-&gt;canStackWith()</code>: 二つのアイテムが数量やサイズ上限は考慮せずに、同じアイテムスロットで保持できるかを返します。</li>
 <li><code>Potion-&gt;getType()</code>: 適用されるエッふぇくとなどの情報をもつ<code>PotionType</code>列挙オブジェクトを返します。</li>
 <li><code>ProjectileItem-&gt;createEntity()</code>: 投げられるプロジェクタイルエンティティの新規インスタンスを返します。</li>
-<li>以下のクラスは削除されました。</li>
+</ul>
+</li>
+<li>以下のクラスは削除されました。<ul>
 <li><code>ChainBoots</code></li>
 <li><code>ChainChestplate</code></li>
 <li><code>ChainHelmet</code></li>
@@ -1813,6 +1821,44 @@ children:
 <li><code>LeatherCap</code></li>
 <li><code>LeatherPants</code></li>
 <li><code>LeatherTunic</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="api4-changelogs-nbt-handling">NBT handling</h5>
+<ul>
+<li>シリアライズされたNBTバイト配列キャッシュはアイテムスタックに保持されなくなりました。これらのキャッシュはネットワークレイヤーシリアライズに用いられる早すぎる最適化であり、それ自体がネットワークNBT形式に依存していました。</li>
+<li>内部NBTの利用は周縁化されます。 もはや即座に変更点をNBTへ書き込む必要はありません。以下のフックが追加されます:<ul>
+<li><code>Item-&gt;serializeCompoundTag()</code></li>
+<li><code>Item-&gt;deserializeCompoundTag()</code></li>
+</ul>
+</li>
+<li>実行時NBTをアイテムから完全に取り除くことが計画されていますが、現段階では未解決の後方互換性の問題があります。</li>
+</ul>
+<h5 id="api4-changelogs-enchantment">Enchantment</h5>
+<ul>
+<li><code>VanillaEnchantments</code>クラスが追加されました。これはバニラのすべてのエンチャントを静的メソッドとして公開していて、 <code>Enchantment::get()</code>の意地の悪さを置き換えます。<ul>
+<li>例: <code>Enchantment::get(Enchantment::PROTECTION)</code>は<code>VanillaEnchantments::PROTECTION()</code>で置き換えられました。</li>
+<li>これらのメソッドは<code>Enchantment</code>の代わりに適切なタイプの情報を静的解析に渡し、コーディングがしやすくなりました。</li>
+</ul>
+</li>
+<li>MCPEのエンチャントIDとPocketMine-MP内部のIDの境目がより明確になりました。<ul>
+<li>IDハンドリングは<code>pocketmine\data\bedrock\EnchantmentIdMap</code>へ移動しました。</li>
+<li>すべてのエンチャントID定数は<code>Enchantment</code>から削除されました。何らかの理由でレガシーエンチャントIDが必要なら<code>pocketmine\data\bedrock\EnchantmentIds</code>を利用してください。</li>
+</ul>
+</li>
+<li><code>Enchantment::RARITY_*</code>定数は<code>Rarity</code>に移動され、<code>RARITY_</code>プレフィックスは削除されました。</li>
+<li><code>Enchantment::SLOT_*</code>定数は<code>ItemFlags</code>に移動され、<code>SLOT_</code>プレフィックスは削除されました。</li>
+<li>以下のAPIメソッドは移動されました。<ul>
+<li><code>Enchantment::registerEnchantment()</code> -&gt; <code>EnchantmentIdMap-&gt;register()</code></li>
+<li><code>Enchantment::getEnchantment()</code> -&gt; <code>EnchantmentIdMap-&gt;fromId()</code></li>
+<li><code>Enchantment-&gt;getId()</code> -&gt; <code>EnchantmentIdMap-&gt;toId()</code></li>
+<li><code>Enchantment::getEnchantmentByName()</code> -&gt; <code>VanillaEnchantments::fromString()</code></li>
+</ul>
+</li>
+<li>以下のAPIメソッドが追加されました。<ul>
+<li><code>Enchantment-&gt;getRuntimeId()</code>: これは<strong>動的ID</strong>でありエンチャントタイプの比較に用いることができます。<strong>これは決して保持されないため、configやNBTでは利用しないでください！</strong></li>
+</ul>
+</li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1>
                         <h1 class='nav-section-title' id='section-単項記事'>
                             単項記事 <a class='headerlink' href='#section-単項記事' title='Permanent link'>↵</a>
@@ -2122,7 +2168,7 @@ DEVirionはvirionのクラスを影で支えているわけではないので、
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-<script id="__config" type="application/json">{"base": "/Defragmentation-of-PocketMine-Information/", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
+<script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
     
 
 <script src="https://unpkg.com/iframe-worker/polyfill"></script>
