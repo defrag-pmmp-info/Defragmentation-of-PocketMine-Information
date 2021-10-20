@@ -674,3 +674,10 @@ permissions:
   - `LeatherCap`
   - `LeatherPants`
   - `LeatherTunic`
+
+##### NBT handling
+- シリアライズされたNBTバイト配列キャッシュはアイテムスタックに保持されなくなりました。これらのキャッシュはネットワークレイヤーシリアライズに用いられる早すぎる最適化であり、それ自体がネットワークNBT形式に依存していました。
+- 内部NBTの利用は周縁化されます。 もはや即座に変更点をNBTへ書き込む必要はありません。以下のフックが追加されます:
+  - `Item->serializeCompoundTag()`
+  - `Item->deserializeCompoundTag()`
+- 実行時NBTをアイテムから完全に取り除くことが計画されていますが、現段階では未解決の後方互換性の問題があります。
