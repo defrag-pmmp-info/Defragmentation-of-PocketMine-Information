@@ -304,9 +304,73 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          API4でのサーバー構築
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="build-in-api4.html" class="md-nav__link md-nav__link--active">
         API4でのサーバー構築
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    警告
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    必要なファイルの準備
+  </a>
+  
+    <nav class="md-nav" aria-label="必要なファイルの準備">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pocketmine-mpphar" class="md-nav__link">
+    PocketMine-MP.pharのダウンロード
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#php" class="md-nav__link">
+    PHPバイナリのダウンロード
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    ダウンロード後
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -573,6 +637,55 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    警告
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    必要なファイルの準備
+  </a>
+  
+    <nav class="md-nav" aria-label="必要なファイルの準備">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pocketmine-mpphar" class="md-nav__link">
+    PocketMine-MP.pharのダウンロード
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#php" class="md-nav__link">
+    PHPバイナリのダウンロード
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    ダウンロード後
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -590,7 +703,27 @@
                 
                 
                 <h1 id="api4">API4でのサーバー構築</h1>
-<p>🚧</p>
+<h2 id="_1">警告</h2>
+<p>これは安定版リリースでは<strong>ありません</strong>。予期しないバグが存在する可能性があります。</p>
+<h2 id="_2">必要なファイルの準備</h2>
+<ul>
+<li><strong>PocketMine-MP.phar</strong></li>
+<li><strong>PHPバイナリ(API4用)</strong></li>
+<li><strong>start.cmd/start.ps1/start.sh</strong> API3のものが利用可能</li>
+</ul>
+<h3 id="pocketmine-mpphar">PocketMine-MP.pharのダウンロード</h3>
+<p>API4のものは現段階ではPre-releaseでありGitHubのreleasesからダウンロードできます。
+https://github.com/pmmp/PocketMine-MP/releases</p>
+<h3 id="php">PHPバイナリのダウンロード</h3>
+<p>API4ではPHP拡張の一部が変更されたため、それが導入されているPHPバイナリが必要になります。以下の手順でダウンロードしてください。</p>
+<p><img alt="masterブランチのLast run" src="/image/e987af6f-2a36-474c-a926-69272498c823.png" />
+マスターブランチのLast run以下をクリック</p>
+<p><img alt="published" src="/image/d9f2aaa6-3d32-4f49-921c-c0698ff28ea2.png" />
+publishedをクリック</p>
+<p><img alt="artifact" src="/image/0ecfc460-fe8d-41e9-b62f-9c21cff0298e.png" />
+対応するOSの︙をクリックし、ダウンロードを選択</p>
+<h2 id="_3">ダウンロード後</h2>
+<p>これ以降は<a href="index.html#_2">API3の手動インストール</a>と同様の手順で進められます。</p>
                 
                   
                     
@@ -599,7 +732,7 @@
 <div class="md-source-date">
   <small>
     
-      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 18, 2021 08:29:02</span>
+      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 21, 2021 03:01:57</span>
       
         <br>作成した: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 18, 2021 08:29:02</span> 
       
