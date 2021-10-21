@@ -698,3 +698,26 @@ permissions:
     - `Enchantment::getEnchantmentByName()` -> `VanillaEnchantments::fromString()`
 - 以下のAPIメソッドが追加されました。
     - `Enchantment->getRuntimeId()`: これは**動的ID**でありエンチャントタイプの比較に用いることができます。**これは決して保持されないため、configやNBTでは利用しないでください！**
+
+### Lang
+- 以下のクラスはリネームされました。
+    - `BaseLang` -> `Language`
+    - `TranslationContainer` -> `Translatable`
+- 以下のクラスは削除されました。
+    - `TextContainer`
+- 以下のAPIメソッドが追加されました。
+    - `Translatable->format()`: 変換に対してフォーマット(カラーコードなど)を追加できます。
+    - `Translatable->prefix()`: プレフィックスを追加できます。
+    - `Translatable->postfix()`: ポストフィキシングを追加できます。
+- 以下のAPIメソッドはシグネチャが変更されました。
+    - `Translatable->__construct()`は現在では`list<string>`だけではなく`array<int|string, Translatable|string>`をパラメータとして受け取ります。
+    - `Translatable->getParameter()`は現在では`int`だけではなく`int|string`をインデックスとして受け取ります。
+    - `Translatable->getParameter()`は現在では`string`だけではなく`Translatable|string`を返します。
+    - `Translatable->getParameters()`は現在では`array<int|string, Translatable|string>`を返します。
+- `LanguageNotFoundException`が追加されました。これはサーバーファイルに存在しない`Language`を構成しようとした際に投げられます。
+- `Translatable`は現在では変換パラメータのキーを無視しなくなりました。以前までは挿入される順番のみが考慮されていました。
+- `Translatable`は変換パラメータの文字列キーをサポートするようになりました。
+- `Translatable`は現在では、他の`Translatable`を変換パラメータとして提供することをサポートします。
+- `Language->translateString()`は現在では、`Translatable`を変換パラメータとして提供することをサポートします。
+- `Language->translateString()`は自動的な文字列パラメータ変換を試みなくなりました。もし変換したければ、明示的に変換する必要があります。これによりプレイヤーが変換キーを含むメッセージを送信した際に図らずも変換されてしまうバグが修正されます。
+- `Language->translate()`は`Translatable`の文字列パラメータを変換しなくなりました。(上で指摘した点と同様)
