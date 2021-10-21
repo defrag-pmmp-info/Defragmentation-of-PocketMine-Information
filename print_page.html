@@ -1859,6 +1859,38 @@ children:
 <li><code>Enchantment-&gt;getRuntimeId()</code>: これは<strong>動的ID</strong>でありエンチャントタイプの比較に用いることができます。<strong>これは決して保持されないため、configやNBTでは利用しないでください！</strong></li>
 </ul>
 </li>
+</ul>
+<h3 id="api4-changelogs-lang">Lang</h3>
+<ul>
+<li>以下のクラスはリネームされました。<ul>
+<li><code>BaseLang</code> -&gt; <code>Language</code></li>
+<li><code>TranslationContainer</code> -&gt; <code>Translatable</code></li>
+</ul>
+</li>
+<li>以下のクラスは削除されました。<ul>
+<li><code>TextContainer</code></li>
+</ul>
+</li>
+<li>以下のAPIメソッドが追加されました。<ul>
+<li><code>Translatable-&gt;format()</code>: 変換に対してフォーマット(カラーコードなど)を追加できます。</li>
+<li><code>Translatable-&gt;prefix()</code>: プレフィックスを追加できます。</li>
+<li><code>Translatable-&gt;postfix()</code>: ポストフィキシングを追加できます。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドはシグネチャが変更されました。<ul>
+<li><code>Translatable-&gt;__construct()</code>は現在では<code>list&lt;string&gt;</code>だけではなく<code>array&lt;int|string, Translatable|string&gt;</code>をパラメータとして受け取ります。</li>
+<li><code>Translatable-&gt;getParameter()</code>は現在では<code>int</code>だけではなく<code>int|string</code>をインデックスとして受け取ります。</li>
+<li><code>Translatable-&gt;getParameter()</code>は現在では<code>string</code>だけではなく<code>Translatable|string</code>を返します。</li>
+<li><code>Translatable-&gt;getParameters()</code>は現在では<code>array&lt;int|string, Translatable|string&gt;</code>を返します。</li>
+</ul>
+</li>
+<li><code>LanguageNotFoundException</code>が追加されました。これはサーバーファイルに存在しない<code>Language</code>を構成しようとした際に投げられます。</li>
+<li><code>Translatable</code>は現在では変換パラメータのキーを無視しなくなりました。以前までは挿入される順番のみが考慮されていました。</li>
+<li><code>Translatable</code>は変換パラメータの文字列キーをサポートするようになりました。</li>
+<li><code>Translatable</code>は現在では、他の<code>Translatable</code>を変換パラメータとして提供することをサポートします。</li>
+<li><code>Language-&gt;translateString()</code>は現在では、<code>Translatable</code>を変換パラメータとして提供することをサポートします。</li>
+<li><code>Language-&gt;translateString()</code>は自動的な文字列パラメータ変換を試みなくなりました。もし変換したければ、明示的に変換する必要があります。これによりプレイヤーが変換キーを含むメッセージを送信した際に図らずも変換されてしまうバグが修正されます。</li>
+<li><code>Language-&gt;translate()</code>は<code>Translatable</code>の文字列パラメータを変換しなくなりました。(上で指摘した点と同様)</li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1>
                         <h1 class='nav-section-title' id='section-単項記事'>
                             単項記事 <a class='headerlink' href='#section-単項記事' title='Permanent link'>↵</a>
