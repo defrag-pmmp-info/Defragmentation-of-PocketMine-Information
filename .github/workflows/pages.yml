@@ -30,12 +30,11 @@ jobs:
         with:
           fetch-depth: 0
       - name: Run action
-        uses: famima65536/markdown-docs@feature/mkdocs-config-support
+        uses: ldeluigi/markdown-docs@master
         with:
           src: .
           dst: ./gh-pages
           language: ja
-          site_url: https://famima65536.github.io/Defragmentation-of-PocketMine-Information/
       - name: Deploy GH Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
