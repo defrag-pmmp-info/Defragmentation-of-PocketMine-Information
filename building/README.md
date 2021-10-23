@@ -31,7 +31,10 @@ wget -q -O - https://get.pmmp.io | bash -s -
 
 ## PowerShellスクリプトの利用(Windows 限定)
 PocketMine-MPをインストールしたいディレクトリを作成して、そのディレクトリをPowerShellで開きます。
-````wget https://gist.githubusercontent.com/famima65536/d1493bd3e4713f09aed2c70e428a5064/raw/0935f747077fe3454b329801a93fe30bb1b55919/install.ps1 -OutFile temp-install.ps1; ./temp-install.ps1; Remove-Item temp-install.ps1````
+```PowerShell
+wget https://gist.githubusercontent.com/famima65536/d1493bd3e4713f09aed2c70e428a5064/raw/0935f747077fe3454b329801a93fe30bb1b55919/install.ps1 -OutFile temp-install.ps1; ./temp-install.ps1; Remove-Item temp-install.ps1
+```
+
 !!! info
     うまく動作しなかったら手動インストールを試してみてください
 
