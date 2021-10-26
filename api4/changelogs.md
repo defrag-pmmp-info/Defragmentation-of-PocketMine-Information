@@ -744,6 +744,6 @@ permissions:
   - `NetworkInterface->putPacket()`
   - `NetworkInterface->close()`
   - `NetworkInterface->emergencyShutdown()`
-- `NetworkInterface` now represents a more generic interface to be implemented by any network component, as opposed to specifically a player network interface.
-- Everything under the `rcon` subnamespace has been removed.
-- `upnp\UPnP` has significant changes. It's now a network component instead of a pair of static methods.
+- `NetworkInterface`はプレイヤーネットワークインターフェースに特化するものではなく、現在ではいかなるネットワークコンポーネントにも実装されるためにより汎用なインターフェースを表します。
+- `rcon`サブ名前空間以下にあるものはすべて削除されました。
+- `upnp\UPnP`には重大な変更点があります。これは現在では二つの静的メソッドではなくネットワークコンポーネントになりました。
