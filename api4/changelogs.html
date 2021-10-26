@@ -10,7 +10,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.3">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.4">
     
     
       
@@ -18,7 +18,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.5143246d.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.db9e7362.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -764,6 +764,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#network" class="md-nav__link">
+    Network
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1259,6 +1266,13 @@
           <li class="md-nav__item">
   <a href="#lang" class="md-nav__link">
     Lang
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network" class="md-nav__link">
+    Network
   </a>
   
 </li>
@@ -2180,6 +2194,33 @@ children:
 <li><code>Language-&gt;translateString()</code>は自動的な文字列パラメータ変換を試みなくなりました。もし変換したければ、明示的に変換する必要があります。これによりプレイヤーが変換キーを含むメッセージを送信した際に図らずも変換されてしまうバグが修正されます。</li>
 <li><code>Language-&gt;translate()</code>は<code>Translatable</code>の文字列パラメータを変換しなくなりました。(上で指摘した点と同様)</li>
 </ul>
+<h3 id="network">Network</h3>
+<ul>
+<li>以下のフィールドが削除されました。</li>
+<li><code>Network::$BATCH_THRESHOLD</code></li>
+<li>以下のクラスがリネームされました。</li>
+<li><code>SourceInterface</code> -&gt; <code>NetworkInterface</code></li>
+<li><code>AdvancedSourceInterface</code> -&gt; <code>AdvancedNetworkInterface</code></li>
+<li>以下のクラスが移動されました。</li>
+<li><code>CompressBatchedTask</code> -&gt; <code>mcpe\CompressBatchTask</code></li>
+<li><code>level\format\io\ChunkRequestTask</code> -&gt; <code>mcpe\ChunkRequestTask</code></li>
+<li><code>mcpe\RakLibInterface</code> -&gt; <code>mcpe\raklib\RakLibInterface</code></li>
+<li>以下のクラスが削除されました。</li>
+<li><code>mcpe\PlayerNetworkSessionAdapter</code></li>
+<li>以下のメソッドがリネームされました。</li>
+<li><code>UPnP::PortForward()</code> -&gt; <code>UPnP::portForward()</code></li>
+<li><code>UPnP::RemovePortForward()</code> -&gt; <code>UPnP::removePortForward()</code></li>
+<li>以下のメソッドはシグネチャが変更されました。</li>
+<li><code>UPnP::portForward()</code>は<code>string $serviceURL, string $internalIP, int $internalPort, int $externalPort</code>を受け取るようになりました。</li>
+<li><code>UPnP::removePortForward()</code>は<code>string $serviceURL, int $externalPort</code>を受け取るようになりました。</li>
+<li>以下のメソッドは削除されました。</li>
+<li><code>NetworkInterface-&gt;putPacket()</code></li>
+<li><code>NetworkInterface-&gt;close()</code></li>
+<li><code>NetworkInterface-&gt;emergencyShutdown()</code></li>
+<li><code>NetworkInterface</code>はプレイヤーネットワークインターフェースに特化するものではなく、現在ではいかなるネットワークコンポーネントにも実装されるためにより汎用なインターフェースを表します。</li>
+<li><code>rcon</code>サブ名前空間以下にあるものはすべて削除されました。</li>
+<li><code>upnp\UPnP</code>には重大な変更点があります。これは現在では二つの静的メソッドではなくネットワークコンポーネントになりました。</li>
+</ul>
                 
                   
                     
@@ -2188,7 +2229,7 @@ children:
 <div class="md-source-date">
   <small>
     
-      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 21, 2021 01:04:52</span>
+      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 26, 2021 13:00:34</span>
       
         <br>作成した: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 18, 2021 08:27:31</span> 
       
@@ -2202,7 +2243,7 @@ children:
   
     <div class="md-source-date">
       <small>
-          Authors: <span class='git-page-authors git-authors'><a href='mailto:famima65536@gmail.com'>famima65536</a> (98.09%), <a href='mailto:maatinosippo@gmail.com'>suinua</a> (1.32%), <a href='mailto:10294990+Yossi1114@users.noreply.github.com'>Yossi1114</a> (0.59%)</span>
+          Authors: <span class='git-page-authors git-authors'><a href='mailto:famima65536@gmail.com'>famima65536</a> (98.16%), <a href='mailto:maatinosippo@gmail.com'>suinua</a> (1.27%), <a href='mailto:10294990+Yossi1114@users.noreply.github.com'>Yossi1114</a> (0.57%)</span>
       </small>
     </div>
   
@@ -2286,7 +2327,7 @@ children:
 
 
     
-      <script src="../assets/javascripts/bundle.f89c2efe.min.js"></script>
+      <script src="../assets/javascripts/bundle.1e84347e.min.js"></script>
       
         <script src="../js/print-site.js"></script>
       
