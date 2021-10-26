@@ -721,3 +721,29 @@ permissions:
 - `Language->translateString()`は現在では、`Translatable`を変換パラメータとして提供することをサポートします。
 - `Language->translateString()`は自動的な文字列パラメータ変換を試みなくなりました。もし変換したければ、明示的に変換する必要があります。これによりプレイヤーが変換キーを含むメッセージを送信した際に図らずも変換されてしまうバグが修正されます。
 - `Language->translate()`は`Translatable`の文字列パラメータを変換しなくなりました。(上で指摘した点と同様)
+
+### Network
+- 以下のフィールドが削除されました。
+  - `Network::$BATCH_THRESHOLD`
+- 以下のクラスがリネームされました。
+  - `SourceInterface` -> `NetworkInterface`
+  - `AdvancedSourceInterface` -> `AdvancedNetworkInterface`
+- 以下のクラスが移動されました。
+  - `CompressBatchedTask` -> `mcpe\CompressBatchTask`
+  - `level\format\io\ChunkRequestTask` -> `mcpe\ChunkRequestTask`
+  - `mcpe\RakLibInterface` -> `mcpe\raklib\RakLibInterface`
+- 以下のクラスが削除されました。
+  - `mcpe\PlayerNetworkSessionAdapter`
+- 以下のメソッドがリネームされました。
+  - `UPnP::PortForward()` -> `UPnP::portForward()`
+  - `UPnP::RemovePortForward()` -> `UPnP::removePortForward()`
+- 以下のメソッドはシグネチャが変更されました。
+  - `UPnP::portForward()`は`string $serviceURL, string $internalIP, int $internalPort, int $externalPort`を受け取るようになりました。
+  - `UPnP::removePortForward()`は`string $serviceURL, int $externalPort`を受け取るようになりました。
+- 以下のメソッドは削除されました。
+  - `NetworkInterface->putPacket()`
+  - `NetworkInterface->close()`
+  - `NetworkInterface->emergencyShutdown()`
+- `NetworkInterface` now represents a more generic interface to be implemented by any network component, as opposed to specifically a player network interface.
+- Everything under the `rcon` subnamespace has been removed.
+- `upnp\UPnP` has significant changes. It's now a network component instead of a pair of static methods.
