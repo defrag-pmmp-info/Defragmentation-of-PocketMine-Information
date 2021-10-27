@@ -322,14 +322,14 @@
       
       
         <label class="md-nav__link" for="__nav_3">
-          プラグイン
+          プラグイン開発
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="プラグイン" data-md-level="1">
+      <nav class="md-nav" aria-label="プラグイン開発" data-md-level="1">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
-          プラグイン
+          プラグイン開発
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -339,7 +339,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../plugin/api-versioning.html" class="md-nav__link">
+      <a href="../plugin-develop/api-versioning.html" class="md-nav__link">
         APIバージョニング: API versioning
       </a>
     </li>
@@ -2253,30 +2253,30 @@ children:
 しかし、<code>plugin.yml</code>での許可定義での<code>default</code>キーはサポートされ続けます。</li>
 </ul>
 </li>
-<li>Added <code>PermissibleDelegateTrait</code> to reduce boilerplate for users of <code>PermissibleBase</code>. This trait is used by <code>ConsoleCommandSender</code> and <code>Player</code>.</li>
-<li>The following API methods have been moved:<ul>
+<li><code>PermissibleBase</code>を利用する際のひな形を減らすために<code>PermissibleDelegateTrait</code>が追加されました。このトレイトは<code>ConsoleCommandSender</code>と<code>Player</code>で利用されています。</li>
+<li>以下のAPIメソッドは移動されました。<ul>
 <li><code>Permission::getByName()</code> -&gt; <code>PermissionParser::defaultFromString()</code></li>
 <li><code>Permission::loadPermissions()</code> -&gt; <code>PermissionParser::loadPermissions()</code></li>
 <li><code>Permission::loadPermission()</code> -&gt; <code>PermissionParser::loadPermission()</code></li>
 </ul>
 </li>
-<li>The following constants have been moved:<ul>
+<li>以下の定数は移動されました。<ul>
 <li><code>Permission::DEFAULT_FALSE</code> -&gt; <code>PermissionParser::DEFAULT_FALSE</code></li>
 <li><code>Permission::DEFAULT_TRUE</code> -&gt; <code>PermissionParser::DEFAULT_TRUE</code></li>
 <li><code>Permission::DEFAULT_OP</code> -&gt; <code>PermissionParser::DEFAULT_OP</code></li>
 <li><code>Permission::DEFAULT_NOT_OP</code> -&gt; <code>PermissionParser::DEFAULT_NOT_OP</code></li>
 </ul>
 </li>
-<li>The following API methods have been added:<ul>
+<li>以下のAPIメソッドが追加されました。<ul>
 <li><code>Permission-&gt;addChild()</code></li>
 <li><code>Permission-&gt;removeChild()</code></li>
-<li><code>Permissible-&gt;getPermissionRecalculationCallbacks()</code> - allows reacting to changes of permissions, such as new permissions being granted or denied</li>
-<li><code>Permissible-&gt;setBasePermission()</code> - used for assigning root permissions like <code>pocketmine.group.operator</code>; plugins usually shouldn't use this</li>
+<li><code>Permissible-&gt;getPermissionRecalculationCallbacks()</code> - 新規許可が与えられたり拒否されたりなど、許可の変更に対しての反応が行えるようになります。</li>
+<li><code>Permissible-&gt;setBasePermission()</code> - <code>pocketmine.group.operator</code>などのルート許可を割り当てる際に使用されます。通常プラグインでは使用するべきではありません。</li>
 <li><code>Permissible-&gt;unsetBasePermission()</code></li>
 <li><code>PermissionAttachmentInfo-&gt;getGroupPermissionInfo()</code> - returns the <code>PermissionAttachmentInfo</code> of the permission that caused the current permission value to be set, or null if the permission is explicit</li>
 </ul>
 </li>
-<li>The following API methods have been removed:<ul>
+<li>以下のAPIメソッドが削除されました。<ul>
 <li><code>Permissible-&gt;isOp()</code>: use <code>Permissible-&gt;hasPermission(DefaultPermissions::ROOT_OPERATOR)</code> instead, <strong>but you really shouldn't directly depend on a player's op status, add your own permissions instead!</strong></li>
 <li><code>Permissible-&gt;setOp()</code>: use <code>addAttachment($plugin, DefaultPermissions::ROOT_OPERATOR, true)</code> instead to add, and <code>removeAttachment()</code> to remove it (or addAttachment() with false to explicitly deny it, just like any other permission)</li>
 <li><code>Permission-&gt;addParent()</code></li>
@@ -2313,7 +2313,7 @@ children:
 <div class="md-source-date">
   <small>
     
-      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 27, 2021 08:10:48</span>
+      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 27, 2021 09:50:09</span>
       
         <br>作成した: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 18, 2021 08:27:31</span> 
       
