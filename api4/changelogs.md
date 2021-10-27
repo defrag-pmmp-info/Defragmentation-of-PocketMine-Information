@@ -699,7 +699,7 @@ permissions:
 - 以下のAPIメソッドが追加されました。
     - `Enchantment->getRuntimeId()`: これは**動的ID**でありエンチャントタイプの比較に用いることができます。**これは決して保持されないため、configやNBTでは利用しないでください！**
 
-### Lang
+#### Lang
 - 以下のクラスはリネームされました。
     - `BaseLang` -> `Language`
     - `TranslationContainer` -> `Translatable`
@@ -722,7 +722,7 @@ permissions:
 - `Language->translateString()`は自動的な文字列パラメータ変換を試みなくなりました。もし変換したければ、明示的に変換する必要があります。これによりプレイヤーが変換キーを含むメッセージを送信した際に図らずも変換されてしまうバグが修正されます。
 - `Language->translate()`は`Translatable`の文字列パラメータを変換しなくなりました。(上で指摘した点と同様)
 
-### Network
+#### Network
 - 以下のフィールドが削除されました。
   - `Network::$BATCH_THRESHOLD`
 - 以下のクラスがリネームされました。
@@ -747,3 +747,55 @@ permissions:
 - `NetworkInterface`はプレイヤーネットワークインターフェースに特化するものではなく、現在ではいかなるネットワークコンポーネントにも実装されるためにより汎用なインターフェースを表します。
 - `rcon`サブ名前空間以下にあるものはすべて削除されました。
 - `upnp\UPnP`には重大な変更点があります。これは現在では二つの静的メソッドではなくネットワークコンポーネントになりました。
+
+
+#### Permission
+- 以下の新規許可ノードが導入されます。
+  - `pocketmine.group.everyone`: デフォルトで全員に与えられます。
+  - `pocketmine.group.operator`: OPのプレイヤーとコンソールに与えられます。
+  これらの許可ノードはほかのノードと同様に許可付与によって割り当て・上書き可能です。つまり、現在ではプレイヤー切断時(や付与が外れた際)に無くなる**一時的OP**状態を与えることができます。 
+- 許可が明示的にセットされていない時やほかの許可により暗示的に付与されている場合には、現在では常にfalseとなるようになりました。
+- 定義されていない許可は`Permission::$DEFAULT_PERMISSION`ではなく、現在では常に`false`となりました。
+- 許可は内部的にデフォルト値を持たなくなりました。 その代わりに、デフォルト値は`pocketmine.group`の子として許可として割り当てられます。
+  - `true`: `pocketmine.group.everyone`に子として値`true`で追加する
+  - `false`: いかなる許可にも与えない
+  - `op`: `pocketmine.group.operator`に子として値`true`で追加する
+  - `notop`: `pocketmine.group.everyone`に子として値`true`で、`pocketmine.group.operator`に`false`で追加する
+  しかし、`plugin.yml`での許可定義での`default`キーはサポートされ続けます。
+- Added `PermissibleDelegateTrait` to reduce boilerplate for users of `PermissibleBase`. This trait is used by `ConsoleCommandSender` and `Player`.
+- The following API methods have been moved:
+  - `Permission::getByName()` -> `PermissionParser::defaultFromString()`
+  - `Permission::loadPermissions()` -> `PermissionParser::loadPermissions()`
+  - `Permission::loadPermission()` -> `PermissionParser::loadPermission()`
+- The following constants have been moved:
+  - `Permission::DEFAULT_FALSE` -> `PermissionParser::DEFAULT_FALSE`
+  - `Permission::DEFAULT_TRUE` -> `PermissionParser::DEFAULT_TRUE`
+  - `Permission::DEFAULT_OP` -> `PermissionParser::DEFAULT_OP`
+  - `Permission::DEFAULT_NOT_OP` -> `PermissionParser::DEFAULT_NOT_OP`
+- The following API methods have been added:
+  - `Permission->addChild()`
+  - `Permission->removeChild()`
+  - `Permissible->getPermissionRecalculationCallbacks()` - allows reacting to changes of permissions, such as new permissions being granted or denied
+  - `Permissible->setBasePermission()` - used for assigning root permissions like `pocketmine.group.operator`; plugins usually shouldn't use this
+  - `Permissible->unsetBasePermission()`
+  - `PermissionAttachmentInfo->getGroupPermissionInfo()` - returns the `PermissionAttachmentInfo` of the permission that caused the current permission value to be set, or null if the permission is explicit
+- The following API methods have been removed:
+  - `Permissible->isOp()`: use `Permissible->hasPermission(DefaultPermissions::ROOT_OPERATOR)` instead, **but you really shouldn't directly depend on a player's op status, add your own permissions instead!**
+  - `Permissible->setOp()`: use `addAttachment($plugin, DefaultPermissions::ROOT_OPERATOR, true)` instead to add, and `removeAttachment()` to remove it (or addAttachment() with false to explicitly deny it, just like any other permission)
+  - `Permission->addParent()`
+  - `Permission->getDefault()`
+  - `Permission->setDefault()`
+  - `PermissionManager->getDefaultPermissions()`
+  - `PermissionManager->recalculatePermissionDefaults()`
+  - `PermissionManager->subscribeToDefaultPerms()`
+  - `PermissionManager->unsubscribeFromDefaultPerms()`
+  - `PermissionManager->getDefaultPermSubscriptions()`
+  - `PermissionAttachment->getPermissible()`
+  - `PermissionAttachmentInfo->getPermissible()`
+- 以下のフィールドは削除されました。
+  - `Permission::$DEFAULT_PERMISSION`
+- The following API methods have changes:
+  - `PermissionParser::defaultFromString()` now throws `InvalidArgumentException` on unknown values.
+  - `Permission->__construct()` no longer accepts a `$defaultValue` parameter (see notes above about defaults refactor).you should add your permission as a child of `pocketmine.group.everyone` or `pocketmine.group.operator` instead).
+- The following classes have been removed:
+  - `ServerOperator`
