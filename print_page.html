@@ -65,7 +65,7 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
-    <script>function __prefix(e){return new URL("/",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
       <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
@@ -981,66 +981,66 @@ publishedをクリック</p>
 <h2 id="api4-index-_1">インストールについて</h2>
 <p>現在(2021.10.9) API4.0.0はベータ段階であり、安定版ではありません。テスト目的でのみ使用してください。
 インストール方法は以下のページを参考にしてください。
-<a href="https://qiita.com/bbo51dog/items/414b6270682f1a028bfe">https://qiita.com/bbo51dog/items/414b6270682f1a028bfe</a> (Ubuntu)
-<a href="#building-build-in-api4.md">API4でのサーバー構築</a></p>
-<h2 id="api4-index-_2">変更点の抄訳</h2>
-<p>翻訳元 <a href="https://github.com/pmmp/PocketMine-MP/blob/master/changelogs/4.0.md">https://github.com/pmmp/PocketMine-MP/blob/master/changelogs/4.0.md</a></p>
-<p>全訳は<a href="#api4-changelogs">API4changelogs</a>より</p>
-<h3 id="api4-index-beta1">BETA1</h3>
-<p>2021.9.7リリース
-API4は重要なAPIの変更,新しいワールド形式のサポート,パフォーマンスの向上やネットワークの刷新を含めたコア全体の重要な変更に焦点を当てています。</p>
-<h4 id="api4-index-general">一般 General</h4>
+- <a href="https://qiita.com/bbo51dog/items/414b6270682f1a028bfe">https://qiita.com/bbo51dog/items/414b6270682f1a028bfe</a> (Ubuntu)
+- <a href="#building-build-in-api4">API4でのサーバー構築</a></p>
+<h2 id="api4-index-_2">変更点のまとめ(鯖主向け)</h2>
+<p>このセクションではAPI4での変更点をいくつかまとめて記述します。全訳は<a href="#api4-changelogs">API4 Changelogs全訳</a>より見られます。</p>
+<h3 id="api4-index-_3">一般</h3>
 <ul>
-<li>"プラグイングレーリスト"機能が導入されます。ローディング時からプラグインをホワイトリスト化もしくはブラックリスト化することができます。</li>
-<li>Remote Console (RCON) は削除されました。<a href="https://github.com/pmmp/RconServer">RconServer</a>プラグインが代わりに提供されます。</li>
-<li>スポーンプロテクションは削除されました。<a href="https://github.com/pmmp/BasicSpawnProtection">BasicSpawnProtection</a>プラグインが代わりに提供されます。</li>
-<li>Ctrl+Cシグナルハンドリングは削除されました。[PcnltSignalHandler]プラグインが代わりに提供されます。</li>
-<li>プレイヤー移動アンチチートは削除されました。</li>
-<li>GS4 QueryはRakLibが無効化されても停止されなくなりました。</li>
-<li><code>pocketmine_chunkutils</code> PHP拡張は使われなくなりました。</li>
-<li>新しいPHP拡張がこのバージョンから必要になりました。<ul>
-<li><a href="https://github.com/pmmp/ext-chunkutils2">chunkutils2</a></li>
-<li><a href="https://github.com/pmmp/ext-morton">morton</a></li>
+<li>セキュリティ・荒らし対策に関する変更点<ul>
+<li>プラグインのホワイトリスト化・ブラックリスト化ができるようになります。</li>
+<li>RCONやスポーンプロテクションはプラグインに代わりました。</li>
+<li>プレイヤーのアンチ移動チートがなくなります。</li>
 </ul>
 </li>
-<li>プレイヤーリスポーン時の多くのバグが修正されました。<ul>
-<li>生成されていない地形でリスポーンする際に岩盤下にスポーンするバグ</li>
-<li>非常に遅いマシン上で初回サーバー参加時に岩盤下にスポーンするバグ</li>
-<li>カスタムスポーン地点がセットされている状態でリスポーンしたときにブロック内(または上空)にスポーンするバグ</li>
-<li>プレイヤースポーン地点がワールドスポーンが変わった時に以前の場所になってしまうバグ</li>
+<li>サーバーの動作に関する変更<ul>
+<li>チャンク関連のPHP拡張が変更されました。binの変更が必要です。</li>
+<li>リスポーン時のバグが修正されました。</li>
+<li></li>
 </ul>
 </li>
-<li>高い維持コストのわりに恩恵が少ないためプリプロセッサーはビルドから削除されました。現在、プリプロセッサー利用は非推奨です。</li>
 </ul>
-<h4 id="api4-index-commands">コマンド Commands</h4>
+<h3 id="api4-index-_4">コマンド</h3>
 <ul>
-<li><code>/reload</code> コマンドは削除されました。</li>
-<li><code>/effect</code> コマンドは数字IDをサポートしなくなりました。現在では名前が要求されます。</li>
-<li><code>/enchant</code> コマンドは数学IDをサポートしなくなりました。現在では名前が要求されます。</li>
-<li><code>/clear</code> コマンドが追加されました。バニラのMinecraftのものと機能的に同等のものです。</li>
-<li>以下のコマンドの出力は選択した言語にローカライズされました。<ul>
-<li><code>/gc</code></li>
-<li><code>/status</code></li>
-<li><code>/op</code></li>
-<li><code>/deop</code></li>
+<li><code>/reload</code>コマンドが無くなりました</li>
+<li><code>/effect</code>, <code>/enchant</code>コマンドは数字のIDは受け付けなくなり、英語のIDのみでしか使えません。</li>
+<li><code>/gc</code>,<code>/status</code>,<code>/op</code>,<code>/deop</code>コマンドの表示が日本語化されるようになりました。</li>
 </ul>
-</li>
-</ul>
-<h4 id="api4-index-configuration">設定 Configuration</h4>
+<h3 id="api4-index-pocketmineyml">設定 (<code>pocketmine.yml</code>)</h3>
 <ul>
-<li>ワールドのプリセットは<code>pocketmine.yml</code>の<code>preset</code>キーとして利用できるようになりました: 以前は<code>generator</code>キー</li>
-<li>新たに以下のオプションが<code>pocketmine.yml</code>に追加されます<ul>
-<li><code>chunk-ticking.blocks-per-subchunk-per-tick</code>(デフォルト <code>3</code>):この値を増加させるとランダムブロックアップデートの確率が上がります。(例. 草の成長)</li>
-<li><code>network.enable-encryption</code>(デフォルト<code>true</code>): Minecraftネットワークパケットを暗号化するか否かを決定できます。</li>
+<li><code>pocketmine.yml</code>におけるワールドプリセットのキーが<code>generator</code>から<code>preset</code>に変更されました。</li>
+<li>新たなオプションが使えるようになります<ul>
+<li><code>chunk-ticking.blocks-per-subchunk-per-tick</code> サボテンの成長など、ブロックアップデートの確率</li>
+<li><code>network.enable-encryption</code> pmmp&lt;-&gt;Minecraft間のパケットを暗号化するか否か</li>
 </ul>
 </li>
-<li>以下のオプションが<code>pocketmine.yml</code>から削除されました。<ul>
-<li><code>chunk-ticking.light-updates</code>: 明るさ計算は基本的なバニラの機能を動作させるのに必要なため、チャンクチックを無効化することなくこの機能を停止することは意味がありません。もし、明るさ計算をしたくなければチャンクチックと共に無効化するようにしてください。</li>
-<li><code>player.anti-cheat.allow-movement-cheats</code></li>
+<li><code>chunk-ticking.light-updates</code>が削除されました。光処理なしにチャンクチックを進めることができなくなります。</li>
 </ul>
-</li>
+<h3 id="api4-index-world">world関連</h3>
+<ul>
+<li>最初のワールド生成時にはスポーン生成がログに表示されるようになります。</li>
+<li>バージョン1.12.xまでのMinecraft Bedrockのワールドがサポートされました。本家からワールドを持ってこれます。</li>
+<li>非推奨となった<code>leveldb</code>以外のワールド形式は<code>leveldb</code>に変換されます。</li>
+<li>建築高さ上限は256になりました。</li>
 </ul>
-<h2 id="api4-index-_3">開発者向け情報</h2>
+<h3 id="api4-index-_5">パフォーマンス</h3>
+<ul>
+<li>保存方式が変わったことによりワールド保存が高速化されました。</li>
+<li>爆発や光処理が軽くなりました。</li>
+<li>パケット圧縮が高速化されました。ネットワーク全体の性能が向上します。</li>
+</ul>
+<h3 id="api4-index-_6">ロガーの刷新</h3>
+<ul>
+<li>多くのメッセージでプレフィックスが追加されました。</li>
+<li>タイムスタンプがミリ秒まで含むようになります。</li>
+</ul>
+<h3 id="api4-index-_7">ネットワーク</h3>
+<ul>
+<li>デフォルトでパケットが暗号化されるようになります。</li>
+<li>エラーチェックが実装されました。例外時にサーバーがクラッシュするようになります。</li>
+<li><code>Internal server error</code>は削除されました。</li>
+</ul>
+<h2 id="api4-index-_8">開発者向け情報</h2>
 <h3 id="api4-index-devtools-api4">DevTools API4対応版の配布場所</h3>
 <p>poggit上でダウンロード可 <a href="https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools">https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools</a> の Build History:master により最新版がダウンロード可能</p></section><section class="print-page" id="api4-changelogs"><h1 id="api4-changelogs-api4-changelogs41">API4 Changelogs全訳(41%完了)</h1>
 <h2 id="api4-changelogs-_1">訳に関して</h2>
@@ -2341,7 +2341,7 @@ DEVirionはvirionのクラスを影で支えているわけではないので、
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-<script id="__config" type="application/json">{"base": "/", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
+<script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
     
 
 <script src="https://unpkg.com/iframe-worker/polyfill"></script>
