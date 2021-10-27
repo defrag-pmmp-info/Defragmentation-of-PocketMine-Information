@@ -762,24 +762,24 @@ permissions:
     - `op`: `pocketmine.group.operator`に子として値`true`で追加する
     - `notop`: `pocketmine.group.everyone`に子として値`true`で、`pocketmine.group.operator`に`false`で追加する
     しかし、`plugin.yml`での許可定義での`default`キーはサポートされ続けます。
-- Added `PermissibleDelegateTrait` to reduce boilerplate for users of `PermissibleBase`. This trait is used by `ConsoleCommandSender` and `Player`.
-- The following API methods have been moved:
+- `PermissibleBase`を利用する際のひな形を減らすために`PermissibleDelegateTrait`が追加されました。このトレイトは`ConsoleCommandSender`と`Player`で利用されています。
+- 以下のAPIメソッドは移動されました。
     - `Permission::getByName()` -> `PermissionParser::defaultFromString()`
     - `Permission::loadPermissions()` -> `PermissionParser::loadPermissions()`
     - `Permission::loadPermission()` -> `PermissionParser::loadPermission()`
-- The following constants have been moved:
+- 以下の定数は移動されました。
     - `Permission::DEFAULT_FALSE` -> `PermissionParser::DEFAULT_FALSE`
     - `Permission::DEFAULT_TRUE` -> `PermissionParser::DEFAULT_TRUE`
     - `Permission::DEFAULT_OP` -> `PermissionParser::DEFAULT_OP`
     - `Permission::DEFAULT_NOT_OP` -> `PermissionParser::DEFAULT_NOT_OP`
-- The following API methods have been added:
+- 以下のAPIメソッドが追加されました。
     - `Permission->addChild()`
     - `Permission->removeChild()`
-    - `Permissible->getPermissionRecalculationCallbacks()` - allows reacting to changes of permissions, such as new permissions being granted or denied
-    - `Permissible->setBasePermission()` - used for assigning root permissions like `pocketmine.group.operator`; plugins usually shouldn't use this
+    - `Permissible->getPermissionRecalculationCallbacks()` - 新規許可が与えられたり拒否されたりなど、許可の変更に対しての反応が行えるようになります。
+    - `Permissible->setBasePermission()` - `pocketmine.group.operator`などのルート許可を割り当てる際に使用されます。通常プラグインでは使用するべきではありません。
     - `Permissible->unsetBasePermission()`
     - `PermissionAttachmentInfo->getGroupPermissionInfo()` - returns the `PermissionAttachmentInfo` of the permission that caused the current permission value to be set, or null if the permission is explicit
-- The following API methods have been removed:
+- 以下のAPIメソッドが削除されました。
     - `Permissible->isOp()`: use `Permissible->hasPermission(DefaultPermissions::ROOT_OPERATOR)` instead, **but you really shouldn't directly depend on a player's op status, add your own permissions instead!**
     - `Permissible->setOp()`: use `addAttachment($plugin, DefaultPermissions::ROOT_OPERATOR, true)` instead to add, and `removeAttachment()` to remove it (or addAttachment() with false to explicitly deny it, just like any other permission)
     - `Permission->addParent()`
