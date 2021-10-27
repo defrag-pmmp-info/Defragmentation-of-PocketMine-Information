@@ -2237,36 +2237,46 @@ children:
 </ul>
 <h4 id="permission">Permission</h4>
 <ul>
-<li>以下の新規許可ノードが導入されます。</li>
+<li>以下の新規許可ノードが導入されます。<ul>
 <li><code>pocketmine.group.everyone</code>: デフォルトで全員に与えられます。</li>
 <li><code>pocketmine.group.operator</code>: OPのプレイヤーとコンソールに与えられます。
-  これらの許可ノードはほかのノードと同様に許可付与によって割り当て・上書き可能です。つまり、現在ではプレイヤー切断時(や付与が外れた際)に無くなる<strong>一時的OP</strong>状態を与えることができます。 </li>
+これらの許可ノードはほかのノードと同様に許可付与によって割り当て・上書き可能です。つまり、現在ではプレイヤー切断時(や付与が外れた際)に無くなる<strong>一時的OP</strong>状態を与えることができます。 </li>
+</ul>
+</li>
 <li>許可が明示的にセットされていない時やほかの許可により暗示的に付与されている場合には、現在では常にfalseとなるようになりました。</li>
 <li>定義されていない許可は<code>Permission::$DEFAULT_PERMISSION</code>ではなく、現在では常に<code>false</code>となりました。</li>
-<li>許可は内部的にデフォルト値を持たなくなりました。 その代わりに、デフォルト値は<code>pocketmine.group</code>の子として許可として割り当てられます。</li>
+<li>許可は内部的にデフォルト値を持たなくなりました。 その代わりに、デフォルト値は<code>pocketmine.group</code>の子として許可として割り当てられます。<ul>
 <li><code>true</code>: <code>pocketmine.group.everyone</code>に子として値<code>true</code>で追加する</li>
 <li><code>false</code>: いかなる許可にも与えない</li>
 <li><code>op</code>: <code>pocketmine.group.operator</code>に子として値<code>true</code>で追加する</li>
 <li><code>notop</code>: <code>pocketmine.group.everyone</code>に子として値<code>true</code>で、<code>pocketmine.group.operator</code>に<code>false</code>で追加する
-  しかし、<code>plugin.yml</code>での許可定義での<code>default</code>キーはサポートされ続けます。</li>
+しかし、<code>plugin.yml</code>での許可定義での<code>default</code>キーはサポートされ続けます。</li>
+</ul>
+</li>
 <li>Added <code>PermissibleDelegateTrait</code> to reduce boilerplate for users of <code>PermissibleBase</code>. This trait is used by <code>ConsoleCommandSender</code> and <code>Player</code>.</li>
-<li>The following API methods have been moved:</li>
+<li>The following API methods have been moved:<ul>
 <li><code>Permission::getByName()</code> -&gt; <code>PermissionParser::defaultFromString()</code></li>
 <li><code>Permission::loadPermissions()</code> -&gt; <code>PermissionParser::loadPermissions()</code></li>
 <li><code>Permission::loadPermission()</code> -&gt; <code>PermissionParser::loadPermission()</code></li>
-<li>The following constants have been moved:</li>
+</ul>
+</li>
+<li>The following constants have been moved:<ul>
 <li><code>Permission::DEFAULT_FALSE</code> -&gt; <code>PermissionParser::DEFAULT_FALSE</code></li>
 <li><code>Permission::DEFAULT_TRUE</code> -&gt; <code>PermissionParser::DEFAULT_TRUE</code></li>
 <li><code>Permission::DEFAULT_OP</code> -&gt; <code>PermissionParser::DEFAULT_OP</code></li>
 <li><code>Permission::DEFAULT_NOT_OP</code> -&gt; <code>PermissionParser::DEFAULT_NOT_OP</code></li>
-<li>The following API methods have been added:</li>
+</ul>
+</li>
+<li>The following API methods have been added:<ul>
 <li><code>Permission-&gt;addChild()</code></li>
 <li><code>Permission-&gt;removeChild()</code></li>
 <li><code>Permissible-&gt;getPermissionRecalculationCallbacks()</code> - allows reacting to changes of permissions, such as new permissions being granted or denied</li>
 <li><code>Permissible-&gt;setBasePermission()</code> - used for assigning root permissions like <code>pocketmine.group.operator</code>; plugins usually shouldn't use this</li>
 <li><code>Permissible-&gt;unsetBasePermission()</code></li>
 <li><code>PermissionAttachmentInfo-&gt;getGroupPermissionInfo()</code> - returns the <code>PermissionAttachmentInfo</code> of the permission that caused the current permission value to be set, or null if the permission is explicit</li>
-<li>The following API methods have been removed:</li>
+</ul>
+</li>
+<li>The following API methods have been removed:<ul>
 <li><code>Permissible-&gt;isOp()</code>: use <code>Permissible-&gt;hasPermission(DefaultPermissions::ROOT_OPERATOR)</code> instead, <strong>but you really shouldn't directly depend on a player's op status, add your own permissions instead!</strong></li>
 <li><code>Permissible-&gt;setOp()</code>: use <code>addAttachment($plugin, DefaultPermissions::ROOT_OPERATOR, true)</code> instead to add, and <code>removeAttachment()</code> to remove it (or addAttachment() with false to explicitly deny it, just like any other permission)</li>
 <li><code>Permission-&gt;addParent()</code></li>
@@ -2279,13 +2289,21 @@ children:
 <li><code>PermissionManager-&gt;getDefaultPermSubscriptions()</code></li>
 <li><code>PermissionAttachment-&gt;getPermissible()</code></li>
 <li><code>PermissionAttachmentInfo-&gt;getPermissible()</code></li>
-<li>以下のフィールドは削除されました。</li>
+</ul>
+</li>
+<li>以下のフィールドは削除されました。<ul>
 <li><code>Permission::$DEFAULT_PERMISSION</code></li>
-<li>The following API methods have changes:</li>
+</ul>
+</li>
+<li>The following API methods have changes:<ul>
 <li><code>PermissionParser::defaultFromString()</code> now throws <code>InvalidArgumentException</code> on unknown values.</li>
 <li><code>Permission-&gt;__construct()</code> no longer accepts a <code>$defaultValue</code> parameter (see notes above about defaults refactor).you should add your permission as a child of <code>pocketmine.group.everyone</code> or <code>pocketmine.group.operator</code> instead).</li>
-<li>The following classes have been removed:</li>
+</ul>
+</li>
+<li>The following classes have been removed:<ul>
 <li><code>ServerOperator</code></li>
+</ul>
+</li>
 </ul>
                 
                   
@@ -2295,7 +2313,7 @@ children:
 <div class="md-source-date">
   <small>
     
-      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 27, 2021 08:07:12</span>
+      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 27, 2021 08:10:48</span>
       
         <br>作成した: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 18, 2021 08:27:31</span> 
       

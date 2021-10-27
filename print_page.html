@@ -65,7 +65,7 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
-    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL("/",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
       <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
@@ -1965,36 +1965,46 @@ children:
 </ul>
 <h4 id="api4-changelogs-permission">Permission</h4>
 <ul>
-<li>以下の新規許可ノードが導入されます。</li>
+<li>以下の新規許可ノードが導入されます。<ul>
 <li><code>pocketmine.group.everyone</code>: デフォルトで全員に与えられます。</li>
 <li><code>pocketmine.group.operator</code>: OPのプレイヤーとコンソールに与えられます。
-  これらの許可ノードはほかのノードと同様に許可付与によって割り当て・上書き可能です。つまり、現在ではプレイヤー切断時(や付与が外れた際)に無くなる<strong>一時的OP</strong>状態を与えることができます。 </li>
+これらの許可ノードはほかのノードと同様に許可付与によって割り当て・上書き可能です。つまり、現在ではプレイヤー切断時(や付与が外れた際)に無くなる<strong>一時的OP</strong>状態を与えることができます。 </li>
+</ul>
+</li>
 <li>許可が明示的にセットされていない時やほかの許可により暗示的に付与されている場合には、現在では常にfalseとなるようになりました。</li>
 <li>定義されていない許可は<code>Permission::$DEFAULT_PERMISSION</code>ではなく、現在では常に<code>false</code>となりました。</li>
-<li>許可は内部的にデフォルト値を持たなくなりました。 その代わりに、デフォルト値は<code>pocketmine.group</code>の子として許可として割り当てられます。</li>
+<li>許可は内部的にデフォルト値を持たなくなりました。 その代わりに、デフォルト値は<code>pocketmine.group</code>の子として許可として割り当てられます。<ul>
 <li><code>true</code>: <code>pocketmine.group.everyone</code>に子として値<code>true</code>で追加する</li>
 <li><code>false</code>: いかなる許可にも与えない</li>
 <li><code>op</code>: <code>pocketmine.group.operator</code>に子として値<code>true</code>で追加する</li>
 <li><code>notop</code>: <code>pocketmine.group.everyone</code>に子として値<code>true</code>で、<code>pocketmine.group.operator</code>に<code>false</code>で追加する
-  しかし、<code>plugin.yml</code>での許可定義での<code>default</code>キーはサポートされ続けます。</li>
+しかし、<code>plugin.yml</code>での許可定義での<code>default</code>キーはサポートされ続けます。</li>
+</ul>
+</li>
 <li>Added <code>PermissibleDelegateTrait</code> to reduce boilerplate for users of <code>PermissibleBase</code>. This trait is used by <code>ConsoleCommandSender</code> and <code>Player</code>.</li>
-<li>The following API methods have been moved:</li>
+<li>The following API methods have been moved:<ul>
 <li><code>Permission::getByName()</code> -&gt; <code>PermissionParser::defaultFromString()</code></li>
 <li><code>Permission::loadPermissions()</code> -&gt; <code>PermissionParser::loadPermissions()</code></li>
 <li><code>Permission::loadPermission()</code> -&gt; <code>PermissionParser::loadPermission()</code></li>
-<li>The following constants have been moved:</li>
+</ul>
+</li>
+<li>The following constants have been moved:<ul>
 <li><code>Permission::DEFAULT_FALSE</code> -&gt; <code>PermissionParser::DEFAULT_FALSE</code></li>
 <li><code>Permission::DEFAULT_TRUE</code> -&gt; <code>PermissionParser::DEFAULT_TRUE</code></li>
 <li><code>Permission::DEFAULT_OP</code> -&gt; <code>PermissionParser::DEFAULT_OP</code></li>
 <li><code>Permission::DEFAULT_NOT_OP</code> -&gt; <code>PermissionParser::DEFAULT_NOT_OP</code></li>
-<li>The following API methods have been added:</li>
+</ul>
+</li>
+<li>The following API methods have been added:<ul>
 <li><code>Permission-&gt;addChild()</code></li>
 <li><code>Permission-&gt;removeChild()</code></li>
 <li><code>Permissible-&gt;getPermissionRecalculationCallbacks()</code> - allows reacting to changes of permissions, such as new permissions being granted or denied</li>
 <li><code>Permissible-&gt;setBasePermission()</code> - used for assigning root permissions like <code>pocketmine.group.operator</code>; plugins usually shouldn't use this</li>
 <li><code>Permissible-&gt;unsetBasePermission()</code></li>
 <li><code>PermissionAttachmentInfo-&gt;getGroupPermissionInfo()</code> - returns the <code>PermissionAttachmentInfo</code> of the permission that caused the current permission value to be set, or null if the permission is explicit</li>
-<li>The following API methods have been removed:</li>
+</ul>
+</li>
+<li>The following API methods have been removed:<ul>
 <li><code>Permissible-&gt;isOp()</code>: use <code>Permissible-&gt;hasPermission(DefaultPermissions::ROOT_OPERATOR)</code> instead, <strong>but you really shouldn't directly depend on a player's op status, add your own permissions instead!</strong></li>
 <li><code>Permissible-&gt;setOp()</code>: use <code>addAttachment($plugin, DefaultPermissions::ROOT_OPERATOR, true)</code> instead to add, and <code>removeAttachment()</code> to remove it (or addAttachment() with false to explicitly deny it, just like any other permission)</li>
 <li><code>Permission-&gt;addParent()</code></li>
@@ -2007,13 +2017,21 @@ children:
 <li><code>PermissionManager-&gt;getDefaultPermSubscriptions()</code></li>
 <li><code>PermissionAttachment-&gt;getPermissible()</code></li>
 <li><code>PermissionAttachmentInfo-&gt;getPermissible()</code></li>
-<li>以下のフィールドは削除されました。</li>
+</ul>
+</li>
+<li>以下のフィールドは削除されました。<ul>
 <li><code>Permission::$DEFAULT_PERMISSION</code></li>
-<li>The following API methods have changes:</li>
+</ul>
+</li>
+<li>The following API methods have changes:<ul>
 <li><code>PermissionParser::defaultFromString()</code> now throws <code>InvalidArgumentException</code> on unknown values.</li>
 <li><code>Permission-&gt;__construct()</code> no longer accepts a <code>$defaultValue</code> parameter (see notes above about defaults refactor).you should add your permission as a child of <code>pocketmine.group.everyone</code> or <code>pocketmine.group.operator</code> instead).</li>
-<li>The following classes have been removed:</li>
+</ul>
+</li>
+<li>The following classes have been removed:<ul>
 <li><code>ServerOperator</code></li>
+</ul>
+</li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1>
                         <h1 class='nav-section-title' id='section-単項記事'>
                             単項記事 <a class='headerlink' href='#section-単項記事' title='Permanent link'>↵</a>
@@ -2323,7 +2341,7 @@ DEVirionはvirionのクラスを影で支えているわけではないので、
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-<script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
+<script id="__config" type="application/json">{"base": "/", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
     
 
 <script src="https://unpkg.com/iframe-worker/polyfill"></script>
