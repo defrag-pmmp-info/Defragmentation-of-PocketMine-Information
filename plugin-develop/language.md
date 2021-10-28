@@ -36,3 +36,34 @@ $language->translateString("test.msg2", ["Steve", "Alex", "スコップ"]) /* ->
 ```
 のようになります。
 これを利用して多言語対応を行うことができます。
+
+なお、`Language`インスタンスの生成はファイルIOを伴うため、実用時には以下のような構成にすると良いでしょう。
+
+```php:Loader.php
+<?php
+
+namespace exampleplugin;
+
+use pocketmine\lang\Language;
+use pocketmine\plugin\PluginBase;
+use Webmozart\PathUtil\Path;
+
+class Loader extends PluginBase{
+
+    /** @var array<string, Language>*/
+    private array $language = [];
+
+    public function onLoad(): void
+    {
+        $path = Path::join($this->getFile(), "resources", "lang");
+        foreach(Language::getLanguageList($path) as $lang => $name){
+            $this->getLogger()->info("Language: $name is loaded");
+            $this->language[$lang] = new Language($lang, $path);
+        }
+    }
+
+    public function getLanguage(string $lang=Language::FALLBACK_LANGUAGE): Language{
+        return $this->language[$lang];
+    }
+}
+```
