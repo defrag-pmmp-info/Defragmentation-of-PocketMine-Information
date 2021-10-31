@@ -39,7 +39,7 @@ $language->translateString("test.msg2", ["Steve", "Alex", "スコップ"]) /* ->
 
 なお、`Language`インスタンスの生成はファイルIOを伴うため、実用時には以下のような構成にすると良いでしょう。
 
-```php:Loader.php
+```php
 <?php
 
 namespace exampleplugin;

@@ -677,31 +677,33 @@
 のようになります。
 これを利用して多言語対応を行うことができます。</p>
 <p>なお、<code>Language</code>インスタンスの生成はファイルIOを伴うため、実用時には以下のような構成にすると良いでしょう。</p>
-<p>```php:Loader.php
-&lt;?php</p>
-<p>namespace exampleplugin;</p>
-<p>use pocketmine\lang\Language;
-use pocketmine\plugin\PluginBase;
-use Webmozart\PathUtil\Path;</p>
-<p>class Loader extends PluginBase{</p>
-<div class="highlight"><pre><span></span><code>/** @var array&lt;string, Language&gt;*/
-private array $language = [];
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
 
-public function onLoad(): void
-{
-    $path = Path::join($this-&gt;getFile(), &quot;resources&quot;, &quot;lang&quot;);
-    foreach(Language::getLanguageList($path) as $lang =&gt; $name){
-        $this-&gt;getLogger()-&gt;info(&quot;Language: $name is loaded&quot;);
-        $this-&gt;language[$lang] = new Language($lang, $path);
-    }
-}
+<span class="k">namespace</span> <span class="nx">exampleplugin</span><span class="p">;</span>
 
-public function getLanguage(string $lang=Language::FALLBACK_LANGUAGE): Language{
-    return $this-&gt;language[$lang];
-}
+<span class="k">use</span> <span class="nx">pocketmine\lang\Language</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">pocketmine\plugin\PluginBase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Webmozart\PathUtil\Path</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Loader</span> <span class="k">extends</span> <span class="nx">PluginBase</span><span class="p">{</span>
+
+    <span class="sd">/** @var array&lt;string, Language&gt;*/</span>
+    <span class="k">private</span> <span class="k">array</span> <span class="nv">$language</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">onLoad</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="nv">$path</span> <span class="o">=</span> <span class="nx">Path</span><span class="o">::</span><span class="na">join</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getFile</span><span class="p">(),</span> <span class="s2">&quot;resources&quot;</span><span class="p">,</span> <span class="s2">&quot;lang&quot;</span><span class="p">);</span>
+        <span class="k">foreach</span><span class="p">(</span><span class="nx">Language</span><span class="o">::</span><span class="na">getLanguageList</span><span class="p">(</span><span class="nv">$path</span><span class="p">)</span> <span class="k">as</span> <span class="nv">$lang</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">){</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getLogger</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s2">&quot;Language: </span><span class="si">$name</span><span class="s2"> is loaded&quot;</span><span class="p">);</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">language</span><span class="p">[</span><span class="nv">$lang</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Language</span><span class="p">(</span><span class="nv">$lang</span><span class="p">,</span> <span class="nv">$path</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getLanguage</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$lang</span><span class="o">=</span><span class="nx">Language</span><span class="o">::</span><span class="na">FALLBACK_LANGUAGE</span><span class="p">)</span><span class="o">:</span> <span class="nx">Language</span><span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">language</span><span class="p">[</span><span class="nv">$lang</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>}
-```</p>
                 
                   
                     
@@ -710,7 +712,7 @@ public function getLanguage(string $lang=Language::FALLBACK_LANGUAGE): Language{
 <div class="md-source-date">
   <small>
     
-      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 28, 2021 02:03:53</span>
+      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 31, 2021 23:02:43</span>
       
         <br>作成した: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 27, 2021 23:08:55</span> 
       
