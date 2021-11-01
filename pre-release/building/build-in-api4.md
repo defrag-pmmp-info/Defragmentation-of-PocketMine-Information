@@ -9,10 +9,10 @@
 
 ### PocketMine-MP.pharのダウンロード
 API4のものは現段階ではPre-releaseでありGitHubのreleasesからダウンロードできます。
-https://github.com/pmmp/PocketMine-MP/releases
+<https://github.com/pmmp/PocketMine-MP/releases>
 
 ### PHPバイナリのダウンロード
-API4ではPHP拡張の一部が変更されたため、それが導入されているPHPバイナリが必要になります。以下の手順でダウンロードしてください。
+API4ではPHP拡張の一部が変更されたため、それが導入されているPHPバイナリが必要になります。以下の手順でダウンロードしてください。<https://dev.azure.com/pocketmine/PHP-Builds/_build?definitionId=3&_a=summary>
 
 ![masterブランチのLast run](/image/e987af6f-2a36-474c-a926-69272498c823.png)
 マスターブランチのLast run以下をクリック
