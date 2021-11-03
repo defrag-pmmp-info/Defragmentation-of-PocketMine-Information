@@ -778,10 +778,10 @@ permissions:
     - `Permissible->getPermissionRecalculationCallbacks()` - 新規許可が与えられたり拒否されたりなど、許可の変更に対しての反応が行えるようになります。
     - `Permissible->setBasePermission()` - `pocketmine.group.operator`などのルート許可を割り当てる際に使用されます。通常プラグインでは使用するべきではありません。
     - `Permissible->unsetBasePermission()`
-    - `PermissionAttachmentInfo->getGroupPermissionInfo()` - returns the `PermissionAttachmentInfo` of the permission that caused the current permission value to be set, or null if the permission is explicit
+    - `PermissionAttachmentInfo->getGroupPermissionInfo()` - 許可の`PermissionAttachmentInfo`を返します。これは現在の許可の値を定めたり、許可が明らかなときには空にするものです。
 - 以下のAPIメソッドが削除されました。
-    - `Permissible->isOp()`: use `Permissible->hasPermission(DefaultPermissions::ROOT_OPERATOR)` instead, **but you really shouldn't directly depend on a player's op status, add your own permissions instead!**
-    - `Permissible->setOp()`: use `addAttachment($plugin, DefaultPermissions::ROOT_OPERATOR, true)` instead to add, and `removeAttachment()` to remove it (or addAttachment() with false to explicitly deny it, just like any other permission)
+    - `Permissible->isOp()`: `Permissible->hasPermission(DefaultPermissions::ROOT_OPERATOR)`を代わりに使用してください。 **ただし、プレイヤーがOPかどうかには直接的に依存するべきではありません。そのプラグイン固有の許可を与えてください。**
+    - `Permissible->setOp()`: `addAttachment($plugin, DefaultPermissions::ROOT_OPERATOR, true)`を追加時に、`removeAttachment()`を削除時に使用してください。(もしくは`addAttachment()`をfalseで使うとほかの許可と同様に明示的に拒否することもできます)
     - `Permission->addParent()`
     - `Permission->getDefault()`
     - `Permission->setDefault()`
@@ -794,8 +794,8 @@ permissions:
     - `PermissionAttachmentInfo->getPermissible()`
 - 以下のフィールドは削除されました。
     - `Permission::$DEFAULT_PERMISSION`
-- The following API methods have changes:
-    - `PermissionParser::defaultFromString()` now throws `InvalidArgumentException` on unknown values.
-    - `Permission->__construct()` no longer accepts a `$defaultValue` parameter (see notes above about defaults refactor).you should add your permission as a child of `pocketmine.group.everyone` or `pocketmine.group.operator` instead).
-- The following classes have been removed:
+- 以下のAPIは変更されました。
+    - `PermissionParser::defaultFromString()`は現在では未知の値を渡されたときに`InvalidArgumentException`を投げるようになりました。
+    - `Permission->__construct()`は現在では`$defaultValue`パラメータを受け取らなくなりました(上記のデフォルト値に関するリファクタに関するノートを参照してください)。代わりに`pocketmine.group.everyone`か`pocketmine.group.operator`の子要素として許可を与える必要があります。
+- 以下のクラスは削除されました。
     - `ServerOperator`
