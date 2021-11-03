@@ -65,7 +65,7 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
-    <script>function __prefix(e){return new URL("/",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
       <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
@@ -2088,12 +2088,12 @@ children:
 <li><code>Permissible-&gt;getPermissionRecalculationCallbacks()</code> - 新規許可が与えられたり拒否されたりなど、許可の変更に対しての反応が行えるようになります。</li>
 <li><code>Permissible-&gt;setBasePermission()</code> - <code>pocketmine.group.operator</code>などのルート許可を割り当てる際に使用されます。通常プラグインでは使用するべきではありません。</li>
 <li><code>Permissible-&gt;unsetBasePermission()</code></li>
-<li><code>PermissionAttachmentInfo-&gt;getGroupPermissionInfo()</code> - returns the <code>PermissionAttachmentInfo</code> of the permission that caused the current permission value to be set, or null if the permission is explicit</li>
+<li><code>PermissionAttachmentInfo-&gt;getGroupPermissionInfo()</code> - 許可の<code>PermissionAttachmentInfo</code>を返します。これは現在の許可の値を定めたり、許可が明らかなときには空にするものです。</li>
 </ul>
 </li>
 <li>以下のAPIメソッドが削除されました。<ul>
-<li><code>Permissible-&gt;isOp()</code>: use <code>Permissible-&gt;hasPermission(DefaultPermissions::ROOT_OPERATOR)</code> instead, <strong>but you really shouldn't directly depend on a player's op status, add your own permissions instead!</strong></li>
-<li><code>Permissible-&gt;setOp()</code>: use <code>addAttachment($plugin, DefaultPermissions::ROOT_OPERATOR, true)</code> instead to add, and <code>removeAttachment()</code> to remove it (or addAttachment() with false to explicitly deny it, just like any other permission)</li>
+<li><code>Permissible-&gt;isOp()</code>: <code>Permissible-&gt;hasPermission(DefaultPermissions::ROOT_OPERATOR)</code>を代わりに使用してください。 <strong>ただし、プレイヤーがOPかどうかには直接的に依存するべきではありません。そのプラグイン固有の許可を与えてください。</strong></li>
+<li><code>Permissible-&gt;setOp()</code>: <code>addAttachment($plugin, DefaultPermissions::ROOT_OPERATOR, true)</code>を追加時に、<code>removeAttachment()</code>を削除時に使用してください。(もしくは<code>addAttachment()</code>をfalseで使うとほかの許可と同様に明示的に拒否することもできます)</li>
 <li><code>Permission-&gt;addParent()</code></li>
 <li><code>Permission-&gt;getDefault()</code></li>
 <li><code>Permission-&gt;setDefault()</code></li>
@@ -2110,12 +2110,12 @@ children:
 <li><code>Permission::$DEFAULT_PERMISSION</code></li>
 </ul>
 </li>
-<li>The following API methods have changes:<ul>
-<li><code>PermissionParser::defaultFromString()</code> now throws <code>InvalidArgumentException</code> on unknown values.</li>
-<li><code>Permission-&gt;__construct()</code> no longer accepts a <code>$defaultValue</code> parameter (see notes above about defaults refactor).you should add your permission as a child of <code>pocketmine.group.everyone</code> or <code>pocketmine.group.operator</code> instead).</li>
+<li>以下のAPIは変更されました。<ul>
+<li><code>PermissionParser::defaultFromString()</code>は現在では未知の値を渡されたときに<code>InvalidArgumentException</code>を投げるようになりました。</li>
+<li><code>Permission-&gt;__construct()</code>は現在では<code>$defaultValue</code>パラメータを受け取らなくなりました(上記のデフォルト値に関するリファクタに関するノートを参照してください)。代わりに<code>pocketmine.group.everyone</code>か<code>pocketmine.group.operator</code>の子要素として許可を与える必要があります。</li>
 </ul>
 </li>
-<li>The following classes have been removed:<ul>
+<li>以下のクラスは削除されました。<ul>
 <li><code>ServerOperator</code></li>
 </ul>
 </li>
@@ -2428,7 +2428,7 @@ DEVirionはvirionのクラスを影で支えているわけではないので、
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-<script id="__config" type="application/json">{"base": "/", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
+<script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
     
 
 <script src="https://unpkg.com/iframe-worker/polyfill"></script>

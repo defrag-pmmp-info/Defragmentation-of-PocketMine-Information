@@ -2287,12 +2287,12 @@ children:
 <li><code>Permissible-&gt;getPermissionRecalculationCallbacks()</code> - 新規許可が与えられたり拒否されたりなど、許可の変更に対しての反応が行えるようになります。</li>
 <li><code>Permissible-&gt;setBasePermission()</code> - <code>pocketmine.group.operator</code>などのルート許可を割り当てる際に使用されます。通常プラグインでは使用するべきではありません。</li>
 <li><code>Permissible-&gt;unsetBasePermission()</code></li>
-<li><code>PermissionAttachmentInfo-&gt;getGroupPermissionInfo()</code> - returns the <code>PermissionAttachmentInfo</code> of the permission that caused the current permission value to be set, or null if the permission is explicit</li>
+<li><code>PermissionAttachmentInfo-&gt;getGroupPermissionInfo()</code> - 許可の<code>PermissionAttachmentInfo</code>を返します。これは現在の許可の値を定めたり、許可が明らかなときには空にするものです。</li>
 </ul>
 </li>
 <li>以下のAPIメソッドが削除されました。<ul>
-<li><code>Permissible-&gt;isOp()</code>: use <code>Permissible-&gt;hasPermission(DefaultPermissions::ROOT_OPERATOR)</code> instead, <strong>but you really shouldn't directly depend on a player's op status, add your own permissions instead!</strong></li>
-<li><code>Permissible-&gt;setOp()</code>: use <code>addAttachment($plugin, DefaultPermissions::ROOT_OPERATOR, true)</code> instead to add, and <code>removeAttachment()</code> to remove it (or addAttachment() with false to explicitly deny it, just like any other permission)</li>
+<li><code>Permissible-&gt;isOp()</code>: <code>Permissible-&gt;hasPermission(DefaultPermissions::ROOT_OPERATOR)</code>を代わりに使用してください。 <strong>ただし、プレイヤーがOPかどうかには直接的に依存するべきではありません。そのプラグイン固有の許可を与えてください。</strong></li>
+<li><code>Permissible-&gt;setOp()</code>: <code>addAttachment($plugin, DefaultPermissions::ROOT_OPERATOR, true)</code>を追加時に、<code>removeAttachment()</code>を削除時に使用してください。(もしくは<code>addAttachment()</code>をfalseで使うとほかの許可と同様に明示的に拒否することもできます)</li>
 <li><code>Permission-&gt;addParent()</code></li>
 <li><code>Permission-&gt;getDefault()</code></li>
 <li><code>Permission-&gt;setDefault()</code></li>
@@ -2309,12 +2309,12 @@ children:
 <li><code>Permission::$DEFAULT_PERMISSION</code></li>
 </ul>
 </li>
-<li>The following API methods have changes:<ul>
-<li><code>PermissionParser::defaultFromString()</code> now throws <code>InvalidArgumentException</code> on unknown values.</li>
-<li><code>Permission-&gt;__construct()</code> no longer accepts a <code>$defaultValue</code> parameter (see notes above about defaults refactor).you should add your permission as a child of <code>pocketmine.group.everyone</code> or <code>pocketmine.group.operator</code> instead).</li>
+<li>以下のAPIは変更されました。<ul>
+<li><code>PermissionParser::defaultFromString()</code>は現在では未知の値を渡されたときに<code>InvalidArgumentException</code>を投げるようになりました。</li>
+<li><code>Permission-&gt;__construct()</code>は現在では<code>$defaultValue</code>パラメータを受け取らなくなりました(上記のデフォルト値に関するリファクタに関するノートを参照してください)。代わりに<code>pocketmine.group.everyone</code>か<code>pocketmine.group.operator</code>の子要素として許可を与える必要があります。</li>
 </ul>
 </li>
-<li>The following classes have been removed:<ul>
+<li>以下のクラスは削除されました。<ul>
 <li><code>ServerOperator</code></li>
 </ul>
 </li>
@@ -2327,7 +2327,7 @@ children:
 <div class="md-source-date">
   <small>
     
-      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 27, 2021 09:50:09</span>
+      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">November 3, 2021 09:56:55</span>
       
         <br>作成した: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 18, 2021 08:27:31</span> 
       
