@@ -68,6 +68,7 @@ public function generateCustomCommandData(Player $player) {
 ```
 For more information, refer to https://gist.github.com/NiclasOlofsson/db712fd9e3c9cb0777cd9381cb48915a <sup>[_ref_](https://forums.pmmp.io/threads/available-subcommand-parameters-above-command.1841/)</sup>
 
+<!-- 編集者向け: https://github.com/pmmp/PocketMine-MP/blob/547503e8f44d1475def28bda2c0ed068eb24e670/changelogs/3.0-alpha.md#api-11 参照のとおり、この項目は不要となったため削除しました
 # Event API
 ## \*\*\*Event does not have a handler list
 You registered an event handler for an event that does not have a handler list. To fix this issue, find the parent class of the event that has a handler list, and handle that event class instead. Use `instanceof` in your event handler to filter events.
@@ -81,6 +82,7 @@ public function handleDamage(EntityDamageEvent $event){
     }
 }
 ```
+-->
 
 # Scheduler API and threading
 ## How to cancel a task?
