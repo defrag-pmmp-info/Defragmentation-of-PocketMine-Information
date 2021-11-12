@@ -84,36 +84,39 @@ public function handleDamage(EntityDamageEvent $event){
 ```
 -->
 
-# Scheduler API and threading
-## How to cancel a task?
-Use the [`ServerScheduler::cancelTask()`](https://github.com/pmmp/PocketMine-MP/blob/80292c6c7a542706a85c4f756e3d93bee1a07ca2/src/pocketmine/scheduler/ServerScheduler.php#L223) method. Do **not** use `Task::cancel()` &mdash; it only triggers internal callbacks of the task, but does not remove it from the scheduler.
+# Scheduler APIとスレッディング
+## タスクをキャンセルするには？(独自・更新)
+Use the [`TaskHandler::cancel()`](https://github.com/pmmp/PocketMine-MP/blob/73592349cd29d91b03c2703107db859115a92e2d/src/scheduler/TaskHandler.php#L99)メソッドを利用してください。
 
-Regarding the task ID, which is required when using `ServerScheduler::cancelTask()`. This can be obtained by `Task::getTaskId()`. If you cancel the task from itself, you can use `$serverScheduler->cancelTask($this->getTaskId())`. Otherwise, you have to retain a reference to the Task instance, or retrieve the task ID when scheduling the task. <sup>[_ref_](https://forums.pmmp.io/threads/creating-a-timer-with-tasks.136/)</sup>
+`TaskHandler`はクラス外では`TaskScheduler::scheduleDelayedTask()`や`TaskScheduler::scheduleRepeatingTask()`の返り値として得られます。外部で利用したければ、プロパティに入れておくと良いでしょう。
 
-For example:
+またTask内部では`Task::getHandler()`が利用できます。
+
+例:
+<!-- 編集者向け PluginTaskは削除されたことからも新しい方法でこの項目は書き直しています -->
 ```php
-class MyTask extends PluginTask{
+class MyTask extends Task{
     public function onRun(int $ticks){
         if(needToCancelTask()){
-            $this->getOwner()->getServer()->getScheduler()->cancelTask($this->getTaskId());
+            $this->getHandler()->cancel();
         }
     }
 }
 ```
 
-Or, store the task ID when scheduling the task:
+タスクのスケジュール時にタスクハンドラーを保存しておく:
 ```php
-$this->id = $server->getScheduler()->scheduleRepeatingTask($myTask)->getTaskId();
-// some time later...
-$server->getScheduler()->cancelTask($this->id);
+$this->taskHandler = $server->getScheduler()->scheduleRepeatingTask($myTask);
+// そのあとで……
+$this->taskHandler->cancel
 ```
 
-## How to cancel an event a few seconds later?
-You don't do it with an event. You do it by comparing the system time.
+## 数秒以内に行われたイベントをキャンセルするには？
+そのような場合にはスケジューラーを使う必要はありません。システム時間の比較によって行うべきです。
 
-This post is not yet cleaned up:
+この投稿はまだ整理されていません:
 
-> ~~Timer~~ Scheduler & Tasks are for doing an action after a period of time, not having a state within a period of time. (The player will be unfrozen 10 seconds later vs The player cannot move for 10 seconds)
+> ~~Timer~~ スケジューラーとタスクは、一定の時間内の状態を持つわけではなく、一定時間後に動作をするものです。(プレイヤーが10秒間移動できない vs プレイヤーが10秒後に動けるようになる)
 
 > What is the difference? For the former, "be unfrozen" is the action, while for the latter, "be immobile" is the state.
 
