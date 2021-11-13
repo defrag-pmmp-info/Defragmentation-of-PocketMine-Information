@@ -65,7 +65,7 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
-    <script>function __prefix(e){return new URL("/",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
       <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
@@ -345,8 +345,36 @@
   
   
     <li class="md-nav__item">
+      <a href="plugin-develop/index.html" class="md-nav__link">
+        プラグイン開発の基本
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="plugin-develop/api-versioning.html" class="md-nav__link">
         APIバージョニング: API versioning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="plugin-develop/development-faq.html" class="md-nav__link">
+        PocketMineプラグイン開発FAQ
       </a>
     </li>
   
@@ -622,8 +650,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#plugin-develop-index" class="md-nav__link">
+    プラグイン開発の基本
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#plugin-develop-api-versioning" class="md-nav__link">
     APIバージョニング: API versioning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin-develop-development-faq" class="md-nav__link">
+    PocketMineプラグイン開発FAQ
   </a>
   
 </li>
@@ -755,8 +797,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#plugin-develop-index" class="md-nav__link">
+    プラグイン開発の基本
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#plugin-develop-api-versioning" class="md-nav__link">
     APIバージョニング: API versioning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin-develop-development-faq" class="md-nav__link">
+    PocketMineプラグイン開発FAQ
   </a>
   
 </li>
@@ -930,7 +986,8 @@ publishedをクリック</p>
                         <h1 class='nav-section-title' id='section-プラグイン開発'>
                             プラグイン開発 <a class='headerlink' href='#section-プラグイン開発' title='Permanent link'>↵</a>
                         </h1>
-                        <section class="print-page" id="plugin-develop-api-versioning"><h1 id="plugin-develop-api-versioning-api-api-versioning">APIバージョニング: API versioning</h1>
+                        <section class="print-page" id="plugin-develop-index"><h1 id="plugin-develop-index-_1">プラグイン開発の基本</h1>
+<p>PocketMine-MPはPHP言語により記述されており、プラグインもPHPを使用して作成されます。</p></section><section class="print-page" id="plugin-develop-api-versioning"><h1 id="plugin-develop-api-versioning-api-api-versioning">APIバージョニング: API versioning</h1>
 <p>PocketMine-MPのプラグインはどのAPIバージョンと互換性があるかを宣言する必要があります。これはプラグインをロードするかしないかを決定し、サーバーバージョンと適合しなかったときにデグレードするために用いられます。</p>
 <h2 id="plugin-develop-api-versioning-api">APIバージョンシステムの説明</h2>
 <p>PocketMine-MP 3.0.0現在ではAPIバージョンとサーバーバージョンは一致しています。このバージョンは<a href="https://semver.org/lang/ja/">semantic major.minor.patch version number</a>で表します。</p>
@@ -1001,7 +1058,281 @@ publishedをクリック</p>
 <li>プラグインが<strong>実際に指定したバージョンで動くこと</strong>を確かめてください。a) クラッシュするバージョンや b)期待されるように動作しないバージョンはバージョンリストから除外される必要があります。</li>
 </ul>
 <h2 id="plugin-develop-api-versioning-_4">翻訳元</h2>
-<p>https://github.com/pmmp/DeveloperDocs/blob/b72417c924d0c917eeed6a172415edf7b5b3d52e/api-version-spec.md</p></section><section class="print-page" id="plugin-develop-language"><h1 id="plugin-develop-language-_1">多言語対応</h1>
+<p>https://github.com/pmmp/DeveloperDocs/blob/b72417c924d0c917eeed6a172415edf7b5b3d52e/api-version-spec.md</p></section><section class="print-page" id="plugin-develop-development-faq"><h1 id="plugin-develop-development-faq-pocketminefaq">PocketMineプラグイン開発FAQ</h1>
+<p>このページはプラグイン開発フォーラムでよく聞かれる質問について伝えることを目的にしています。コンテンツの大半はフォーラム上の質の良い投稿からまとめられたもので、参考があればリンクしてあります。</p>
+<p>この元ページにはbitlink <a href="https://bit.ly/PmDev">https://bit.ly/PmDev</a> でアクセスしてください</p>
+<h2 id="plugin-develop-development-faq-dpmi">翻訳について(dpmiより)</h2>
+<p>このページのコンテンツは<a href="https://bit.ly/PmDev">PocketMine Plugin Development FAQ</a>から翻訳された内容です。元のコンテンツがunlicenseでだったことから、このページの内容もunlicenseとします。</p>
+<h1 id="plugin-develop-development-faq-php">PHP</h1>
+<h2 id="plugin-develop-development-faq-syntax-error">Syntax error 構文エラー</h2>
+<p>これらはPHP自体での問題です。
+These are pure PHP problems. <a href="http://stackoverflow.com/q/18050071/3990767">このStackOverflowのページ</a>を見てください。細かいところまでが書かれています。</p>
+<h2 id="plugin-develop-development-faq-_1">ある数字が数字のリストの一つに等しいかを確認する</h2>
+<p>日本語で「そのIDは1,2,3,4のいずれかなら」というのは意味が通る内容ですが、PHPで<code>if($id == [1, 2, 3, 4])</code>や<code>if($id == 1 or 2 or 3 or 4)</code>などのように書くのは間違いです。
+詳細は<a href="https://stackoverflow.com/q/21343646/3990767">このStackOverflowの質問</a>と、さらに多くの方法を知りたければ<a href="https://stackoverflow.com/q/5593512/3990767">これ</a>を見てください。</p>
+<h2 id="plugin-develop-development-faq-classnotfoundexception-class-not-found">ClassNotFoundException: Class <code>プラグイン内のクラス</code> not found</h2>
+<p>クラスのファイルがPSR-0に基づいておかれているかを確認してください。(<a href="https://sof3.github.io/psr.htm">ここでチェック</a>).</p>
+<h1 id="plugin-develop-development-faq-command-api">Command API</h1>
+<h2 id="plugin-develop-development-faq-how-to-override-a-command">How to override a command?</h2>
+<p>As of API 3.0.0-ALPHA4 and before, you have to first rename the original command into something else using <code>Command::setLabel</code>, then remove it from the command map using <code>Command::unregister</code>. Then your own command class can be registered to the command map directly. <sup><em>ref</em> from <a href="http://forums.pocketmine.net/thre7ads/overriding-default-7commands.8216/#post-87410">@iksaku</a> and <a href="https://gist.github.com/a540360b7323f7cc656f">@shoghicp</a></sup></p>
+<p>For example, to override the /help command:</p>
+<div class="highlight"><pre><span></span><code><span class="x">$map = $server-&gt;getCommandMap();</span>
+<span class="x">$old = $map-&gt;getCommand(&quot;help&quot;);</span>
+<span class="x">$old-&gt;setLabel(&quot;help_disabled&quot;);</span>
+<span class="x">$old-&gt;unregister($map);</span>
+
+<span class="x">$new = new MyHelpCommand($this);</span>
+<span class="x">$map-&gt;register($this-&gt;getName(), $new);</span>
+<span class="x">$map-&gt;register($this-&gt;getName(), $new, &quot;?&quot;);</span>
+</code></pre></div>
+<h2 id="plugin-develop-development-faq-custom-command-usage-autocompletion">Custom command usage / autocompletion</h2>
+<p>In API 2.0.0 to API 3.0.0-ALPHA4, you have to do this for automatic command completion:
+The actual command completion part can be done using the "enum_values" option.</p>
+<p><div class="highlight"><pre><span></span><code><span class="x">// Class that extends pocketmine\command\Command</span>
+
+<span class="x">public function generateCustomCommandData(Player $player) {</span>
+<span class="x">   $commandData = parent::generateCustomCommandData($player);</span>
+<span class="x">   $commandData[&quot;overloads&quot;][&quot;default&quot;][&quot;input&quot;][&quot;parameters&quot;] = [</span>
+<span class="x">      0 =&gt; [</span>
+<span class="x">         &quot;type&quot; =&gt; &quot;stringenum&quot;,</span>
+<span class="x">         &quot;name&quot; =&gt; &quot;parameter&quot;,</span>
+<span class="x">         &quot;optional&quot; =&gt; false,</span>
+<span class="x">         &quot;enum_values&quot; =&gt; [&quot;parameter1&quot;, &quot;parameter2&quot;]</span>
+<span class="x">      ],</span>
+<span class="x">      1 =&gt; [</span>
+<span class="x">         &quot;type&quot; =&gt; &quot;rawtext&quot;,</span>
+<span class="x">         &quot;name&quot; =&gt; &quot;value&quot;,</span>
+<span class="x">         &quot;optional&quot; =&gt; true</span>
+<span class="x">      ],</span>
+<span class="x">      2 =&gt; [</span>
+<span class="x">         &quot;type&quot; =&gt; &quot;string&quot;,</span>
+<span class="x">         &quot;name&quot; =&gt; &quot;name&quot;,</span>
+<span class="x">         &quot;optional&quot; =&gt; true</span>
+<span class="x">      ]</span>
+<span class="x">   ];</span>
+
+<span class="x">   return $commandData;</span>
+<span class="x">}</span>
+</code></pre></div>
+For more information, refer to https://gist.github.com/NiclasOlofsson/db712fd9e3c9cb0777cd9381cb48915a <sup><a href="https://forums.pmmp.io/threads/available-subcommand-parameters-above-command.1841/"><em>ref</em></a></sup></p>
+<!-- 編集者向け: https://github.com/pmmp/PocketMine-MP/blob/547503e8f44d1475def28bda2c0ed068eb24e670/changelogs/3.0-alpha.md#api-11 参照のとおり、この項目は不要となったため削除しました
+# Event API
+## \*\*\*Event does not have a handler list
+You registered an event handler for an event that does not have a handler list. To fix this issue, find the parent class of the event that has a handler list, and handle that event class instead. Use `instanceof` in your event handler to filter events.
+
+Take `EntityDamageByChildEntityEvent` as an example. Look at the [class file](https://github.com/pmmp/PocketMine-MP/blob/80292c6c7a542706a85c4f756e3d93bee1a07ca2/src/pocketmine/event/entity/EntityDamageByChildEntityEvent.php) &mdash; there is no `public static $handlerList;`, so you cannot make event handlers for it. Instead, look at the [class declaration](https://github.com/pmmp/PocketMine-MP/blob/80292c6c7a542706a85c4f756e3d93bee1a07ca2/src/pocketmine/event/entity/EntityDamageByChildEntityEvent.php#L29) to find out its superclass (`EntityDamageByEntityEvent`), and then [the superclass of the superclass](https://github.com/pmmp/PocketMine-MP/blob/80292c6c7a542706a85c4f756e3d93bee1a07ca2/src/pocketmine/event/entity/EntityDamageByEntityEvent.php#L30), vice versa, until you find a superclass [with the line `public static $handlerList = null;`](https://github.com/pmmp/PocketMine-MP/blob/80292c6c7a542706a85c4f756e3d93bee1a07ca2/src/pocketmine/event/entity/EntityDamageEvent.php#L32). Make your event handler handle this event class, and check if you are receiving `EntityDamageByChildEntityEvent` in the handler:
+
+<div class="highlight"><pre><span></span><code><span class="x">public function handleDamage(EntityDamageEvent $event){</span>
+<span class="x">    if($event instanceof EntityDamageByChildEntityEvent){</span>
+<span class="x">        // handle $event here</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</code></pre></div>
+-->
+
+<h1 id="plugin-develop-development-faq-scheduler-api">Scheduler APIとスレッディング</h1>
+<h2 id="plugin-develop-development-faq-_2">タスクをキャンセルするには？(独自・更新)</h2>
+<p>Use the <a href="https://github.com/pmmp/PocketMine-MP/blob/73592349cd29d91b03c2703107db859115a92e2d/src/scheduler/TaskHandler.php#L99"><code>TaskHandler::cancel()</code></a>メソッドを利用してください。</p>
+<p><code>TaskHandler</code>はクラス外では<code>TaskScheduler::scheduleDelayedTask()</code>や<code>TaskScheduler::scheduleRepeatingTask()</code>の返り値として得られます。外部で利用したければ、プロパティに入れておくと良いでしょう。</p>
+<p>またTask内部では<code>Task::getHandler()</code>が利用できます。</p>
+<p>例:</p>
+<!-- 編集者向け PluginTaskは削除されたことからも新しい方法でこの項目は書き直しています -->
+<div class="highlight"><pre><span></span><code><span class="x">class MyTask extends Task{</span>
+<span class="x">    public function onRun(int $ticks){</span>
+<span class="x">        if(needToCancelTask()){</span>
+<span class="x">            $this-&gt;getHandler()-&gt;cancel();</span>
+<span class="x">        }</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</code></pre></div>
+<p>タスクのスケジュール時にタスクハンドラーを保存しておく:
+<div class="highlight"><pre><span></span><code><span class="x">$this-&gt;taskHandler = $server-&gt;getScheduler()-&gt;scheduleRepeatingTask($myTask);</span>
+<span class="x">// そのあとで……</span>
+<span class="x">$this-&gt;taskHandler-&gt;cancel</span>
+</code></pre></div></p>
+<h2 id="plugin-develop-development-faq-_3">数秒以内に行われたイベントをキャンセルするには？</h2>
+<p>そのような場合にはスケジューラーを使う必要はありません。システム時間の比較によって行うべきです。</p>
+<p>この投稿はまだ整理されていません:</p>
+<blockquote>
+<p>~~Timer~~ スケジューラーとタスクは、一定の時間内の状態を持つわけではなく、一定時間後に動作をするものです。(プレイヤーが10秒間移動できない vs プレイヤーが10秒後に動けるようになる)</p>
+<p>What is the difference? For the former, "be unfrozen" is the action, while for the latter, "be immobile" is the state.</p>
+<p>How is a state different from an action? For an action, you do something actively. For example, "kill the player" is an action, but "the player is dead" is a state, a description, a condition.</p>
+<p>In programming, the things you put in a function are always actions. You change a value, you call a function, you stop the code from executing. How does a condition affect execution? A condition is queried upon when something is executing, and it does not actively executes. Your condition is "cannot move". What executions will query this condition? Of course, you only need to know whether the player can move when the player tries to move. This is, as you said, cancel an event. You handle a PlayerMoveEvent and cancel it if the condition applies.</p>
+<p>To be most convenient, you can change a value to make a player frozen/unfrozen, but this does not exist in PocketMine (there is Player-&gt;blocked, but it has side effects and it isn't very reliable). Therefore, you have to make PocketMine ask you whether the player can move every time the player tries to move. How do you yourself know whether the player can move? You ask yourself whether it is within the 10 seconds you asked for.</p>
+<p>But the time that code executes changes - how do you know if it is that relative 10 seconds? Therefore, we make the relative time absolute. For example, if I tell you that I typed this sentence in the past minute, you don't know when I typed this sentence. So how do you find it out? You look at the time this post is posted, and minus one miniute, to know what I meant by "in the past minute". Without the post timestamp from the forums? I have to tell you the exact (absolute) date and time, that is, 2016-11-16 17:38:05 UTC+8.</p>
+<p>Same goes to your code. You write down that "It is now 2016-11-16 17:38:05 UTC+8, and for the next 10 seconds the player can't move". Since time only goes forwards, I can make it even more straightforward: "The player can't move before 2016-11-16 17:38:15 UTC+8".</p>
+<p>An absolute time can be retrieved using the time() or microtime() function. So, you only store the timestamp for the "unfreeze" time, then in the PlayerMoveEvent handler, you check if the current time is less than the "unfreeze" time. You don't need to check if it is less than the "freeze" time, because time only goes forwards.</p>
+<p>You don't need to use scheduler tasks at all.</p>
+</blockquote>
+<p><sup><a href="https://forums.pmmp.io/threads/learning-timer-or-task.57/"><em>ref</em></a></sup></p>
+<h2 id="plugin-develop-development-faq-what-is-different-between-scheduledelayedtask-schedulerepeatingtask-scheduledelayedrepeatingtask-and-scheduleasynctask">What is different between <code>scheduleDelayedTask</code>, <code>scheduleRepeatingTask</code>, <code>scheduleDelayedRepeatingTask</code> and <code>scheduleAsyncTask</code>?</h2>
+<p>Do not mix them up. There is something called <code>Task</code>, where <code>PluginTask</code> is a type of <code>Task</code>; and there is something called <code>AsyncTask</code>, which is entirely irrelevant with <code>Task</code>.</p>
+<p>A <code>Task</code> can be scheduled to run after some time, which is <code>scheduleDelayedTask</code>; or to run repeatedly at given intervals, starting immediately, which is <code>scheduleRepeatingTask</code>; or to start running repeatedly after some time, which is <code>scheduleDelayedRepeatingTask</code>. The code in <code>Task</code> is executed on the main thread.</p>
+<h2 id="plugin-develop-development-faq-what-is-threading-does-it-make-the-server-faster">What is threading? Does it make the server faster?</h2>
+<p>Threading is like executing code in another machine. Executing code in threads generally won't slow down the server unless you try to mine bitcoins. Each thread executes differently. We call the thread that the server does most of the work the "main thread". If the "main thread" is blocked (stops executing because it has to do something busy), it cannot respond to players, so it looks like the server hangs, or if it is only blocked for short periods, the server is laggy (decrease in TPS). <strong>In simple words, threading is executing in background.</strong></p>
+<p>An <code>AsyncTask</code> is executed in other threads, but an <code>AsyncTask</code> is not an independent thread. PocketMine internally has some threads called <code>AsyncWorker</code>. Each <code>AsyncWorker</code> is an independent thread, which you can think as another CPU. When you <code>scheduleAsyncTask</code>, PocketMine adds your new <code>AsyncTask</code> to a queue of AsyncTasks called the <code>AsyncPool</code>. An <code>AsyncWorker</code> will take the oldest <code>AsyncTask</code> from the <code>AsyncPool</code> and execute it, and then takes and execute the next one from the <code>AsyncPool</code>. (Imagine there are a few water pipes removing water from a water pool &mdash; the water at the bottom gets removed first) They are still executed on the same machine, possibly on another core (system-dependent, I guess). Using an AsyncTask will not give you infinite CPU, but may facilitate better utilization of all the CPU available.</p>
+<p>You should only use <code>AsyncTask</code> to run one-time operations (e.g. usually takes less than 15 seconds to execute). If you are using it to run repeating stuff, such as starting another server (e.g. an HTTP server like Volt or an IRC client like the IRCClient plugin), start a thread instead. Otherwise, you will keep one of the workers busy (the water pipe is stuck), and the server will get one less AsyncWorker available. <sup><a href="http://forums.pocketmine.net/threads/how-asynctask-reduces-lag.14056/#post-138729"><em>ref</em></a></sup></p>
+<h3 id="plugin-develop-development-faq-asynctask-an-analogy-of-a-restaurant">AsyncTask: An analogy of a restaurant</h3>
+<p>In this analogy, a customer = a player, the waiter = main thread, food = some data from the Internet that takes a long time to download, the cook = the code that downloads data</p>
+<ol>
+<li>A customer enters a restaurant and orders some food.
+  * A player logins and asks the server to download some data from the Internet.</li>
+<li>The waiter takes the order.
+  * The server receives the command to download data.</li>
+<li>The waiter writes a note to the cook to prepare the food.
+  * The server starts an AsyncTask to download the data. While downloading data, the thread can't do anything else.</li>
+<li>The waiter continues to serve other customers.
+  * The server still serves the players, keeping them online, maintaining game mechanics, keep the server ticking, etc.</li>
+<li>If the waiter does not ask the cook to prepare the food, but does the cooking himself, (assuming there is only one waiter) the customers will be left unattended, and they will be angry and leave the restaurant.
+  * If the server downloads data on the main thread instead of in an AsyncTask, the players cannot see any response from the server to what they do, and may eventually timeout.</li>
+<li>The waiter occasionally looks if the cook has finished preparing the food. (Looking at the table does not really stop him from serving customers, because it's just a glimpse and takes very little time)
+  * The server checks if an AsyncTask is completed every tick.</li>
+<li>The restaurant has a partition between the kitchen and the dining area, so the waiter and the cook cannot really talk directly.
+  * Threads in PHP cannot communicate easily. They are often based on message stacks that may only be queried in long intervals.</li>
+<li>The cook wants to say "the beef is ready, now preparing the noodles". He writes it on a note, and the waiter reads the note to the customer.
+  * The AsyncTask announces that "50% downloaded" (using <code>AsyncTask::publishProgress</code>). The main thread checks for the progress every tick, and accordingly sends them to the player.
+  * The main thread code is implemented in <code>AsyncTask::onProgressUpdate</code>, but they are actually run on the main thread.</li>
+<li>If the food is ready, it is served to the player.
+  * If the AsyncTask has a result, i.e. the data are downloaded, the data will be processed and the server accordingly reacts to the player.
+  * The main thread code is implemented in <code>AsyncTask::onCompletion</code>, but they are actually run on the main thread.</li>
+</ol>
+<p><sup><em>ref</em>: an ancient post from @PEMapModder that can no longer be found. @SOF3 recited it.</sup></p>
+<h2 id="plugin-develop-development-faq-what-can-be-done-in-asynctasks">What can be done in AsyncTasks?</h2>
+<p><strong>You can't call API methods on a separate thread. This is the undeniable fact; this is by definition of "API methods of PocketMine" and "threads".</strong> The main body (<code>onRun</code>) of an AsyncTask is run entirely on a worker thread, and it is <strong>incorrect, if not impossible</strong> to call API methods from <code>AsyncTask::onRun()</code>. In addition to system limitations, most API operations you want to run in background actually have a bottleneck in network I/O with players, which cannot be prevented by threading anyway.</p>
+<p>You may <em>request a delayed call</em> of API methods <em>on the main thread</em> from an AsyncTask using <code>publishProgress()</code> + <code>onProgressUpdate()</code>, or using <code>onCompletion()</code>, but <strong>you still cannot call API methods on other threads</strong>, but just on the main thread. You can <strong>pass scalar/serializable data</strong> between threads, and you can <em>request something to be done upon an object on the main thread</em> through a complicated series of scheduling, but you <strong>cannot</strong> do them <strong>directly on other threads</strong>. You may <em>break down objects and reconstruct them</em> in another thread, but <strong>they will not be the same object</strong>, i.e. if you somehow pass the Player object to an AsyncTask (which is actually impossible because it has a Server reference), <strong>it will be a clone</strong>, and <em>API methods won't work as they usually do</em>.</p>
+<p>In other threads you may, however, call <em>static API methods</em>, such as <code>Utils::getURL()</code>, or even construct classes in the PocketMine API; but this is very dangerous, because if you aren't 100% sure what you are doing, you will end up trying to modify some data ineffectively without errors. <em>PHP builtin functions are not API methods</em>, but they are <strong>safe to use as long as they don't reference any storage in the main thread</strong>. For example, <a href="https://php.net/fopen"><code>fopen</code></a> returns a resource, which is actually an integer pointing to a handle stored in the PHP process; this resource ID will mean something probably entirely different if passed to another thread. You can still use resources in other threads, but make sure you don't try to reference resources in the main thread.</p>
+<p>Therefore, <strong>trying to call an API method on other threads will fail silently</strong>. It is not possible, because you aren't calling API methods from <em>the</em> server at all; you are calling them probably on a clone of the server, or a clone of other objects, etc., which <strong>does not affect anything on the main thread</strong>. <sup><a href="https://forums.pmmp.io/threads/creating-async-task-and-call-methods-from-api.1000/#post-12255"><em>ref</em></a></sup></p>
+<p>There are two typical uses:</p>
+<h3 id="plugin-develop-development-faq-cpu-consuming-code">CPU-consuming code</h3>
+<ul>
+<li>No, this is not how you call setBlock() in a large loop in world edit. Remember that you cannot execute PocketMine core API stuff in AsyncTask or any other threads. (to be explained below)</li>
+<li>One example is when you want to, say, delete a very big directory (e.g. the .git/ directory of a Git repo with many commits and branches like PocketMine, or the world folder of a map with many generated chunks). That is not related to PocketMine core, but it is time-consuming to run ("lagging the server") (I would consider anything taking more than half a tick, i.e. 25 ms "lagging the server"). You wouldn't expect it to take too much time (like a whole hour) to run, and you may execute it quite frequently.</li>
+<li>For example, you may be copying/deleting a SkyWars map 5 times every 10 minutes). This is when you want to use AsyncTask. AsyncTask wouldn't magically use less CPU. But it executes in another thread, which is like in another process (or is it really in a subprocess/another process? I'm not sure about how pthreads works internally).
+So instead of spending the server's core tick time to do stuff that you don't need to get done on the pulse, do it in another thread.</li>
+<li>E.g. you can teleport the player to that world after the copying AsyncTask has completed; you don't need to do that immediately, and maybe your copying task spends 100 milliseconds to run, the player doesn't notice it but your server will lag behind for 2 ticks if you had not used an AsyncTask).</li>
+</ul>
+<h3 id="plugin-develop-development-faq-waiting-blocking">Waiting-blocking</h3>
+<ul>
+<li>No, I didn't say waiting for a player to do something. You can simply use the event API or the scheduler API to do that instead of suspending an async worker.</li>
+<li>This refers to thread-blocking function calls, such as curl_exec() (hence <code>Utils::getURL()</code> and <code>Utils::postURL()</code>). HTTP requests (cURL execution) would lag your server, because it spends most of the time waiting for a response from another server.</li>
+<li>Another example is MySQL queries. You aren't doing anything constructive in the majority time of a query function call. You are simply waiting for MySQL server to read your query, execute it and return a result.</li>
+<li>Why spend all the main thread performance on waiting for a response?</li>
+<li>It would of course be most convenient if you can set your queries/requests to be non-blocking and use a scheduler task to synchronously check if the server has respond. But in cases where you can't, we are simply putting the query aside and get a worker (another thread) stuck instead of getting the main thread stuck. Do you want the waiters look sick or the cooks to look sick, when your clients can see your waiters but not your cooks?</li>
+<li>It doesn't save CPU. It just redistributes the CPU use.</li>
+</ul>
+<p><sup><a href="http://forums.pocketmine.net/threads/how-asynctask-reduces-lag.14056/#post-138729"><em>ref</em></a></sup></p>
+<h2 id="plugin-develop-development-faq-stored-local-complex-data-did-not-remove-them-after-completion">Stored local complex data did not remove them after completion</h2>
+<p>Do not pass anything to the AsyncTask (parent) constructor unless you are going to use them in onCompletion() or onProgressUpdate(). If you do so, you must call fetchLocal() in onCompletion() to remove the data.</p>
+<p>AsyncTask is not a PluginTask. You do not need to pass arguments to it.</p>
+<p><sup><a href="https://forums.pmmp.io/threads/async-task-spam.3163/"><em>ref</em></a></sup></p>
+<h1 id="plugin-develop-development-faq-data-saving">Data saving</h1>
+<h2 id="plugin-develop-development-faq-yaml-vs-sql">YAML vs SQL</h2>
+<p>JSON is a subset of YAML. Any valid JSON data can be parsed as YAML. So unless you want to store the data in a compact way (which is pointless for small files, since <a href="https://unix.stackexchange.com/q/62049/161897">the size of each file is always multiples of 4 KB</a>), YAML seems to always be a better option compared to JSON, unless your data will be parsed by a program that only knows JSON but not YAML. (After all, JSON has a long history but YAML is kind of new, but most languages already have YAML libraries)</p>
+<p>If you have may data for many small units, e.g. a few numbers per player, you won't want to store all the data in the same YAML file, because it's slow. You have to load all the data into memory whenever you do I/O, which may cause memory failure.</p>
+<p>Therefore, to save data for each player, each account should have its own file. However, it creates a large number of files, which many users may dislike. Also, it is inconvenient to evaluate statistics based on all data, e.g. mean, sum, maximum, etc. To do so with YAML, you have to either:</p>
+<ul>
+<li>Load the data of all units every time. But if you have 100000 players registered, you are in trouble. You have to open a file stream for each unit, read the contents, store them in a list, and close stream. This will lead to very poor performance, especially on personal computers, whose harddisks don't expect you to read so many files at a time. Therefore, this is not a good idea.</li>
+<li>Store the values. If you want a sum, store the sum somewhere and update it every time a datum is added/removed/updated. If you want an average or standard deviation, store the count too and also update it every time data are changed. If you want top 10, a bit trouble. If you want the median, basically you must recalculate all the data every time, unless you otherwise have an index of all numbers somewhere, which isn't per-player storage anymore. <sup><a href="http://forums.pocketmine.net/threads/yaml-vs-sql.15091/#post-147453"><em>ref</em></a></sup></li>
+</ul>
+<p>Oh the other hand, SQL has these advantages:</p>
+<ul>
+<li>All the data are stored in the same file, but the data are accessed using <a href="https://php.net/fseek"><code>fseek</code></a>, which prevents loading unnecessary data. SQL is optimized for various queries, and data are indexed upon request, so it is more efficient.</li>
+<li>Most SQL implementations (e.g. MySQL) have good concurrency support, so multiple servers can access data together without conflict, if you know how to use it. Nevertheless, user-side setup might be slightly inconvenient.</li>
+</ul>
+<p>Of course, the best solution is to let the users pick what database to use and bear their own consequences! See <a href="https://github.com/PocketMine/SimpleAuth">SimpleAuth</a> for how to support switching between multiple database types.</p>
+<h1 id="plugin-develop-development-faq-general-gameplay">General gameplay</h1>
+<h2 id="plugin-develop-development-faq-coordinate-system">Coordinate system</h2>
+<p>The Minecraft coordinate system complies with a right-handed Cartesian coordinate system, i.e. <code>x cross y = z</code>, as in this figure:</p>
+<p><a href="https://en.wikipedia.org/wiki/Right-hand_rule"><img alt="See Wikipedia's article on Right-hand Rule" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Right_hand_rule_cross_product.svg/440px-Right_hand_rule_cross_product.svg.png" /></a></p>
+<p>In the Minecraft system, Y (the index finger) points upwards (negative Y points downwards). X points eastwards (negative X goes westwards), and Z points southwards (negative Z goes northwards).</p>
+<p>The sun and moon come out from the east since Pocket Edition 1.1 <sup><a href="https://minecraft.gamepedia.com/Day-night_cycle#History"><em>ref</em></a></sup>. Clouds float westward, too <sup><a href="https://minecraft.gamepedia.com/Cloud#Behavior"><em>ref</em></a></sup>.</p>
+<p>Rotation is measured by yaw (a.k.a. azimuth) and pitch. The yaw is the clockwise rotation from the south, i.e.:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Yaw (Degrees), mod 360</th>
+<th align="center">Yaw (Radians), mod 2&pi;</th>
+<th align="center">Direction</th>
+<th align="center">One step from (x = 0, z = 0) in this direction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">South</td>
+<td align="center">(0, 1)</td>
+</tr>
+<tr>
+<td align="center">90</td>
+<td align="center">0.5&pi;</td>
+<td align="center">West</td>
+<td align="center">(-1, 0)</td>
+</tr>
+<tr>
+<td align="center">180</td>
+<td align="center">&pi;</td>
+<td align="center">North</td>
+<td align="center">(0, -1)</td>
+</tr>
+<tr>
+<td align="center">270</td>
+<td align="center">1.5&pi;</td>
+<td align="center">East</td>
+<td align="center">(1, 0)</td>
+</tr>
+</tbody>
+</table>
+<p>Pitch is the downward rotation. Starting at 0 at the horizontal, it increases to 90&deg; (0.5&pi;) when facing the ground, and decreases to -90&deg; (-0.5&pi;) when facing the sky.</p>
+<p>A few cautions:
+* The yaw and pitch are represented in degrees in most places in PocketMine, including <code>Entity::$yaw</code> and <code>Entity::$pitch</code>.
+* The yaw is not guaranteed to be within the range <code>[0, 360)</code>. Be sure to mod 360 before comparing it.
+* PHP's behaviour with <code>$negative_number % $positive_number</code> or <code>fmod($negative_number, $positive_number)</code>: a negative number is returned. But the yaw can be negative. Be sure to conditionally add 360 to the yaw after <code>% 360</code> if it is negative.
+* PHP's <code>%</code> operator casts floats to ints. This may affect your results slightly. Use <code>fmod</code> instead; but it might still produce negative results.</p>
+<p>Here is an alternative to <code>%</code>/<code>fmod</code> that always produces zero/positive float results:</p>
+<div class="highlight"><pre><span></span><code><span class="x">function positive_fmod(float $a, float $b) : float{</span>
+<span class="x">    return $a - floor($a / $b) * $b;</span>
+<span class="x">}</span>
+</code></pre></div>
+<h3 id="plugin-develop-development-faq-conversion-of-yawpitch-to-a-unit-vector-src">Conversion of yaw+pitch to a unit vector <sup><a href="https://github.com/pmmp/PocketMine-MP/blob/master/src/pocketmine/entity/Entity.php#L1063-L1070"><em>src</em></a></sup></h3>
+<div class="highlight"><pre><span></span><code><span class="x">$y = -sin(deg2rad($this-&gt;pitch));</span>
+<span class="x">$xz = cos(deg2rad($this-&gt;pitch));</span>
+<span class="x">$x = -$xz * sin(deg2rad($this-&gt;yaw));</span>
+<span class="x">$z = $xz * cos(deg2rad($this-&gt;yaw));</span>
+<span class="x">return (new Vector3($x $y, $z))-&gt;normalize(); // TODO: verify if normalize() call is needed</span>
+</code></pre></div>
+<h3 id="plugin-develop-development-faq-evaluate-yaw-and-pitch-looking-from-pos1-to-pos2-ref">Evaluate yaw and pitch looking from $pos1 to $pos2 <sup><a href="https://forums.pmmp.io/threads/direction.2285/#post-23772"><em>ref</em></a></sup></h3>
+<div class="highlight"><pre><span></span><code><span class="x">$diff = $pos2-&gt;subtract($pos1)-&gt;normalize();</span>
+<span class="x">$pitch = asin(-$diff-&gt;y);</span>
+<span class="x">$yaw = acos($diff-&gt;z / cos($pitch));</span>
+</code></pre></div>
+<hr />
+<h3 id="plugin-develop-development-faq-legacy">Legacy</h3>
+<table>
+<thead>
+<tr>
+<th align="center">symbol</th>
+<th align="center">meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>ref</em></td>
+<td align="center">Content is copied from the linked forum thread</td>
+</tr>
+<tr>
+<td align="center"><em>src</em></td>
+<td align="center">Content is based on evidence from source code</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><a href="https://raw.githubusercontent.com/SOF3/forums-common-sense/master/LICENSE"><img alt="Unlicense" src="https://img.shields.io/badge/license-Unlicense-blue.svg?style=plastic" /></a> This wiki is community work.</p>
+<p>In jurisdictions that recognize copyright laws, the author or authors of this software dedicate any and all copyright interest in the software to the public domain. We make this dedication for the benefit of the public at large and to the detriment of our heirs and successors. We intend this dedication to be an overt act of relinquishment in perpetuity of all present and future rights to this software under copyright law.</p>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+<p>For more information, please refer to <a href="http://unlicense.org">http://unlicense.org</a></p>
+</div></section><section class="print-page" id="plugin-develop-language"><h1 id="plugin-develop-language-_1">多言語対応</h1>
 <p>Poggitでプラグインをリリースする場合やサーバーを多言語対応する場合には<code>pocketmine\lang\Language</code>を用いることで比較的楽に対応することができます。また、これによりメッセージ送信部がスマートにできるかもしれません。</p>
 <p><a href="https://github.com/pmmp/PocketMine-MP/blob/master/src/lang/Language.php">https://github.com/pmmp/PocketMine-MP/blob/master/src/lang/Language.php</a>より内容を抜粋。</p>
 <h2 id="plugin-develop-language-language">Languageの利用</h2>
@@ -2428,7 +2759,7 @@ DEVirionはvirionのクラスを影で支えているわけではないので、
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-<script id="__config" type="application/json">{"base": "/", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
+<script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
     
 
 <script src="https://unpkg.com/iframe-worker/polyfill"></script>
