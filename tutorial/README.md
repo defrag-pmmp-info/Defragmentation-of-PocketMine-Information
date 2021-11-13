@@ -18,7 +18,8 @@ MinecraftのBedrockサーバーを立てる場合には以下のソフトウェ�
 ## PocketMine-MPでのサーバーの立て方
 [サーバーの立て方](/building/README.md)から見ることができます。
 
-## Bedrock Dedicated Serverでのサーバーの立て方
+<!-- TODO
+## Bedrock Dedicated Serverでのサーバーの立て方 -->
 
 
 ## サーバーに外部から入れるようにする
