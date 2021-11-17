@@ -65,7 +65,7 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
-    <script>function __prefix(e){return new URL("/",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
       <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
@@ -2628,27 +2628,41 @@ children:
 </ul>
 <h4 id="api4-changelogs-network">Network</h4>
 <ul>
-<li>以下のフィールドが削除されました。</li>
+<li>以下のフィールドが削除されました。<ul>
 <li><code>Network::$BATCH_THRESHOLD</code></li>
-<li>以下のクラスがリネームされました。</li>
+</ul>
+</li>
+<li>以下のクラスがリネームされました。<ul>
 <li><code>SourceInterface</code> -&gt; <code>NetworkInterface</code></li>
 <li><code>AdvancedSourceInterface</code> -&gt; <code>AdvancedNetworkInterface</code></li>
-<li>以下のクラスが移動されました。</li>
+</ul>
+</li>
+<li>以下のクラスが移動されました。<ul>
 <li><code>CompressBatchedTask</code> -&gt; <code>mcpe\CompressBatchTask</code></li>
 <li><code>level\format\io\ChunkRequestTask</code> -&gt; <code>mcpe\ChunkRequestTask</code></li>
 <li><code>mcpe\RakLibInterface</code> -&gt; <code>mcpe\raklib\RakLibInterface</code></li>
-<li>以下のクラスが削除されました。</li>
+</ul>
+</li>
+<li>以下のクラスが削除されました。<ul>
 <li><code>mcpe\PlayerNetworkSessionAdapter</code></li>
-<li>以下のメソッドがリネームされました。</li>
+</ul>
+</li>
+<li>以下のメソッドがリネームされました。<ul>
 <li><code>UPnP::PortForward()</code> -&gt; <code>UPnP::portForward()</code></li>
 <li><code>UPnP::RemovePortForward()</code> -&gt; <code>UPnP::removePortForward()</code></li>
-<li>以下のメソッドはシグネチャが変更されました。</li>
+</ul>
+</li>
+<li>以下のメソッドはシグネチャが変更されました。<ul>
 <li><code>UPnP::portForward()</code>は<code>string $serviceURL, string $internalIP, int $internalPort, int $externalPort</code>を受け取るようになりました。</li>
 <li><code>UPnP::removePortForward()</code>は<code>string $serviceURL, int $externalPort</code>を受け取るようになりました。</li>
-<li>以下のメソッドは削除されました。</li>
+</ul>
+</li>
+<li>以下のメソッドは削除されました。<ul>
 <li><code>NetworkInterface-&gt;putPacket()</code></li>
 <li><code>NetworkInterface-&gt;close()</code></li>
 <li><code>NetworkInterface-&gt;emergencyShutdown()</code></li>
+</ul>
+</li>
 <li><code>NetworkInterface</code>はプレイヤーネットワークインターフェースに特化するものではなく、現在ではいかなるネットワークコンポーネントにも実装されるためにより汎用なインターフェースを表します。</li>
 <li><code>rcon</code>サブ名前空間以下にあるものはすべて削除されました。</li>
 <li><code>upnp\UPnP</code>には重大な変更点があります。これは現在では二つの静的メソッドではなくネットワークコンポーネントになりました。</li>
@@ -2720,6 +2734,67 @@ children:
 </li>
 <li>以下のクラスは削除されました。<ul>
 <li><code>ServerOperator</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="api4-changelogs-player">Player</h4>
+<ul>
+<li>以下のクラスは新規名前空間<code>pocketmine\Player</code>に移動されました。<ul>
+<li><code>Achievement</code></li>
+<li><code>GameMode</code></li>
+<li><code>IPlayer</code></li>
+<li><code>OfflinePlayer</code></li>
+<li><code>PlayerInfo</code></li>
+<li><code>Player</code></li>
+</ul>
+</li>
+<li>以下の定数は削除されました<ul>
+<li><code>Player::SURVIVAL</code> - <code>GameMode::SURVIVAL()</code>を使用してください</li>
+<li><code>Player::CREATIVE</code> - <code>GameMode::CREATIVE()</code>を使用してください</li>
+<li><code>Player::ADVENTURE</code> - <code>GameMode::ADVENTURE()</code>を使用してください</li>
+<li><code>Player::SPECTATOR</code> - <code>GameMode::SPECTATOR()</code>を使用してください</li>
+<li><code>Player::VIEW</code> - <code>GameMode::SPECTATOR()</code>を使用してください</li>
+</ul>
+</li>
+<li>(ほぼ)すべてのパケットハンドラーは<code>プレイヤー</code>から除去されました。これらのハンドラーはネットワークレイヤー内にカプセル化されました</li>
+<li><code>Player-&gt;getSpawn()</code>は現在ではプレイヤーのスポーン地点が設定されていないときにワールドのセーフスポーンを返さなくなりました。コールしたときのセーフスポーンを返すというのは意味がありません。実際に使われるときにセーフスポーンであるとは限らないからです。セーフスポーンを取得したい場合には<code>World-&gt;getSafeSpawn()</code>にこの関数の返り値を渡してください。</li>
+<li>以下のAPIメソッドが追加されました。<ul>
+<li><code>Player-&gt;attackBlock()</code>: ターゲットブロックを殴る(左クリック), 例. ブロックの破壊を開始(サバイバル)</li>
+<li><code>Player-&gt;attackEntity()</code>: (範囲内にいれば)ターゲットエンティティを素手攻撃(左クリック)</li>
+<li><code>Player-&gt;breakBlock()</code>: 現在のワールドのターゲットブロックを(即座に)破壊する</li>
+<li><code>Player-&gt;consumeHeldItem()</code>: 以前にアクティベートされたアイテムを消費する, 例. 食べ物を食べる</li>
+<li><code>Player-&gt;continueBreakBlock()</code>: サバイバル時に破壊アニメーションとパーティクルを生成しながらターゲットブロックを殴る</li>
+<li><code>Player-&gt;getItemCooldownExpiry()</code>: 与えられたアイテムのクールダウンが失効するtickを返す</li>
+<li><code>Player-&gt;hasFiniteResources()</code></li>
+<li><code>Player-&gt;interactBlock()</code>: 現在のワールドのターゲットブロックを触る(右クリック)</li>
+<li><code>Player-&gt;interactEntity()</code>: ターゲットエンティティを触る(右クリック), 例. エンティティに名札で名前をつける</li>
+<li><code>Player-&gt;pickBlock()</code>: 現在のワールドのターゲットブロックをピックする(マウスホイールクリック)</li>
+<li><code>Player-&gt;releaseHeldItem()</code>: 以前にアクティベートされたアイテムをリリースする, 例. 竿を振る</li>
+<li><code>Player-&gt;selectHotbarSlot()</code>: 特定のホットバースロットを選択する</li>
+<li><code>Player-&gt;stopBreakBlock()</code>: それ以前に攻撃されていたブロックへの攻撃をやめる</li>
+<li><code>Player-&gt;toggleFlight()</code>: 飛行を開始/停止しようとする (イベントを発火し、キャンセルされる可能性がある)</li>
+<li><code>Player-&gt;updateNextPosition()</code>: プレイヤーの次に試みられる移動場所を設定する (イベントを発火し、キャンセルされる可能性がある)</li>
+<li><code>Player-&gt;useHeldItem()</code>: 持っているアイテムをアクティベートする, 例. 雪玉を投げる</li>
+<li><code>Player-&gt;getSaveData()</code>: その場でセーブデータを生成し、セーブデータを返す。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは削除されました。<ul>
+<li><code>Player-&gt;addActionBarMessage()</code>: <code>sendActionBarMessage()</code>に置き換えられました。</li>
+<li><code>Player-&gt;addSubTitle()</code>: <code>sendSubTitle()</code>に置き換えられました。</li>
+<li><code>Player-&gt;addTitle()</code>: <code>sendTitle()</code>に置き換えられました。</li>
+<li><code>Player-&gt;getAddress()</code>: <code>NetworkSession-&gt;getIp()</code>に置き換えられました。</li>
+<li><code>Player-&gt;getPing()</code>: <code>NetworkSession</code>に移動されました。</li>
+<li><code>Player-&gt;getPort()</code>: <code>NetworkSession</code>に移動されました。</li>
+<li><code>Player-&gt;updatePing()</code>: <code>NetworkSession</code>に移動されました。</li>
+<li><code>Player-&gt;dataPacket()</code>: <code>NetworkSession-&gt;sendDataPacket()</code>に置き換えられました。</li>
+<li><code>Player-&gt;sendDataPacket()</code>: <code>NetworkSession-&gt;sendDataPacket()</code>に置き換えられました。</li>
+<li><code>Player-&gt;updateNextPosition()</code>: <code>Player-&gt;handleMovement()</code>を代わりに使用してください。</li>
+<li><code>IPlayer-&gt;isWhitelisted()</code>: <code>Server-&gt;isWhitelisted()</code>を代わりに使用してください。</li>
+<li><code>IPlayer-&gt;setWhitelisted()</code>: <code>Server-&gt;setWhitelisted()</code>を代わりに使用してください。</li>
+<li><code>IPlayer-&gt;isBanned()</code>: これはネームBANのみをチェックしプラグインによる独自のBANシステムについて把握していなかったため信頼性に欠けていました。<code>Server-&gt;getNameBans()-&gt;isBanned()</code>と<code>Server-&gt;getIPBans()-&gt;isBanned()</code>を代わりに使用してください。</li>
+<li><code>IPlayer-&gt;setBanned()</code>: <code>Server</code>のAPIを代わりに使用してください。</li>
+<li><code>IPlayer-&gt;isOp()</code>: <code>Server</code>のAPIを代わりに使用してください。</li>
+<li><code>IPlayer-&gt;setOp()</code>: <code>Server</code>のAPIを代わりに使用してください。</li>
 </ul>
 </li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1>
@@ -3031,7 +3106,7 @@ DEVirionはvirionのクラスを影で支えているわけではないので、
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-<script id="__config" type="application/json">{"base": "/", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
+<script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
     
 
 <script src="https://unpkg.com/iframe-worker/polyfill"></script>
