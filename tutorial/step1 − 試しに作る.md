@@ -3,7 +3,9 @@
 
 
 ## PocketMine-MPでのサーバーの立て方
-[サーバーの立て方](/building/README.md)から見ることができます。
+[サーバーの立て方](/building/README.md)から見ることができます。  
+また、Windowsであれば、ねらひかだ氏がインストーラーを開発しています。
+[このページ](https://github.com/Nerahikada/PocketMine-MP_Installer/releases/latest)のPocketMine-MPなんとかかんとか.exeをダウンロードして実行すればインストールしてくれます。
 <!-- ここ、不親切だけどどうしようか -->
 <!-- TODO
 ## Bedrock Dedicated Serverでのサーバーの立て方 -->
@@ -41,8 +43,6 @@ CheckNetIsolation LoopbackExempt -a -n="Microsoft.MinecraftUWP_8wekyb3d8bbwe"
 
 自宅サーバーの場合UPnPを利用したり、手動でルーターの設定をいじることでポートフォワーディングすることができます。ただし、ネットワークの問題でできないこともあります。
 設定方法は使っているルーターの種類によってまちまちなので「ルーターの名前 ポート開放」とかでgoogleで検索しましょう。よほどマイナーな機械じゃない限り使えるサイトがあるはず。
-
-VPSの場合は大抵ポートフォワーディングを設定できる画面があるため、そこで変更することでポートフォワーディングすることができます。
 
 設定が終われば、Minecraftのサーバー追加画面にIPを打ち込んで誰でもサーバーに入ることができます。
 
