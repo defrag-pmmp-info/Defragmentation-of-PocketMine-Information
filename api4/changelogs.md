@@ -724,26 +724,26 @@ permissions:
 
 #### Network
 - 以下のフィールドが削除されました。
-  - `Network::$BATCH_THRESHOLD`
+    - `Network::$BATCH_THRESHOLD`
 - 以下のクラスがリネームされました。
-  - `SourceInterface` -> `NetworkInterface`
-  - `AdvancedSourceInterface` -> `AdvancedNetworkInterface`
+    - `SourceInterface` -> `NetworkInterface`
+    - `AdvancedSourceInterface` -> `AdvancedNetworkInterface`
 - 以下のクラスが移動されました。
-  - `CompressBatchedTask` -> `mcpe\CompressBatchTask`
-  - `level\format\io\ChunkRequestTask` -> `mcpe\ChunkRequestTask`
-  - `mcpe\RakLibInterface` -> `mcpe\raklib\RakLibInterface`
+    - `CompressBatchedTask` -> `mcpe\CompressBatchTask`
+    - `level\format\io\ChunkRequestTask` -> `mcpe\ChunkRequestTask`
+    - `mcpe\RakLibInterface` -> `mcpe\raklib\RakLibInterface`
 - 以下のクラスが削除されました。
-  - `mcpe\PlayerNetworkSessionAdapter`
+    - `mcpe\PlayerNetworkSessionAdapter`
 - 以下のメソッドがリネームされました。
-  - `UPnP::PortForward()` -> `UPnP::portForward()`
-  - `UPnP::RemovePortForward()` -> `UPnP::removePortForward()`
+    - `UPnP::PortForward()` -> `UPnP::portForward()`
+    - `UPnP::RemovePortForward()` -> `UPnP::removePortForward()`
 - 以下のメソッドはシグネチャが変更されました。
-  - `UPnP::portForward()`は`string $serviceURL, string $internalIP, int $internalPort, int $externalPort`を受け取るようになりました。
-  - `UPnP::removePortForward()`は`string $serviceURL, int $externalPort`を受け取るようになりました。
+    - `UPnP::portForward()`は`string $serviceURL, string $internalIP, int $internalPort, int $externalPort`を受け取るようになりました。
+    - `UPnP::removePortForward()`は`string $serviceURL, int $externalPort`を受け取るようになりました。
 - 以下のメソッドは削除されました。
-  - `NetworkInterface->putPacket()`
-  - `NetworkInterface->close()`
-  - `NetworkInterface->emergencyShutdown()`
+    - `NetworkInterface->putPacket()`
+    - `NetworkInterface->close()`
+    - `NetworkInterface->emergencyShutdown()`
 - `NetworkInterface`はプレイヤーネットワークインターフェースに特化するものではなく、現在ではいかなるネットワークコンポーネントにも実装されるためにより汎用なインターフェースを表します。
 - `rcon`サブ名前空間以下にあるものはすべて削除されました。
 - `upnp\UPnP`には重大な変更点があります。これは現在では二つの静的メソッドではなくネットワークコンポーネントになりました。
@@ -799,3 +799,55 @@ permissions:
     - `Permission->__construct()`は現在では`$defaultValue`パラメータを受け取らなくなりました(上記のデフォルト値に関するリファクタに関するノートを参照してください)。代わりに`pocketmine.group.everyone`か`pocketmine.group.operator`の子要素として許可を与える必要があります。
 - 以下のクラスは削除されました。
     - `ServerOperator`
+
+#### Player
+- 以下のクラスは新規名前空間`pocketmine\Player`に移動されました。
+    - `Achievement`
+    - `GameMode`
+    - `IPlayer`
+    - `OfflinePlayer`
+    - `PlayerInfo`
+    - `Player`
+- 以下の定数は削除されました
+    - `Player::SURVIVAL` - `GameMode::SURVIVAL()`を使用してください
+    - `Player::CREATIVE` - `GameMode::CREATIVE()`を使用してください
+    - `Player::ADVENTURE` - `GameMode::ADVENTURE()`を使用してください
+    - `Player::SPECTATOR` - `GameMode::SPECTATOR()`を使用してください
+    - `Player::VIEW` - `GameMode::SPECTATOR()`を使用してください
+- (ほぼ)すべてのパケットハンドラーは`プレイヤー`から除去されました。これらのハンドラーはネットワークレイヤー内にカプセル化されました
+- `Player->getSpawn()`は現在ではプレイヤーのスポーン地点が設定されていないときにワールドのセーフスポーンを返さなくなりました。コールしたときのセーフスポーンを返すというのは意味がありません。実際に使われるときにセーフスポーンであるとは限らないからです。セーフスポーンを取得したい場合には`World->getSafeSpawn()`にこの関数の返り値を渡してください。
+- 以下のAPIメソッドが追加されました。
+    - `Player->attackBlock()`: ターゲットブロックを殴る(左クリック), 例. ブロックの破壊を開始(サバイバル)
+    - `Player->attackEntity()`: (範囲内にいれば)ターゲットエンティティを素手攻撃(左クリック)
+    - `Player->breakBlock()`: 現在のワールドのターゲットブロックを(即座に)破壊する
+    - `Player->consumeHeldItem()`: 以前にアクティベートされたアイテムを消費する, 例. 食べ物を食べる
+    - `Player->continueBreakBlock()`: サバイバル時に破壊アニメーションとパーティクルを生成しながらターゲットブロックを殴る
+    - `Player->getItemCooldownExpiry()`: 与えられたアイテムのクールダウンが失効するtickを返す
+    - `Player->hasFiniteResources()`
+    - `Player->interactBlock()`: 現在のワールドのターゲットブロックを触る(右クリック)
+    - `Player->interactEntity()`: ターゲットエンティティを触る(右クリック), 例. エンティティに名札で名前をつける
+    - `Player->pickBlock()`: 現在のワールドのターゲットブロックをピックする(マウスホイールクリック)
+    - `Player->releaseHeldItem()`: 以前にアクティベートされたアイテムをリリースする, 例. 竿を振る
+    - `Player->selectHotbarSlot()`: 特定のホットバースロットを選択する
+    - `Player->stopBreakBlock()`: それ以前に攻撃されていたブロックへの攻撃をやめる
+    - `Player->toggleFlight()`: 飛行を開始/停止しようとする (イベントを発火し、キャンセルされる可能性がある)
+    - `Player->updateNextPosition()`: プレイヤーの次に試みられる移動場所を設定する (イベントを発火し、キャンセルされる可能性がある)
+    - `Player->useHeldItem()`: 持っているアイテムをアクティベートする, 例. 雪玉を投げる
+    - `Player->getSaveData()`: その場でセーブデータを生成し、セーブデータを返す。
+- 以下のAPIメソッドは削除されました。
+    - `Player->addActionBarMessage()`: `sendActionBarMessage()`に置き換えられました。
+    - `Player->addSubTitle()`: `sendSubTitle()`に置き換えられました。
+    - `Player->addTitle()`: `sendTitle()`に置き換えられました。
+    - `Player->getAddress()`: `NetworkSession->getIp()`に置き換えられました。
+    - `Player->getPing()`: `NetworkSession`に移動されました。
+    - `Player->getPort()`: `NetworkSession`に移動されました。
+    - `Player->updatePing()`: `NetworkSession`に移動されました。
+    - `Player->dataPacket()`: `NetworkSession->sendDataPacket()`に置き換えられました。
+    - `Player->sendDataPacket()`: `NetworkSession->sendDataPacket()`に置き換えられました。
+    - `Player->updateNextPosition()`: `Player->handleMovement()`を代わりに使用してください。
+    - `IPlayer->isWhitelisted()`: `Server->isWhitelisted()`を代わりに使用してください。
+    - `IPlayer->setWhitelisted()`: `Server->setWhitelisted()`を代わりに使用してください。
+    - `IPlayer->isBanned()`: これはネームBANのみをチェックしプラグインによる独自のBANシステムについて把握していなかったため信頼性に欠けていました。`Server->getNameBans()->isBanned()`と`Server->getIPBans()->isBanned()`を代わりに使用してください。
+    - `IPlayer->setBanned()`: `Server`のAPIを代わりに使用してください。
+    - `IPlayer->isOp()`: `Server`のAPIを代わりに使用してください。
+    - `IPlayer->setOp()`: `Server`のAPIを代わりに使用してください。
