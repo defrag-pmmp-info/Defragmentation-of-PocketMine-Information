@@ -817,37 +817,37 @@ permissions:
 - (ほぼ)すべてのパケットハンドラーは`プレイヤー`から除去されました。これらのハンドラーはネットワークレイヤー内にカプセル化されました
 - `Player->getSpawn()`は現在ではプレイヤーのスポーン地点が設定されていないときにワールドのセーフスポーンを返さなくなりました。コールしたときのセーフスポーンを返すというのは意味がありません。実際に使われるときにセーフスポーンであるとは限らないからです。セーフスポーンを取得したい場合には`World->getSafeSpawn()`にこの関数の返り値を渡してください。
 - 以下のAPIメソッドが追加されました。
-    - `Player->attackBlock()`: attack (left click) the target block, e.g. to start destroying it (survival)
-    - `Player->attackEntity()`: melee-attack (left click) the target entity (if within range)
-    - `Player->breakBlock()`: destroy the target block in the current world (immediately)
-    - `Player->consumeHeldItem()`: consume the previously activated item, e.g. eating food
-    - `Player->continueBreakBlock()`: punch the target block during destruction in survival, advancing break animation and creating particles
-    - `Player->getItemCooldownExpiry()`: returns the tick on which the player's cooldown for a given item expires
+    - `Player->attackBlock()`: ターゲットブロックを殴る(左クリック), 例. ブロックの破壊を開始(サバイバル)
+    - `Player->attackEntity()`: (範囲内にいれば)ターゲットエンティティを素手攻撃(左クリック)
+    - `Player->breakBlock()`: 現在のワールドのターゲットブロックを(即座に)破壊する
+    - `Player->consumeHeldItem()`: 以前にアクティベートされたアイテムを消費する, 例. 食べ物を食べる
+    - `Player->continueBreakBlock()`: サバイバル時に破壊アニメーションとパーティクルを生成しながらターゲットブロックを殴る
+    - `Player->getItemCooldownExpiry()`: 与えられたアイテムのクールダウンが失効するtickを返す
     - `Player->hasFiniteResources()`
-    - `Player->interactBlock()`: interact (right click) the target block in the current world
-    - `Player->interactEntity()`: interact (right click) the target entity, e.g. to apply a nametag (not implemented yet)
-    - `Player->pickBlock()`: picks (mousewheel click) the target block in the current world
-    - `Player->releaseHeldItem()`: release the previously activated item, e.g. shooting a bow
-    - `Player->selectHotbarSlot()`: select the specified hotbar slot
-    - `Player->stopBreakBlock()`: cease attacking a previously attacked block
-    - `Player->toggleFlight()`: tries to start / stop flying (fires events, may be cancelled)
-    - `Player->updateNextPosition()`: sets the player's next attempted move location (fires events, may be cancelled)
-    - `Player->useHeldItem()`: activate the held item, e.g. throwing a snowball
-    - `Player->getSaveData()`: returns save data generated on the fly
+    - `Player->interactBlock()`: 現在のワールドのターゲットブロックを触る(右クリック)
+    - `Player->interactEntity()`: ターゲットエンティティを触る(右クリック), 例. エンティティに名札で名前をつける
+    - `Player->pickBlock()`: 現在のワールドのターゲットブロックをピックする(マウスホイールクリック)
+    - `Player->releaseHeldItem()`: 以前にアクティベートされたアイテムをリリースする, 例. 竿を振る
+    - `Player->selectHotbarSlot()`: 特定のホットバースロットを選択する
+    - `Player->stopBreakBlock()`: それ以前に攻撃されていたブロックへの攻撃をやめる
+    - `Player->toggleFlight()`: 飛行を開始/停止しようとする (イベントを発火し、キャンセルされる可能性がある)
+    - `Player->updateNextPosition()`: プレイヤーの次に試みられる移動場所を設定する (イベントを発火し、キャンセルされる可能性がある)
+    - `Player->useHeldItem()`: 持っているアイテムをアクティベートする, 例. 雪玉を投げる
+    - `Player->getSaveData()`: その場でセーブデータを生成し、セーブデータを返す。
 - 以下のAPIメソッドは削除されました。
-    - `Player->addActionBarMessage()`: replaced by `sendActionBarMessage()`
-    - `Player->addSubTitle()`: replaced by `sendSubTitle()`
-    - `Player->addTitle()`: replaced by `sendTitle()`
-    - `Player->getAddress()`: replaced by `NetworkSession->getIp()`
-    - `Player->getPing()`: moved to `NetworkSession`
-    - `Player->getPort()`: moved to `NetworkSession`
-    - `Player->updatePing()`: moved to `NetworkSession`
-    - `Player->dataPacket()`: replaced by `NetworkSession->sendDataPacket()`
-    - `Player->sendDataPacket()`: replaced by `NetworkSession->sendDataPacket()`
-    - `Player->updateNextPosition()`: use `Player->handleMovement()` instead
-    - `IPlayer->isWhitelisted()`: use `Server->isWhitelisted()` instead
-    - `IPlayer->setWhitelisted()`: use `Server->setWhitelisted()` instead
-    - `IPlayer->isBanned()`: this was unreliable because it only checked name bans and didn't account for plugin custom ban systems. Use `Server->getNameBans()->isBanned()` and `Server->getIPBans()->isBanned()` instead.
-    - `IPlayer->setBanned()`: use `Server` APIs instead
-    - `IPlayer->isOp()`: use `Server` APIs instead
-    - `IPlayer->setOp()`: use `Server` APIs instead
+    - `Player->addActionBarMessage()`: `sendActionBarMessage()`に置き換えられました。
+    - `Player->addSubTitle()`: `sendSubTitle()`に置き換えられました。
+    - `Player->addTitle()`: `sendTitle()`に置き換えられました。
+    - `Player->getAddress()`: `NetworkSession->getIp()`に置き換えられました。
+    - `Player->getPing()`: `NetworkSession`に移動されました。
+    - `Player->getPort()`: `NetworkSession`に移動されました。
+    - `Player->updatePing()`: `NetworkSession`に移動されました。
+    - `Player->dataPacket()`: `NetworkSession->sendDataPacket()`に置き換えられました。
+    - `Player->sendDataPacket()`: `NetworkSession->sendDataPacket()`に置き換えられました。
+    - `Player->updateNextPosition()`: `Player->handleMovement()`を代わりに使用してください。
+    - `IPlayer->isWhitelisted()`: `Server->isWhitelisted()`を代わりに使用してください。
+    - `IPlayer->setWhitelisted()`: `Server->setWhitelisted()`を代わりに使用してください。
+    - `IPlayer->isBanned()`: これはネームBANのみをチェックしプラグインによる独自のBANシステムについて把握していなかったため信頼性に欠けていました。`Server->getNameBans()->isBanned()`と`Server->getIPBans()->isBanned()`を代わりに使用してください。
+    - `IPlayer->setBanned()`: `Server`のAPIを代わりに使用してください。
+    - `IPlayer->isOp()`: `Server`のAPIを代わりに使用してください。
+    - `IPlayer->setOp()`: `Server`のAPIを代わりに使用してください。
