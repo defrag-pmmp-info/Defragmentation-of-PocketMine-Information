@@ -921,3 +921,37 @@ permissions:
     - `AsyncTask->getFromThreadStore()`: `AsyncTask->worker->getFromThreadStore()` を代わりに使用してください。
     - `AsyncTask->removeFromThreadStore()`: `AsyncTask->worker->removeFromThreadStore()` を代わりに使用してください。
     - `AsyncTask->saveToThreadStore()`: `AsyncTask->worker->saveToThreadStore()` を代わりに使用してください。
+
+#### Server
+- 権限システムに依存しない、新しいチャット配信APIが実装されました。
+    - 以下のAPIメソッドが追加されました。
+      - `subscribeToBroadcastChannel()` - チャット（及びその他の種類の）メッセージを受信するために、`CommandSender`をサブスクライブできます。
+      - `unsubscribeFromBroadcastChannel()`
+      - `unsubscribeFromAllBroadcastChannels()`
+      - `getBroadcastChannelSubscribers()`
+    - `Player`に`pocketmine.broadcast.*`のいずれかの権限を与えると、自動的に対応するブロードキャストチャンネルに加入できます。（権限を削除すると登録も解除されます）
+    - 権限を使わずにカスタムブロードキャストチャンネルを作成・登録できるようになりました。
+    - しかし、`Player`達が適切な権限を持っていなければ、内蔵ブロードキャストチャンネルから自動的に登録解除されるでしょう。
+    - カスタムブロードキャストチャンネルからの自動的な登録/登録解除は新しい`Permissible`権限再計算コールバックAPI使用して実装できます。
+- 以下のAPIメソッドは削除されました。
+    - `reloadWhitelist()`
+    - `getLevelMetadata()`
+    - `getPlayerMetadata()`
+    - `getEntityMetadata()`
+    - `getDefaultGamemode()`
+    - `getLoggedInPlayers()`
+    - `onPlayerLogout()`
+    - `addPlayer()`
+    - `removePlayer()`
+    - `reload()`
+    - `getSpawnRadius()`
+    - `enablePlugin()`
+    - `disablePlugin()`
+    - `getGamemodeString()` - `pocketmine\player\GameMode->getTranslationKey()` に置き換えられました。
+    - `getGamemodeName()` - `pocketmine\player\GameMode->name()`　に置き換えられました。
+    - `getGamemodeFromString()` - `GameMode::fromString()` に置き換えられました。
+    - `broadcast()` - `broadcastMessage()` を代わりに使用してください。
+- 以下のAPIメソッドは変更されました。
+    - `getOfflinePlayerData()` 存在しないデータを生成しなくなりました。
+- 以下のAPIメソッドは名前が変更されました。
+    - `getPlayer()` -> `getPlayerByPrefix()` (可能な場所では `getPlayerExact()` を代わりに使用することを検討してください)
