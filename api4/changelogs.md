@@ -889,3 +889,35 @@ permissions:
     - `PluginManager->unsubscribeFromDefaultPerms()`: `PermissionManager`を代わりに使用してください。
     - `PluginManager->unsubscribeFromPermission()`: `PermissionManager`を代わりに使用してください。
 - `PluginBase->onEnable()`や`PluginBase->onLoad()`で例外を投げることは許可されなくなりました。現在では例外を投げるとサーバーがクラッシュします。
+
+#### Scheduler
+##### AsyncTaskのためのスレッドローカルストレージ
+- TLSは自己完結し、より安定し、使いやすくなるようにこのリリースで完全に書き直されました。
+- そして、よりシンプルなプロパティのように振る舞います。`storeLocal()` は書き込み、 `fetchLocal()` は読み込みです。
+- 自己完結し、その後クリーンアップするために非同期プールに依存もしません。
+- 値は `AsyncTask` がガベージコレクトされたときに、通常のプロパティと同様に自動的に削除されます。
+- 複数の値を文字列の名前で識別して保存できます。
+- `fetchLocal()` は複数回使えるようになりました。保存されている値を削除することはなくなりました。
+- 以下のクラスは削除されました。
+    - `FileWriteTask`
+- 以下のメソッドは削除されました。
+    - `AsyncTask->peekLocal()`: `fetchLocal()` を代わりに使用してください。
+- 以下のメソッドはシグネチャが変わりました。
+    - `AsyncTask->storeLocal()` は `storeLocal(string $key, mixed $complexData) : void` をシグネチャに持ちます。
+    - `AsyncTask->fetchLocal()` は `fetchLocal(string $key) : mixed` をシグネチャに持ちます。
+
+##### その他の変更
+- `AsyncPool` は新しく、かなり効率の良いアルゴリズムをタスクコレクションに使用します。
+- `BulkCurlTask` のコンストラクタ引数 `$complexData` は削除されました。
+- `BulkCurlTask->__construct()` は `mixed[]` の代わりに `BulkCurlTaskOperation[]` を受け取ります。
+- `CancelTaskException` が追加されました。これは、 `Task::onRun()` からタスクをキャンセルするために投げられます。（特に `ClosureTask` に便利です）
+- `pocketmine\Collectable` は削除され、 `AsyncTask` から継承されなくなりました。
+- 以下のフックが追加されました。
+    - `AsyncTask->onError()`: メインスレッドにおいて非同期処理でメモリ不足などの制御不能なエラーを検知したときに呼び出されます。
+- 以下のフックはシグネチャが変わりました。
+    - `AsyncTask->onCompletion()` は `Server` パラメーターを受け取らなくなり、 `void` を戻り値の型とします。
+    - `AsyncTask->onProgressUpdate()` は `Server` パラメーターを受け取らなくなり、 `void` を戻り値の型とします。
+- 以下のAPIメソッドは削除されました。
+    - `AsyncTask->getFromThreadStore()`: `AsyncTask->worker->getFromThreadStore()` を代わりに使用してください。
+    - `AsyncTask->removeFromThreadStore()`: `AsyncTask->worker->removeFromThreadStore()` を代わりに使用してください。
+    - `AsyncTask->saveToThreadStore()`: `AsyncTask->worker->saveToThreadStore()` を代わりに使用してください。
