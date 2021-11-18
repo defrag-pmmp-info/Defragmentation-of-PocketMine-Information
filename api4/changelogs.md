@@ -851,3 +851,41 @@ permissions:
     - `IPlayer->setBanned()`: `Server`のAPIを代わりに使用してください。
     - `IPlayer->isOp()`: `Server`のAPIを代わりに使用してください。
     - `IPlayer->setOp()`: `Server`のAPIを代わりに使用してください。
+    
+#### Plugin
+- APIバージョンのチェックがより厳格になりました。現在では同じメジャーバージョン内における複数の最小バージョンの宣言をすることができなくなりました。複数宣言した場合、プラグインは読み込みに失敗し、`Multiple minimum API versions found for some major versions`というメッセージが表示されます。
+- `plugin.yml`のYAMLコマンドのロードは`PluginBase`に取り込まれました。
+- `PluginManager->registerEvent()`はよりシンプルなシグネチャを持つようになります: `registerEvent(string $event, \Closure $handler, int $priority, Plugin $plugin, bool $handleCancelled = false)`。 与えられるクロージャーはその唯一のパラメータとしてその特定のイベントのみを受け取る必要があります. 詳しくは[Event APIの変更](#event)をご覧ください。
+- 以下のクラスは削除されました。
+    - `PluginLogger`
+- 以下の定数は削除されました。
+    - `PluginLoadOrder::STARTUP` - `PluginEnableOrder::STARTUP()`を使用してください。
+    - `PluginLoadOrder::POSTWORLD` - `PluginEnableOrder::POSTWORLD()`を使用してください。
+- 以下のインターフェース要求は削除されました。
+    - `Plugin->onEnable()`: `PluginBase`に取り込まれました。
+    - `Plugin->onDisable()`: 同上
+    - `Plugin->onLoad()`: 同上
+    - `Plugin->getServer()`は実装が要求されなくなりました。利便性のために`PluginBase`に実装されます。
+    - `Plugin->isDisabled()`は削除されました。(`Plugin->isEnabled()`を代わりに使用してください)
+    - `Plugin`は`CommandExecutor`を継承しなくなりました。つまりこれは`Plugin`実装は`onCommand()`をこれからは実装する必要がないことを表します。
+- 以下のフックメソッドはアクセス権が変更されました。
+    - `PluginBase->onEnable()`は`public`から`protected`に変更されました。
+    - `PluginBase->onDisable()`は`public`から`protected`に変更されました。
+    - `PluginBase->onLoad()`は`public`に`protected`変更されました。
+- 以下のフックメソッドはリネームされました。
+    - `Plugin->setEnabled()` -> `Plugin->onEnableStateChange()` - この変更はプラグイン開発者に、このフックメソッドを誤って使わせないようにしこのメソッドが行うことをより正確に説明する名前を与えるためのものです。
+- 以下の(非推奨の)APIメソッドは削除されました。
+    - `PluginManager->callEvent()`: `Event->call()`を代わりに使用してください。
+    - `PluginManager->addPermission()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->getDefaultPermSubscriptions()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->getDefaultPermissions()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->getPermission()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->getPermissionSubscriptions()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->getPermissions()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->recalculatePermissionDefaults()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->removePermission()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->subscribeToDefaultPerms()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->subscribeToPermission()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->unsubscribeFromDefaultPerms()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->unsubscribeFromPermission()`: `PermissionManager`を代わりに使用してください。
+- `PluginBase->onEnable()`や`PluginBase->onLoad()`で例外を投げることは許可されなくなりました。現在では例外を投げるとサーバーがクラッシュします。
