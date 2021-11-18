@@ -890,8 +890,8 @@ permissions:
     - `PluginManager->unsubscribeFromPermission()`: `PermissionManager`を代わりに使用してください。
 - `PluginBase->onEnable()`や`PluginBase->onLoad()`で例外を投げることは許可されなくなりました。現在では例外を投げるとサーバーがクラッシュします。
 
-### Scheduler
-#### AsyncTaskのためのスレッドローカルストレージ
+#### Scheduler
+##### AsyncTaskのためのスレッドローカルストレージ
 - TLSは自己完結し、より安定し、使いやすくなるようにこのリリースで完全に書き直されました。
 - そして、よりシンプルなプロパティのように振る舞います。`storeLocal()` は書き込み、 `fetchLocal()` は読み込みです。
 - 自己完結し、その後クリーンアップするために非同期プールに依存もしません。
@@ -906,7 +906,7 @@ permissions:
     - `AsyncTask->storeLocal()` は `storeLocal(string $key, mixed $complexData) : void` をシグネチャに持ちます。
     - `AsyncTask->fetchLocal()` は `fetchLocal(string $key) : mixed` をシグネチャに持ちます。
 
-#### その他の変更
+##### その他の変更
 - `AsyncPool` は新しく、かなり効率の良いアルゴリズムをタスクコレクションに使用します。
 - `BulkCurlTask` のコンストラクタ引数 `$complexData` は削除されました。
 - `BulkCurlTask->__construct()` は `mixed[]` の代わりに `BulkCurlTaskOperation[]` を受け取ります。
