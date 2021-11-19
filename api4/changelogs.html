@@ -932,6 +932,47 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#plugin" class="md-nav__link">
+    Plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scheduler" class="md-nav__link">
+    Scheduler
+  </a>
+  
+    <nav class="md-nav" aria-label="Scheduler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asynctask" class="md-nav__link">
+    AsyncTaskのためのスレッドローカルストレージ
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    その他の変更
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server" class="md-nav__link">
+    Server
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1448,6 +1489,47 @@
           <li class="md-nav__item">
   <a href="#player" class="md-nav__link">
     Player
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin" class="md-nav__link">
+    Plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scheduler" class="md-nav__link">
+    Scheduler
+  </a>
+  
+    <nav class="md-nav" aria-label="Scheduler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asynctask" class="md-nav__link">
+    AsyncTaskのためのスレッドローカルストレージ
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    その他の変更
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server" class="md-nav__link">
+    Server
   </a>
   
 </li>
@@ -2546,6 +2628,146 @@ children:
 </ul>
 </li>
 </ul>
+<h4 id="plugin">Plugin</h4>
+<ul>
+<li>APIバージョンのチェックがより厳格になりました。現在では同じメジャーバージョン内における複数の最小バージョンの宣言をすることができなくなりました。複数宣言した場合、プラグインは読み込みに失敗し、<code>Multiple minimum API versions found for some major versions</code>というメッセージが表示されます。</li>
+<li><code>plugin.yml</code>のYAMLコマンドのロードは<code>PluginBase</code>に取り込まれました。</li>
+<li><code>PluginManager-&gt;registerEvent()</code>はよりシンプルなシグネチャを持つようになります: <code>registerEvent(string $event, \Closure $handler, int $priority, Plugin $plugin, bool $handleCancelled = false)</code>。 与えられるクロージャーはその唯一のパラメータとしてその特定のイベントのみを受け取る必要があります. 詳しくは<a href="#event">Event APIの変更</a>をご覧ください。</li>
+<li>以下のクラスは削除されました。<ul>
+<li><code>PluginLogger</code></li>
+</ul>
+</li>
+<li>以下の定数は削除されました。<ul>
+<li><code>PluginLoadOrder::STARTUP</code> - <code>PluginEnableOrder::STARTUP()</code>を使用してください。</li>
+<li><code>PluginLoadOrder::POSTWORLD</code> - <code>PluginEnableOrder::POSTWORLD()</code>を使用してください。</li>
+</ul>
+</li>
+<li>以下のインターフェース要求は削除されました。<ul>
+<li><code>Plugin-&gt;onEnable()</code>: <code>PluginBase</code>に取り込まれました。</li>
+<li><code>Plugin-&gt;onDisable()</code>: 同上</li>
+<li><code>Plugin-&gt;onLoad()</code>: 同上</li>
+<li><code>Plugin-&gt;getServer()</code>は実装が要求されなくなりました。利便性のために<code>PluginBase</code>に実装されます。</li>
+<li><code>Plugin-&gt;isDisabled()</code>は削除されました。(<code>Plugin-&gt;isEnabled()</code>を代わりに使用してください)</li>
+<li><code>Plugin</code>は<code>CommandExecutor</code>を継承しなくなりました。つまりこれは<code>Plugin</code>実装は<code>onCommand()</code>をこれからは実装する必要がないことを表します。</li>
+</ul>
+</li>
+<li>以下のフックメソッドはアクセス権が変更されました。<ul>
+<li><code>PluginBase-&gt;onEnable()</code>は<code>public</code>から<code>protected</code>に変更されました。</li>
+<li><code>PluginBase-&gt;onDisable()</code>は<code>public</code>から<code>protected</code>に変更されました。</li>
+<li><code>PluginBase-&gt;onLoad()</code>は<code>public</code>に<code>protected</code>変更されました。</li>
+</ul>
+</li>
+<li>以下のフックメソッドはリネームされました。<ul>
+<li><code>Plugin-&gt;setEnabled()</code> -&gt; <code>Plugin-&gt;onEnableStateChange()</code> - この変更はプラグイン開発者に、このフックメソッドを誤って使わせないようにしこのメソッドが行うことをより正確に説明する名前を与えるためのものです。</li>
+</ul>
+</li>
+<li>以下の(非推奨の)APIメソッドは削除されました。<ul>
+<li><code>PluginManager-&gt;callEvent()</code>: <code>Event-&gt;call()</code>を代わりに使用してください。</li>
+<li><code>PluginManager-&gt;addPermission()</code>: <code>PermissionManager</code>を代わりに使用してください。</li>
+<li><code>PluginManager-&gt;getDefaultPermSubscriptions()</code>: <code>PermissionManager</code>を代わりに使用してください。</li>
+<li><code>PluginManager-&gt;getDefaultPermissions()</code>: <code>PermissionManager</code>を代わりに使用してください。</li>
+<li><code>PluginManager-&gt;getPermission()</code>: <code>PermissionManager</code>を代わりに使用してください。</li>
+<li><code>PluginManager-&gt;getPermissionSubscriptions()</code>: <code>PermissionManager</code>を代わりに使用してください。</li>
+<li><code>PluginManager-&gt;getPermissions()</code>: <code>PermissionManager</code>を代わりに使用してください。</li>
+<li><code>PluginManager-&gt;recalculatePermissionDefaults()</code>: <code>PermissionManager</code>を代わりに使用してください。</li>
+<li><code>PluginManager-&gt;removePermission()</code>: <code>PermissionManager</code>を代わりに使用してください。</li>
+<li><code>PluginManager-&gt;subscribeToDefaultPerms()</code>: <code>PermissionManager</code>を代わりに使用してください。</li>
+<li><code>PluginManager-&gt;subscribeToPermission()</code>: <code>PermissionManager</code>を代わりに使用してください。</li>
+<li><code>PluginManager-&gt;unsubscribeFromDefaultPerms()</code>: <code>PermissionManager</code>を代わりに使用してください。</li>
+<li><code>PluginManager-&gt;unsubscribeFromPermission()</code>: <code>PermissionManager</code>を代わりに使用してください。</li>
+</ul>
+</li>
+<li><code>PluginBase-&gt;onEnable()</code>や<code>PluginBase-&gt;onLoad()</code>で例外を投げることは許可されなくなりました。現在では例外を投げるとサーバーがクラッシュします。</li>
+</ul>
+<h4 id="scheduler">Scheduler</h4>
+<h5 id="asynctask">AsyncTaskのためのスレッドローカルストレージ</h5>
+<ul>
+<li>TLSは自己完結し、より安定し、使いやすくなるようにこのリリースで完全に書き直されました。</li>
+<li>そして、よりシンプルなプロパティのように振る舞います。<code>storeLocal()</code> は書き込み、 <code>fetchLocal()</code> は読み込みです。</li>
+<li>自己完結し、その後クリーンアップするために非同期プールに依存もしません。</li>
+<li>値は <code>AsyncTask</code> がガベージコレクトされたときに、通常のプロパティと同様に自動的に削除されます。</li>
+<li>複数の値を文字列の名前で識別して保存できます。</li>
+<li><code>fetchLocal()</code> は複数回使えるようになりました。保存されている値を削除することはなくなりました。</li>
+<li>以下のクラスは削除されました。<ul>
+<li><code>FileWriteTask</code></li>
+</ul>
+</li>
+<li>以下のメソッドは削除されました。<ul>
+<li><code>AsyncTask-&gt;peekLocal()</code>: <code>fetchLocal()</code> を代わりに使用してください。</li>
+</ul>
+</li>
+<li>以下のメソッドはシグネチャが変わりました。<ul>
+<li><code>AsyncTask-&gt;storeLocal()</code> は <code>storeLocal(string $key, mixed $complexData) : void</code> をシグネチャに持ちます。</li>
+<li><code>AsyncTask-&gt;fetchLocal()</code> は <code>fetchLocal(string $key) : mixed</code> をシグネチャに持ちます。</li>
+</ul>
+</li>
+</ul>
+<h5 id="_18">その他の変更</h5>
+<ul>
+<li><code>AsyncPool</code> は新しく、かなり効率の良いアルゴリズムをタスクコレクションに使用します。</li>
+<li><code>BulkCurlTask</code> のコンストラクタ引数 <code>$complexData</code> は削除されました。</li>
+<li><code>BulkCurlTask-&gt;__construct()</code> は <code>mixed[]</code> の代わりに <code>BulkCurlTaskOperation[]</code> を受け取ります。</li>
+<li><code>CancelTaskException</code> が追加されました。これは、 <code>Task::onRun()</code> からタスクをキャンセルするために投げられます。（特に <code>ClosureTask</code> に便利です）</li>
+<li><code>pocketmine\Collectable</code> は削除され、 <code>AsyncTask</code> から継承されなくなりました。</li>
+<li>以下のフックが追加されました。<ul>
+<li><code>AsyncTask-&gt;onError()</code>: メインスレッドにおいて非同期処理でメモリ不足などの制御不能なエラーを検知したときに呼び出されます。</li>
+</ul>
+</li>
+<li>以下のフックはシグネチャが変わりました。<ul>
+<li><code>AsyncTask-&gt;onCompletion()</code> は <code>Server</code> パラメーターを受け取らなくなり、 <code>void</code> を戻り値の型とします。</li>
+<li><code>AsyncTask-&gt;onProgressUpdate()</code> は <code>Server</code> パラメーターを受け取らなくなり、 <code>void</code> を戻り値の型とします。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは削除されました。<ul>
+<li><code>AsyncTask-&gt;getFromThreadStore()</code>: <code>AsyncTask-&gt;worker-&gt;getFromThreadStore()</code> を代わりに使用してください。</li>
+<li><code>AsyncTask-&gt;removeFromThreadStore()</code>: <code>AsyncTask-&gt;worker-&gt;removeFromThreadStore()</code> を代わりに使用してください。</li>
+<li><code>AsyncTask-&gt;saveToThreadStore()</code>: <code>AsyncTask-&gt;worker-&gt;saveToThreadStore()</code> を代わりに使用してください。</li>
+</ul>
+</li>
+</ul>
+<h4 id="server">Server</h4>
+<ul>
+<li>権限システムに依存しない、新しいチャット配信APIが実装されました。<ul>
+<li>以下のAPIメソッドが追加されました。</li>
+<li><code>subscribeToBroadcastChannel()</code> - チャット（及びその他の種類の）メッセージを受信するために、<code>CommandSender</code>をサブスクライブできます。</li>
+<li><code>unsubscribeFromBroadcastChannel()</code></li>
+<li><code>unsubscribeFromAllBroadcastChannels()</code></li>
+<li><code>getBroadcastChannelSubscribers()</code></li>
+<li><code>Player</code>に<code>pocketmine.broadcast.*</code>のいずれかの権限を与えると、自動的に対応するブロードキャストチャンネルに加入できます。（権限を削除すると登録も解除されます）</li>
+<li>権限を使わずにカスタムブロードキャストチャンネルを作成・登録できるようになりました。</li>
+<li>しかし、<code>Player</code>達が適切な権限を持っていなければ、内蔵ブロードキャストチャンネルから自動的に登録解除されるでしょう。</li>
+<li>カスタムブロードキャストチャンネルからの自動的な登録/登録解除は新しい<code>Permissible</code>権限再計算コールバックAPI使用して実装できます。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは削除されました。<ul>
+<li><code>reloadWhitelist()</code></li>
+<li><code>getLevelMetadata()</code></li>
+<li><code>getPlayerMetadata()</code></li>
+<li><code>getEntityMetadata()</code></li>
+<li><code>getDefaultGamemode()</code></li>
+<li><code>getLoggedInPlayers()</code></li>
+<li><code>onPlayerLogout()</code></li>
+<li><code>addPlayer()</code></li>
+<li><code>removePlayer()</code></li>
+<li><code>reload()</code></li>
+<li><code>getSpawnRadius()</code></li>
+<li><code>enablePlugin()</code></li>
+<li><code>disablePlugin()</code></li>
+<li><code>getGamemodeString()</code> - <code>pocketmine\player\GameMode-&gt;getTranslationKey()</code> に置き換えられました。</li>
+<li><code>getGamemodeName()</code> - <code>pocketmine\player\GameMode-&gt;name()</code>　に置き換えられました。</li>
+<li><code>getGamemodeFromString()</code> - <code>GameMode::fromString()</code> に置き換えられました。</li>
+<li><code>broadcast()</code> - <code>broadcastMessage()</code> を代わりに使用してください。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは変更されました。<ul>
+<li><code>getOfflinePlayerData()</code> 存在しないデータを生成しなくなりました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは名前が変更されました。<ul>
+<li><code>getPlayer()</code> -&gt; <code>getPlayerByPrefix()</code> (可能な場所では <code>getPlayerExact()</code> を代わりに使用することを検討してください)</li>
+</ul>
+</li>
+</ul>
                 
                   
                     
@@ -2554,7 +2776,7 @@ children:
 <div class="md-source-date">
   <small>
     
-      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">November 17, 2021 11:34:41</span>
+      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">November 18, 2021 17:09:36</span>
       
         <br>作成した: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 18, 2021 08:27:31</span> 
       
@@ -2568,7 +2790,7 @@ children:
   
     <div class="md-source-date">
       <small>
-          Authors: <span class='git-page-authors git-authors'><a href='mailto:famima65536@gmail.com'>famima65536</a> (98.39%), <a href='mailto:maatinosippo@gmail.com'>suinua</a> (1.11%), <a href='mailto:10294990+Yossi1114@users.noreply.github.com'>Yossi1114</a> (0.5%)</span>
+          Authors: <span class='git-page-authors git-authors'><a href='mailto:famima65536@gmail.com'>famima65536</a> (92.08%), <a href='mailto:hobbypopkechupki@gmail.com'>こもれび / popkechupki</a> (6.49%), <a href='mailto:maatinosippo@gmail.com'>suinua</a> (0.99%), <a href='mailto:10294990+Yossi1114@users.noreply.github.com'>Yossi1114</a> (0.44%)</span>
       </small>
     </div>
   
