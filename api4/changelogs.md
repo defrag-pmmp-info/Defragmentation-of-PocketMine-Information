@@ -851,3 +851,107 @@ permissions:
     - `IPlayer->setBanned()`: `Server`のAPIを代わりに使用してください。
     - `IPlayer->isOp()`: `Server`のAPIを代わりに使用してください。
     - `IPlayer->setOp()`: `Server`のAPIを代わりに使用してください。
+    
+#### Plugin
+- APIバージョンのチェックがより厳格になりました。現在では同じメジャーバージョン内における複数の最小バージョンの宣言をすることができなくなりました。複数宣言した場合、プラグインは読み込みに失敗し、`Multiple minimum API versions found for some major versions`というメッセージが表示されます。
+- `plugin.yml`のYAMLコマンドのロードは`PluginBase`に取り込まれました。
+- `PluginManager->registerEvent()`はよりシンプルなシグネチャを持つようになります: `registerEvent(string $event, \Closure $handler, int $priority, Plugin $plugin, bool $handleCancelled = false)`。 与えられるクロージャーはその唯一のパラメータとしてその特定のイベントのみを受け取る必要があります. 詳しくは[Event APIの変更](#event)をご覧ください。
+- 以下のクラスは削除されました。
+    - `PluginLogger`
+- 以下の定数は削除されました。
+    - `PluginLoadOrder::STARTUP` - `PluginEnableOrder::STARTUP()`を使用してください。
+    - `PluginLoadOrder::POSTWORLD` - `PluginEnableOrder::POSTWORLD()`を使用してください。
+- 以下のインターフェース要求は削除されました。
+    - `Plugin->onEnable()`: `PluginBase`に取り込まれました。
+    - `Plugin->onDisable()`: 同上
+    - `Plugin->onLoad()`: 同上
+    - `Plugin->getServer()`は実装が要求されなくなりました。利便性のために`PluginBase`に実装されます。
+    - `Plugin->isDisabled()`は削除されました。(`Plugin->isEnabled()`を代わりに使用してください)
+    - `Plugin`は`CommandExecutor`を継承しなくなりました。つまりこれは`Plugin`実装は`onCommand()`をこれからは実装する必要がないことを表します。
+- 以下のフックメソッドはアクセス権が変更されました。
+    - `PluginBase->onEnable()`は`public`から`protected`に変更されました。
+    - `PluginBase->onDisable()`は`public`から`protected`に変更されました。
+    - `PluginBase->onLoad()`は`public`に`protected`変更されました。
+- 以下のフックメソッドはリネームされました。
+    - `Plugin->setEnabled()` -> `Plugin->onEnableStateChange()` - この変更はプラグイン開発者に、このフックメソッドを誤って使わせないようにしこのメソッドが行うことをより正確に説明する名前を与えるためのものです。
+- 以下の(非推奨の)APIメソッドは削除されました。
+    - `PluginManager->callEvent()`: `Event->call()`を代わりに使用してください。
+    - `PluginManager->addPermission()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->getDefaultPermSubscriptions()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->getDefaultPermissions()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->getPermission()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->getPermissionSubscriptions()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->getPermissions()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->recalculatePermissionDefaults()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->removePermission()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->subscribeToDefaultPerms()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->subscribeToPermission()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->unsubscribeFromDefaultPerms()`: `PermissionManager`を代わりに使用してください。
+    - `PluginManager->unsubscribeFromPermission()`: `PermissionManager`を代わりに使用してください。
+- `PluginBase->onEnable()`や`PluginBase->onLoad()`で例外を投げることは許可されなくなりました。現在では例外を投げるとサーバーがクラッシュします。
+
+#### Scheduler
+##### AsyncTaskのためのスレッドローカルストレージ
+- TLSは自己完結し、より安定し、使いやすくなるようにこのリリースで完全に書き直されました。
+- そして、よりシンプルなプロパティのように振る舞います。`storeLocal()` は書き込み、 `fetchLocal()` は読み込みです。
+- 自己完結し、その後クリーンアップするために非同期プールに依存もしません。
+- 値は `AsyncTask` がガベージコレクトされたときに、通常のプロパティと同様に自動的に削除されます。
+- 複数の値を文字列の名前で識別して保存できます。
+- `fetchLocal()` は複数回使えるようになりました。保存されている値を削除することはなくなりました。
+- 以下のクラスは削除されました。
+    - `FileWriteTask`
+- 以下のメソッドは削除されました。
+    - `AsyncTask->peekLocal()`: `fetchLocal()` を代わりに使用してください。
+- 以下のメソッドはシグネチャが変わりました。
+    - `AsyncTask->storeLocal()` は `storeLocal(string $key, mixed $complexData) : void` をシグネチャに持ちます。
+    - `AsyncTask->fetchLocal()` は `fetchLocal(string $key) : mixed` をシグネチャに持ちます。
+
+##### その他の変更
+- `AsyncPool` は新しく、かなり効率の良いアルゴリズムをタスクコレクションに使用します。
+- `BulkCurlTask` のコンストラクタ引数 `$complexData` は削除されました。
+- `BulkCurlTask->__construct()` は `mixed[]` の代わりに `BulkCurlTaskOperation[]` を受け取ります。
+- `CancelTaskException` が追加されました。これは、 `Task::onRun()` からタスクをキャンセルするために投げられます。（特に `ClosureTask` に便利です）
+- `pocketmine\Collectable` は削除され、 `AsyncTask` から継承されなくなりました。
+- 以下のフックが追加されました。
+    - `AsyncTask->onError()`: メインスレッドにおいて非同期処理でメモリ不足などの制御不能なエラーを検知したときに呼び出されます。
+- 以下のフックはシグネチャが変わりました。
+    - `AsyncTask->onCompletion()` は `Server` パラメーターを受け取らなくなり、 `void` を戻り値の型とします。
+    - `AsyncTask->onProgressUpdate()` は `Server` パラメーターを受け取らなくなり、 `void` を戻り値の型とします。
+- 以下のAPIメソッドは削除されました。
+    - `AsyncTask->getFromThreadStore()`: `AsyncTask->worker->getFromThreadStore()` を代わりに使用してください。
+    - `AsyncTask->removeFromThreadStore()`: `AsyncTask->worker->removeFromThreadStore()` を代わりに使用してください。
+    - `AsyncTask->saveToThreadStore()`: `AsyncTask->worker->saveToThreadStore()` を代わりに使用してください。
+
+#### Server
+- 権限システムに依存しない、新しいチャット配信APIが実装されました。
+    - 以下のAPIメソッドが追加されました。
+      - `subscribeToBroadcastChannel()` - チャット（及びその他の種類の）メッセージを受信するために、`CommandSender`をサブスクライブできます。
+      - `unsubscribeFromBroadcastChannel()`
+      - `unsubscribeFromAllBroadcastChannels()`
+      - `getBroadcastChannelSubscribers()`
+    - `Player`に`pocketmine.broadcast.*`のいずれかの権限を与えると、自動的に対応するブロードキャストチャンネルに加入できます。（権限を削除すると登録も解除されます）
+    - 権限を使わずにカスタムブロードキャストチャンネルを作成・登録できるようになりました。
+    - しかし、`Player`達が適切な権限を持っていなければ、内蔵ブロードキャストチャンネルから自動的に登録解除されるでしょう。
+    - カスタムブロードキャストチャンネルからの自動的な登録/登録解除は新しい`Permissible`権限再計算コールバックAPI使用して実装できます。
+- 以下のAPIメソッドは削除されました。
+    - `reloadWhitelist()`
+    - `getLevelMetadata()`
+    - `getPlayerMetadata()`
+    - `getEntityMetadata()`
+    - `getDefaultGamemode()`
+    - `getLoggedInPlayers()`
+    - `onPlayerLogout()`
+    - `addPlayer()`
+    - `removePlayer()`
+    - `reload()`
+    - `getSpawnRadius()`
+    - `enablePlugin()`
+    - `disablePlugin()`
+    - `getGamemodeString()` - `pocketmine\player\GameMode->getTranslationKey()` に置き換えられました。
+    - `getGamemodeName()` - `pocketmine\player\GameMode->name()`　に置き換えられました。
+    - `getGamemodeFromString()` - `GameMode::fromString()` に置き換えられました。
+    - `broadcast()` - `broadcastMessage()` を代わりに使用してください。
+- 以下のAPIメソッドは変更されました。
+    - `getOfflinePlayerData()` 存在しないデータを生成しなくなりました。
+- 以下のAPIメソッドは名前が変更されました。
+    - `getPlayer()` -> `getPlayerByPrefix()` (可能な場所では `getPlayerExact()` を代わりに使用することを検討してください)
