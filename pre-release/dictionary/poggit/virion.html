@@ -1,0 +1,1336 @@
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.4">
+    
+    
+      
+        <title>Virion - defrag-pmmp-info/Defragmentation-of-PocketMine-Information</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.db9e7362.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-material.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#virion" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href="../../index.html" title="defrag-pmmp-info/Defragmentation-of-PocketMine-Information" class="md-header__button md-logo" aria-label="defrag-pmmp-info/Defragmentation-of-PocketMine-Information" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            defrag-pmmp-info/Defragmentation-of-PocketMine-Information
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Virion
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="クリア" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            検索を初期化
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/defrag-pmmp-info/Defragmentation-of-PocketMine-Information/" title="リポジトリへ" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="ナビゲーション" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="defrag-pmmp-info/Defragmentation-of-PocketMine-Information" class="md-nav__button md-logo" aria-label="defrag-pmmp-info/Defragmentation-of-PocketMine-Information" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    defrag-pmmp-info/Defragmentation-of-PocketMine-Information
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/defrag-pmmp-info/Defragmentation-of-PocketMine-Information/" title="リポジトリへ" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        ようこそ
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          チュートリアル
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="チュートリアル" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          チュートリアル
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/index.html" class="md-nav__link">
+        Minecraftサーバーについて
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          サーバー構築
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="サーバー構築" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          サーバー構築
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../building/index.html" class="md-nav__link">
+        サーバー構築
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../building/build-in-api4.html" class="md-nav__link">
+        API4でのサーバー構築
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          プラグイン
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="プラグイン" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          プラグイン
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugin/index.html" class="md-nav__link">
+        プラグイン
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugin/awesome-plugins.html" class="md-nav__link">
+        おすすめプラグインリスト
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          プラグイン開発
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="プラグイン開発" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          プラグイン開発
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugin-develop/index.html" class="md-nav__link">
+        プラグイン開発の基本
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugin-develop/api-versioning.html" class="md-nav__link">
+        APIバージョニング: API versioning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugin-develop/development-faq.html" class="md-nav__link">
+        PocketMineプラグイン開発FAQ
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugin-develop/language.html" class="md-nav__link">
+        多言語対応
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          API4
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API4" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          API4
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api4/index.html" class="md-nav__link">
+        API4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api4/changelogs.html" class="md-nav__link">
+        API4 Changelogs全訳(41%完了)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          単項記事
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="単項記事" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          単項記事
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_1">
+          Poggit
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Poggit" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_1">
+          <span class="md-nav__icon md-icon"></span>
+          Poggit
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="poggit.html" class="md-nav__link">
+        Poggit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Virion
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="virion.html" class="md-nav__link md-nav__link--active">
+        Virion
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#virion_1" class="md-nav__link">
+    Virionの目的
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    前置き
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    ワークフロー
+  </a>
+  
+    <nav class="md-nav" aria-label="ワークフロー">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#virion_2" class="md-nav__link">
+    Virionの開発
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#virion_3" class="md-nav__link">
+    Virionユーザの開発
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#virion_4" class="md-nav__link">
+    Virionやプラグインのテスト
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#poggitvirion" class="md-nav__link">
+    PoggitでVirionをビルドする
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#virion_5" class="md-nav__link">
+    ローカルでVirionをビルドする
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#poggitvirion_1" class="md-nav__link">
+    PoggitでVirionユーザをビルドする
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#virion_6" class="md-nav__link">
+    ローカルでVirionユーザをコンパイルする
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cli" class="md-nav__link">
+    CLI機能の拡張
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    制限事項
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    付録
+  </a>
+  
+    <nav class="md-nav" aria-label="付録">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    構文的参照
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../link.html" class="md-nav__link">
+        リンク集
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../print_page.html" class="md-nav__link">
+        Print as PDF
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#virion_1" class="md-nav__link">
+    Virionの目的
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    前置き
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    ワークフロー
+  </a>
+  
+    <nav class="md-nav" aria-label="ワークフロー">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#virion_2" class="md-nav__link">
+    Virionの開発
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#virion_3" class="md-nav__link">
+    Virionユーザの開発
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#virion_4" class="md-nav__link">
+    Virionやプラグインのテスト
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#poggitvirion" class="md-nav__link">
+    PoggitでVirionをビルドする
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#virion_5" class="md-nav__link">
+    ローカルでVirionをビルドする
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#poggitvirion_1" class="md-nav__link">
+    PoggitでVirionユーザをビルドする
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#virion_6" class="md-nav__link">
+    ローカルでVirionユーザをコンパイルする
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cli" class="md-nav__link">
+    CLI機能の拡張
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    制限事項
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    付録
+  </a>
+  
+    <nav class="md-nav" aria-label="付録">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    構文的参照
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+  
+                
+                  <a href="https://github.com/defrag-pmmp-info/Defragmentation-of-PocketMine-Information/edit/pre-release/dictionary/poggit/virion.md" title="編集" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="virion">Virion</h1>
+<p>Poggit Virion(以下Virion)はPocketMineプラグイン専用のPHPライブラリです。
+このドキュメントでは、Virionの開発と使用についてのワークフローについての情報を提供します。</p>
+<h2 id="virion_1">Virionの目的</h2>
+<p>ソフトウェア開発においてライブラリは素晴らしいものですが、複数のプラグインが同じライブラリを使用する場合、同じPHPランタイムで実行されるために間違ったバージョンのライブラリが使用される可能性があります。Virionフレームワークでは、クラスをシェーディング(名前空間の操作)することでこの問題を解決することを目指しています。</p>
+<h2 id="_1">前置き</h2>
+<p>Virionはプラグインや他のVirionによって使用されます。
+このドキュメントでは、<code>Virionユーザ</code>は、Virionを使用するプラグインまたはVirionを指します。</p>
+<h2 id="_2">ワークフロー</h2>
+<h3 id="virion_2">Virionの開発</h3>
+<p>Virionはメインクラスを含む必要はありませんが、virion が宣言するすべてのシンボル (クラス・インターフェース・trait・名前空間関数・名前空間定数) は、<strong>Antigen</strong>と呼ばれるVirionの名前空間、またはAntigenのサブ名前空間の下になければなりません。
+Antigenはビリオンに固有のものでなければなりません。
+他のVirionやプラグインは、Antigenの名前空間またはその下位の名前空間の下でシンボルを宣言することはできません。</p>
+<p>名前空間内に置くことができない他の名前付きグローバルリソースを登録する場合、その名前は、Virionのランタイム名前空間に依存するか、Virionユーザが提供する文字列に依存する必要があります。
+例えば、VirionがAsyncTaskスレッドストアを使用する場合、<code>AsyncTask::saveToThreadStore()</code>に渡されるキーは<strong>クラスの構文上の名前空間の参照 (<a href="#構文的参照">構文的参照</a>) から生成されるか、Virionユーザから渡された値から生成されなければなりません</strong>。
+stream_wrapper_register()`も同様のケースで、プロトコル名Virionによってハードコードされてはなりません。</p>
+<p>Virionフレームワークには、<code>PSR-0</code>のソースファイルとVirionのマニフェストファイル <code>virion.yml</code> が含まれています。
+<code>virion.yml</code>には以下の属性が含まれます。</p>
+<table>
+<thead>
+<tr>
+<th align="center">名前</th>
+<th align="center">説明</th>
+<th align="center">例</th>
+<th align="center">必須/任意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>name</code></td>
+<td align="center">現在は使用されていませんが、Poggitのプロジェクト名と一致する必要があります。</td>
+<td align="center"><code>libasynql</code></td>
+<td align="center">必須</td>
+</tr>
+<tr>
+<td align="center"><code>version</code></td>
+<td align="center">セマンティック・バージョニングを用いたVirionのバージョン</td>
+<td align="center"><code>0.1.0-beta</code></td>
+<td align="center">必須</td>
+</tr>
+<tr>
+<td align="center"><code>antigen</code></td>
+<td align="center">Antigen(名前空間)</td>
+<td align="center"><code>poggit\libasynql</code></td>
+<td align="center">必須</td>
+</tr>
+<tr>
+<td align="center"><code>api</code></td>
+<td align="center">このVirionが使用できる<strong>唯一</strong>のPocketMine APIのバージョンです。plugin.yml の<code>api</code>と同じシステムを使用します。</td>
+<td align="center"><code>[1.4.0, 2.0.0, 3.0.0-ALPHA1]</code></td>
+<td align="center"><code>api</code>か<code>php</code>のどちらか</td>
+</tr>
+<tr>
+<td align="center"><code>php</code></td>
+<td align="center">このVirionが使用できる<strong>唯一</strong>の PHP バージョンです。plugin.ymlの<code>api</code> と同様のシステムを使用します。</td>
+<td align="center"><code>[5.6, 7.0]</code></td>
+<td align="center"><code>api</code>か<code>php</code>のどちらか</td>
+</tr>
+<tr>
+<td align="center"><code>authors</code></td>
+<td align="center">製作者名。文字列かリストが指定できます。</td>
+<td align="center"><code>[SOFe, PEMapModder]</code></td>
+<td align="center">任意</td>
+</tr>
+<tr>
+<td align="center"><code>description</code></td>
+<td align="center">説明文</td>
+<td align="center"><code>Simple asynchronous SQL access</code></td>
+<td align="center">任意</td>
+</tr>
+</tbody>
+</table>
+<p>異なるプラグインで使用されている同じVirionが相互に作用してはいけません。</p>
+<h3 id="virion_3">Virionユーザの開発</h3>
+<p>virion ユーザーは、virion によって宣言されたシンボルが正常にロードされることを前提に開発することができます。ただし、これらのシンボルへのすべての参照は、<a href="#構文的参照">構文的</a>でなければなりません。</p>
+<h3 id="virion_4">Virionやプラグインのテスト</h3>
+<p>Virion用テスターの役割を果たすプラグインを作ることが推奨されます。</p>
+<p>Poggitは<a href="https://poggit.pmmp.io/p/DEVirion">DEVirion</a>を提供しています。詳しい使い方はPoggitのリリースページにあるプラグインの説明を参照してください。
+このプラグインを使うと、Phar形式またはフォルダ形式のVirionまたはプラグインでサーバーを動かすことができます。</p>
+<p><strong>デバッグ以外の理由でDEVirionを使用しないでください</strong>。
+DEVirionはvirionのクラスを影で支えているわけではないので、DEVirionを使った複数のプラグインがあっても互換性の問題が発生し、virionフレームワークの意味がなくなってしまいます。</p>
+<h3 id="poggitvirion">PoggitでVirionをビルドする</h3>
+<p>Virionプロジェクトは、プラグインプロジェクトと同様にリポジトリの<code>.poggit.yml</code>で宣言することができますが、プロジェクト属性が 2 つ追加されます。</p>
+<div class="highlight"><pre><span></span><code><span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">library</span>
+<span class="nt">model</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">virion</span>
+</code></pre></div>
+<p>例:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">projects</span><span class="p">:</span>
+  <span class="nt">libasynql</span><span class="p">:</span>
+    <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">path/to/libasynql</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">library</span>
+    <span class="nt">model</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">virion</span>
+</code></pre></div>
+<h3 id="virion_5">ローカルでVirionをビルドする</h3>
+<p>Virionをローカルで直接コンパイルする公式ツールは作成されていませんが、ビルドスクリプトは簡単に作成することができます。</p>
+<p>基本的にVirionはプラグインと同じフォーマットですが、4つの違いがあります。
+- <code>plugin.yml</code>が<code>virion.yml</code>になります。
+- <code>resources</code> はサポートされていません (将来的に追加される可能性があります)。
+- <code>virion.php</code>というファイルと、<code>virion_stub.php</code>というファイルがpharに含まれている必要があります。これらのファイルは、<a href="https://github.com/poggit/poggit/tree/beta/assets/php/"></a>からダウンロードすることができます。
+    - <code>virion_stub.php</code>はビルド用のCLIを提供します。
+    - <code>virion.php</code>には、実際にVirionを注入するコードが含まれています。
+- pharのスタブは<code>virion.php</code>を直接読み込む必要があります。以下は有効なスタブの例です。</p>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span> <span class="k">require</span> <span class="s2">&quot;phar://&quot;</span> <span class="o">.</span> <span class="no">__FILE__</span> <span class="o">.</span> <span class="s2">&quot;/virion_stub.php&quot;</span><span class="p">;</span> <span class="nx">__HALT_COMPILER</span><span class="p">();</span>
+</code></pre></div>
+<p><a href="https://github.com/poggit/poggit/blob/d587ecf3891270bd37940bf5640fca1eb7e374ad/src/poggit/ci/builder/PoggitVirionBuilder.php?utf8=%E2%9C%93#L50-L52">参考</a></p>
+<h3 id="poggitvirion_1">PoggitでVirionユーザをビルドする</h3>
+<p>Virionユーザ(Virionを使用するプラグインやVirion本体)は、<code>.poggit.yml</code>で使用するVirionを宣言することができ、プラグインのビルド時にPoggitが自動的にVirionを注入します。Virionは、プラグインプロジェクトの<code>libs</code>属性でリストアップできます。利用する各Virionの宣言は下記の属性を含みます。</p>
+<table>
+<thead>
+<tr>
+<th align="center">名前</th>
+<th align="center">説明</th>
+<th align="center">形式・例</th>
+<th align="center">必須/任意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>format</code></td>
+<td align="center">ライブラリのフォーマット</td>
+<td align="center"><code>virion</code> (現在この値のみ選択可能)</td>
+<td align="center">任意 (デフォルト：<code>virion</code>)</td>
+</tr>
+<tr>
+<td align="center"><code>vendor</code></td>
+<td align="center">Virionのインポート元</td>
+<td align="center"><code>poggit-project</code> または <code>raw</code></td>
+<td align="center">任意 (デフォルト：<code>poggit-project</code>)</td>
+</tr>
+<tr>
+<td align="center"><code>src</code> (<code>vendor</code>属性で<code>poggit-project</code>を選択した場合)</td>
+<td align="center">Poggitプロジェクトのフルパス</td>
+<td align="center"><code>/projectName</code> (同じリポジトリのプロジェクト) OR <code>repoOwner/repoName/projectName</code></td>
+<td align="center">必須</td>
+</tr>
+<tr>
+<td align="center"><code>src</code> (<code>vendor</code>属性で<code>raw</code>)を選択した場合</td>
+<td align="center">ダウンロード先URL(HTTP/HTTPS)、またはプロジェクトからの相対パス</td>
+<td align="center"><code>https://example.com/virion.phar</code> または <code>libs/virion.phar</code></td>
+<td align="center">必須</td>
+</tr>
+<tr>
+<td align="center"><code>version</code> (<code>vendor: poggit-project</code>)</td>
+<td align="center"><a href="https://getcomposer.org/doc/articles/versions.md">セマンティックバージョニング</a>で指定</td>
+<td align="center"><code>^1.0</code></td>
+<td align="center"><code>vender</code>属性で<code>poggit-project</code>を指定した場合のみ必須</td>
+</tr>
+<tr>
+<td align="center"><code>shade</code></td>
+<td align="center">シェーディングストラテジ</td>
+<td align="center"><code>syntax</code> または <code>single</code> または <code>double</code></td>
+<td align="center">任意 (デフォルト：<code>syntax</code>)</td>
+</tr>
+<tr>
+<td align="center"><code>branch</code> (<code>vendor</code>属性で<code>poggit-project</code>を選択した場合)</td>
+<td align="center">ブランチの指定</td>
+<td align="center"><code>ブランチ名</code> または <code>:default</code>(デフォルトブランチ) または <code>*</code>/<code>%</code>(全てのブランチ)</td>
+<td align="center">任意(デフォルト：<code>:default</code>)</td>
+</tr>
+<tr>
+<td align="center"><code>epitope</code></td>
+<td align="center">追加の名前空間</td>
+<td align="center"><code>.random</code>(ランダム) または <code>.sha</code>(ハッシュ) または <code>.none</code> または <code>任意の名前空間</code></td>
+<td align="center">任意 (デフォルト：<code>libs</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意</strong></p>
+<p>セキュリティ上の理由から、Poggitでのビルドではローカルのvirion.phpを無視し、常に最新のvirion.phpを使用します。</p>
+<h3 id="virion_6">ローカルでVirionユーザをコンパイルする</h3>
+<p>ビルドされたVirionには、<code>virion_stub.php</code>および<code>virion.php</code>ファイルが含まれている必要があります。これらのファイルはVirionをVirionユーザに注入するためのCLIを提供します。</p>
+<p>基本的な使い方：</p>
+<div class="highlight"><pre><span></span><code>php used_virion.phar virion_user.phar <span class="si">${</span><span class="nv">ANTIBODY_PREFIX</span><span class="si">}</span>
+</code></pre></div>
+<p><code>${ANTIBODY_PREFIX}</code>はビリオンユーザーのメインの名前空間（プラグインの場合はメインクラスの名前空間、ビリオンの場合はAntigenの名前空間）でなければなりません。バックスラッシュ等はエスケープする必要があります。</p>
+<h2 id="cli">CLI機能の拡張</h2>
+<p>Virionは、プロジェクトルートに<code>cli-map.json</code>というファイルを追加することで、カスタムコマンドを追加することができます。このファイルには、コマンド名と実行ファイルをマッピングしたオブジェクトを記述します。</p>
+<p><code>cli-map.json</code>が存在する場合、Poggitはsrcディレクトリのオートローダーのための<code>cli-autoload.php</code>を作成します。</p>
+<p>コマンド名は<code>.phar</code>で終わらないようにしてください。</p>
+<h2 id="_3">制限事項</h2>
+<ul>
+<li>Virionユーザは、自分のAPIでVirionのクラスを公開してはいけません。もしそのようなオブジェクトをAPIで公開しなければならない場合は、Virionユーザが宣言したインターフェースでラップしなければなりません。</li>
+</ul>
+<h2 id="_4">付録</h2>
+<h3 id="_5">構文的参照</h3>
+<p>基本的に、構文参照は以下のように定義されます。</p>
+<blockquote>
+<p>A <code>T_NAMESPACE</code> (<code>namespace</code>), <code>T_USE</code> (<code>use</code>) or <code>T_NS_SEPARATOR</code> (<code>\</code>) token, or <code>T_USE</code> + <code>T_FUNCTION</code> (<code>use function</code>) or <code>T_USE</code> + <code>T_CONST</code> (<code>use const</code>), followed by a consecutive series of <code>T_STRING</code> (a non-keyword set of characters, i.e. part of the namespace) and <code>T_NS_SEPARATOR</code> (<code>\</code>).</p>
+</blockquote>
+<p>Virionの<code>クラス</code>・<code>関数</code>・<code>定数</code>の名前空間を参照する際には、以下のような形式で<strong>のみ</strong>行うことができます。</p>
+<p><div class="highlight"><pre><span></span><code><span class="x">namespace name\space;</span>
+<span class="x">use name\space\Clazz;</span>
+<span class="x">use function name\space\func;</span>
+<span class="x">use const name\space\CONSTANT;</span>
+<span class="x">\name\space\Clazz::method();</span>
+</code></pre></div>
+<code>poggit\libasynql</code>というAntigenのVirionの例：</p>
+<div class="highlight"><pre><span></span><code><span class="x">// syntactic reference</span>
+<span class="x">use poggit\libasynql\SqlResult as Result; </span>
+<span class="x">$result = new Result;</span>
+
+<span class="x">// syntactic reference</span>
+<span class="x">$result = new \poggit\libasynql\SqlResult;</span>
+
+<span class="x">// syntactic reference</span>
+<span class="x">use poggit\libasynql\SqlResult as Result;</span>
+<span class="x">$class = new \ReflectionClass(Result::class);</span>
+
+<span class="x">// syntactic reference</span>
+<span class="x">$class = new \ReflectionClass(\poggit\libasynql\SqlResult::class);</span>
+
+<span class="x">// syntactic references, from the scope of a class method in poggit\libasynql\SqlResult</span>
+<span class="x">$class = new \ReflectionClass(self::class);</span>
+<span class="x">$class = new \ReflectionClass(static::class);</span>
+<span class="x">$class = new \ReflectionClass(get_class());</span>
+<span class="x">$class = new \ReflectionClass(__CLASS__);</span>
+<span class="x">$class = new \ReflectionClass(__NAMESPACE__ . &quot;\\SqlResult&quot;); // a boundary case barely acceptable</span>
+
+<span class="x">// non-syntactic reference</span>
+<span class="x">$class = new \ReflectionClass(&quot;poggit\\libasynql\\SqlResult&quot;);</span>
+<span class="x">$class = new \ReflectionClass(&#39;poggit\libasynql\SqlResult&#39;);</span>
+</code></pre></div>
+<p>名前空間からの相対参照はシェーディングされないため、<strong>Virionの名前空間への相対参照は使用しないでください</strong>。例えば、Virion のAntigenが<code>namespace poggit\libasynql</code>である場合、Virionユーザでは<code>namespace poggit</code>で始まるコードを書いてはいけません。</p>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 13, 2021 12:45:28</span>
+      
+        <br>作成した: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">October 12, 2021 08:56:52</span> 
+      
+    
+  </small>
+</div>
+                  
+                
+              
+
+  
+    <div class="md-source-date">
+      <small>
+          Authors: <span class='git-page-authors git-authors'><a href='mailto:famima65536@gmail.com'>famima65536</a> (4.8%), <a href='mailto:25810983+UramnOIL@users.noreply.github.com'>うらむんオイル</a> (95.2%)</span>
+      </small>
+    </div>
+  
+
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="フッター">
+      
+        
+        <a href="poggit.html" class="md-footer__link md-footer__link--prev" aria-label="前: Poggit" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                前
+              </span>
+              Poggit
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../link.html" class="md-footer__link md-footer__link--next" aria-label="次: リンク集" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                次
+              </span>
+              リンク集
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+<script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
+    
+
+<script src="https://unpkg.com/iframe-worker/polyfill"></script>
+<script src="../../search/search_index.js"></script>
+
+
+    
+      <script src="../../assets/javascripts/bundle.1e84347e.min.js"></script>
+      
+        <script src="../../js/print-site.js"></script>
+      
+        <script src="../../js/arithmatex.config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
