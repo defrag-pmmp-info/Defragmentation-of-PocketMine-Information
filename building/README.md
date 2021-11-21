@@ -42,13 +42,12 @@ wget https://gist.githubusercontent.com/famima65536/d1493bd3e4713f09aed2c70e428a
 ### 必要なファイルの準備
 PocketMine-MPを最低限起動するためには
 
-- **PocketMine-MP.phar** サーバーの本体
-- **PHPバイナリ** サーバーを動作させるプログラム
-- **スタート用スクリプト** サーバーを起動するためのファイル
-    - start.cmd / start.ps1 (Windows)
-    - start.sh (Linux/Mac)
+- **PocketMine-MP.phar** サーバーの本体 [GitHub](https://github.com/pmmp/PocketMine-MP/releases/latest)からダウンロード可能
+- **PHPバイナリ** サーバーを動作させるプログラム [Jenkins](https://jenkins.pmmp.io/job/PHP-8.0-Aggregate/)からダウンロード可能
+- **スタート用スクリプト** サーバーを起動するためのファイル いずれも「名前を付けて保存」やwget等でダウンロード可能
+    - [start.cmd](https://raw.githubusercontent.com/pmmp/PocketMine-MP/stable/start.sh) / [start.ps1](https://raw.githubusercontent.com/pmmp/PocketMine-MP/stable/start.ps1) (Windows)
+    - [start.sh](https://raw.githubusercontent.com/pmmp/PocketMine-MP/stable/start.sh) (Linux/Mac)
 
-以上の3つが必要です。[リンク集](/link.html)を見てダウンロードしてください。
 
 ### ディレクトリ配置
 バイナリはzip形式のため展開し、以下のようにファイルを配置します。
