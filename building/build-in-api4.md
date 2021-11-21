@@ -2,6 +2,17 @@
 ## 警告
 これは安定版リリースでは**ありません**。予期しないバグが存在する可能性があります。
 
+## https://get.pmmp.io の利用(Linux/MacOS 限定)
+`curl`または`wget`を用いてPocketMine-MPをインストールできます。
+```bash
+curl -sL https://get.pmmp.io | bash -s - -v beta
+```
+または
+```bash
+wget -q -O - https://get.pmmp.io | bash -s - -v beta
+```
+を実行してください。
+
 ## 手動インストール
 ### 必要なファイルの準備
 - **PocketMine-MP.phar**
