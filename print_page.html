@@ -65,7 +65,7 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
-    <script>function __prefix(e){return new URL("/",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
       <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
@@ -1192,15 +1192,14 @@ API4.0.0(ベータ版)での構築は<a href="#building-build-in-api4">API4.0.0�
 <h3 id="building-index-_3">必要なファイルの準備</h3>
 <p>PocketMine-MPを最低限起動するためには</p>
 <ul>
-<li><strong>PocketMine-MP.phar</strong> サーバーの本体</li>
-<li><strong>PHPバイナリ</strong> サーバーを動作させるプログラム</li>
-<li><strong>スタート用スクリプト</strong> サーバーを起動するためのファイル<ul>
-<li>start.cmd / start.ps1 (Windows)</li>
-<li>start.sh (Linux/Mac)</li>
+<li><strong>PocketMine-MP.phar</strong> サーバーの本体 <a href="https://github.com/pmmp/PocketMine-MP/releases/latest">GitHub</a>からダウンロード可能</li>
+<li><strong>PHPバイナリ</strong> サーバーを動作させるプログラム <a href="https://jenkins.pmmp.io/job/PHP-8.0-Aggregate/">Jenkins</a>からダウンロード可能</li>
+<li><strong>スタート用スクリプト</strong> サーバーを起動するためのファイル いずれも「名前を付けて保存」やwget等でダウンロード可能<ul>
+<li><a href="https://raw.githubusercontent.com/pmmp/PocketMine-MP/stable/start.sh">start.cmd</a> / <a href="https://raw.githubusercontent.com/pmmp/PocketMine-MP/stable/start.ps1">start.ps1</a> (Windows)</li>
+<li><a href="https://raw.githubusercontent.com/pmmp/PocketMine-MP/stable/start.sh">start.sh</a> (Linux/Mac)</li>
 </ul>
 </li>
 </ul>
-<p>以上の3つが必要です。<a href="#link">リンク集</a>を見てダウンロードしてください。</p>
 <h3 id="building-index-_4">ディレクトリ配置</h3>
 <p>バイナリはzip形式のため展開し、以下のようにファイルを配置します。
 <div class="highlight"><pre><span></span><code>|-- bin/
@@ -1211,25 +1210,26 @@ API4.0.0(ベータ版)での構築は<a href="#building-build-in-api4">API4.0.0�
 <p>start.cmdまたはstart.ps1を実行することでサーバーが起動されます。</p></section><section class="print-page" id="building-build-in-api4"><h1 id="building-build-in-api4-api4">API4でのサーバー構築</h1>
 <h2 id="building-build-in-api4-_1">警告</h2>
 <p>これは安定版リリースでは<strong>ありません</strong>。予期しないバグが存在する可能性があります。</p>
-<h2 id="building-build-in-api4-_2">必要なファイルの準備</h2>
+<h2 id="building-build-in-api4-httpsgetpmmpio-linuxmacos">https://get.pmmp.io の利用(Linux/MacOS 限定)</h2>
+<p><code>curl</code>または<code>wget</code>を用いてPocketMine-MPをインストールできます。
+<div class="highlight"><pre><span></span><code>curl -sL https://get.pmmp.io <span class="p">|</span> bash -s - -v beta
+</code></pre></div>
+または
+<div class="highlight"><pre><span></span><code>wget -q -O - https://get.pmmp.io <span class="p">|</span> bash -s - -v beta
+</code></pre></div>
+を実行してください。</p>
+<h2 id="building-build-in-api4-_2">手動インストール</h2>
+<h3 id="building-build-in-api4-_3">必要なファイルの準備</h3>
 <ul>
 <li><strong>PocketMine-MP.phar</strong></li>
-<li><strong>PHPバイナリ(API4用)</strong></li>
+<li><strong>PHPバイナリ(API3・API4共用)</strong> バイナリが更新されたため、Jenkinsからダウンロードするものが使用できるようになりました。</li>
 <li><strong>start.cmd/start.ps1/start.sh</strong> API3のものが利用可能</li>
 </ul>
-<h3 id="building-build-in-api4-pocketmine-mpphar">PocketMine-MP.pharのダウンロード</h3>
+<h4 id="building-build-in-api4-pocketmine-mpphar">PocketMine-MP.pharのダウンロード</h4>
 <p>API4のものは現段階ではPre-releaseでありGitHubのreleasesからダウンロードできます。
 <a href="https://github.com/pmmp/PocketMine-MP/releases">https://github.com/pmmp/PocketMine-MP/releases</a></p>
-<h3 id="building-build-in-api4-php">PHPバイナリのダウンロード</h3>
-<p>API4ではPHP拡張の一部が変更されたため、それが導入されているPHPバイナリが必要になります。以下の手順でダウンロードしてください。<a href="https://dev.azure.com/pocketmine/PHP-Builds/_build?definitionId=3&amp;_a=summary">https://dev.azure.com/pocketmine/PHP-Builds/_build?definitionId=3&amp;_a=summary</a></p>
-<p><img alt="masterブランチのLast run" src="/image/e987af6f-2a36-474c-a926-69272498c823.png" />
-マスターブランチのLast run以下をクリック</p>
-<p><img alt="published" src="/image/d9f2aaa6-3d32-4f49-921c-c0698ff28ea2.png" />
-publishedをクリック</p>
-<p><img alt="artifact" src="/image/0ecfc460-fe8d-41e9-b62f-9c21cff0298e.png" />
-対応するOSの︙をクリックし、ダウンロードを選択</p>
-<h2 id="building-build-in-api4-_3">ダウンロード後</h2>
-<p>これ以降は<a href="#building-readme-_2">API3の手動インストール</a>と同様の手順で進められます。</p></section><h1 class='nav-section-title-end'>Ended: サーバー構築</h1>
+<h2 id="building-build-in-api4-_4">ダウンロード後</h2>
+<p>これ以降は<a href="#building-readme-_2">API3の手動インストール</a>と同様の手順で進められます</p></section><h1 class='nav-section-title-end'>Ended: サーバー構築</h1>
                         <h1 class='nav-section-title' id='section-プラグイン'>
                             プラグイン <a class='headerlink' href='#section-プラグイン' title='Permanent link'>↵</a>
                         </h1>
@@ -3246,7 +3246,7 @@ DEVirionはvirionのクラスを影で支えているわけではないので、
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-<script id="__config" type="application/json">{"base": "/", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
+<script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
     
 
 <script src="https://unpkg.com/iframe-worker/polyfill"></script>
