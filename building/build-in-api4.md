@@ -24,5 +24,5 @@ API4のものは現段階ではPre-releaseでありGitHubのreleasesからダウ
 <https://github.com/pmmp/PocketMine-MP/releases>
 
 
-### ダウンロード後
-これ以降は[API3の手動インストール](/building/README.md#_2)と同様の手順で進められます。
+## ダウンロード後
+これ以降は[API3の手動インストール](/building/README.html#_2)と同様の手順で進められます
