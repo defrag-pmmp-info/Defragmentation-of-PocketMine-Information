@@ -26,13 +26,13 @@
 - GS4 QueryはRakLibが無効化されても停止されなくなりました。
 - `pocketmine_chunkutils` PHP拡張は使われなくなりました。
 - 新しいPHP拡張がこのバージョンから必要になりました。
-    - [chunkutils2](https://github.com/pmmp/ext-chunkutils2)
-    - [morton](https://github.com/pmmp/ext-morton)
+        - [chunkutils2](https://github.com/pmmp/ext-chunkutils2)
+        - [morton](https://github.com/pmmp/ext-morton)
 - プレイヤーリスポーン時の多くのバグが修正されました。
-    - 生成されていない地形でリスポーンする際に岩盤下にスポーンするバグ
-    - 非常に遅いマシン上で初回サーバー参加時に岩盤下にスポーンするバグ
-    - カスタムスポーン地点がセットされている状態でリスポーンしたときにブロック内(または上空)にスポーンするバグ
-    - プレイヤースポーン地点がワールドスポーンが変わった時に以前の場所になってしまうバグ
+        - 生成されていない地形でリスポーンする際に岩盤下にスポーンするバグ
+        - 非常に遅いマシン上で初回サーバー参加時に岩盤下にスポーンするバグ
+        - カスタムスポーン地点がセットされている状態でリスポーンしたときにブロック内(または上空)にスポーンするバグ
+        - プレイヤースポーン地点がワールドスポーンが変わった時に以前の場所になってしまうバグ
 - 高い維持コストのわりに恩恵が少ないためプリプロセッサーはビルドから削除されました。現在、プリプロセッサー利用は非推奨です。
 
 #### コマンド Commands
@@ -41,19 +41,19 @@
 - `/enchant` コマンドは数学IDをサポートしなくなりました。現在では名前が要求されます。
 - `/clear` コマンドが追加されました。バニラのMinecraftのものと機能的に同等のものです。
 - 以下のコマンドの出力は選択した言語にローカライズされました。
-    - `/gc`
-    - `/status`
-    - `/op`
-    - `/deop`
+        - `/gc`
+        - `/status`
+        - `/op`
+        - `/deop`
 
 #### 設定 Configuration
 - ワールドのプリセットは`pocketmine.yml`の`preset`キーとして利用できるようになりました: 以前は`generator`キー
 - 新たに以下のオプションが`pocketmine.yml`に追加されます
-    - `chunk-ticking.blocks-per-subchunk-per-tick`(デフォルト `3`):この値を増加させるとランダムブロックアップデートの確率が上がります。(例. 草の成長)
-    - `network.enable-encryption`(デフォルト`true`): Minecraftネットワークパケットを暗号化するか否かを決定できます。
+        - `chunk-ticking.blocks-per-subchunk-per-tick`(デフォルト `3`):この値を増加させるとランダムブロックアップデートの確率が上がります。(例. 草の成長)
+        - `network.enable-encryption`(デフォルト`true`): Minecraftネットワークパケットを暗号化するか否かを決定できます。
 - 以下のオプションが`pocketmine.yml`から削除されました。
-    - `chunk-ticking.light-updates`: 光処理は基本的なバニラの機能を動作させるのに必要なため、チャンクチックを無効化することなくこの機能を停止することは意味がありません。もし、明るさ計算をしたくなければチャンクチックと共に無効化するようにしてください。
-    - `player.anti-cheat.allow-movement-cheats`
+        - `chunk-ticking.light-updates`: 光処理は基本的なバニラの機能を動作させるのに必要なため、チャンクチックを無効化することなくこの機能を停止することは意味がありません。もし、明るさ計算をしたくなければチャンクチックと共に無効化するようにしてください。
+        - `player.anti-cheat.allow-movement-cheats`
 
 #### ワールドハンドリング
 ##### インターフェイス
@@ -63,9 +63,9 @@
 - 1.12.xまでのMinecraft Bedrockのワールドがサポートされました。(1.13より上はまた別の形式変更によりまだ**サポートされていません**。対応には非常に労力を要します。)
 - 非推奨のワールド形式の自動変換が実装されました。
 - `leveldb`以外のすべての形式は非推奨となりました。以下のワールド形式は**ロード時に自動的に新しい形式に変換されます**:
-    - `mcregion`
-    - `anvil`
-    - `pmanvil`
+        - `mcregion`
+        - `anvil`
+        - `pmanvil`
 - 建築上限256はすべてのワールドでサポートされます。(自動変換により)
 - 追加ブロックがサポートされます。(自動変換により)
 - 光処理はディスク上に保存・ロードされなくなりました。
@@ -95,16 +95,16 @@
 
 ##### パケット受信エラーハンドリングが整備されました
 - 今は`BadPacketException`のみがパケットのデコード、ハンドリング時にキャッチされます。これにはすべてのデコードが適切なエラーチェックを行うことが**必須**とされます。
-    - デコードで`BadPacketException`を投げるとプレイヤーは`Packet processing error`メッセージでキックされます。
-    - 切断メッセージにはサーバーオーナーがプレイヤーから報告された問題を特定しやすくするためのランダムな16進数IDが含まれます。
+        - デコードで`BadPacketException`を投げるとプレイヤーは`Packet processing error`メッセージでキックされます。
+        - 切断メッセージにはサーバーオーナーがプレイヤーから報告された問題を特定しやすくするためのランダムな16進数IDが含まれます。
 - そのほかの例外を投げるとサーバーはクラッシュします。`Internal server error`は削除されました。
 - 現在ではサーバーに対するクライアント方向へのパケットの送信は不当なものになりました。これを行うとクライアントは`Unexpected non-serverbound packet`メッセージでキックされます。
 
 ##### 新たなパケットハンドラーシステム
 - パケットハンドラーはネットワークセッションから分離され、専用のパケットハンダラー構造に分かれました。
 - ネットワークセッションは正確に1つのハンドラーをその時点で持つことができます。ハンドラーは可変ありいつでも置き換えられます。これによりパケットハンドリングのロジックを複数のステージへと分離することができます。
-    - 不正なタイミングで不正なパケットを送信することを防ぐ(今では何事もなくドロップされます)
-    - 一時的な状態固有のロジックの存在を許可する(例えばリソースパックのより厳格なダウンロードチェック)
+        - 不正なタイミングで不正なパケットを送信することを防ぐ(今では何事もなくドロップされます)
+        - 一時的な状態固有のロジックの存在を許可する(例えばリソースパックのより厳格なダウンロードチェック)
 - パケットハンドラーはほとんどいたるところで`Player`からなくなり、代わりにそのパケットハンドラー専用のユニットに存在しまるようになりました。
 - 以前まで`Player`のパケットハンドラー内部に絡み合っていたほぼすべてのゲームロジックは新たなAPIメソッドへと展開されました。詳しくはPlayer APIの変更をご覧ください。
 
@@ -171,241 +171,243 @@ permissions:
 - ブロックは`Position`を継承するかわりにポジションを保有します。`Block->getBlockPosition()`が追加されました。
 - 256以上のIDをもつブロックがサポートされました。
 - ブロックのステートとバリアントメタデータは分離されました。
-    - バリアントはIDの拡張と考えられ、不変です。(解説:これは回転や開閉といった状態を含まないことを表す)
-    - `Block->setDamage()`は削除されました。
-    - すべてのブロックにはブロックプロパティ相応のゲッターとセッターが備わりました。例えば`facing` どの向きか,`lit/unlit` 着火/消火, `colour` 色などです。これらはメタデータの代わりに利用されるべきです。
+        - バリアントはIDの拡張と考えられ、不変です。(解説:これは回転や開閉といった状態を含まないことを表す)
+        - `Block->setDamage()`は削除されました。
+        - すべてのブロックにはブロックプロパティ相応のゲッターとセッターが備わりました。例えば`facing` どの向きか,`lit/unlit` 着火/消火, `colour` 色などです。これらはメタデータの代わりに利用されるべきです。
 - タイルエンティティは,タイルエンティティを必要とするブロックが`World->setBlock()`されたときに自動的に作成/削除されるようになります。
 - いくつかのタイルエンティティのAPIは,タイルエンティティが非推奨となると同時に対応する`Block`クラスで公開されるようになりました。
 - 名前空間`pocketmine\tile`は`pocketmine\block\tile`に移動されました。
 - `Block->recalculateBoundingBox()`と`Block->recalculateCollisionBoxes()`は自身の位置基準ではなく`0,0,0`に基準のAABBsを返すようになります。
 - ブロックの破壊情報は新しい動的な`BlockBreakInfo`ユニットへと展開されました。以下のメソッドが移動されます。
-    - `Block->getBlastResistance()` -> `BlockBreakInfo->getBlastResistance()`
-    - `Block->getBreakTime()` -> `BlockBreakInfo->getBreakTime()`
-    - `Block->getHardness()` -> `BlockBreakInfo->getHardness()`
-    - `Block->getToolHarvestLevel()` -> `BlockBreakInfo->getToolHarvestLevel()`
-    - `Block->getToolType()` -> `BlockBreakInfo->getToolType()`
-    - `Block->isBreakable()` -> `BlockBreakInfo->isBreakable()`
-    - `Block->isCompatibleWithTool()` -> `BlockBreakInfo->isToolCompatible()`
+        - `Block->getBlastResistance()` -> `BlockBreakInfo->getBlastResistance()`
+        - `Block->getBreakTime()` -> `BlockBreakInfo->getBreakTime()`
+        - `Block->getHardness()` -> `BlockBreakInfo->getHardness()`
+        - `Block->getToolHarvestLevel()` -> `BlockBreakInfo->getToolHarvestLevel()`
+        - `Block->getToolType()` -> `BlockBreakInfo->getToolType()`
+        - `Block->isBreakable()` -> `BlockBreakInfo->isBreakable()`
+        - `Block->isCompatibleWithTool()` -> `BlockBreakInfo->isToolCompatible()`
 - 以下のAPIメソッドが追加されました。
-    - `Block->asItem()`: ブロックに対応するアイテムスタックを返す。
-    - `Block->isSameState()`: ステート情報を含めてブロックが同じパラメータであるかを返す。
-    - `Block->isSameType()`: ステート情報を含めずにブロックが同じパラメータであるかを返す。
-    - `Block->isFullCube()`
+        - `Block->asItem()`: ブロックに対応するアイテムスタックを返す。
+        - `Block->isSameState()`: ステート情報を含めてブロックが同じパラメータであるかを返す。
+        - `Block->isSameType()`: ステート情報を含めずにブロックが同じパラメータであるかを返す。
+        - `Block->isFullCube()`
 - 以下のフックが追加されました。
-    - `Block->onAttack()`: サバイバルモードのプレイヤーがブロックを左クリックしブロックの破壊をし始めた時に呼ばれる。
-    - `Block->onEntityLand()`: エンティティが(高さによらず)落下後にブロック上に乗ったときに呼ばれる。
-    - `Block->onPostPlace()`: ワールドにおかれた直後に呼ばれ、レール接続やチェストの連結をハンドルする。
+        - `Block->onAttack()`: サバイバルモードのプレイヤーがブロックを左クリックしブロックの破壊をし始めた時に呼ばれる。
+        - `Block->onEntityLand()`: エンティティが(高さによらず)落下後にブロック上に乗ったときに呼ばれる。
+        - `Block->onPostPlace()`: ワールドにおかれた直後に呼ばれ、レール接続やチェストの連結をハンドルする。
 - 以下のAPIメソッドがリネームされました。
-    - `Block->getDamage()` -> `Block->getMeta()`
-    - `Block->onActivate()` -> `Block->onInteract()`
-    - `Block->onEntityCollide()` -> `Block->onEntityInside()`
+        - `Block->getDamage()` -> `Block->getMeta()`
+        - `Block->onActivate()` -> `Block->onInteract()`
+        - `Block->onEntityCollide()` -> `Block->onEntityInside()`
 - 以下のAPIメソッドはシグネチャが変わりました。
-    - `Block->onInteract()` は現在ではシグネチャ `onInteract(Item $item, int $face, Vector3 $clickVector, ?Player $player = null) : bool` を持ちます。
-    - `Block->getCollisionBoxes()` はファイナルになりました。 子クラスは`recalculateCollisionBoxes()`をオーバーライドするべきです。
+        - `Block->onInteract()` は現在ではシグネチャ `onInteract(Item $item, int $face, Vector3 $clickVector, ?Player $player = null) : bool` を持ちます。
+        - `Block->getCollisionBoxes()` はファイナルになりました。 子クラスは`recalculateCollisionBoxes()`をオーバーライドするべきです。
 - 以下のAPIメソッドは削除されました。
-    - `Block->canPassThrough()`
-    - `Block->setDamage()`
-    - `Block::get()`: これはずいぶん前に `BlockFactory::get()`に置き換えられています。
-    - `Block->getBoundingBox()`
+        - `Block->canPassThrough()`
+        - `Block->setDamage()`
+        - `Block::get()`: これはずいぶん前に `BlockFactory::get()`に置き換えられています。
+        - `Block->getBoundingBox()`
 - 以下のクラスはリネームされました。
-    - `BlockIds` -> `BlockLegacyIds`
-    - `CobblestoneWall` -> `Wall`
-    - `NoteBlock` -> `Note`
-    - `SignPost` -> `Sign`
-    - `StandingBanner` -> `Banner`
+        - `BlockIds` -> `BlockLegacyIds`
+        - `CobblestoneWall` -> `Wall`
+        - `NoteBlock` -> `Note`
+        - `SignPost` -> `Sign`
+        - `StandingBanner` -> `Banner`
 - 以下のクラスは削除されました。
-    - `Bricks`
-    - `BurningFurnace`
-    - `CobblestoneStairs`
-    - `Dandelion`
-    - `DoubleSlab`
-    - `DoubleStoneSlab`
-    - `EndStone`
-    - `GlowingRedstoneOre`
-    - `GoldOre`
-    - `Gold`
-    - `IronDoor`
-    - `IronOre`
-    - `IronTrapdoor`
-    - `Iron`
-    - `Lapis`
-    - `NetherBrickFence`
-    - `NetherBrickStairs`
-    - `Obsidian`
-    - `PurpurStairs`
-    - `Purpur`
-    - `QuartzStairs`
-    - `Quartz`
-    - `RedSandstoneStairs`
-    - `RedSandstone`
-    - `SandstoneStairs`
-    - `Sandstone`
-    - `StainedClay`
-    - `StainedGlassPane`
-    - `StainedGlass`
-    - `StoneBrickStairs`
-    - `StoneBricks`
-    - `StoneSlab2`
-    - `StoneSlab`
-    - `Stone`
-    - `WallBanner`
-    - `WallSign`
-    - `Wood2`
+        - `Bricks`
+        - `BurningFurnace`
+        - `CobblestoneStairs`
+        - `Dandelion`
+        - `DoubleSlab`
+        - `DoubleStoneSlab`
+        - `EndStone`
+        - `GlowingRedstoneOre`
+        - `GoldOre`
+        - `Gold`
+        - `IronDoor`
+        - `IronOre`
+        - `IronTrapdoor`
+        - `Iron`
+        - `Lapis`
+        - `NetherBrickFence`
+        - `NetherBrickStairs`
+        - `Obsidian`
+        - `PurpurStairs`
+        - `Purpur`
+        - `QuartzStairs`
+        - `Quartz`
+        - `RedSandstoneStairs`
+        - `RedSandstone`
+        - `SandstoneStairs`
+        - `Sandstone`
+        - `StainedClay`
+        - `StainedGlassPane`
+        - `StainedGlass`
+        - `StoneBrickStairs`
+        - `StoneBricks`
+        - `StoneSlab2`
+        - `StoneSlab`
+        - `Stone`
+        - `WallBanner`
+        - `WallSign`
+        - `Wood2`
 - `BlockToolType`の定数は`TYPE_`プレフィックスを削除する形でリネームされました。
 
 #### Command
 - 以下のクラスは削除されました。
-    - `RemoteConsoleCommandSender`
+        - `RemoteConsoleCommandSender`
 - 以下のAPIメソッドはシグネチャが変わりました。
-    - `Command->setPermission()` nullableではありますが、引数が必須になりました
-    - `CommandSender->setScreenLineHeight()` nullableではありますが、引数が必須になりました
+        - `Command->setPermission()` nullableではありますが、引数が必須になりました
+        - `CommandSender->setScreenLineHeight()` nullableではありますが、引数が必須になりました
 - 名前に空白を含むコマンドはサポートされなくなりました
 
 #### Entity
 ##### 一般
 - `Entity`は`Location`を継承しなくなります。 代わりに`Entity->getLocation()`や`Entity->getPosition()`を使ってください。
 - 以下のフィールドは削除されました。
-    - `Entity->chunk`: エンティティはどのチャンクにいるのかを自身では記憶しなくなりました (かわりに`World`がそれを管理します)。
-    - `Entity->height`: `EntitySizeInfo`に移動しました。 代わりに`Entity->size`を使ってください。
-    - `Entity->width`: `EntitySizeInfo`に移動しました。 代わりに`Entity->size`を使ってください。
-    - `Entity->eyeHeight`: `EntitySizeInfo`に移動しました。 代わりに `Entity->size`を使ってください。
+        - `Entity->chunk`: エンティティはどのチャンクにいるのかを自身では記憶しなくなりました (かわりに`World`がそれを管理します)。
+        - `Entity->height`: `EntitySizeInfo`に移動しました。 代わりに`Entity->size`を使ってください。
+        - `Entity->width`: `EntitySizeInfo`に移動しました。 代わりに`Entity->size`を使ってください。
+        - `Entity->eyeHeight`: `EntitySizeInfo`に移動しました。 代わりに `Entity->size`を使ってください。
 - 以下のAPIメソッドが追加されました。
-    - `Entity->getFallDistance()`
-    - `Entity->setFallDistance()`
-    - `ItemEntity->getDespawnDelay()`
-    - `ItemEntity->setDespawnDelay()`
-    - `Living->calculateFallDamage()`: これは`protected`です。 サブクラスにより、これをオーバーライドすることでダメージロジックをカスタマイズできます。
-    - `Human->getHungerManager()`
-    - `Human->getXpManager()`
+        - `Entity->getFallDistance()`
+        - `Entity->setFallDistance()`
+        - `ItemEntity->getDespawnDelay()`
+        - `ItemEntity->setDespawnDelay()`
+        - `Living->calculateFallDamage()`: これは`protected`です。 サブクラスにより、これをオーバーライドすることでダメージロジックをカスタマイズできます。
+        - `Human->getHungerManager()`
+        - `Human->getXpManager()`
 - 以下のAPIメソッドはシグネチャが変わりました。
-    - `Entity->entityBaseTick()`は`protected`になりました。
-    - `Entity->move()`は`protected`になりました。
-    - `Entity->setPosition()`は`protected`になりました。 (代わりに `Entity->teleport()`を使ってください).
-    - `Entity->setPositionAndRotation()`は`protected` (代わりに`Entity->teleport()`を使ってください).
-    - `Living->knockBack()`は`float, float, float`を受け入れるようになりました。 (最初の２つのパラメーターは削除されました).
-    - `Living->getEffects()`は`Effect[]`の代わりに`EffectManager`を返すようになりました。
+        - `Entity->entityBaseTick()`は`protected`になりました。
+        - `Entity->move()`は`protected`になりました。
+        - `Entity->setPosition()`は`protected`になりました。 (代わりに `Entity->teleport()`を使ってください).
+        - `Entity->setPositionAndRotation()`は`protected` (代わりに`Entity->teleport()`を使ってください).
+        - `Living->knockBack()`は`float, float, float`を受け入れるようになりました。 (最初の２つのパラメーターは削除されました).
+        - `Living->getEffects()`は`Effect[]`の代わりに`EffectManager`を返すようになりました。
 - 以下のクラスは追加されました。
-    - `effect\EffectManager`: `Living`から展開されたエフェクト管理の機能群を保持します。
-    - `HungerManager`: `Human`から展開された空腹管理の機能群を保持します。
-    - `ExperienceManager`: `Human`から展開された経験値管理の機能群を保持します。
+        - `effect\EffectManager`: `Living`から展開されたエフェクト管理の機能群を保持します。
+        - `HungerManager`: `Human`から展開された空腹管理の機能群を保持します。
+        - `ExperienceManager`: `Human`から展開された経験値管理の機能群を保持します。
 - 以下のAPIメソッドは移動、またはリネームされました。
-    - `Entity->fall()` -> `Entity->onHitGround()` (また、アクセス権が`public`から`protected`になりました。)
-    - `Living->removeAllEffects()` -> `EffectManager->clear()`
-    - `Living->removeEffect()` -> `EffectManager->remove()`
-    - `Living->addEffect()` -> `EffectManager->add()`
-    - `Living->getEffect()` -> `EffectManager->get()`
-    - `Living->hasEffect()` -> `EffectManager->has()`
-    - `Living->hasEffects()` -> `EffectManager->hasEffects()`
-    - `Living->getEffects()` -> `EffectManager->all()`
-    - `Human->getFood()` -> `HungerManager->getFood()`
-    - `Human->setFood()` -> `HungerManager->setFood()`
-    - `Human->getMaxFood()` -> `HungerManager->getMaxFood()`
-    - `Human->addFood()` -> `HungerManager->addFood()`
-    - `Human->isHungry()` -> `HungerManager->isHungry()`
-    - `Human->getSaturation()` -> `HungerManager->getSaturation()`
-    - `Human->setSaturation()` -> `HungerManager->setSaturation()`
-    - `Human->addSaturation()` -> `HungerManager->addSaturation()`
-    - `Human->getExhaustion()` -> `HungerManager->getExhaustion()`
-    - `Human->setExhaustion()` -> `HungerManager->setExhaustion()`
-    - `Human->exhaust()` -> `HungerManager->exhaust()`
-    - `Human->getXpLevel()` -> `ExperienceManager->getXpLevel()`
-    - `Human->setXpLevel()` -> `ExperienceManager->setXpLevel()`
-    - `Human->addXpLevels()` -> `ExperienceManager->addXpLevels()`
-    - `Human->subtractXpLevels()` -> `ExperienceManager->subtractXpLevels()`
-    - `Human->getXpProgress()` -> `ExperienceManager->getXpProgress()`
-    - `Human->setXpProgress()` -> `ExperienceManager->setXpProgress()`
-    - `Human->getRemainderXp()` -> `ExperienceManager->getRemainderXp()`
-    - `Human->getCurrentTotalXp()` -> `ExperienceManager->getCurrentTotalXp()`
-    - `Human->setCurrentTotalXp()` -> `ExperienceManager->setCurrentTotalXp()`
-    - `Human->addXp()` -> `ExperienceManager->addXp()`
-    - `Human->subtractXp()` -> `ExperienceManager->subtractXp()`
-    - `Human->getLifetimeTotalXp()` -> `ExperienceManager->getLifetimeTotalXp()`
-    - `Human->setLifetimeTotalXp()` -> `ExperienceManager->setLifetimeTotalXp()`
-    - `Human->canPickupXp()` -> `ExperienceManager->canPickupXp()`
-    - `Human->onPickupXp()` -> `ExperienceManager->onPickupXp()`
-    - `Human->resetXpCooldown()` -> `ExperienceManager->resetXpCooldown()`
+        - `Entity->fall()` -> `Entity->onHitGround()` (また、アクセス権が`public`から`protected`になりました。)
+        - `Living->removeAllEffects()` -> `EffectManager->clear()`
+        - `Living->removeEffect()` -> `EffectManager->remove()`
+        - `Living->addEffect()` -> `EffectManager->add()`
+        - `Living->getEffect()` -> `EffectManager->get()`
+        - `Living->hasEffect()` -> `EffectManager->has()`
+        - `Living->hasEffects()` -> `EffectManager->hasEffects()`
+        - `Living->getEffects()` -> `EffectManager->all()`
+        - `Human->getFood()` -> `HungerManager->getFood()`
+        - `Human->setFood()` -> `HungerManager->setFood()`
+        - `Human->getMaxFood()` -> `HungerManager->getMaxFood()`
+        - `Human->addFood()` -> `HungerManager->addFood()`
+        - `Human->isHungry()` -> `HungerManager->isHungry()`
+        - `Human->getSaturation()` -> `HungerManager->getSaturation()`
+        - `Human->setSaturation()` -> `HungerManager->setSaturation()`
+        - `Human->addSaturation()` -> `HungerManager->addSaturation()`
+        - `Human->getExhaustion()` -> `HungerManager->getExhaustion()`
+        - `Human->setExhaustion()` -> `HungerManager->setExhaustion()`
+        - `Human->exhaust()` -> `HungerManager->exhaust()`
+        - `Human->getXpLevel()` -> `ExperienceManager->getXpLevel()`
+        - `Human->setXpLevel()` -> `ExperienceManager->setXpLevel()`
+        - `Human->addXpLevels()` -> `ExperienceManager->addXpLevels()`
+        - `Human->subtractXpLevels()` -> `ExperienceManager->subtractXpLevels()`
+        - `Human->getXpProgress()` -> `ExperienceManager->getXpProgress()`
+        - `Human->setXpProgress()` -> `ExperienceManager->setXpProgress()`
+        - `Human->getRemainderXp()` -> `ExperienceManager->getRemainderXp()`
+        - `Human->getCurrentTotalXp()` -> `ExperienceManager->getCurrentTotalXp()`
+        - `Human->setCurrentTotalXp()` -> `ExperienceManager->setCurrentTotalXp()`
+        - `Human->addXp()` -> `ExperienceManager->addXp()`
+        - `Human->subtractXp()` -> `ExperienceManager->subtractXp()`
+        - `Human->getLifetimeTotalXp()` -> `ExperienceManager->getLifetimeTotalXp()`
+        - `Human->setLifetimeTotalXp()` -> `ExperienceManager->setLifetimeTotalXp()`
+        - `Human->canPickupXp()` -> `ExperienceManager->canPickupXp()`
+        - `Human->onPickupXp()` -> `ExperienceManager->onPickupXp()`
+        - `Human->resetXpCooldown()` -> `ExperienceManager->resetXpCooldown()`
 - 以下のAPIメソッドは削除されました。
-    - `Human->getRawUniqueId()`は、代わりに`Human->getUniqueId()->toBinary()`を使うようになりました。
+        - `Human->getRawUniqueId()`は、代わりに`Human->getUniqueId()->toBinary()`を使うようになりました。
 - 以下のクラスは削除されました。
-    - `Creature`
-    - `Damageable`
-    - `Monster`
-    - `NPC`
-    - `Rideable`
-    - `Vehicle`
+        - `Creature`
+        - `Damageable`
+        - `Monster`
+        - `NPC`
+        - `Rideable`
+        - `Vehicle`
 - `Skin`無効なデータを受け取ると例外を投げるようになりました。
 
 ##### Effect
 - 全ての`Effect`に関連したクラスは`pocketmine\entity\effect`の名前空間に移動しました。
 - `Effect`クラスに入っていたエフェクト機能はいくつかのクラスに分けられました。以下のクラスが新しく追加されました。
-    - `AbsorptionEffect`
-    - `HealthBoostEffect`
-    - `HungerEffect`
-    - `InstantDamageEffect`
-    - `InstantEffect`
-    - `InstantHealthEffect`
-    - `InvisibilityEffect`
-    - `LevitationEffect`
-    - `PoisonEffect`
-    - `RegenerationEffect`
-    - `SaturationEffect`
-    - `SlownessEffect`
-    - `SpeedEffect`
-    - `WitherEffect`
+        - `AbsorptionEffect`
+        - `HealthBoostEffect`
+        - `HungerEffect`
+        - `InstantDamageEffect`
+        - `InstantEffect`
+        - `InstantHealthEffect`
+        - `InvisibilityEffect`
+        - `LevitationEffect`
+        - `PoisonEffect`
+        - `RegenerationEffect`
+        - `SaturationEffect`
+        - `SlownessEffect`
+        - `SpeedEffect`
+        - `WitherEffect`
 - `VanillaEffects`クラスが追加されました。これは全てのバニラエフェクトタイプを静的メソッドで表現し、`Effect::getEffect()`よりもきれいに書けるようになります。
-    - 例: `Effect::getEffect(Effect::NIGHT_VISION)`は`VanillaEffects::NIGHT_VISION()`に置き換えることができます。
+        - 例: `Effect::getEffect(Effect::NIGHT_VISION)`は`VanillaEffects::NIGHT_VISION()`に置き換えることができます。
 - エフェクトの強さ(amplifiers)を負の値にすることは現在では明確に禁止されます。エフェクトの生み出す効果が定義されていないためです。
 - MCPEのエフェクトIDとPocketMine-MP内部のIDの境目がより明確になりました。
-    - IDハンドリングは`pocketmine\data\bedrock\EffectIdMap`へ移動しました。
-    - すべてのエフェクトID定数は`Effect`から削除されました。何らかの理由でレガシーエフェクトIDが必要なら`pocketmine\data\bedrock\EffectIds`を利用してください。
+        - IDハンドリングは`pocketmine\data\bedrock\EffectIdMap`へ移動しました。
+        - すべてのエフェクトID定数は`Effect`から削除されました。何らかの理由でレガシーエフェクトIDが必要なら`pocketmine\data\bedrock\EffectIds`を利用してください。
 - 以下のAPIメソッドは移動しました。
-    - `Effect->getId()` -> `EffectIdMap->toId()`
-    - `Effect::registerEffect()` -> `EffectIdMap->register()`
-    - `Effect::getEffect()` -> `EffectIdMap->fromId()`
-    - `Effect::getEffectByName()` -> `VanillaEffects::fromString()`
+        - `Effect->getId()` -> `EffectIdMap->toId()`
+        - `Effect::registerEffect()` -> `EffectIdMap->register()`
+        - `Effect::getEffect()` -> `EffectIdMap->fromId()`
+        - `Effect::getEffectByName()` -> `VanillaEffects::fromString()`
 - 以下のAPIメソッドが追加されました。
-    - `Effect->getRuntimeId()`: これは**動的ID**でありエフェクトタイプの比較に用いることができます。**これは決して保持されないため、configやNBTでは利用しないでください！**
+        - `Effect->getRuntimeId()`: これは**動的ID**でありエフェクトタイプの比較に用いることができます。**これは決して保持されないため、configやNBTでは利用しないでください！**
 
 ##### 実行時エンティティNBTの削除
 - エンティティは実行時にNBTを存在させ続けなくなりました。
-    - `Entity->namedtag`は削除されました。
-    - `Entity->saveNBT()`はその場で前のNBTに変更を加えるのではなく、現在では新規生成された`CompoundTag`を返すようになりました。
-    - `Entity->initEntity()`は現在では`CompoundTag`パラメータを受け付けます。
+        - `Entity->namedtag`は削除されました。
+        - `Entity->saveNBT()`はその場で前のNBTに変更を加えるのではなく、現在では新規生成された`CompoundTag`を返すようになりました。
+        - `Entity->initEntity()`は現在では`CompoundTag`パラメータを受け付けます。
 
 ##### エンティティ生成
 - `Entity::createEntity()`は削除されました。もはや実行時に新たなエンティティを生成するためには必要なくなりました。代わりに、単に`new YourEntity`のようにしてください。
 - `Entity`の子クラスのコンストラクタは普通のクラスと同様にどのようなシグネチャでも持つことができます。
 - NBTからのエンティティの読み込みは現在では`EntityFactory`にハンドルされるようになりました。`Entity::createEntity()`の動作とはかなり違った動作をします。 `YourEntity::class`を一式のMinecraft save IDに登録する代わりに、 あるNBTと`World`が与えられたときにエンティティを構築するコールバックを与える必要があります。
-    - 生成コールバックは`EntityFactory::register()`を用いて登録されます。
-    - 生成コールバックはシグネチャ`function(World, CompoundTag) : Entity`を持つ必要があります。
-    - これにより`Entity`の子クラスはそれぞれにふさわしいコンストラクタ引数を持てるようになりました。
-    - また、特定のデータが常に与えられるように要求することも可能になります。(例えば、`FallingBlock`をどの種類のブロックかを指定することなく生成するというのは理解できません。)
-    - 例:
+        - 生成コールバックは`EntityFactory::register()`を用いて登録されます。
+        - 生成コールバックはシグネチャ`function(World, CompoundTag) : Entity`を持つ必要があります。
+        - これにより`Entity`の子クラスはそれぞれにふさわしいコンストラクタ引数を持てるようになりました。
+        - また、特定のデータが常に与えられるように要求することも可能になります。(例えば、`FallingBlock`をどの種類のブロックかを指定することなく生成するというのは理解できません。)
+        - 例:
         - `ItemEntity`は現在では`Item`をコンストラクタで要求するようになりました。そのため、生成コールバックは`Item`をコンストラクタに渡されたNBTからデコードするものです。
         - `Painting`は現在では`PaintingMotive`をコンストラクタで要求するようになりました。そのため、生成コールバックはどの`PaintingMotive`を与えるべきかを受け取ったNBTに応じて決定するものです。
         - さらなる例は`EntityFactory`をご覧ください。
 - `EntityFactory::register()`(以前の`Entity::registerEntity()`)はエラー発生時に`false`のかわりに例外を投げるようになりました。
 - 以下のAPIメソッドが移動しました。
-    - `Entity::registerEntity()` -> `EntityFactory::register()`
+        - `Entity::registerEntity()` -> `EntityFactory::register()`
 - 以下のクラスはコンストラクタが変更されました。
-    - すべての発射物の子クラスは現在では`?Entity $thrower`パラメータを必要とします。
-    - `Arrow->__construct()`は現在では`bool $critical` パラメータを必要とします。
-    - `ExperienceOrb->__construct()`は現在では`int $xpValue`パラメータを必要とします。
-    - `FallingBlock->__construct()`は現在では`Block $block`パラメータを必要とします。
-    - `ItemEntity->__construct()`は現在では`Item $item`パラメータを必要とします。
-    - `Painting->__construct()`は現在では`PaintingMotive $motive`を必要とします。
-    - `SplashPotion->__construct()`は現在では`int $potionId`を必要とします。
+        - すべての発射物の子クラスは現在では`?Entity $thrower`パラメータを必要とします。
+        - `Arrow->__construct()`は現在では`bool $critical` パラメータを必要とします。
+        - `ExperienceOrb->__construct()`は現在では`int $xpValue`パラメータを必要とします。
+        - `FallingBlock->__construct()`は現在では`Block $block`パラメータを必要とします。
+        - `ItemEntity->__construct()`は現在では`Item $item`パラメータを必要とします。
+        - `Painting->__construct()`は現在では`PaintingMotive $motive`を必要とします。
+        - `SplashPotion->__construct()`は現在では`int $potionId`を必要とします。
 - 以下のAPIメソッドは削除されました。
-    - `Entity::createBaseNBT()`: `new YourEntity`と適切なAPIメソッドが利用されるべきです。
-    - `Entity->getSaveId()`
-    - `Entity::getKnownEntityTypes()`
+        - `Entity::createBaseNBT()`: `new YourEntity`と適切なAPIメソッドが利用されるべきです。
+        - `Entity->getSaveId()`
+        - `Entity::getKnownEntityTypes()`
+        - `Entity::createEntity()`: `new YourEntity`をかわりに利用してください。 
     - `Entity::createEntity()`: `new YourEntity`をかわりに利用してください。 
+        - `Entity::createEntity()`: `new YourEntity`をかわりに利用してください。 
 
 ##### やりかけ エンティティのネットワークメタデータの削除
 - 定数に関するすべてのネットワークメタデータは`Entity`クラスから削除され、プロトコル層へ移動されました。これはネットワークメタデータをAPIから全体的に削除することを意図していますが、完了はしていません。
-    - 定数`Entity::DATA_FLAG_*`は`pocketmine\network\mcpe\protocol\types\entity\EntityMetadataFlags`に移動されました。
-    - 定数`Entity::DATA_TYPE_*`は`pocketmine\network\mcpe\protocol\types\entity\EntityMetadataTypes`に移動されました。
-    - 定数`Entity::DATA_*`は`pocketmine\network\mcpe\protocol\types\entity\EntityMetadataProperties`に移動されました。
+        - 定数`Entity::DATA_FLAG_*`は`pocketmine\network\mcpe\protocol\types\entity\EntityMetadataFlags`に移動されました。
+        - 定数`Entity::DATA_TYPE_*`は`pocketmine\network\mcpe\protocol\types\entity\EntityMetadataTypes`に移動されました。
+        - 定数`Entity::DATA_*`は`pocketmine\network\mcpe\protocol\types\entity\EntityMetadataProperties`に移動されました。
 - `DataPropertyManager`は 名前空間`pocketmine\network\mcpe\protocol\types\entity`に移動され、したがってAPIの一部ではないものとして扱われます。
 - 導入された内部の`Entity`は`syncNetworkData()`をフックします。この関数はエンティティのプロパティをエンティティはエンティティのネットワークデータセット同期することが期待されます。
 - 内部のエンティティのプロパティを保存するためのネットワークメタデータセットの内部利用は削除されました。エンティティは現在では正規のクラスプロパティを使用し、ネットワークデータセットを同期することが期待されます。
@@ -415,12 +417,12 @@ permissions:
 #### Event
 ##### 内部イベントシステムにおける`Listener`依存の排除
 - 内部イベント処理システムは`Listener`オブジェクトに依存しなくなりました。ハンドラーになるための標準要求さえ満たせば任意のクロージャーが利用できます。
-    - この変更により、イベントハンドラーの呼び出し性能が15%程改善されます。プラグインが行っていることは何も含まれません。
-    - 以下のクラスが削除されました。
+        - この変更により、イベントハンドラーの呼び出し性能が15%程改善されます。プラグインが行っていることは何も含まれません。
+        - 以下のクラスが削除されました。
         - `pocketmine\plugin\EventExecutor`
         - `pocketmine\plugin\MethodEventExecutor`
-    - `RegisteredListener->__construct()`は先頭のパラメータとして`Listener, EventExecutor`の代わりに`Closure`を必要とします。
-    - `RegisteredListener->getListener()`は削除されました。
+        - `RegisteredListener->__construct()`は先頭のパラメータとして`Listener, EventExecutor`の代わりに`Closure`を必要とします。
+        - `RegisteredListener->getListener()`は削除されました。
 
 ##### デフォルトのキャンセルハンドリングの振る舞いの変化
 - ハンドラー関数は**デフォルトではキャンセルされたイベントを受け取らなくなります**。 これは**静かに後方互換性を損なうもの**であり、すなわち直接エラーを吐くことはなくともバグを引き起こす可能性があります。
@@ -431,289 +433,289 @@ permissions:
 ##### `PlayerPreLoginEvent`の変更
 - `Player`オブジェクトはログインのこのフェーズでは存在しなくなりました。代わりに`PlayerInfo`オブジェクトが接続情報とともに与えられます。
 - Ban、サーバーの満員、ホワイトリストの確認は`PlayerPreLoginEvent`に一元化されます。もはやこの手の切断をハンドルするために`PlayerKickEvent`に介入する必要はなくなるとともに、介入することはできなくなりました。
-    - 複数のキック理由を使用すると、他にプレイヤーを切断する理由があって内一つが除外されたときにもプレイヤーを確実に切断することができます。例えばあるプレイヤーがBanされていてサーバーが満員であったとすると、Banフラグを除外してもサーバーが満員であることからプレイヤーはそれでも切断されます。
-    - プラグインはカスタムのキック理由をセットできます。どの理由も絶対的な優先度を持ちます。
-    - もし複数のフラグがセットされていた場合、キックメッセージには最も優先度が高いものが表示されます。優先度(このスナップショットにおいて)は下記の順に続きます。
+        - 複数のキック理由を使用すると、他にプレイヤーを切断する理由があって内一つが除外されたときにもプレイヤーを確実に切断することができます。例えばあるプレイヤーがBanされていてサーバーが満員であったとすると、Banフラグを除外してもサーバーが満員であることからプレイヤーはそれでも切断されます。
+        - プラグインはカスタムのキック理由をセットできます。どの理由も絶対的な優先度を持ちます。
+        - もし複数のフラグがセットされていた場合、キックメッセージには最も優先度が高いものが表示されます。優先度(このスナップショットにおいて)は下記の順に続きます。
         - カスタム (最優先)
         - 満員
         - ホワイトリスト
         - Ban
 - `PlayerPreLoginEvent::KICK_REASON_PRIORITY`定数は高いほうが先にくるキック理由の優先度のリストを保持します。
 - 以下の定数が追加されました
-    - `PlayerPreLoginEvent::KICK_REASON_PLUGIN`
-    - `PlayerPreLoginEvent::KICK_REASON_SERVER_FULL`
-    - `PlayerPreLoginEvent::KICK_REASON_SERVER_WHITELISTED`
-    - `PlayerPreLoginEvent::KICK_REASON_BANNED`
-    - `PlayerPreLoginEvent::KICK_REASON_PRIORITY`
+        - `PlayerPreLoginEvent::KICK_REASON_PLUGIN`
+        - `PlayerPreLoginEvent::KICK_REASON_SERVER_FULL`
+        - `PlayerPreLoginEvent::KICK_REASON_SERVER_WHITELISTED`
+        - `PlayerPreLoginEvent::KICK_REASON_BANNED`
+        - `PlayerPreLoginEvent::KICK_REASON_PRIORITY`
 - 以下のAPIメソッドが追加されました。
-    - `PlayerPreLoginEvent->clearAllKickReasons()`
-    - `PlayerPreLoginEvent->clearKickReason()`
-    - `PlayerPreLoginEvent->getFinalKickMessage()`: 現在の理由リストでプレイヤーに表示されるメッセージ
-    - `PlayerPreLoginEvent->getIp()`
-    - `PlayerPreLoginEvent->getKickReasons()`: キック理由を示すフラグの配列, 参加できる時には空
-    - `PlayerPreLoginEvent->getPlayerInfo()`
-    - `PlayerPreLoginEvent->getPort()`
-    - `PlayerPreLoginEvent->isAllowed()`
-    - `PlayerPreLoginEvent->isAuthRequired()`: XBL認証が強制されているか
-    - `PlayerPreLoginEvent->isKickReasonSet()`
-    - `PlayerPreLoginEvent->setAuthRequired()`
-    - `PlayerPreLoginEvent->setKickReason()`
+        - `PlayerPreLoginEvent->clearAllKickReasons()`
+        - `PlayerPreLoginEvent->clearKickReason()`
+        - `PlayerPreLoginEvent->getFinalKickMessage()`: 現在の理由リストでプレイヤーに表示されるメッセージ
+        - `PlayerPreLoginEvent->getIp()`
+        - `PlayerPreLoginEvent->getKickReasons()`: キック理由を示すフラグの配列, 参加できる時には空
+        - `PlayerPreLoginEvent->getPlayerInfo()`
+        - `PlayerPreLoginEvent->getPort()`
+        - `PlayerPreLoginEvent->isAllowed()`
+        - `PlayerPreLoginEvent->isAuthRequired()`: XBL認証が強制されているか
+        - `PlayerPreLoginEvent->isKickReasonSet()`
+        - `PlayerPreLoginEvent->setAuthRequired()`
+        - `PlayerPreLoginEvent->setKickReason()`
 - 以下のAPIメソッドは変更されました。
-    - `PlayerPreLoginEvent->getKickMessage()`は現在ではシグネチャ`getKickMessage(int $flag) : ?string`を持ちます。
+        - `PlayerPreLoginEvent->getKickMessage()`は現在ではシグネチャ`getKickMessage(int $flag) : ?string`を持ちます。
 - 以下のAPIメソッドは削除されました。
-    - `PlayerPreLoginEvent->setKickMessage()`
-    - `PlayerPreLoginEvent->getPlayer()`
+        - `PlayerPreLoginEvent->setKickMessage()`
+        - `PlayerPreLoginEvent->getPlayer()`
 - 以下のAPIメソッドは移動/リネームされました。
-    - `InventoryPickupItemEvent->getItem()` -> `InventoryPickupItemEvent->getItemEntity()`
+        - `InventoryPickupItemEvent->getItem()` -> `InventoryPickupItemEvent->getItemEntity()`
 
 ##### その他の変更
 - イベントの間にプレイヤーが切断されてもサーバーはクラッシュしなくなりました。(それでも他の副作用を引き起こす可能性があります)
 - `PlayerKickEvent`は最初のログインシークエンスが完了する以前に発生した切断では着火されなくなりました。(例 リソースパックのダウンロード完了時)
 - キャンセル可能なイベントはインターフェースの要件を満たすために必要なキャンセル可能なコンポーネントを得るための`CancellableTrait`を実装する必要があります。`Event`はこれらのメソッドをスタブを持たなくなりました。
 - `PlayerInteractEvent`はプレイヤーがアイテムをアクティベートしたときに着火されなくなりました。これは古くからの問題であった`PlayerInteractEvent`が一回触った時にも繰り返し発火されてしまう問題を修正します。以下の定数は削除されました。
-    - `PlayerInteractEvent::LEFT_CLICK_AIR`
-    - `PlayerInteractEvent::RIGHT_CLICK_AIR`
-    - `PlayerInteractEvent::PHYSICAL`
+        - `PlayerInteractEvent::LEFT_CLICK_AIR`
+        - `PlayerInteractEvent::RIGHT_CLICK_AIR`
+        - `PlayerInteractEvent::PHYSICAL`
 - 以下のイベントが追加されます。
-    - `PlayerEntityInteractEvent`: プレイヤーがエンティティを右クリック(スマホでは長押し)した時のイベント
-    - `PlayerItemUseEvent`: プレイヤーが持っているアイテムをアクティベートした時のイベント, 例えば雪玉を投げるなど。
-    - `BlockTeleportEvent`: ブロックがテレポートした時のイベント、例えばエンドラの卵が攻撃されたときなど。
-    - `PlayerDisplayNameChangeEvent`
-    - `EntityItemPickupEvent`: プレイヤーやエンティティが落ちているアイテム(か矢)を拾った時のイベント。 `InventoryPickupItemEvent`と`InventoryPickupArrowEvent`の置き換え
+        - `PlayerEntityInteractEvent`: プレイヤーがエンティティを右クリック(スマホでは長押し)した時のイベント
+        - `PlayerItemUseEvent`: プレイヤーが持っているアイテムをアクティベートした時のイベント, 例えば雪玉を投げるなど。
+        - `BlockTeleportEvent`: ブロックがテレポートした時のイベント、例えばエンドラの卵が攻撃されたときなど。
+        - `PlayerDisplayNameChangeEvent`
+        - `EntityItemPickupEvent`: プレイヤーやエンティティが落ちているアイテム(か矢)を拾った時のイベント。 `InventoryPickupItemEvent`と`InventoryPickupArrowEvent`の置き換え
         - 置き換え前とは違って、アイテムが入るインベントリを変更することができます。
         - もし入るインベントリを`null`にすると、アイテムは破棄されます。これはインベントリが満杯の状態でクリエイティブのプレイヤーが拾うときに見られる動作です。
-    - `EntityTrampleFarmlandEvent`: 農地上でmobやプレイヤーがジャンプをして土に変化させるときのイベント。
-    - `StructureGrowEvent`: 木や竹、その他の複数ブロックの苗木構造物が成長するときに呼ばれます。
+        - `EntityTrampleFarmlandEvent`: 農地上でmobやプレイヤーがジャンプをして土に変化させるときのイベント。
+        - `StructureGrowEvent`: 木や竹、その他の複数ブロックの苗木構造物が成長するときに呼ばれます。
 - 以下のイベントは削除されました。
-    - `EntityArmorChangeEvent`
-    - `EntityInventoryChangeEvent`
-    - `EntityLevelChangeEvent` - `EntityTeleportEvent`にてワールドの確認をすることで代用してください。
-    - `InventoryPickupItemEvent` - `EntityItemPickupEvent`を代わりに使用してください。
-    - `InventoryPickupArrowEvent` - `EntityItemPickupEvent`を代わり使用してください。
-    - `NetworkInterfaceCrashEvent`
-    - `PlayerCheatEvent`
-    - `PlayerIllegalMoveEvent`
+        - `EntityArmorChangeEvent`
+        - `EntityInventoryChangeEvent`
+        - `EntityLevelChangeEvent` - `EntityTeleportEvent`にてワールドの確認をすることで代用してください。
+        - `InventoryPickupItemEvent` - `EntityItemPickupEvent`を代わりに使用してください。
+        - `InventoryPickupArrowEvent` - `EntityItemPickupEvent`を代わり使用してください。
+        - `NetworkInterfaceCrashEvent`
+        - `PlayerCheatEvent`
+        - `PlayerIllegalMoveEvent`
 - 以下のAPIメソッドが追加されました。
-    - `EntityDeathEvent->getXpDropAmount()`
-    - `EntityDeathEvent->setXpDropAmount()`
-    - `PlayerDeathEvent->getXpDropAmount()`
-    - `PlayerDeathEvent->setXpDropAmount()`
+        - `EntityDeathEvent->getXpDropAmount()`
+        - `EntityDeathEvent->setXpDropAmount()`
+        - `PlayerDeathEvent->getXpDropAmount()`
+        - `PlayerDeathEvent->setXpDropAmount()`
 - 以下のメソッドは削除されました。
-    - `PlayerPreLoginEvent->getPlayer()`
-    - `Cancellable->setCancelled()`: これにより`Cancellable`実装はそのイベント特有のキャンセル機構を実装できるようになりました。例えば`PlayerPreLoginEvent`における複雑な機構などです。
+        - `PlayerPreLoginEvent->getPlayer()`
+        - `Cancellable->setCancelled()`: これにより`Cancellable`実装はそのイベント特有のキャンセル機構を実装できるようになりました。例えば`PlayerPreLoginEvent`における複雑な機構などです。
 - 以下のAPIメソッドは移動されました。
-    - `Event->isCancelled()` -> `CancellableTrait->isCancelled()`: これはクラスが`Cancellable`を実装していなかった場合に`BadMethodCallException`を投げるスタブでした。これは現在ではキャンセル不可能なイベントでは単に使えなくなっています。
-    - `Event->setCancelled()`は`cancel()`と`uncancel()`に分割され、`CancellableTrait`に移動しました。
-    - `HandlerList::unregisterAll()` -> `HandlerListManager->unregisterAll()`
-    - `HandlerList::getHandlerListFor()` -> `HandlerListManager->getListFor()`
-    - `HandlerList::getHandlerLists()` -> `HandlerListManager->getAll()`
+        - `Event->isCancelled()` -> `CancellableTrait->isCancelled()`: これはクラスが`Cancellable`を実装していなかった場合に`BadMethodCallException`を投げるスタブでした。これは現在ではキャンセル不可能なイベントでは単に使えなくなっています。
+        - `Event->setCancelled()`は`cancel()`と`uncancel()`に分割され、`CancellableTrait`に移動しました。
+        - `HandlerList::unregisterAll()` -> `HandlerListManager->unregisterAll()`
+        - `HandlerList::getHandlerListFor()` -> `HandlerListManager->getListFor()`
+        - `HandlerList::getHandlerLists()` -> `HandlerListManager->getAll()`
 - 以下のクラスは移動しました。
-    - `pocketmine\plugin\RegisteredListener` -> `pocketmine\event\RegisteredListener`
+        - `pocketmine\plugin\RegisteredListener` -> `pocketmine\event\RegisteredListener`
 
 #### Inventory
 - すべてのクラフトとレシピに関するクラスは名前空間`pocketmine\crafting`に移動しました。
 - 以下のクラスが追加されました。
-    - `CallbackInventoryChangeListener`
-    - `CreativeInventory`: 以前まで`pocketmine\item\Item`に埋め込まれていた機能群を含みます。詳細はアイテムの変更をご覧ください
-    - `InventoryChangeListener`: 一つのインベントリのイベントを監視できます(ただし介入はできません)。
-    - `transaction\CreateItemAction`
-    - `transaction\DestroyItemAction`
+        - `CallbackInventoryChangeListener`
+        - `CreativeInventory`: 以前まで`pocketmine\item\Item`に埋め込まれていた機能群を含みます。詳細はアイテムの変更をご覧ください
+        - `InventoryChangeListener`: 一つのインベントリのイベントを監視できます(ただし介入はできません)。
+        - `transaction\CreateItemAction`
+        - `transaction\DestroyItemAction`
 - 以下のクラスはリネーム/移動されました。
-    - `ContainerInventory` -> `pocketmine\block\inventory\BlockInventory`
+        - `ContainerInventory` -> `pocketmine\block\inventory\BlockInventory`
 - 以下のクラスは名前空間`pocketmine\block\inventory` に移動されました。
-    - `AnvilInventory`
-    - `ChestInventory`
-    - `DoubleChestInventory`
-    - `EnchantInventory`
-    - `EnderChestInventory`
-    - `FurnaceInventory`
+        - `AnvilInventory`
+        - `ChestInventory`
+        - `DoubleChestInventory`
+        - `EnchantInventory`
+        - `EnderChestInventory`
+        - `FurnaceInventory`
 - 以下のクラスは削除されました。
-    - `CustomInventory`
-    - `InventoryEventProcessor`
-    - `Recipe`
-    - `transaction\CreativeInventoryAction`
+        - `CustomInventory`
+        - `InventoryEventProcessor`
+        - `Recipe`
+        - `transaction\CreativeInventoryAction`
 - 以下のAPIメソッドが追加されました。
-    - `Inventory->addChangeListeners()`
-    - `Inventory->getChangeListeners()`
-    - `Inventory->removeChangeListeners()`
-    - `Inventory->swap()`: 二つのスロットのコンテンツを入れ替えます。
+        - `Inventory->addChangeListeners()`
+        - `Inventory->getChangeListeners()`
+        - `Inventory->removeChangeListeners()`
+        - `Inventory->swap()`: 二つのスロットのコンテンツを入れ替えます。
 - 以下のAPIメソッドは削除されました。
-    - `BaseInventory->getDefaultSize()`
-    - `BaseInventory->setSize()`
-    - `Inventory->close()`
-    - `Inventory->dropContents()`
-    - `Inventory->getName()`
-    - `Inventory->getTitle()`
-    - `Inventory->onSlotChange()`
-    - `Inventory->open()`
-    - `Inventory->sendContents()`
-    - `Inventory->sendSlot()`
-    - `InventoryAction->onExecuteFail()`
-    - `InventoryAction->onExecuteSuccess()`
-    - `PlayerInventory->sendCreativeContents()`
+        - `BaseInventory->getDefaultSize()`
+        - `BaseInventory->setSize()`
+        - `Inventory->close()`
+        - `Inventory->dropContents()`
+        - `Inventory->getName()`
+        - `Inventory->getTitle()`
+        - `Inventory->onSlotChange()`
+        - `Inventory->open()`
+        - `Inventory->sendContents()`
+        - `Inventory->sendSlot()`
+        - `InventoryAction->onExecuteFail()`
+        - `InventoryAction->onExecuteSuccess()`
+        - `PlayerInventory->sendCreativeContents()`
 - 以下のAPIメソッドはシグネチャが変更されました。
-    - `Inventory->clear()`は`bool`の代わりに現在では`void`を返します。
-    - `Inventory->setItem()`は`bool`の代わりに現在では`void`を返します。
-    - `InventoryAction->execute()`は`bool`の代わりに現在では`void`を返します。
-    - `BaseInventory->construct()`は初期化用のアイテムリストを受け取らなくなりました。
+        - `Inventory->clear()`は`bool`の代わりに現在では`void`を返します。
+        - `Inventory->setItem()`は`bool`の代わりに現在では`void`を返します。
+        - `InventoryAction->execute()`は`bool`の代わりに現在では`void`を返します。
+        - `BaseInventory->construct()`は初期化用のアイテムリストを受け取らなくなりました。
 - `PlayerInventory->setItemInHand()`は現在ではそのプレイヤーが見える人にアイテム更新を送信します。
 
 #### Item
 ##### General
 - 新たに`VanillaItems`クラスが追加されました。すべての既知のアイテムタイプを生成する静的メソッドを含んでいます。これは定数が使われている`ItemFactory::get()`の代わりとして使われることが好ましいです。
 - `StringToItemParser`が追加されました。あらゆる文字列をIDに関係なくアイテムへとマッピングすることができるようになりました。これらのマッピングは`/give`と`/clear`で使われていて、プラグインでのカスタムエイリアスを念頭に置いて作られています。
-    - つまり、見苦しいハックなしに`/give`のカスタムエイリアスが追加できるようになったということです。
+        - つまり、見苦しいハックなしに`/give`のカスタムエイリアスが追加できるようになったということです。
 - `LegacyStringToItemParser`が追加されました。これは少しだけ動的な(しかし推奨はされない)`ItemFactory::fromString()`の置き換えです。
 - `Item->count`はアクセス権がpublicから変更されました。
 - 書き込める本(本と羽ペン,記入済みの本)のヒエラルキーが変更されました。`WritableBook`と`WrittenBook`は現在では`WritableBookBase`を継承します。
 - 以下のAPIはシグネチャが変更されました。
-    - `WritableBookBase->setPages()`は現在では`CompoundTag[]`の代わりに`WritableBookPage[]`を受け付けます。
-    - `ItemFactory::get()`は`string`を`tags`パラメータとして受け付けなくなりました。
-    - `ItemFactory::fromString()`は`$multiple`パラメータを受け取らなくなり、`Item|Item[]`ではなく`Item`のみを返すようになりました。
+        - `WritableBookBase->setPages()`は現在では`CompoundTag[]`の代わりに`WritableBookPage[]`を受け付けます。
+        - `ItemFactory::get()`は`string`を`tags`パラメータとして受け付けなくなりました。
+        - `ItemFactory::fromString()`は`$multiple`パラメータを受け取らなくなり、`Item|Item[]`ではなく`Item`のみを返すようになりました。
 - 以下のメソッドはメソッドチェーンが利用できるようになりました。(原文: The following methods are now fluent)
-    - `WritableBookBase->setPages()`
-    - `Item->addEnchantment()`
-    - `Item->removeEnchantment()`
-    - `Item->removeEnchantments()`
-    - `Armor->setCustomColor()`
-    - `WrittenBook->setTitle()`
-    - `WrittenBook->setAuthor()`
-    - `WrittenBook->setGeneration()`
+        - `WritableBookBase->setPages()`
+        - `Item->addEnchantment()`
+        - `Item->removeEnchantment()`
+        - `Item->removeEnchantments()`
+        - `Armor->setCustomColor()`
+        - `WrittenBook->setTitle()`
+        - `WrittenBook->setAuthor()`
+        - `WrittenBook->setGeneration()`
 - 以下のAPIメソッドは削除されました。
-    - `Item->getNamedTagEntry()`
-    - `Item->removeNamedTagEntry()`
-    - `Item->setDamage()`: 現在では`Durable`を実装しているアイテム以外ではダメージは不変です。
-    - `Item->setNamedTagEntry()`
-    - `Item::get()`: これはずいぶん前に`ItemFactory::get()`にとってかわられました。
-    - `Item::fromString()`: これはずいぶん前に`ItemFactory::fromString()`にとってかわられました。
-    - `Item->setCompoundTag()`
-    - `Item->getCompoundTag()`
-    - `Item->hasCompoundTag()`
-    - `Potion::getPotionEffectsById()`
-    - `ProjectileItem->getProjectileEntityType()`
+        - `Item->getNamedTagEntry()`
+        - `Item->removeNamedTagEntry()`
+        - `Item->setDamage()`: 現在では`Durable`を実装しているアイテム以外ではダメージは不変です。
+        - `Item->setNamedTagEntry()`
+        - `Item::get()`: これはずいぶん前に`ItemFactory::get()`にとってかわられました。
+        - `Item::fromString()`: これはずいぶん前に`ItemFactory::fromString()`にとってかわられました。
+        - `Item->setCompoundTag()`
+        - `Item->getCompoundTag()`
+        - `Item->hasCompoundTag()`
+        - `Potion::getPotionEffectsById()`
+        - `ProjectileItem->getProjectileEntityType()`
 - 以下の定数は削除されました。
-    - `Potion::ALL` - `PotionType::getAll()`を代わりに使ってください。
-    - `Potion::WATER`
-    - `Potion::MUNDANE`
-    - `Potion::LONG_MUNDANE`
-    - `Potion::THICK`
-    - `Potion::AWKWARD`
-    - `Potion::NIGHT_VISION`
-    - `Potion::LONG_NIGHT_VISION`
-    - `Potion::INVISIBILITY`
-    - `Potion::LONG_INVISIBILITY`
-    - `Potion::LEAPING`
-    - `Potion::LONG_LEAPING`
-    - `Potion::STRONG_LEAPING`
-    - `Potion::FIRE_RESISTANCE`
-    - `Potion::LONG_FIRE_RESISTANCE`
-    - `Potion::SWIFTNESS`
-    - `Potion::LONG_SWIFTNESS`
-    - `Potion::STRONG_SWIFTNESS`
-    - `Potion::SLOWNESS`
-    - `Potion::LONG_SLOWNESS`
-    - `Potion::WATER_BREATHING`
-    - `Potion::LONG_WATER_BREATHING`
-    - `Potion::HEALING`
-    - `Potion::STRONG_HEALING`
-    - `Potion::HARMING`
-    - `Potion::STRONG_HARMING`
-    - `Potion::POISON`
-    - `Potion::LONG_POISON`
-    - `Potion::STRONG_POISON`
-    - `Potion::REGENERATION`
-    - `Potion::LONG_REGENERATION`
-    - `Potion::STRONG_REGENERATION`
-    - `Potion::STRENGTH`
-    - `Potion::LONG_STRENGTH`
-    - `Potion::STRONG_STRENGTH`
-    - `Potion::WEAKNESS`
-    - `Potion::LONG_WEAKNESS`
-    - `Potion::WITHER`
+        - `Potion::ALL` - `PotionType::getAll()`を代わりに使ってください。
+        - `Potion::WATER`
+        - `Potion::MUNDANE`
+        - `Potion::LONG_MUNDANE`
+        - `Potion::THICK`
+        - `Potion::AWKWARD`
+        - `Potion::NIGHT_VISION`
+        - `Potion::LONG_NIGHT_VISION`
+        - `Potion::INVISIBILITY`
+        - `Potion::LONG_INVISIBILITY`
+        - `Potion::LEAPING`
+        - `Potion::LONG_LEAPING`
+        - `Potion::STRONG_LEAPING`
+        - `Potion::FIRE_RESISTANCE`
+        - `Potion::LONG_FIRE_RESISTANCE`
+        - `Potion::SWIFTNESS`
+        - `Potion::LONG_SWIFTNESS`
+        - `Potion::STRONG_SWIFTNESS`
+        - `Potion::SLOWNESS`
+        - `Potion::LONG_SLOWNESS`
+        - `Potion::WATER_BREATHING`
+        - `Potion::LONG_WATER_BREATHING`
+        - `Potion::HEALING`
+        - `Potion::STRONG_HEALING`
+        - `Potion::HARMING`
+        - `Potion::STRONG_HARMING`
+        - `Potion::POISON`
+        - `Potion::LONG_POISON`
+        - `Potion::STRONG_POISON`
+        - `Potion::REGENERATION`
+        - `Potion::LONG_REGENERATION`
+        - `Potion::STRONG_REGENERATION`
+        - `Potion::STRENGTH`
+        - `Potion::LONG_STRENGTH`
+        - `Potion::STRONG_STRENGTH`
+        - `Potion::WEAKNESS`
+        - `Potion::LONG_WEAKNESS`
+        - `Potion::WITHER`
 - 以下のメソッドはリネームされました。
-    - `Item->getDamage()` -> `Item->getMeta()`
+        - `Item->getDamage()` -> `Item->getMeta()`
 - 以下のメソッドは `pocketmine\inventory\CreativeInventory`へと移動されました:
-    - `Item::addCreativeItem()` -> `CreativeInventory::add()`
-    - `Item::clearCreativeItems()` -> `CreativeInventory::clear()`
-    - `Item::getCreativeItemIndex()` -> `CreativeInventory::getItemIndex()`
-    - `Item::getCreativeItems()` -> `CreativeInventory::getAll()`
-    - `Item::initCreativeItems()` -> `CreativeInventory::init()`
-    - `Item::isCreativeItem()` -> `CreativeInventory::contains()`
-    - `Item::removeCreativeItem()` -> `CreativeInventory::remove()`
+        - `Item::addCreativeItem()` -> `CreativeInventory::add()`
+        - `Item::clearCreativeItems()` -> `CreativeInventory::clear()`
+        - `Item::getCreativeItemIndex()` -> `CreativeInventory::getItemIndex()`
+        - `Item::getCreativeItems()` -> `CreativeInventory::getAll()`
+        - `Item::initCreativeItems()` -> `CreativeInventory::init()`
+        - `Item::isCreativeItem()` -> `CreativeInventory::contains()`
+        - `Item::removeCreativeItem()` -> `CreativeInventory::remove()`
 - 以下のクラスが追加されました。
-    - `ArmorTypeInfo`
-    - `Fertilizer`
-    - `LiquidBucket`
-    - `MilkBucket`
-    - `PotionType`: バニラのポーションタイプについての情報を保持する列挙クラス
-    - `WritableBookBase`
-    - `WritableBookPage`
+        - `ArmorTypeInfo`
+        - `Fertilizer`
+        - `LiquidBucket`
+        - `MilkBucket`
+        - `PotionType`: バニラのポーションタイプについての情報を保持する列挙クラス
+        - `WritableBookBase`
+        - `WritableBookPage`
 - 以下のAPIメソッドが追加されました。
-    - `Armor->getArmorSlot()`
-    - `Item->canStackWith()`: 二つのアイテムが数量やサイズ上限は考慮せずに、同じアイテムスロットで保持できるかを返します。
-    - `Potion->getType()`: 適用されるエッふぇくとなどの情報をもつ`PotionType`列挙オブジェクトを返します。
-    - `ProjectileItem->createEntity()`: 投げられるプロジェクタイルエンティティの新規インスタンスを返します。
+        - `Armor->getArmorSlot()`
+        - `Item->canStackWith()`: 二つのアイテムが数量やサイズ上限は考慮せずに、同じアイテムスロットで保持できるかを返します。
+        - `Potion->getType()`: 適用されるエッふぇくとなどの情報をもつ`PotionType`列挙オブジェクトを返します。
+        - `ProjectileItem->createEntity()`: 投げられるプロジェクタイルエンティティの新規インスタンスを返します。
 - 以下のクラスは削除されました。
-    - `ChainBoots`
-    - `ChainChestplate`
-    - `ChainHelmet`
-    - `ChainLeggings`
-    - `DiamondBoots`
-    - `DiamondChestplate`
-    - `DiamondHelmet`
-    - `DiamondLeggings`
-    - `GoldBoots`
-    - `GoldChestplate`
-    - `GoldHelmet`
-    - `GoldLeggings`
-    - `IronBoots`
-    - `IronChesplate`
-    - `IronHelmet`
-    - `IronLeggings`
-    - `LeatherBoots`
-    - `LeatherCap`
-    - `LeatherPants`
-    - `LeatherTunic`
+        - `ChainBoots`
+        - `ChainChestplate`
+        - `ChainHelmet`
+        - `ChainLeggings`
+        - `DiamondBoots`
+        - `DiamondChestplate`
+        - `DiamondHelmet`
+        - `DiamondLeggings`
+        - `GoldBoots`
+        - `GoldChestplate`
+        - `GoldHelmet`
+        - `GoldLeggings`
+        - `IronBoots`
+        - `IronChesplate`
+        - `IronHelmet`
+        - `IronLeggings`
+        - `LeatherBoots`
+        - `LeatherCap`
+        - `LeatherPants`
+        - `LeatherTunic`
 
 ##### NBT handling
 - シリアライズされたNBTバイト配列キャッシュはアイテムスタックに保持されなくなりました。これらのキャッシュはネットワークレイヤーシリアライズに用いられる早すぎる最適化であり、それ自体がネットワークNBT形式に依存していました。
 - 内部NBTの利用は周縁化されます。 もはや即座に変更点をNBTへ書き込む必要はありません。以下のフックが追加されます:
-    - `Item->serializeCompoundTag()`
-    - `Item->deserializeCompoundTag()`
+        - `Item->serializeCompoundTag()`
+        - `Item->deserializeCompoundTag()`
 - 実行時NBTをアイテムから完全に取り除くことが計画されていますが、現段階では未解決の後方互換性の問題があります。
 
 ##### Enchantment
 - `VanillaEnchantments`クラスが追加されました。これはバニラのすべてのエンチャントを静的メソッドとして公開していて、 `Enchantment::get()`の意地の悪さを置き換えます。
-    - 例: `Enchantment::get(Enchantment::PROTECTION)`は`VanillaEnchantments::PROTECTION()`で置き換えられました。
-    - これらのメソッドは`Enchantment`の代わりに適切なタイプの情報を静的解析に渡し、コーディングがしやすくなりました。
+        - 例: `Enchantment::get(Enchantment::PROTECTION)`は`VanillaEnchantments::PROTECTION()`で置き換えられました。
+        - これらのメソッドは`Enchantment`の代わりに適切なタイプの情報を静的解析に渡し、コーディングがしやすくなりました。
 - MCPEのエンチャントIDとPocketMine-MP内部のIDの境目がより明確になりました。
-    - IDハンドリングは`pocketmine\data\bedrock\EnchantmentIdMap`へ移動しました。
-    - すべてのエンチャントID定数は`Enchantment`から削除されました。何らかの理由でレガシーエンチャントIDが必要なら`pocketmine\data\bedrock\EnchantmentIds`を利用してください。
+        - IDハンドリングは`pocketmine\data\bedrock\EnchantmentIdMap`へ移動しました。
+        - すべてのエンチャントID定数は`Enchantment`から削除されました。何らかの理由でレガシーエンチャントIDが必要なら`pocketmine\data\bedrock\EnchantmentIds`を利用してください。
 - `Enchantment::RARITY_*`定数は`Rarity`に移動され、`RARITY_`プレフィックスは削除されました。
 - `Enchantment::SLOT_*`定数は`ItemFlags`に移動され、`SLOT_`プレフィックスは削除されました。
 - 以下のAPIメソッドは移動されました。
-    - `Enchantment::registerEnchantment()` -> `EnchantmentIdMap->register()`
-    - `Enchantment::getEnchantment()` -> `EnchantmentIdMap->fromId()`
-    - `Enchantment->getId()` -> `EnchantmentIdMap->toId()`
-    - `Enchantment::getEnchantmentByName()` -> `VanillaEnchantments::fromString()`
+        - `Enchantment::registerEnchantment()` -> `EnchantmentIdMap->register()`
+        - `Enchantment::getEnchantment()` -> `EnchantmentIdMap->fromId()`
+        - `Enchantment->getId()` -> `EnchantmentIdMap->toId()`
+        - `Enchantment::getEnchantmentByName()` -> `VanillaEnchantments::fromString()`
 - 以下のAPIメソッドが追加されました。
-    - `Enchantment->getRuntimeId()`: これは**動的ID**でありエンチャントタイプの比較に用いることができます。**これは決して保持されないため、configやNBTでは利用しないでください！**
+        - `Enchantment->getRuntimeId()`: これは**動的ID**でありエンチャントタイプの比較に用いることができます。**これは決して保持されないため、configやNBTでは利用しないでください！**
 
 #### Lang
 - 以下のクラスはリネームされました。
-    - `BaseLang` -> `Language`
-    - `TranslationContainer` -> `Translatable`
+        - `BaseLang` -> `Language`
+        - `TranslationContainer` -> `Translatable`
 - 以下のクラスは削除されました。
-    - `TextContainer`
+        - `TextContainer`
 - 以下のAPIメソッドが追加されました。
-    - `Translatable->format()`: 変換に対してフォーマット(カラーコードなど)を追加できます。
-    - `Translatable->prefix()`: プレフィックスを追加できます。
-    - `Translatable->postfix()`: ポストフィキシングを追加できます。
+        - `Translatable->format()`: 変換に対してフォーマット(カラーコードなど)を追加できます。
+        - `Translatable->prefix()`: プレフィックスを追加できます。
+        - `Translatable->postfix()`: ポストフィキシングを追加できます。
 - 以下のAPIメソッドはシグネチャが変更されました。
-    - `Translatable->__construct()`は現在では`list<string>`だけではなく`array<int|string, Translatable|string>`をパラメータとして受け取ります。
-    - `Translatable->getParameter()`は現在では`int`だけではなく`int|string`をインデックスとして受け取ります。
-    - `Translatable->getParameter()`は現在では`string`だけではなく`Translatable|string`を返します。
-    - `Translatable->getParameters()`は現在では`array<int|string, Translatable|string>`を返します。
+        - `Translatable->__construct()`は現在では`list<string>`だけではなく`array<int|string, Translatable|string>`をパラメータとして受け取ります。
+        - `Translatable->getParameter()`は現在では`int`だけではなく`int|string`をインデックスとして受け取ります。
+        - `Translatable->getParameter()`は現在では`string`だけではなく`Translatable|string`を返します。
+        - `Translatable->getParameters()`は現在では`array<int|string, Translatable|string>`を返します。
 - `LanguageNotFoundException`が追加されました。これはサーバーファイルに存在しない`Language`を構成しようとした際に投げられます。
 - `Translatable`は現在では変換パラメータのキーを無視しなくなりました。以前までは挿入される順番のみが考慮されていました。
 - `Translatable`は変換パラメータの文字列キーをサポートするようになりました。
@@ -724,26 +726,26 @@ permissions:
 
 #### Network
 - 以下のフィールドが削除されました。
-    - `Network::$BATCH_THRESHOLD`
+        - `Network::$BATCH_THRESHOLD`
 - 以下のクラスがリネームされました。
-    - `SourceInterface` -> `NetworkInterface`
-    - `AdvancedSourceInterface` -> `AdvancedNetworkInterface`
+        - `SourceInterface` -> `NetworkInterface`
+        - `AdvancedSourceInterface` -> `AdvancedNetworkInterface`
 - 以下のクラスが移動されました。
-    - `CompressBatchedTask` -> `mcpe\CompressBatchTask`
-    - `level\format\io\ChunkRequestTask` -> `mcpe\ChunkRequestTask`
-    - `mcpe\RakLibInterface` -> `mcpe\raklib\RakLibInterface`
+        - `CompressBatchedTask` -> `mcpe\CompressBatchTask`
+        - `level\format\io\ChunkRequestTask` -> `mcpe\ChunkRequestTask`
+        - `mcpe\RakLibInterface` -> `mcpe\raklib\RakLibInterface`
 - 以下のクラスが削除されました。
-    - `mcpe\PlayerNetworkSessionAdapter`
+        - `mcpe\PlayerNetworkSessionAdapter`
 - 以下のメソッドがリネームされました。
-    - `UPnP::PortForward()` -> `UPnP::portForward()`
-    - `UPnP::RemovePortForward()` -> `UPnP::removePortForward()`
+        - `UPnP::PortForward()` -> `UPnP::portForward()`
+        - `UPnP::RemovePortForward()` -> `UPnP::removePortForward()`
 - 以下のメソッドはシグネチャが変更されました。
-    - `UPnP::portForward()`は`string $serviceURL, string $internalIP, int $internalPort, int $externalPort`を受け取るようになりました。
-    - `UPnP::removePortForward()`は`string $serviceURL, int $externalPort`を受け取るようになりました。
+        - `UPnP::portForward()`は`string $serviceURL, string $internalIP, int $internalPort, int $externalPort`を受け取るようになりました。
+        - `UPnP::removePortForward()`は`string $serviceURL, int $externalPort`を受け取るようになりました。
 - 以下のメソッドは削除されました。
-    - `NetworkInterface->putPacket()`
-    - `NetworkInterface->close()`
-    - `NetworkInterface->emergencyShutdown()`
+        - `NetworkInterface->putPacket()`
+        - `NetworkInterface->close()`
+        - `NetworkInterface->emergencyShutdown()`
 - `NetworkInterface`はプレイヤーネットワークインターフェースに特化するものではなく、現在ではいかなるネットワークコンポーネントにも実装されるためにより汎用なインターフェースを表します。
 - `rcon`サブ名前空間以下にあるものはすべて削除されました。
 - `upnp\UPnP`には重大な変更点があります。これは現在では二つの静的メソッドではなくネットワークコンポーネントになりました。
@@ -751,143 +753,143 @@ permissions:
 
 #### Permission
 - 以下の新規許可ノードが導入されます。
-    - `pocketmine.group.everyone`: デフォルトで全員に与えられます。
-    - `pocketmine.group.operator`: OPのプレイヤーとコンソールに与えられます。
+        - `pocketmine.group.everyone`: デフォルトで全員に与えられます。
+        - `pocketmine.group.operator`: OPのプレイヤーとコンソールに与えられます。
     これらの許可ノードはほかのノードと同様に許可付与によって割り当て・上書き可能です。つまり、現在ではプレイヤー切断時(や付与が外れた際)に無くなる**一時的OP**状態を与えることができます。 
 - 許可が明示的にセットされていない時やほかの許可により暗示的に付与されている場合には、現在では常にfalseとなるようになりました。
 - 定義されていない許可は`Permission::$DEFAULT_PERMISSION`ではなく、現在では常に`false`となりました。
 - 許可は内部的にデフォルト値を持たなくなりました。 その代わりに、デフォルト値は`pocketmine.group`の子として許可として割り当てられます。
-    - `true`: `pocketmine.group.everyone`に子として値`true`で追加する
-    - `false`: いかなる許可にも与えない
-    - `op`: `pocketmine.group.operator`に子として値`true`で追加する
-    - `notop`: `pocketmine.group.everyone`に子として値`true`で、`pocketmine.group.operator`に`false`で追加する
+        - `true`: `pocketmine.group.everyone`に子として値`true`で追加する
+        - `false`: いかなる許可にも与えない
+        - `op`: `pocketmine.group.operator`に子として値`true`で追加する
+        - `notop`: `pocketmine.group.everyone`に子として値`true`で、`pocketmine.group.operator`に`false`で追加する
     しかし、`plugin.yml`での許可定義での`default`キーはサポートされ続けます。
 - `PermissibleBase`を利用する際のひな形を減らすために`PermissibleDelegateTrait`が追加されました。このトレイトは`ConsoleCommandSender`と`Player`で利用されています。
 - 以下のAPIメソッドは移動されました。
-    - `Permission::getByName()` -> `PermissionParser::defaultFromString()`
-    - `Permission::loadPermissions()` -> `PermissionParser::loadPermissions()`
-    - `Permission::loadPermission()` -> `PermissionParser::loadPermission()`
+        - `Permission::getByName()` -> `PermissionParser::defaultFromString()`
+        - `Permission::loadPermissions()` -> `PermissionParser::loadPermissions()`
+        - `Permission::loadPermission()` -> `PermissionParser::loadPermission()`
 - 以下の定数は移動されました。
-    - `Permission::DEFAULT_FALSE` -> `PermissionParser::DEFAULT_FALSE`
-    - `Permission::DEFAULT_TRUE` -> `PermissionParser::DEFAULT_TRUE`
-    - `Permission::DEFAULT_OP` -> `PermissionParser::DEFAULT_OP`
-    - `Permission::DEFAULT_NOT_OP` -> `PermissionParser::DEFAULT_NOT_OP`
+        - `Permission::DEFAULT_FALSE` -> `PermissionParser::DEFAULT_FALSE`
+        - `Permission::DEFAULT_TRUE` -> `PermissionParser::DEFAULT_TRUE`
+        - `Permission::DEFAULT_OP` -> `PermissionParser::DEFAULT_OP`
+        - `Permission::DEFAULT_NOT_OP` -> `PermissionParser::DEFAULT_NOT_OP`
 - 以下のAPIメソッドが追加されました。
-    - `Permission->addChild()`
-    - `Permission->removeChild()`
-    - `Permissible->getPermissionRecalculationCallbacks()` - 新規許可が与えられたり拒否されたりなど、許可の変更に対しての反応が行えるようになります。
-    - `Permissible->setBasePermission()` - `pocketmine.group.operator`などのルート許可を割り当てる際に使用されます。通常プラグインでは使用するべきではありません。
-    - `Permissible->unsetBasePermission()`
-    - `PermissionAttachmentInfo->getGroupPermissionInfo()` - 許可の`PermissionAttachmentInfo`を返します。これは現在の許可の値を定めたり、許可が明らかなときには空にするものです。
+        - `Permission->addChild()`
+        - `Permission->removeChild()`
+        - `Permissible->getPermissionRecalculationCallbacks()` - 新規許可が与えられたり拒否されたりなど、許可の変更に対しての反応が行えるようになります。
+        - `Permissible->setBasePermission()` - `pocketmine.group.operator`などのルート許可を割り当てる際に使用されます。通常プラグインでは使用するべきではありません。
+        - `Permissible->unsetBasePermission()`
+        - `PermissionAttachmentInfo->getGroupPermissionInfo()` - 許可の`PermissionAttachmentInfo`を返します。これは現在の許可の値を定めたり、許可が明らかなときには空にするものです。
 - 以下のAPIメソッドが削除されました。
-    - `Permissible->isOp()`: `Permissible->hasPermission(DefaultPermissions::ROOT_OPERATOR)`を代わりに使用してください。 **ただし、プレイヤーがOPかどうかには直接的に依存するべきではありません。そのプラグイン固有の許可を与えてください。**
-    - `Permissible->setOp()`: `addAttachment($plugin, DefaultPermissions::ROOT_OPERATOR, true)`を追加時に、`removeAttachment()`を削除時に使用してください。(もしくは`addAttachment()`をfalseで使うとほかの許可と同様に明示的に拒否することもできます)
-    - `Permission->addParent()`
-    - `Permission->getDefault()`
-    - `Permission->setDefault()`
-    - `PermissionManager->getDefaultPermissions()`
-    - `PermissionManager->recalculatePermissionDefaults()`
-    - `PermissionManager->subscribeToDefaultPerms()`
-    - `PermissionManager->unsubscribeFromDefaultPerms()`
-    - `PermissionManager->getDefaultPermSubscriptions()`
-    - `PermissionAttachment->getPermissible()`
-    - `PermissionAttachmentInfo->getPermissible()`
+        - `Permissible->isOp()`: `Permissible->hasPermission(DefaultPermissions::ROOT_OPERATOR)`を代わりに使用してください。 **ただし、プレイヤーがOPかどうかには直接的に依存するべきではありません。そのプラグイン固有の許可を与えてください。**
+        - `Permissible->setOp()`: `addAttachment($plugin, DefaultPermissions::ROOT_OPERATOR, true)`を追加時に、`removeAttachment()`を削除時に使用してください。(もしくは`addAttachment()`をfalseで使うとほかの許可と同様に明示的に拒否することもできます)
+        - `Permission->addParent()`
+        - `Permission->getDefault()`
+        - `Permission->setDefault()`
+        - `PermissionManager->getDefaultPermissions()`
+        - `PermissionManager->recalculatePermissionDefaults()`
+        - `PermissionManager->subscribeToDefaultPerms()`
+        - `PermissionManager->unsubscribeFromDefaultPerms()`
+        - `PermissionManager->getDefaultPermSubscriptions()`
+        - `PermissionAttachment->getPermissible()`
+        - `PermissionAttachmentInfo->getPermissible()`
 - 以下のフィールドは削除されました。
-    - `Permission::$DEFAULT_PERMISSION`
+        - `Permission::$DEFAULT_PERMISSION`
 - 以下のAPIは変更されました。
-    - `PermissionParser::defaultFromString()`は現在では未知の値を渡されたときに`InvalidArgumentException`を投げるようになりました。
-    - `Permission->__construct()`は現在では`$defaultValue`パラメータを受け取らなくなりました(上記のデフォルト値に関するリファクタに関するノートを参照してください)。代わりに`pocketmine.group.everyone`か`pocketmine.group.operator`の子要素として許可を与える必要があります。
+        - `PermissionParser::defaultFromString()`は現在では未知の値を渡されたときに`InvalidArgumentException`を投げるようになりました。
+        - `Permission->__construct()`は現在では`$defaultValue`パラメータを受け取らなくなりました(上記のデフォルト値に関するリファクタに関するノートを参照してください)。代わりに`pocketmine.group.everyone`か`pocketmine.group.operator`の子要素として許可を与える必要があります。
 - 以下のクラスは削除されました。
-    - `ServerOperator`
+        - `ServerOperator`
 
 #### Player
 - 以下のクラスは新規名前空間`pocketmine\Player`に移動されました。
-    - `Achievement`
-    - `GameMode`
-    - `IPlayer`
-    - `OfflinePlayer`
-    - `PlayerInfo`
-    - `Player`
+        - `Achievement`
+        - `GameMode`
+        - `IPlayer`
+        - `OfflinePlayer`
+        - `PlayerInfo`
+        - `Player`
 - 以下の定数は削除されました
-    - `Player::SURVIVAL` - `GameMode::SURVIVAL()`を使用してください
-    - `Player::CREATIVE` - `GameMode::CREATIVE()`を使用してください
-    - `Player::ADVENTURE` - `GameMode::ADVENTURE()`を使用してください
-    - `Player::SPECTATOR` - `GameMode::SPECTATOR()`を使用してください
-    - `Player::VIEW` - `GameMode::SPECTATOR()`を使用してください
+        - `Player::SURVIVAL` - `GameMode::SURVIVAL()`を使用してください
+        - `Player::CREATIVE` - `GameMode::CREATIVE()`を使用してください
+        - `Player::ADVENTURE` - `GameMode::ADVENTURE()`を使用してください
+        - `Player::SPECTATOR` - `GameMode::SPECTATOR()`を使用してください
+        - `Player::VIEW` - `GameMode::SPECTATOR()`を使用してください
 - (ほぼ)すべてのパケットハンドラーは`プレイヤー`から除去されました。これらのハンドラーはネットワークレイヤー内にカプセル化されました
 - `Player->getSpawn()`は現在ではプレイヤーのスポーン地点が設定されていないときにワールドのセーフスポーンを返さなくなりました。コールしたときのセーフスポーンを返すというのは意味がありません。実際に使われるときにセーフスポーンであるとは限らないからです。セーフスポーンを取得したい場合には`World->getSafeSpawn()`にこの関数の返り値を渡してください。
 - 以下のAPIメソッドが追加されました。
-    - `Player->attackBlock()`: ターゲットブロックを殴る(左クリック), 例. ブロックの破壊を開始(サバイバル)
-    - `Player->attackEntity()`: (範囲内にいれば)ターゲットエンティティを素手攻撃(左クリック)
-    - `Player->breakBlock()`: 現在のワールドのターゲットブロックを(即座に)破壊する
-    - `Player->consumeHeldItem()`: 以前にアクティベートされたアイテムを消費する, 例. 食べ物を食べる
-    - `Player->continueBreakBlock()`: サバイバル時に破壊アニメーションとパーティクルを生成しながらターゲットブロックを殴る
-    - `Player->getItemCooldownExpiry()`: 与えられたアイテムのクールダウンが失効するtickを返す
-    - `Player->hasFiniteResources()`
-    - `Player->interactBlock()`: 現在のワールドのターゲットブロックを触る(右クリック)
-    - `Player->interactEntity()`: ターゲットエンティティを触る(右クリック), 例. エンティティに名札で名前をつける
-    - `Player->pickBlock()`: 現在のワールドのターゲットブロックをピックする(マウスホイールクリック)
-    - `Player->releaseHeldItem()`: 以前にアクティベートされたアイテムをリリースする, 例. 竿を振る
-    - `Player->selectHotbarSlot()`: 特定のホットバースロットを選択する
-    - `Player->stopBreakBlock()`: それ以前に攻撃されていたブロックへの攻撃をやめる
-    - `Player->toggleFlight()`: 飛行を開始/停止しようとする (イベントを発火し、キャンセルされる可能性がある)
-    - `Player->updateNextPosition()`: プレイヤーの次に試みられる移動場所を設定する (イベントを発火し、キャンセルされる可能性がある)
-    - `Player->useHeldItem()`: 持っているアイテムをアクティベートする, 例. 雪玉を投げる
-    - `Player->getSaveData()`: その場でセーブデータを生成し、セーブデータを返す。
+        - `Player->attackBlock()`: ターゲットブロックを殴る(左クリック), 例. ブロックの破壊を開始(サバイバル)
+        - `Player->attackEntity()`: (範囲内にいれば)ターゲットエンティティを素手攻撃(左クリック)
+        - `Player->breakBlock()`: 現在のワールドのターゲットブロックを(即座に)破壊する
+        - `Player->consumeHeldItem()`: 以前にアクティベートされたアイテムを消費する, 例. 食べ物を食べる
+        - `Player->continueBreakBlock()`: サバイバル時に破壊アニメーションとパーティクルを生成しながらターゲットブロックを殴る
+        - `Player->getItemCooldownExpiry()`: 与えられたアイテムのクールダウンが失効するtickを返す
+        - `Player->hasFiniteResources()`
+        - `Player->interactBlock()`: 現在のワールドのターゲットブロックを触る(右クリック)
+        - `Player->interactEntity()`: ターゲットエンティティを触る(右クリック), 例. エンティティに名札で名前をつける
+        - `Player->pickBlock()`: 現在のワールドのターゲットブロックをピックする(マウスホイールクリック)
+        - `Player->releaseHeldItem()`: 以前にアクティベートされたアイテムをリリースする, 例. 竿を振る
+        - `Player->selectHotbarSlot()`: 特定のホットバースロットを選択する
+        - `Player->stopBreakBlock()`: それ以前に攻撃されていたブロックへの攻撃をやめる
+        - `Player->toggleFlight()`: 飛行を開始/停止しようとする (イベントを発火し、キャンセルされる可能性がある)
+        - `Player->updateNextPosition()`: プレイヤーの次に試みられる移動場所を設定する (イベントを発火し、キャンセルされる可能性がある)
+        - `Player->useHeldItem()`: 持っているアイテムをアクティベートする, 例. 雪玉を投げる
+        - `Player->getSaveData()`: その場でセーブデータを生成し、セーブデータを返す。
 - 以下のAPIメソッドは削除されました。
-    - `Player->addActionBarMessage()`: `sendActionBarMessage()`に置き換えられました。
-    - `Player->addSubTitle()`: `sendSubTitle()`に置き換えられました。
-    - `Player->addTitle()`: `sendTitle()`に置き換えられました。
-    - `Player->getAddress()`: `NetworkSession->getIp()`に置き換えられました。
-    - `Player->getPing()`: `NetworkSession`に移動されました。
-    - `Player->getPort()`: `NetworkSession`に移動されました。
-    - `Player->updatePing()`: `NetworkSession`に移動されました。
-    - `Player->dataPacket()`: `NetworkSession->sendDataPacket()`に置き換えられました。
-    - `Player->sendDataPacket()`: `NetworkSession->sendDataPacket()`に置き換えられました。
-    - `Player->updateNextPosition()`: `Player->handleMovement()`を代わりに使用してください。
-    - `IPlayer->isWhitelisted()`: `Server->isWhitelisted()`を代わりに使用してください。
-    - `IPlayer->setWhitelisted()`: `Server->setWhitelisted()`を代わりに使用してください。
-    - `IPlayer->isBanned()`: これはネームBANのみをチェックしプラグインによる独自のBANシステムについて把握していなかったため信頼性に欠けていました。`Server->getNameBans()->isBanned()`と`Server->getIPBans()->isBanned()`を代わりに使用してください。
-    - `IPlayer->setBanned()`: `Server`のAPIを代わりに使用してください。
-    - `IPlayer->isOp()`: `Server`のAPIを代わりに使用してください。
-    - `IPlayer->setOp()`: `Server`のAPIを代わりに使用してください。
+        - `Player->addActionBarMessage()`: `sendActionBarMessage()`に置き換えられました。
+        - `Player->addSubTitle()`: `sendSubTitle()`に置き換えられました。
+        - `Player->addTitle()`: `sendTitle()`に置き換えられました。
+        - `Player->getAddress()`: `NetworkSession->getIp()`に置き換えられました。
+        - `Player->getPing()`: `NetworkSession`に移動されました。
+        - `Player->getPort()`: `NetworkSession`に移動されました。
+        - `Player->updatePing()`: `NetworkSession`に移動されました。
+        - `Player->dataPacket()`: `NetworkSession->sendDataPacket()`に置き換えられました。
+        - `Player->sendDataPacket()`: `NetworkSession->sendDataPacket()`に置き換えられました。
+        - `Player->updateNextPosition()`: `Player->handleMovement()`を代わりに使用してください。
+        - `IPlayer->isWhitelisted()`: `Server->isWhitelisted()`を代わりに使用してください。
+        - `IPlayer->setWhitelisted()`: `Server->setWhitelisted()`を代わりに使用してください。
+        - `IPlayer->isBanned()`: これはネームBANのみをチェックしプラグインによる独自のBANシステムについて把握していなかったため信頼性に欠けていました。`Server->getNameBans()->isBanned()`と`Server->getIPBans()->isBanned()`を代わりに使用してください。
+        - `IPlayer->setBanned()`: `Server`のAPIを代わりに使用してください。
+        - `IPlayer->isOp()`: `Server`のAPIを代わりに使用してください。
+        - `IPlayer->setOp()`: `Server`のAPIを代わりに使用してください。
     
 #### Plugin
 - APIバージョンのチェックがより厳格になりました。現在では同じメジャーバージョン内における複数の最小バージョンの宣言をすることができなくなりました。複数宣言した場合、プラグインは読み込みに失敗し、`Multiple minimum API versions found for some major versions`というメッセージが表示されます。
 - `plugin.yml`のYAMLコマンドのロードは`PluginBase`に取り込まれました。
 - `PluginManager->registerEvent()`はよりシンプルなシグネチャを持つようになります: `registerEvent(string $event, \Closure $handler, int $priority, Plugin $plugin, bool $handleCancelled = false)`。 与えられるクロージャーはその唯一のパラメータとしてその特定のイベントのみを受け取る必要があります. 詳しくは[Event APIの変更](#event)をご覧ください。
 - 以下のクラスは削除されました。
-    - `PluginLogger`
+        - `PluginLogger`
 - 以下の定数は削除されました。
-    - `PluginLoadOrder::STARTUP` - `PluginEnableOrder::STARTUP()`を使用してください。
-    - `PluginLoadOrder::POSTWORLD` - `PluginEnableOrder::POSTWORLD()`を使用してください。
+        - `PluginLoadOrder::STARTUP` - `PluginEnableOrder::STARTUP()`を使用してください。
+        - `PluginLoadOrder::POSTWORLD` - `PluginEnableOrder::POSTWORLD()`を使用してください。
 - 以下のインターフェース要求は削除されました。
-    - `Plugin->onEnable()`: `PluginBase`に取り込まれました。
-    - `Plugin->onDisable()`: 同上
-    - `Plugin->onLoad()`: 同上
-    - `Plugin->getServer()`は実装が要求されなくなりました。利便性のために`PluginBase`に実装されます。
-    - `Plugin->isDisabled()`は削除されました。(`Plugin->isEnabled()`を代わりに使用してください)
-    - `Plugin`は`CommandExecutor`を継承しなくなりました。つまりこれは`Plugin`実装は`onCommand()`をこれからは実装する必要がないことを表します。
+        - `Plugin->onEnable()`: `PluginBase`に取り込まれました。
+        - `Plugin->onDisable()`: 同上
+        - `Plugin->onLoad()`: 同上
+        - `Plugin->getServer()`は実装が要求されなくなりました。利便性のために`PluginBase`に実装されます。
+        - `Plugin->isDisabled()`は削除されました。(`Plugin->isEnabled()`を代わりに使用してください)
+        - `Plugin`は`CommandExecutor`を継承しなくなりました。つまりこれは`Plugin`実装は`onCommand()`をこれからは実装する必要がないことを表します。
 - 以下のフックメソッドはアクセス権が変更されました。
-    - `PluginBase->onEnable()`は`public`から`protected`に変更されました。
-    - `PluginBase->onDisable()`は`public`から`protected`に変更されました。
-    - `PluginBase->onLoad()`は`public`に`protected`変更されました。
+        - `PluginBase->onEnable()`は`public`から`protected`に変更されました。
+        - `PluginBase->onDisable()`は`public`から`protected`に変更されました。
+        - `PluginBase->onLoad()`は`public`に`protected`変更されました。
 - 以下のフックメソッドはリネームされました。
-    - `Plugin->setEnabled()` -> `Plugin->onEnableStateChange()` - この変更はプラグイン開発者に、このフックメソッドを誤って使わせないようにしこのメソッドが行うことをより正確に説明する名前を与えるためのものです。
+        - `Plugin->setEnabled()` -> `Plugin->onEnableStateChange()` - この変更はプラグイン開発者に、このフックメソッドを誤って使わせないようにしこのメソッドが行うことをより正確に説明する名前を与えるためのものです。
 - 以下の(非推奨の)APIメソッドは削除されました。
-    - `PluginManager->callEvent()`: `Event->call()`を代わりに使用してください。
-    - `PluginManager->addPermission()`: `PermissionManager`を代わりに使用してください。
-    - `PluginManager->getDefaultPermSubscriptions()`: `PermissionManager`を代わりに使用してください。
-    - `PluginManager->getDefaultPermissions()`: `PermissionManager`を代わりに使用してください。
-    - `PluginManager->getPermission()`: `PermissionManager`を代わりに使用してください。
-    - `PluginManager->getPermissionSubscriptions()`: `PermissionManager`を代わりに使用してください。
-    - `PluginManager->getPermissions()`: `PermissionManager`を代わりに使用してください。
-    - `PluginManager->recalculatePermissionDefaults()`: `PermissionManager`を代わりに使用してください。
-    - `PluginManager->removePermission()`: `PermissionManager`を代わりに使用してください。
-    - `PluginManager->subscribeToDefaultPerms()`: `PermissionManager`を代わりに使用してください。
-    - `PluginManager->subscribeToPermission()`: `PermissionManager`を代わりに使用してください。
-    - `PluginManager->unsubscribeFromDefaultPerms()`: `PermissionManager`を代わりに使用してください。
-    - `PluginManager->unsubscribeFromPermission()`: `PermissionManager`を代わりに使用してください。
+        - `PluginManager->callEvent()`: `Event->call()`を代わりに使用してください。
+        - `PluginManager->addPermission()`: `PermissionManager`を代わりに使用してください。
+        - `PluginManager->getDefaultPermSubscriptions()`: `PermissionManager`を代わりに使用してください。
+        - `PluginManager->getDefaultPermissions()`: `PermissionManager`を代わりに使用してください。
+        - `PluginManager->getPermission()`: `PermissionManager`を代わりに使用してください。
+        - `PluginManager->getPermissionSubscriptions()`: `PermissionManager`を代わりに使用してください。
+        - `PluginManager->getPermissions()`: `PermissionManager`を代わりに使用してください。
+        - `PluginManager->recalculatePermissionDefaults()`: `PermissionManager`を代わりに使用してください。
+        - `PluginManager->removePermission()`: `PermissionManager`を代わりに使用してください。
+        - `PluginManager->subscribeToDefaultPerms()`: `PermissionManager`を代わりに使用してください。
+        - `PluginManager->subscribeToPermission()`: `PermissionManager`を代わりに使用してください。
+        - `PluginManager->unsubscribeFromDefaultPerms()`: `PermissionManager`を代わりに使用してください。
+        - `PluginManager->unsubscribeFromPermission()`: `PermissionManager`を代わりに使用してください。
 - `PluginBase->onEnable()`や`PluginBase->onLoad()`で例外を投げることは許可されなくなりました。現在では例外を投げるとサーバーがクラッシュします。
 
 #### Scheduler
@@ -899,12 +901,12 @@ permissions:
 - 複数の値を文字列の名前で識別して保存できます。
 - `fetchLocal()` は複数回使えるようになりました。保存されている値を削除することはなくなりました。
 - 以下のクラスは削除されました。
-    - `FileWriteTask`
+        - `FileWriteTask`
 - 以下のメソッドは削除されました。
-    - `AsyncTask->peekLocal()`: `fetchLocal()` を代わりに使用してください。
+        - `AsyncTask->peekLocal()`: `fetchLocal()` を代わりに使用してください。
 - 以下のメソッドはシグネチャが変わりました。
-    - `AsyncTask->storeLocal()` は `storeLocal(string $key, mixed $complexData) : void` をシグネチャに持ちます。
-    - `AsyncTask->fetchLocal()` は `fetchLocal(string $key) : mixed` をシグネチャに持ちます。
+        - `AsyncTask->storeLocal()` は `storeLocal(string $key, mixed $complexData) : void` をシグネチャに持ちます。
+        - `AsyncTask->fetchLocal()` は `fetchLocal(string $key) : mixed` をシグネチャに持ちます。
 
 ##### その他の変更
 - `AsyncPool` は新しく、かなり効率の良いアルゴリズムをタスクコレクションに使用します。
@@ -913,189 +915,189 @@ permissions:
 - `CancelTaskException` が追加されました。これは、 `Task::onRun()` からタスクをキャンセルするために投げられます。（特に `ClosureTask` に便利です）
 - `pocketmine\Collectable` は削除され、 `AsyncTask` から継承されなくなりました。
 - 以下のフックが追加されました。
-    - `AsyncTask->onError()`: メインスレッドにおいて非同期処理でメモリ不足などの制御不能なエラーを検知したときに呼び出されます。
+        - `AsyncTask->onError()`: メインスレッドにおいて非同期処理でメモリ不足などの制御不能なエラーを検知したときに呼び出されます。
 - 以下のフックはシグネチャが変わりました。
-    - `AsyncTask->onCompletion()` は `Server` パラメーターを受け取らなくなり、 `void` を戻り値の型とします。
-    - `AsyncTask->onProgressUpdate()` は `Server` パラメーターを受け取らなくなり、 `void` を戻り値の型とします。
+        - `AsyncTask->onCompletion()` は `Server` パラメーターを受け取らなくなり、 `void` を戻り値の型とします。
+        - `AsyncTask->onProgressUpdate()` は `Server` パラメーターを受け取らなくなり、 `void` を戻り値の型とします。
 - 以下のAPIメソッドは削除されました。
-    - `AsyncTask->getFromThreadStore()`: `AsyncTask->worker->getFromThreadStore()` を代わりに使用してください。
-    - `AsyncTask->removeFromThreadStore()`: `AsyncTask->worker->removeFromThreadStore()` を代わりに使用してください。
-    - `AsyncTask->saveToThreadStore()`: `AsyncTask->worker->saveToThreadStore()` を代わりに使用してください。
+        - `AsyncTask->getFromThreadStore()`: `AsyncTask->worker->getFromThreadStore()` を代わりに使用してください。
+        - `AsyncTask->removeFromThreadStore()`: `AsyncTask->worker->removeFromThreadStore()` を代わりに使用してください。
+        - `AsyncTask->saveToThreadStore()`: `AsyncTask->worker->saveToThreadStore()` を代わりに使用してください。
 
 #### Server
 - 権限システムに依存しない、新しいチャット配信APIが実装されました。
-    - 以下のAPIメソッドが追加されました。
+        - 以下のAPIメソッドが追加されました。
       - `subscribeToBroadcastChannel()` - チャット（及びその他の種類の）メッセージを受信するために、`CommandSender`をサブスクライブできます。
       - `unsubscribeFromBroadcastChannel()`
       - `unsubscribeFromAllBroadcastChannels()`
       - `getBroadcastChannelSubscribers()`
-    - `Player`に`pocketmine.broadcast.*`のいずれかの権限を与えると、自動的に対応するブロードキャストチャンネルに加入できます。（権限を削除すると登録も解除されます）
-    - 権限を使わずにカスタムブロードキャストチャンネルを作成・登録できるようになりました。
-    - しかし、`Player`達が適切な権限を持っていなければ、内蔵ブロードキャストチャンネルからは自動的に登録解除されるでしょう。
-    - カスタムブロードキャストチャンネルからの自動的な登録/登録解除は新しい`Permissible`権限再計算コールバックAPI使用して実装できます。
+        - `Player`に`pocketmine.broadcast.*`のいずれかの権限を与えると、自動的に対応するブロードキャストチャンネルに加入できます。（権限を削除すると登録も解除されます）
+        - 権限を使わずにカスタムブロードキャストチャンネルを作成・登録できるようになりました。
+        - しかし、`Player`達が適切な権限を持っていなければ、内蔵ブロードキャストチャンネルからは自動的に登録解除されるでしょう。
+        - カスタムブロードキャストチャンネルからの自動的な登録/登録解除は新しい`Permissible`権限再計算コールバックAPI使用して実装できます。
 - 以下のAPIメソッドは削除されました。
-    - `reloadWhitelist()`
-    - `getLevelMetadata()`
-    - `getPlayerMetadata()`
-    - `getEntityMetadata()`
-    - `getDefaultGamemode()`
-    - `getLoggedInPlayers()`
-    - `onPlayerLogout()`
-    - `addPlayer()`
-    - `removePlayer()`
-    - `reload()`
-    - `getSpawnRadius()`
-    - `enablePlugin()`
-    - `disablePlugin()`
-    - `getGamemodeString()` - `pocketmine\player\GameMode->getTranslationKey()` に置き換えられました。
-    - `getGamemodeName()` - `pocketmine\player\GameMode->name()`　に置き換えられました。
-    - `getGamemodeFromString()` - `GameMode::fromString()` に置き換えられました。
-    - `broadcast()` - `broadcastMessage()` を代わりに使用してください。
+        - `reloadWhitelist()`
+        - `getLevelMetadata()`
+        - `getPlayerMetadata()`
+        - `getEntityMetadata()`
+        - `getDefaultGamemode()`
+        - `getLoggedInPlayers()`
+        - `onPlayerLogout()`
+        - `addPlayer()`
+        - `removePlayer()`
+        - `reload()`
+        - `getSpawnRadius()`
+        - `enablePlugin()`
+        - `disablePlugin()`
+        - `getGamemodeString()` - `pocketmine\player\GameMode->getTranslationKey()` に置き換えられました。
+        - `getGamemodeName()` - `pocketmine\player\GameMode->name()`　に置き換えられました。
+        - `getGamemodeFromString()` - `GameMode::fromString()` に置き換えられました。
+        - `broadcast()` - `broadcastMessage()` を代わりに使用してください。
 - 以下のAPIメソッドは変更されました。
-    - `getOfflinePlayerData()` 存在しないデータを生成しなくなりました。
+        - `getOfflinePlayerData()` 存在しないデータを生成しなくなりました。
 - 以下のAPIメソッドは名前が変更されました。
-    - `getPlayer()` -> `getPlayerByPrefix()` (可能な場所では `getPlayerExact()` を代わりに使用することを検討してください)
+        - `getPlayer()` -> `getPlayerByPrefix()` (可能な場所では `getPlayerExact()` を代わりに使用することを検討してください)
 
 #### Level / World
 ##### General
 - "world"の文脈での`Level`への言及は全て`World`に変更されました。
-    - 名前空間`pocketmine\level`は`pocketmine\world`に変更されました。
-    - "world"の文脈で`Level`を名前に含む全てのクラスの該当箇所は、`World`に変更されました。
-    - 例えば、`Position->getLevel()`は`Position->getWorld()`に変更され、`Position->level`は`Position->world`に変更されました。
+        - 名前空間`pocketmine\level`は`pocketmine\world`に変更されました。
+        - "world"の文脈で`Level`を名前に含む全てのクラスの該当箇所は、`World`に変更されました。
+        - 例えば、`Position->getLevel()`は`Position->getWorld()`に変更され、`Position->level`は`Position->world`に変更されました。
 - `WorldManager`ユニットを`Server`から分割しました。
-    - `Server->findEntity()` -> `WorldManager->findEntity()`
-    - `Server->generateLevel()` -> `WorldManager->generateWorld()`
-    - `Server->getAutoSave()` -> `WorldManager->getAutoSave()`
-    - `Server->getDefaultLevel()` -> `WorldManager->getDefaultWorld()`
-    - `Server->getLevel()` -> `WorldManager->getWorld()`
-    - `Server->getLevelByName()` -> `WorldManager->getWorldByName()`
-    - `Server->getLevels()` -> `WorldManager->getWorlds()`
-    - `Server->isLevelGenerated()` -> `WorldManager->isWorldGenerated()`
-    - `Server->isLevelLoaded()` -> `WorldManager->isWorldLoaded()`
-    - `Server->loadLevel()` -> `WorldManager->loadWorld()`
+        - `Server->findEntity()` -> `WorldManager->findEntity()`
+        - `Server->generateLevel()` -> `WorldManager->generateWorld()`
+        - `Server->getAutoSave()` -> `WorldManager->getAutoSave()`
+        - `Server->getDefaultLevel()` -> `WorldManager->getDefaultWorld()`
+        - `Server->getLevel()` -> `WorldManager->getWorld()`
+        - `Server->getLevelByName()` -> `WorldManager->getWorldByName()`
+        - `Server->getLevels()` -> `WorldManager->getWorlds()`
+        - `Server->isLevelGenerated()` -> `WorldManager->isWorldGenerated()`
+        - `Server->isLevelLoaded()` -> `WorldManager->isWorldLoaded()`
+        - `Server->loadLevel()` -> `WorldManager->loadWorld()`
       - `WorldManager->loadWorld()` 要求された場合はワールドを変換できます。 (`$autoUpgrade`パラメーターが提供されている必要があります)
-    - `Server->setAutoSave()` -> `WorldManager->setAutoSave()`
-    - `Server->setDefaultLevel()` -> `WorldManager->setDefaultWorld()`
-    - `Server->unloadLevel()` -> `WorldManager->unloadWorld()`
+        - `Server->setAutoSave()` -> `WorldManager->setAutoSave()`
+        - `Server->setDefaultLevel()` -> `WorldManager->setDefaultWorld()`
+        - `Server->unloadLevel()` -> `WorldManager->unloadWorld()`
 - `WorldManager->getAutoSaveTicks()`が追加され、自動セーブの間隔を操作できるようになりました。
 - 以下のクラスは追加されました。
-    - `BlockTransaction`: 検証条件付きでブロックの一括変更を行えます - 一つでも変更不可なブロックがある場合、変更全体が適用できなくなります。
-    - `ChunkListenerNoOpTrait`: チャンクリスナーの実装のための標準のno-opスタブを含みます。
-    - `ChunkListener`: 与えられたチャンクで発生したイベントを監視することができるインタフェースです。
-    - `TickingChunkLoader`: チャンクの時を刻むことに特化した`ChunkLoader`です。
+        - `BlockTransaction`: 検証条件付きでブロックの一括変更を行えます - 一つでも変更不可なブロックがある場合、変更全体が適用できなくなります。
+        - `ChunkListenerNoOpTrait`: チャンクリスナーの実装のための標準のno-opスタブを含みます。
+        - `ChunkListener`: 与えられたチャンクで発生したイベントを監視することができるインタフェースです。
+        - `TickingChunkLoader`: チャンクの時を刻むことに特化した`ChunkLoader`です。
 - `ChunkLoader`は`getX()`と`getZ()`の実装を必要としなくなりました。
 - `ChunkLoader`でチャンクがランダムに更新されることがなくなりました。この動作が必要なら`TickingChunkLoader`を実装してください。
 - 以下のクラスは改名されました。
-    - `pocketmine\world\utils\SubChunkIteratorManager` -> `pocketmine\world\utils\SubChunkExplorer`
+        - `pocketmine\world\utils\SubChunkIteratorManager` -> `pocketmine\world\utils\SubChunkExplorer`
 - 以下のAPIメソッドは追加されました。
-    - `World->registerChunkListener()`
-    - `World->unregisterChunkListener()`
-    - `World->getBlockAt()` (Vector3の代わりにint x/y/zを受け入れ、場合によってはより速くなります)
-    - `World->setBlockAt()` (Vector3の代わりにint x/y/zを受け入れ、場合によってはより速くなります)
-    - `Chunk->isDirty()` (`Chunk->hasChanged()`の置換)
-    - `Chunk->getDirtyFlag()` (より細かなコンポーネント・ベースのチャンクダーティフラッギングで、チャンクの変更されていない部分を保存することを回避するために使用されます)
-    - `Chunk->setDirty()`
-    - `Chunk->setDirtyFlag()`
+        - `World->registerChunkListener()`
+        - `World->unregisterChunkListener()`
+        - `World->getBlockAt()` (Vector3の代わりにint x/y/zを受け入れ、場合によってはより速くなります)
+        - `World->setBlockAt()` (Vector3の代わりにint x/y/zを受け入れ、場合によってはより速くなります)
+        - `Chunk->isDirty()` (`Chunk->hasChanged()`の置換)
+        - `Chunk->getDirtyFlag()` (より細かなコンポーネント・ベースのチャンクダーティフラッギングで、チャンクの変更されていない部分を保存することを回避するために使用されます)
+        - `Chunk->setDirty()`
+        - `Chunk->setDirtyFlag()`
 - 以下のAPIメソッドは削除されました。
-    - `ChunkLoader->getLoaderId()` (オブジェクトIDが使われるようになりました)
-    - `ChunkLoader->isLoaderActive()`
-    - `ChunkLoader->getPosition()`
-    - `ChunkLoader->getLevel()`
-    - `Chunk->fastSerialize()` (`FastChunkSerializer::serialize()`を代わりに使用してください)
-    - `Chunk->getBlockData()`
-    - `Chunk->getBlockDataColumn()`
-    - `Chunk->getBlockId()`
-    - `Chunk->getBlockIdColumn()`
-    - `Chunk->getBlockLight()`
-    - `Chunk->getBlockLightColumn()`
-    - `Chunk->getBlockSkyLight()`
-    - `Chunk->getBlockSkyLightColumn()`
-    - `Chunk->getMaxY()`
-    - `Chunk->getSubChunkSendCount()` (これはプロトコルの取り扱いに特化していました)
-    - `Chunk->getX()`
-    - `Chunk->getZ()`
-    - `Chunk->hasChanged()` (`Chunk->isDirty()`または`Chunk->getDirtyFlag()`を代わりに使用してください)
-    - `Chunk->isGenerated()`
-    - `Chunk->networkSerialize()` (`network\mcpe\serializer`の中にある`ChunkSerializer`を確認してください)
-    - `Chunk->populateSkyLight()` (`SkyLightUpdate->recalculateChunk()`を代わりに使用してください)
-    - `Chunk->recalculateHeightMap()` (`SkyLightUpdate`に移動しました)
-    - `Chunk->recalculateHeightMapColumn()` (`SkyLightUpdate`に移動しました)
-    - `Chunk->setAllBlockLight()`
-    - `Chunk->setAllBlockSkyLight()`
-    - `Chunk->setBlock()`
-    - `Chunk->setBlockData()`
-    - `Chunk->setBlockId()`
-    - `Chunk->setBlockLight()`
-    - `Chunk->setBlockSkyLight()`
-    - `Chunk->setChanged()` (`Chunk->setDirty()`または`Chunk->setDirtyFlag()`を代わりに使用してください)
-    - `Chunk->setGenerated()`
-    - `Chunk->setX()`
-    - `Chunk->setZ()`
-    - `Chunk::fastDeserialize()` (`FastChunkSerializer::deserialize()`を代わりに使用してください)
-    - `World->isFullBlock()`
-    - `World->getFullBlock()`
-    - `World->getBlockIdAt()`
-    - `World->setBlockIdAt()`
-    - `World->getBlockDataAt()`
-    - `World->setBlockDataAt()`
-    - `World->setBlockLightAt()`
-    - `World->setBlockSkyLightAt()`
-    - `World->getBlockSkyLightAt()` (場合によって、`World->getRealBlockSkyLightAt()`または`World->getPotentialBlockSkyLightAt()`を使用してください)
-    - `World->getHeightMap()` (誤解を招く名前であり、空の光の計算にのみ有益です - おそらく`getHighestBlockAt()`が求められているものでしょう)
-    - `World->setHeightMap()` (誤解を招く名前であり、空の光の計算にのみ有益です)
-    - `World->getChunkEntities()`
-    - `World->getChunkTiles()`
-    - `World->getTileById()`
-    - `World->checkSpawnProtection()`
-    - `World->updateBlockLight()`
-    - `World->updateSkyLight()`
-    - `World->isFullBlock()` (`Block->isFullCube()`を代わりに使用してください)
-    - `World->sendBlocks()`
-    - `World->sendTime()`
-    - `World->addGlobalPacket()`
-    - `World->broadcastGlobalPacket()`
-    - `World->addChunkPacket()`
-    - `World->broadcastLevelSoundEvent()`
-    - `World->broadcastLevelEvent()`
-    - `World->getTickRate()`
-    - `World->setTickRate()`
-    - `World::generateChunkLoaderId()`
+        - `ChunkLoader->getLoaderId()` (オブジェクトIDが使われるようになりました)
+        - `ChunkLoader->isLoaderActive()`
+        - `ChunkLoader->getPosition()`
+        - `ChunkLoader->getLevel()`
+        - `Chunk->fastSerialize()` (`FastChunkSerializer::serialize()`を代わりに使用してください)
+        - `Chunk->getBlockData()`
+        - `Chunk->getBlockDataColumn()`
+        - `Chunk->getBlockId()`
+        - `Chunk->getBlockIdColumn()`
+        - `Chunk->getBlockLight()`
+        - `Chunk->getBlockLightColumn()`
+        - `Chunk->getBlockSkyLight()`
+        - `Chunk->getBlockSkyLightColumn()`
+        - `Chunk->getMaxY()`
+        - `Chunk->getSubChunkSendCount()` (これはプロトコルの取り扱いに特化していました)
+        - `Chunk->getX()`
+        - `Chunk->getZ()`
+        - `Chunk->hasChanged()` (`Chunk->isDirty()`または`Chunk->getDirtyFlag()`を代わりに使用してください)
+        - `Chunk->isGenerated()`
+        - `Chunk->networkSerialize()` (`network\mcpe\serializer`の中にある`ChunkSerializer`を確認してください)
+        - `Chunk->populateSkyLight()` (`SkyLightUpdate->recalculateChunk()`を代わりに使用してください)
+        - `Chunk->recalculateHeightMap()` (`SkyLightUpdate`に移動しました)
+        - `Chunk->recalculateHeightMapColumn()` (`SkyLightUpdate`に移動しました)
+        - `Chunk->setAllBlockLight()`
+        - `Chunk->setAllBlockSkyLight()`
+        - `Chunk->setBlock()`
+        - `Chunk->setBlockData()`
+        - `Chunk->setBlockId()`
+        - `Chunk->setBlockLight()`
+        - `Chunk->setBlockSkyLight()`
+        - `Chunk->setChanged()` (`Chunk->setDirty()`または`Chunk->setDirtyFlag()`を代わりに使用してください)
+        - `Chunk->setGenerated()`
+        - `Chunk->setX()`
+        - `Chunk->setZ()`
+        - `Chunk::fastDeserialize()` (`FastChunkSerializer::deserialize()`を代わりに使用してください)
+        - `World->isFullBlock()`
+        - `World->getFullBlock()`
+        - `World->getBlockIdAt()`
+        - `World->setBlockIdAt()`
+        - `World->getBlockDataAt()`
+        - `World->setBlockDataAt()`
+        - `World->setBlockLightAt()`
+        - `World->setBlockSkyLightAt()`
+        - `World->getBlockSkyLightAt()` (場合によって、`World->getRealBlockSkyLightAt()`または`World->getPotentialBlockSkyLightAt()`を使用してください)
+        - `World->getHeightMap()` (誤解を招く名前であり、空の光の計算にのみ有益です - おそらく`getHighestBlockAt()`が求められているものでしょう)
+        - `World->setHeightMap()` (誤解を招く名前であり、空の光の計算にのみ有益です)
+        - `World->getChunkEntities()`
+        - `World->getChunkTiles()`
+        - `World->getTileById()`
+        - `World->checkSpawnProtection()`
+        - `World->updateBlockLight()`
+        - `World->updateSkyLight()`
+        - `World->isFullBlock()` (`Block->isFullCube()`を代わりに使用してください)
+        - `World->sendBlocks()`
+        - `World->sendTime()`
+        - `World->addGlobalPacket()`
+        - `World->broadcastGlobalPacket()`
+        - `World->addChunkPacket()`
+        - `World->broadcastLevelSoundEvent()`
+        - `World->broadcastLevelEvent()`
+        - `World->getTickRate()`
+        - `World->setTickRate()`
+        - `World::generateChunkLoaderId()`
 - 以下のAPIメソッドはシグネチャーが変更されました。
-    - `World->addParticle()`は`addParticle(Vector3 $pos, Particle $particle, ?Player[] $players = null) : void`のシグネチャーを持つようになります。
-    - `World->addSound()`は`addSound(?Vector3 $pos, Sound $sound, ?Player[] $players = null) : void`のシグネチャーを持つようになります。
-    - `World->getRandomTickedBlocks()`は`SplFixedArray`の代わりに`bool[]`を受け付けます。
-    - `World->addRandomTickedBlock()`は`int, int`の代わりに`Block`を受け付けます。
-    - `World->removeRandomTickedBlock()`は`int, int`の代わりに`Block`を受け付けます。
-    - `World->setBlock()`にあった`$direct`パラメーターは削除されました。
-    - `World->loadChunk()`は`?Chunk`を返し、`$create`パラメーターは削除されました。
-    - `World->getChunk()`は`$create`パラメーターを受け付けなくなりました。
-    - `World->updateAllLight()`は`Vector3`の代わりに`int, int, int`を受け付けます。
-    - `ChunkManager->setChunk()` (および`World`と`SimpleChunkManager`の中の注目に値する実装) は`$chunk`パラメーターにNULLを受け付けなくなりました。
-    - `Chunk->__construct()`は`array<int, SubChunk> $subChunks, ?list<CompoundTag> $entities, ?list<CompoundTag> $tiles, ?BiomeArray $biomeArray, ?HeightArray $heightArray`のシグネチャーを持つようになります。
-    - `Chunk->getSubChunk()`は`SubChunkInterface|null`の代わりに`SubChunk`を返します。(範囲外の座標では`InvalidArgumentException`を投げます)
-    - `Chunk->setSubChunk()`はもう`SubChunkInterface`を受け入れず、`$allowEmpty`パラメーターは削除されました。
-    - `WorldManager->generateWorld()` (以前の`Server->generateWorld()`) は`int $seed, class-string<Generator> $generator, mixed[] $options`の代わりに`WorldCreationOptions`を受け付けるようになりました。
+        - `World->addParticle()`は`addParticle(Vector3 $pos, Particle $particle, ?Player[] $players = null) : void`のシグネチャーを持つようになります。
+        - `World->addSound()`は`addSound(?Vector3 $pos, Sound $sound, ?Player[] $players = null) : void`のシグネチャーを持つようになります。
+        - `World->getRandomTickedBlocks()`は`SplFixedArray`の代わりに`bool[]`を受け付けます。
+        - `World->addRandomTickedBlock()`は`int, int`の代わりに`Block`を受け付けます。
+        - `World->removeRandomTickedBlock()`は`int, int`の代わりに`Block`を受け付けます。
+        - `World->setBlock()`にあった`$direct`パラメーターは削除されました。
+        - `World->loadChunk()`は`?Chunk`を返し、`$create`パラメーターは削除されました。
+        - `World->getChunk()`は`$create`パラメーターを受け付けなくなりました。
+        - `World->updateAllLight()`は`Vector3`の代わりに`int, int, int`を受け付けます。
+        - `ChunkManager->setChunk()` (および`World`と`SimpleChunkManager`の中の注目に値する実装) は`$chunk`パラメーターにNULLを受け付けなくなりました。
+        - `Chunk->__construct()`は`array<int, SubChunk> $subChunks, ?list<CompoundTag> $entities, ?list<CompoundTag> $tiles, ?BiomeArray $biomeArray, ?HeightArray $heightArray`のシグネチャーを持つようになります。
+        - `Chunk->getSubChunk()`は`SubChunkInterface|null`の代わりに`SubChunk`を返します。(範囲外の座標では`InvalidArgumentException`を投げます)
+        - `Chunk->setSubChunk()`はもう`SubChunkInterface`を受け入れず、`$allowEmpty`パラメーターは削除されました。
+        - `WorldManager->generateWorld()` (以前の`Server->generateWorld()`) は`int $seed, class-string<Generator> $generator, mixed[] $options`の代わりに`WorldCreationOptions`を受け付けるようになりました。
 - 以下のAPIメソッドは改名または移動しました。
-    - `Level->getChunks()` -> `World->getLoadedChunks()`
-    - `Level->getCollisionCubes()` -> `World->getCollisionBoxes()`
-    - `World->getName()` -> `World->getDisplayName()`
-    - `World->populateChunk()`は`World->requestChunkPopulation()`と`World->orderChunkPopulation()`に分割されました。
+        - `Level->getChunks()` -> `World->getLoadedChunks()`
+        - `Level->getCollisionCubes()` -> `World->getCollisionBoxes()`
+        - `World->getName()` -> `World->getDisplayName()`
+        - `World->populateChunk()`は`World->requestChunkPopulation()`と`World->orderChunkPopulation()`に分割されました。
 - 以下のAPIメソッドは動作が変更されました。
-    - `World->getChunk()`はディスクからチャンクを読み込もうとしなくなりました。チャンクがすでにメモリになかった場合、`null`が返されます。 (この動作は他の`ChunkManager`の実装と適切に調和します)
-    - `World->getHighestBlockAt()`は目標のX/Z列にブロックがなかった場合`-1`の代わりに`null`を返すようになりました。
-    - 以下のメソッドは未生成の地形を指定したときに`WorldException`を投げるようになりました。
+        - `World->getChunk()`はディスクからチャンクを読み込もうとしなくなりました。チャンクがすでにメモリになかった場合、`null`が返されます。 (この動作は他の`ChunkManager`の実装と適切に調和します)
+        - `World->getHighestBlockAt()`は目標のX/Z列にブロックがなかった場合`-1`の代わりに`null`を返すようになりました。
+        - 以下のメソッドは未生成の地形を指定したときに`WorldException`を投げるようになりました。
       - `World->getSafeSpawn()` (以前はただ黙って入力位置を返していました)
       - `World->getHighestBlockAt()` (以前は-1を返していました)
-    - `World->loadChunk()`はディスクに指定のチャンクが存在しなかった時に空のチャンクを生成しなくなりました。
-    - `World->setChunk()`は`ChunkLoadEvent`と`ChunkListener->onChunkLoaded()`を以前存在していなかったチャンクを置き換えるときに呼び出します。
-    - `World->useBreakOn()`は指定の場所が未生成、または未ロードの（または生成のためにロックされている）チャンクに含まれていた場合に`false`を返すようになりました。
-    - `World->useItemOn()`は指定の場所が未生成、または未ロードの（または生成のためにロックされている）チャンクに含まれていた場合に`false`を返すようになりました。
+        - `World->loadChunk()`はディスクに指定のチャンクが存在しなかった時に空のチャンクを生成しなくなりました。
+        - `World->setChunk()`は`ChunkLoadEvent`と`ChunkListener->onChunkLoaded()`を以前存在していなかったチャンクを置き換えるときに呼び出します。
+        - `World->useBreakOn()`は指定の場所が未生成、または未ロードの（または生成のためにロックされている）チャンクに含まれていた場合に`false`を返すようになりました。
+        - `World->useItemOn()`は指定の場所が未生成、または未ロードの（または生成のためにロックされている）チャンクに含まれていた場合に`false`を返すようになりました。
 - `ChunkListener`インタフェースは`ChunkLoader`から分割されました。以下のメソッドは移動しました。
-    - `ChunkLoader->onBlockChanged()` -> `ChunkListener->onBlockChanged()`
-    - `ChunkLoader->onChunkChanged()` -> `ChunkListener->onChunkChanged()`
-    - `ChunkLoader->onChunkLoaded()` -> `ChunkListener->onChunkLoaded()`
-    - `ChunkLoader->onChunkPopulated()` -> `ChunkListener->onChunkPopulated()`
-    - `ChunkLoader->onChunkUnloaded()` -> `ChunkListener->onChunkUnloaded()`
+        - `ChunkLoader->onBlockChanged()` -> `ChunkListener->onBlockChanged()`
+        - `ChunkLoader->onChunkChanged()` -> `ChunkListener->onChunkChanged()`
+        - `ChunkLoader->onChunkLoaded()` -> `ChunkListener->onChunkLoaded()`
+        - `ChunkLoader->onChunkPopulated()` -> `ChunkListener->onChunkPopulated()`
+        - `ChunkLoader->onChunkUnloaded()` -> `ChunkListener->onChunkUnloaded()`
 - `Location`は`pocketmine\entity\Location`に移動しました。
 
 ##### Particles
@@ -1103,8 +1105,8 @@ permissions:
 - `DustParticle->__construct()`は`pocketmine\color\Color`オブジェクトを`r, g, b, a`の代わりに受け付けるようになりました。
 - `pocketmine\world\particle\Particle`は`pocketmine\math\Vector3`を継承しなくなり、インタフェースに変換されました。
 - 以下の`Particle`が追加されました。
-    - `DragonEggTeleportParticle`
-    - `PunchBlockParticle`
+        - `DragonEggTeleportParticle`
+        - `PunchBlockParticle`
 
 ##### Sounds
 - `pocketmine\world\sound\Sound`は`pocketmine\math\Vector3`を継承しなくなり、インタフェースに変換されました。
@@ -1134,3 +1136,46 @@ permissions:
     - `ThrowSound`
     - `XpCollectSound`
     - `XpLevelUpSound`
+
+#### Utils
+- `Color`クラスは移動されました。現在では[`pocketmine/color`](https://github.com/pmmp/Color)パッケージ内の`pocketmine\color\Color`に存在します。
+- `UUID`クラスは削除されました。 [`ramsey/uuid`](https://github.com/ramsey/uuid)のバージョン4.1が代わりに使用されます。
+    - `UUID::fromData()`は`Ramsey\Uuid\Uuid::uuid3()`に置き換えられます
+    - `UUID::fromRandom()`は`Ramsey\Uuid\Uuid::uuid4()`に置き換えられます
+    - `UUID::fromBinary()`は`Ramsey\Uuid\Uuid::fromBytes()`に置き換えられます (`Ramsey\Uuid\Uuid::isValid()`で有効か確認してください)
+    - `UUID::toBinary()`は`Ramsey\Uuid\UuidInterface::getBytes()`で置き換えられます
+    - 詳細は <https://uuid.ramsey.dev/en/latest/introduction.html> で確認できます
+- `Terminal::hasFormattingCodes()`はフォーマットに用いるコードが利用できるかを自動的に検出しなくなりました。 代わりに`Terminal::init()`をパラメータなしで用いて初期化するか、`true`か`false`を与えて上書きする必要があります。
+- `Config->save()`はディスク書き込み時の例外を受け取らなくなりました。
+- 以下のクラスが追加されました。
+    - `InternetException`
+    - `Internet`
+    - `Process`
+- 以下のAPIメソッドが追加されました。
+    - `Config->getPath()`: ディスク上のConfigのパスを返します
+    - `Terminal::write()`: Minecraftフォーマットを使用したテキストを新たな行を作ることなく出力します
+    - `Terminal::writeLine()`: Minecraftフォーマットを使用したテキストを新たな行を作って出力します
+    - `Utils::recursiveUnlink()`: 再帰的にディレクトリ内のコンテンツとそのディレクトリを削除します
+- 以下のAPIクラス定数が追加されました。
+    - `TextFormat::COLORS`: すべての既知のカラーコードのリスト
+    - `TextFormat::FORMATS`: すべての既知のフォーマットコードのリスト(例. イタリック,ボールド)。 (`RESET`は含まれません。これはフォーマットを追加せず _削除_ するためです。)
+- 以下の非推奨のAPIリダイレクトが削除されました。
+    - `Utils::execute()`: `Process`に移動されました。
+    - `Utils::getIP()`: `Internet`に移動されました。
+    - `Utils::getMemoryUsage()`: `Process`に移動されました。
+    - `Utils::getRealMemoryUsage()`: `Process`に移動されました。
+    - `Utils::getThreadCount()`: `Process`に移動されました。
+    - `Utils::getURL()`: `Internet`に移動されました。
+    - `Utils::kill()`: `Process`に移動されました。
+    - `Utils::postURL()`: `Internet`に移動されました。
+    - `Utils::simpleCurl()`: `Internet`に移動されました。
+- 以下のAPIフィールドは削除/隠蔽されました。
+    - `Utils::$ip`
+    - `Utils::$online`
+    - `Utils::$os`
+- 以下のAPIメソッドはシグネチャが変更されました。
+    - `Internet::simpleCurl()`は現在では`callable`ではなく`Closure`を`onSuccess`パラメータとして要求します
+- 以下のAPIメソッドは削除されました。
+    - `TextFormat::toJSON()`
+    - `Utils::getCallableIdentifier()`
+
