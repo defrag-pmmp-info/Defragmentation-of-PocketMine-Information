@@ -65,7 +65,7 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
-    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL("/",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
       <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
@@ -1229,7 +1229,7 @@ API4.0.0(ベータ版)での構築は<a href="#building-build-in-api4">API4.0.0�
 <p>API4のものは現段階ではPre-releaseでありGitHubのreleasesからダウンロードできます。
 <a href="https://github.com/pmmp/PocketMine-MP/releases">https://github.com/pmmp/PocketMine-MP/releases</a></p>
 <h2 id="building-build-in-api4-_4">ダウンロード後</h2>
-<p>これ以降は<a href="#building-readme-_2">API3の手動インストール</a>と同様の手順で進められます</p></section><h1 class='nav-section-title-end'>Ended: サーバー構築</h1>
+<p>これ以降は<a href="#building-readme-_2">API3の手動インストール</a>と同様の手順で進められます。</p></section><h1 class='nav-section-title-end'>Ended: サーバー構築</h1>
                         <h1 class='nav-section-title' id='section-プラグイン'>
                             プラグイン <a class='headerlink' href='#section-プラグイン' title='Permanent link'>↵</a>
                         </h1>
@@ -2905,7 +2905,7 @@ children:
 <li><code>getBroadcastChannelSubscribers()</code></li>
 <li><code>Player</code>に<code>pocketmine.broadcast.*</code>のいずれかの権限を与えると、自動的に対応するブロードキャストチャンネルに加入できます。（権限を削除すると登録も解除されます）</li>
 <li>権限を使わずにカスタムブロードキャストチャンネルを作成・登録できるようになりました。</li>
-<li>しかし、<code>Player</code>達が適切な権限を持っていなければ、内蔵ブロードキャストチャンネルから自動的に登録解除されるでしょう。</li>
+<li>しかし、<code>Player</code>達が適切な権限を持っていなければ、内蔵ブロードキャストチャンネルからは自動的に登録解除されるでしょう。</li>
 <li>カスタムブロードキャストチャンネルからの自動的な登録/登録解除は新しい<code>Permissible</code>権限再計算コールバックAPI使用して実装できます。</li>
 </ul>
 </li>
@@ -2937,6 +2937,333 @@ children:
 <li><code>getPlayer()</code> -&gt; <code>getPlayerByPrefix()</code> (可能な場所では <code>getPlayerExact()</code> を代わりに使用することを検討してください)</li>
 </ul>
 </li>
+</ul>
+<h4 id="api4-changelogs-level-world">Level / World</h4>
+<h5 id="api4-changelogs-general_2">General</h5>
+<ul>
+<li>"world"の文脈での<code>Level</code>への言及は全て<code>World</code>に変更されました。<ul>
+<li>名前空間<code>pocketmine\level</code>は<code>pocketmine\world</code>に変更されました。</li>
+<li>"world"の文脈で<code>Level</code>を名前に含む全てのクラスの該当箇所は、<code>World</code>に変更されました。</li>
+<li>例えば、<code>Position-&gt;getLevel()</code>は<code>Position-&gt;getWorld()</code>に変更され、<code>Position-&gt;level</code>は<code>Position-&gt;world</code>に変更されました。</li>
+</ul>
+</li>
+<li><code>WorldManager</code>ユニットを<code>Server</code>から分割しました。<ul>
+<li><code>Server-&gt;findEntity()</code> -&gt; <code>WorldManager-&gt;findEntity()</code></li>
+<li><code>Server-&gt;generateLevel()</code> -&gt; <code>WorldManager-&gt;generateWorld()</code></li>
+<li><code>Server-&gt;getAutoSave()</code> -&gt; <code>WorldManager-&gt;getAutoSave()</code></li>
+<li><code>Server-&gt;getDefaultLevel()</code> -&gt; <code>WorldManager-&gt;getDefaultWorld()</code></li>
+<li><code>Server-&gt;getLevel()</code> -&gt; <code>WorldManager-&gt;getWorld()</code></li>
+<li><code>Server-&gt;getLevelByName()</code> -&gt; <code>WorldManager-&gt;getWorldByName()</code></li>
+<li><code>Server-&gt;getLevels()</code> -&gt; <code>WorldManager-&gt;getWorlds()</code></li>
+<li><code>Server-&gt;isLevelGenerated()</code> -&gt; <code>WorldManager-&gt;isWorldGenerated()</code></li>
+<li><code>Server-&gt;isLevelLoaded()</code> -&gt; <code>WorldManager-&gt;isWorldLoaded()</code></li>
+<li><code>Server-&gt;loadLevel()</code> -&gt; <code>WorldManager-&gt;loadWorld()</code></li>
+<li><code>WorldManager-&gt;loadWorld()</code> 要求された場合はワールドを変換できます。 (<code>$autoUpgrade</code>パラメーターが提供されている必要があります)</li>
+<li><code>Server-&gt;setAutoSave()</code> -&gt; <code>WorldManager-&gt;setAutoSave()</code></li>
+<li><code>Server-&gt;setDefaultLevel()</code> -&gt; <code>WorldManager-&gt;setDefaultWorld()</code></li>
+<li><code>Server-&gt;unloadLevel()</code> -&gt; <code>WorldManager-&gt;unloadWorld()</code></li>
+</ul>
+</li>
+<li><code>WorldManager-&gt;getAutoSaveTicks()</code>が追加され、自動セーブの間隔を操作できるようになりました。</li>
+<li>以下のクラスは追加されました。<ul>
+<li><code>BlockTransaction</code>: 検証条件付きでブロックの一括変更を行えます - 一つでも変更不可なブロックがある場合、変更全体が適用できなくなります。</li>
+<li><code>ChunkListenerNoOpTrait</code>: チャンクリスナーの実装のための標準のno-opスタブを含みます。</li>
+<li><code>ChunkListener</code>: 与えられたチャンクで発生したイベントを監視することができるインタフェースです。</li>
+<li><code>TickingChunkLoader</code>: チャンクの時を刻むことに特化した<code>ChunkLoader</code>です。</li>
+</ul>
+</li>
+<li><code>ChunkLoader</code>は<code>getX()</code>と<code>getZ()</code>の実装を必要としなくなりました。</li>
+<li><code>ChunkLoader</code>でチャンクがランダムに更新されることがなくなりました。この動作が必要なら<code>TickingChunkLoader</code>を実装してください。</li>
+<li>以下のクラスは改名されました。<ul>
+<li><code>pocketmine\world\utils\SubChunkIteratorManager</code> -&gt; <code>pocketmine\world\utils\SubChunkExplorer</code></li>
+</ul>
+</li>
+<li>以下のAPIメソッドは追加されました。<ul>
+<li><code>World-&gt;registerChunkListener()</code></li>
+<li><code>World-&gt;unregisterChunkListener()</code></li>
+<li><code>World-&gt;getBlockAt()</code> (Vector3の代わりにint x/y/zを受け入れ、場合によってはより速くなります)</li>
+<li><code>World-&gt;setBlockAt()</code> (Vector3の代わりにint x/y/zを受け入れ、場合によってはより速くなります)</li>
+<li><code>Chunk-&gt;isDirty()</code> (<code>Chunk-&gt;hasChanged()</code>の置換)</li>
+<li><code>Chunk-&gt;getDirtyFlag()</code> (より細かなコンポーネント・ベースのチャンクダーティフラッギングで、チャンクの変更されていない部分を保存することを回避するために使用されます)</li>
+<li><code>Chunk-&gt;setDirty()</code></li>
+<li><code>Chunk-&gt;setDirtyFlag()</code></li>
+</ul>
+</li>
+<li>以下のAPIメソッドは削除されました。<ul>
+<li><code>ChunkLoader-&gt;getLoaderId()</code> (オブジェクトIDが使われるようになりました)</li>
+<li><code>ChunkLoader-&gt;isLoaderActive()</code></li>
+<li><code>ChunkLoader-&gt;getPosition()</code></li>
+<li><code>ChunkLoader-&gt;getLevel()</code></li>
+<li><code>Chunk-&gt;fastSerialize()</code> (<code>FastChunkSerializer::serialize()</code>を代わりに使用してください)</li>
+<li><code>Chunk-&gt;getBlockData()</code></li>
+<li><code>Chunk-&gt;getBlockDataColumn()</code></li>
+<li><code>Chunk-&gt;getBlockId()</code></li>
+<li><code>Chunk-&gt;getBlockIdColumn()</code></li>
+<li><code>Chunk-&gt;getBlockLight()</code></li>
+<li><code>Chunk-&gt;getBlockLightColumn()</code></li>
+<li><code>Chunk-&gt;getBlockSkyLight()</code></li>
+<li><code>Chunk-&gt;getBlockSkyLightColumn()</code></li>
+<li><code>Chunk-&gt;getMaxY()</code></li>
+<li><code>Chunk-&gt;getSubChunkSendCount()</code> (これはプロトコルの取り扱いに特化していました)</li>
+<li><code>Chunk-&gt;getX()</code></li>
+<li><code>Chunk-&gt;getZ()</code></li>
+<li><code>Chunk-&gt;hasChanged()</code> (<code>Chunk-&gt;isDirty()</code>または<code>Chunk-&gt;getDirtyFlag()</code>を代わりに使用してください)</li>
+<li><code>Chunk-&gt;isGenerated()</code></li>
+<li><code>Chunk-&gt;networkSerialize()</code> (<code>network\mcpe\serializer</code>の中にある<code>ChunkSerializer</code>を確認してください)</li>
+<li><code>Chunk-&gt;populateSkyLight()</code> (<code>SkyLightUpdate-&gt;recalculateChunk()</code>を代わりに使用してください)</li>
+<li><code>Chunk-&gt;recalculateHeightMap()</code> (<code>SkyLightUpdate</code>に移動しました)</li>
+<li><code>Chunk-&gt;recalculateHeightMapColumn()</code> (<code>SkyLightUpdate</code>に移動しました)</li>
+<li><code>Chunk-&gt;setAllBlockLight()</code></li>
+<li><code>Chunk-&gt;setAllBlockSkyLight()</code></li>
+<li><code>Chunk-&gt;setBlock()</code></li>
+<li><code>Chunk-&gt;setBlockData()</code></li>
+<li><code>Chunk-&gt;setBlockId()</code></li>
+<li><code>Chunk-&gt;setBlockLight()</code></li>
+<li><code>Chunk-&gt;setBlockSkyLight()</code></li>
+<li><code>Chunk-&gt;setChanged()</code> (<code>Chunk-&gt;setDirty()</code>または<code>Chunk-&gt;setDirtyFlag()</code>を代わりに使用してください)</li>
+<li><code>Chunk-&gt;setGenerated()</code></li>
+<li><code>Chunk-&gt;setX()</code></li>
+<li><code>Chunk-&gt;setZ()</code></li>
+<li><code>Chunk::fastDeserialize()</code> (<code>FastChunkSerializer::deserialize()</code>を代わりに使用してください)</li>
+<li><code>World-&gt;isFullBlock()</code></li>
+<li><code>World-&gt;getFullBlock()</code></li>
+<li><code>World-&gt;getBlockIdAt()</code></li>
+<li><code>World-&gt;setBlockIdAt()</code></li>
+<li><code>World-&gt;getBlockDataAt()</code></li>
+<li><code>World-&gt;setBlockDataAt()</code></li>
+<li><code>World-&gt;setBlockLightAt()</code></li>
+<li><code>World-&gt;setBlockSkyLightAt()</code></li>
+<li><code>World-&gt;getBlockSkyLightAt()</code> (場合によって、<code>World-&gt;getRealBlockSkyLightAt()</code>または<code>World-&gt;getPotentialBlockSkyLightAt()</code>を使用してください)</li>
+<li><code>World-&gt;getHeightMap()</code> (誤解を招く名前であり、空の光の計算にのみ有益です - おそらく<code>getHighestBlockAt()</code>が求められているものでしょう)</li>
+<li><code>World-&gt;setHeightMap()</code> (誤解を招く名前であり、空の光の計算にのみ有益です)</li>
+<li><code>World-&gt;getChunkEntities()</code></li>
+<li><code>World-&gt;getChunkTiles()</code></li>
+<li><code>World-&gt;getTileById()</code></li>
+<li><code>World-&gt;checkSpawnProtection()</code></li>
+<li><code>World-&gt;updateBlockLight()</code></li>
+<li><code>World-&gt;updateSkyLight()</code></li>
+<li><code>World-&gt;isFullBlock()</code> (<code>Block-&gt;isFullCube()</code>を代わりに使用してください)</li>
+<li><code>World-&gt;sendBlocks()</code></li>
+<li><code>World-&gt;sendTime()</code></li>
+<li><code>World-&gt;addGlobalPacket()</code></li>
+<li><code>World-&gt;broadcastGlobalPacket()</code></li>
+<li><code>World-&gt;addChunkPacket()</code></li>
+<li><code>World-&gt;broadcastLevelSoundEvent()</code></li>
+<li><code>World-&gt;broadcastLevelEvent()</code></li>
+<li><code>World-&gt;getTickRate()</code></li>
+<li><code>World-&gt;setTickRate()</code></li>
+<li><code>World::generateChunkLoaderId()</code></li>
+</ul>
+</li>
+<li>以下のAPIメソッドはシグネチャーが変更されました。<ul>
+<li><code>World-&gt;addParticle()</code>は<code>addParticle(Vector3 $pos, Particle $particle, ?Player[] $players = null) : void</code>のシグネチャーを持つようになります。</li>
+<li><code>World-&gt;addSound()</code>は<code>addSound(?Vector3 $pos, Sound $sound, ?Player[] $players = null) : void</code>のシグネチャーを持つようになります。</li>
+<li><code>World-&gt;getRandomTickedBlocks()</code>は<code>SplFixedArray</code>の代わりに<code>bool[]</code>を受け付けます。</li>
+<li><code>World-&gt;addRandomTickedBlock()</code>は<code>int, int</code>の代わりに<code>Block</code>を受け付けます。</li>
+<li><code>World-&gt;removeRandomTickedBlock()</code>は<code>int, int</code>の代わりに<code>Block</code>を受け付けます。</li>
+<li><code>World-&gt;setBlock()</code>にあった<code>$direct</code>パラメーターは削除されました。</li>
+<li><code>World-&gt;loadChunk()</code>は<code>?Chunk</code>を返し、<code>$create</code>パラメーターは削除されました。</li>
+<li><code>World-&gt;getChunk()</code>は<code>$create</code>パラメーターを受け付けなくなりました。</li>
+<li><code>World-&gt;updateAllLight()</code>は<code>Vector3</code>の代わりに<code>int, int, int</code>を受け付けます。</li>
+<li><code>ChunkManager-&gt;setChunk()</code> (および<code>World</code>と<code>SimpleChunkManager</code>の中の注目に値する実装) は<code>$chunk</code>パラメーターにNULLを受け付けなくなりました。</li>
+<li><code>Chunk-&gt;__construct()</code>は<code>array&lt;int, SubChunk&gt; $subChunks, ?list&lt;CompoundTag&gt; $entities, ?list&lt;CompoundTag&gt; $tiles, ?BiomeArray $biomeArray, ?HeightArray $heightArray</code>のシグネチャーを持つようになります。</li>
+<li><code>Chunk-&gt;getSubChunk()</code>は<code>SubChunkInterface|null</code>の代わりに<code>SubChunk</code>を返します。(範囲外の座標では<code>InvalidArgumentException</code>を投げます)</li>
+<li><code>Chunk-&gt;setSubChunk()</code>はもう<code>SubChunkInterface</code>を受け入れず、<code>$allowEmpty</code>パラメーターは削除されました。</li>
+<li><code>WorldManager-&gt;generateWorld()</code> (以前の<code>Server-&gt;generateWorld()</code>) は<code>int $seed, class-string&lt;Generator&gt; $generator, mixed[] $options</code>の代わりに<code>WorldCreationOptions</code>を受け付けるようになりました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは改名または移動しました。<ul>
+<li><code>Level-&gt;getChunks()</code> -&gt; <code>World-&gt;getLoadedChunks()</code></li>
+<li><code>Level-&gt;getCollisionCubes()</code> -&gt; <code>World-&gt;getCollisionBoxes()</code></li>
+<li><code>World-&gt;getName()</code> -&gt; <code>World-&gt;getDisplayName()</code></li>
+<li><code>World-&gt;populateChunk()</code>は<code>World-&gt;requestChunkPopulation()</code>と<code>World-&gt;orderChunkPopulation()</code>に分割されました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは動作が変更されました。<ul>
+<li><code>World-&gt;getChunk()</code>はディスクからチャンクを読み込もうとしなくなりました。チャンクがすでにメモリになかった場合、<code>null</code>が返されます。 (この動作は他の<code>ChunkManager</code>の実装と適切に調和します)</li>
+<li><code>World-&gt;getHighestBlockAt()</code>は目標のX/Z列にブロックがなかった場合<code>-1</code>の代わりに<code>null</code>を返すようになりました。</li>
+<li>以下のメソッドは未生成の地形を指定したときに<code>WorldException</code>を投げるようになりました。</li>
+<li><code>World-&gt;getSafeSpawn()</code> (以前はただ黙って入力位置を返していました)</li>
+<li><code>World-&gt;getHighestBlockAt()</code> (以前は-1を返していました)</li>
+<li><code>World-&gt;loadChunk()</code>はディスクに指定のチャンクが存在しなかった時に空のチャンクを生成しなくなりました。</li>
+<li><code>World-&gt;setChunk()</code>は<code>ChunkLoadEvent</code>と<code>ChunkListener-&gt;onChunkLoaded()</code>を以前存在していなかったチャンクを置き換えるときに呼び出します。</li>
+<li><code>World-&gt;useBreakOn()</code>は指定の場所が未生成、または未ロードの（または生成のためにロックされている）チャンクに含まれていた場合に<code>false</code>を返すようになりました。</li>
+<li><code>World-&gt;useItemOn()</code>は指定の場所が未生成、または未ロードの（または生成のためにロックされている）チャンクに含まれていた場合に<code>false</code>を返すようになりました。</li>
+</ul>
+</li>
+<li><code>ChunkListener</code>インタフェースは<code>ChunkLoader</code>から分割されました。以下のメソッドは移動しました。<ul>
+<li><code>ChunkLoader-&gt;onBlockChanged()</code> -&gt; <code>ChunkListener-&gt;onBlockChanged()</code></li>
+<li><code>ChunkLoader-&gt;onChunkChanged()</code> -&gt; <code>ChunkListener-&gt;onChunkChanged()</code></li>
+<li><code>ChunkLoader-&gt;onChunkLoaded()</code> -&gt; <code>ChunkListener-&gt;onChunkLoaded()</code></li>
+<li><code>ChunkLoader-&gt;onChunkPopulated()</code> -&gt; <code>ChunkListener-&gt;onChunkPopulated()</code></li>
+<li><code>ChunkLoader-&gt;onChunkUnloaded()</code> -&gt; <code>ChunkListener-&gt;onChunkUnloaded()</code></li>
+</ul>
+</li>
+<li><code>Location</code>は<code>pocketmine\entity\Location</code>に移動しました。</li>
+</ul>
+<h5 id="api4-changelogs-particles">Particles</h5>
+<ul>
+<li><code>DestroyBlockParticle</code>は<code>BlockBreakParticle</code>に一貫性のために名前が変更されました。</li>
+<li><code>DustParticle-&gt;__construct()</code>は<code>pocketmine\color\Color</code>オブジェクトを<code>r, g, b, a</code>の代わりに受け付けるようになりました。</li>
+<li><code>pocketmine\world\particle\Particle</code>は<code>pocketmine\math\Vector3</code>を継承しなくなり、インタフェースに変換されました。</li>
+<li>以下の<code>Particle</code>が追加されました。<ul>
+<li><code>DragonEggTeleportParticle</code></li>
+<li><code>PunchBlockParticle</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="api4-changelogs-sounds">Sounds</h5>
+<ul>
+<li><code>pocketmine\world\sound\Sound</code>は<code>pocketmine\math\Vector3</code>を継承しなくなり、インタフェースに変換されました。</li>
+<li><code>Sound-&gt;encode()</code>は<code>?\pocketmine\math\Vector3</code>を受け付けるようになりました。全体へのサウンドの場合は<code>NULL</code>を渡すことができます。</li>
+<li>以下のクラスが追加されました。<ul>
+<li><code>ArrowHitSound</code></li>
+<li><code>BlockBreakSound</code></li>
+<li><code>BlockPlaceSound</code></li>
+<li><code>BowShootSound</code></li>
+<li><code>BucketEmptyLavaSound</code></li>
+<li><code>BucketEmptyWaterSound</code></li>
+<li><code>BucketFillLavaSound</code></li>
+<li><code>BucketFillWaterSound</code></li>
+<li><code>ChestCloseSound</code></li>
+<li><code>ChestOpenSound</code></li>
+<li><code>EnderChestCloseSound</code></li>
+<li><code>EnderChestOpenSound</code></li>
+<li><code>ExplodeSound</code></li>
+<li><code>FlintSteelSound</code></li>
+<li><code>ItemBreakSound</code></li>
+<li><code>NoteInstrument</code></li>
+<li><code>NoteSound</code></li>
+<li><code>PaintingPlaceSound</code></li>
+<li><code>PotionSplashSound</code></li>
+<li><code>RedstonePowerOffSound</code></li>
+<li><code>RedstonePowerOnSound</code></li>
+<li><code>ThrowSound</code></li>
+<li><code>XpCollectSound</code></li>
+<li><code>XpLevelUpSound</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="api4-changelogs-utils">Utils</h4>
+<ul>
+<li><code>Color</code>クラスは移動されました。現在では<a href="https://github.com/pmmp/Color"><code>pocketmine/color</code></a>パッケージ内の<code>pocketmine\color\Color</code>に存在します。</li>
+<li><code>UUID</code>クラスは削除されました。 <a href="https://github.com/ramsey/uuid"><code>ramsey/uuid</code></a>のバージョン4.1が代わりに使用されます。<ul>
+<li><code>UUID::fromData()</code>は<code>Ramsey\Uuid\Uuid::uuid3()</code>に置き換えられます</li>
+<li><code>UUID::fromRandom()</code>は<code>Ramsey\Uuid\Uuid::uuid4()</code>に置き換えられます</li>
+<li><code>UUID::fromBinary()</code>は<code>Ramsey\Uuid\Uuid::fromBytes()</code>に置き換えられます (<code>Ramsey\Uuid\Uuid::isValid()</code>で有効か確認してください)</li>
+<li><code>UUID::toBinary()</code>は<code>Ramsey\Uuid\UuidInterface::getBytes()</code>で置き換えられます</li>
+<li>詳細は <a href="https://uuid.ramsey.dev/en/latest/introduction.html">https://uuid.ramsey.dev/en/latest/introduction.html</a> で確認できます</li>
+</ul>
+</li>
+<li><code>Terminal::hasFormattingCodes()</code>はフォーマットに用いるコードが利用できるかを自動的に検出しなくなりました。 代わりに<code>Terminal::init()</code>をパラメータなしで用いて初期化するか、<code>true</code>か<code>false</code>を与えて上書きする必要があります。</li>
+<li><code>Config-&gt;save()</code>はディスク書き込み時の例外を受け取らなくなりました。</li>
+<li>以下のクラスが追加されました。<ul>
+<li><code>InternetException</code></li>
+<li><code>Internet</code></li>
+<li><code>Process</code></li>
+</ul>
+</li>
+<li>以下のAPIメソッドが追加されました。<ul>
+<li><code>Config-&gt;getPath()</code>: ディスク上のConfigのパスを返します</li>
+<li><code>Terminal::write()</code>: Minecraftフォーマットを使用したテキストを新たな行を作ることなく出力します</li>
+<li><code>Terminal::writeLine()</code>: Minecraftフォーマットを使用したテキストを新たな行を作って出力します</li>
+<li><code>Utils::recursiveUnlink()</code>: 再帰的にディレクトリ内のコンテンツとそのディレクトリを削除します</li>
+</ul>
+</li>
+<li>以下のAPIクラス定数が追加されました。<ul>
+<li><code>TextFormat::COLORS</code>: すべての既知のカラーコードのリスト</li>
+<li><code>TextFormat::FORMATS</code>: すべての既知のフォーマットコードのリスト(例. イタリック,ボールド)。 (<code>RESET</code>は含まれません。これはフォーマットを追加せず <em>削除</em> するためです。)</li>
+</ul>
+</li>
+<li>以下の非推奨のAPIリダイレクトが削除されました。<ul>
+<li><code>Utils::execute()</code>: <code>Process</code>に移動されました。</li>
+<li><code>Utils::getIP()</code>: <code>Internet</code>に移動されました。</li>
+<li><code>Utils::getMemoryUsage()</code>: <code>Process</code>に移動されました。</li>
+<li><code>Utils::getRealMemoryUsage()</code>: <code>Process</code>に移動されました。</li>
+<li><code>Utils::getThreadCount()</code>: <code>Process</code>に移動されました。</li>
+<li><code>Utils::getURL()</code>: <code>Internet</code>に移動されました。</li>
+<li><code>Utils::kill()</code>: <code>Process</code>に移動されました。</li>
+<li><code>Utils::postURL()</code>: <code>Internet</code>に移動されました。</li>
+<li><code>Utils::simpleCurl()</code>: <code>Internet</code>に移動されました。</li>
+</ul>
+</li>
+<li>以下のAPIフィールドは削除/隠蔽されました。<ul>
+<li><code>Utils::$ip</code></li>
+<li><code>Utils::$online</code></li>
+<li><code>Utils::$os</code></li>
+</ul>
+</li>
+<li>以下のAPIメソッドはシグネチャが変更されました。<ul>
+<li><code>Internet::simpleCurl()</code>は現在では<code>callable</code>ではなく<code>Closure</code>を<code>onSuccess</code>パラメータとして要求します</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは削除されました。<ul>
+<li><code>TextFormat::toJSON()</code></li>
+<li><code>Utils::getCallableIdentifier()</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="api4-changelogs-gameplay">Gameplay</h3>
+<h4 id="api4-changelogs-blocks">Blocks</h4>
+<ul>
+<li>以下のブロックが実装されました<ul>
+<li>bamboo</li>
+<li>bamboo sapling</li>
+<li>barrel</li>
+<li>barrier</li>
+<li>blast furnace</li>
+<li>blue ice</li>
+<li>carved pumpkin</li>
+<li>coral block</li>
+<li>daylight sensor</li>
+<li>dried kelp</li>
+<li>elements (from Minecraft: Education Edition)</li>
+<li>hard (stained and unstained) glass (from Minecraft: Education Edition)</li>
+<li>hard (stained and unstained) glass pane (from Minecraft: Education Edition)</li>
+<li>jukebox</li>
+<li>note block</li>
+<li>red, green, blue and purple torches (from Minecraft: Education Edition)</li>
+<li>sea pickle</li>
+<li>slime</li>
+<li>smoker</li>
+<li>underwater torches (from Minecraft: Education Edition)</li>
+<li>additional wood variants of the following:<ul>
+<li>buttons</li>
+<li>pressure plates</li>
+<li>signs</li>
+<li>trapdoors</li>
+</ul>
+</li>
+<li>stairs of the following materials:<ul>
+<li>andesite (smooth and natural)</li>
+<li>diorite (smooth and natural)</li>
+<li>end stone</li>
+<li>end stone brick</li>
+<li>granite (smooth and natural)</li>
+<li>mossy cobblestone</li>
+<li>prismarine (natural, dark and bricks)</li>
+<li>red nether brick</li>
+<li>red sandstone (and variants)</li>
+</ul>
+</li>
+<li>stone-like slabs of many variants</li>
+</ul>
+</li>
+<li>プレイヤーでないエンティティがベッドに落ちた際に跳ねるようになりました。</li>
+<li>プレイヤーとmobはベッドに落ちた際にダメージが軽減されるようになりました。</li>
+</ul>
+<h4 id="api4-changelogs-items">Items</h4>
+<ul>
+<li>以下のアイテムが実装されました<ul>
+<li>records</li>
+<li>compounds (from Minecraft: Education Edition)</li>
+<li>black, brown, blue and white dyes</li>
+</ul>
+</li>
+</ul>
+<h4 id="api4-changelogs-inventory_1">Inventory</h4>
+<ul>
+<li>オフハンドインベントリが実装されました。</li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1>
                         <h1 class='nav-section-title' id='section-単項記事'>
                             単項記事 <a class='headerlink' href='#section-単項記事' title='Permanent link'>↵</a>
@@ -3246,7 +3573,7 @@ DEVirionはvirionのクラスを影で支えているわけではないので、
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-<script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
+<script id="__config" type="application/json">{"base": "/", "features": [], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
     
 
 <script src="https://unpkg.com/iframe-worker/polyfill"></script>
