@@ -1227,3 +1227,41 @@ permissions:
 
 #### Inventory
 - オフハンドインベントリが実装されました。
+
+## 4.0.0-BETA2
+2021年9月10日リリース
+
+### General
+- ext-chunkutils 0.3.xが要求されるようになりました。
+- ガベージコレクションの後のライトストレージのメモリ使用量を削減しました。
+- 一種類のブロックのみを含む均一なサブチャンクのメモリ使用量を削減しました。
+- タイトルバーはヒープメモリの使用量を表示しなくなりました。(それはさておき、誰もそれが何かわかっていなかったようです。)
+- `/status`はヒープメモリの使用量を表示しなくなりました。
+- `start.sh`はPHPバイナリが見当たらないエラーにおいてPHP7を挙げることはなくなりました。
+- 到達距離のチェックによってプレイヤーが何かをすることを妨げられた時に、デバッグメッセージが記録されるようになりました。
+
+### Fixes
+- プレイヤーが未生成のチャンクに対して`/tp`を使用した(あるいは他のプレイヤーによってテレポートされた)時に切断される問題を修正しました。
+- チャンクがアンロードされた時にブロックが更新されることで発生する可能性のあるメモリリークの問題を修正しました。
+- `Living->lookAt()`が目線の高さを考慮に入れていなかった動作を修正しました。
+- 草を設置したときにそれが勝手に入れ替わる(インベントリのアイテムを消費する)問題を修正しました。
+- プレイヤーが壁の横に落下した時にダメージを受ける問題を修正しました。
+
+### API changes
+- 以下のAPIメソッドが追加されました。
+    - `World->getChunkEntities()`
+    - `World->notifyNeighbourBlockUpdate()`
+- 以下のAPIメソッドは削除されました。
+    - `Chunk->getEntities()`
+    - `Chunk->getSavableEntities()`
+    - `Chunk->addEntity()`
+    - `Chunk->removeEntity()`
+- 以下のクラスが追加されました。
+    - `pocketmine\inventory\transaction\TransactionBuilderInventory`: 標準的な`Inventory`APIメソッドを用いて`InventoryTransaction`を作成することを容易にします。
+- 以下のクラス定数が追加されました。
+    - `Chunk::EDGE_LENGTH`
+    - `Chunk::COORD_BIT_SIZE`
+    - `Chunk::COORD_MASK`
+    - `SubChunk::EDGE_LENGTH`
+    - `SubChunk::COORD_BIT_SIZE`
+    - `SubChunk::COORD_MASK`
