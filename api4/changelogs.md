@@ -1,4 +1,4 @@
-# API4 Changelogs全訳(41%完了)
+# API4 Changelogs全訳
 ## 訳に関して
 <https://github.com/pmmp/PocketMine-MP/blob/a3f8546ac442d6bbb44dfedc19eb6d3e639a50b6/changelogs/4.0.md> 版より翻訳
 
@@ -1395,3 +1395,20 @@ permissions:
 #### World
 - 以下のAPIメソッドのシグネチャーは変更されました。
     - `GeneratorManager->registerGenerator()`は`\Closure $presetValidator`パラメーターを要求するようになりました。これはワールドとコンフィグのオプションをそれらに適用する前に確認するために使われます。
+
+## 4.0.0-BETA6
+2021年10月19日リリース
+
+### General
+- Minecraft: Bedrock Edition 1.17.40をサポートしました。
+- 以前のバージョンのサポートを終了しました。
+- CTRL+Cシグナルの処理は復元され、Windowsで使用できるようになりました。サーバー起動中にCTRL+Cを押下すると`/stop`が実行されたように振る舞います。
+- 新しいスクリプト`tools/generate-permission-doc.php`を全ての権限とその関係性のリストを含むマークダウンファイルの生成のために追加しました。将来的には、これは公式の文献を保守するために使用される予定ですが、プラグイン開発者も彼ら自身の目的のために有用であることに気付くでしょう。
+- [`respect/validation`](https://packagist.org/packages/respect/validation)はもう中核的な依存関係にはありません。
+
+### Fixes
+- 大きすぎるアイテムIDのアイテムを`/give`で与えようとした時、あるいは`/clear`で存在しないアイテムを削除しようとしたときにサーバーがクラッシュする問題を修正しました。
+    - `LegacyStringToItemParser`は独占的に使われるようになり、数字のIDはもう解析されません。
+
+### Gameplay
+- ドロップされたアイテムスタックからいくつかのアイテムを拾うことができるようになりました。これによりほぼ満杯のインベントリでアイテムを拾えない種々のバグが修正されます。
