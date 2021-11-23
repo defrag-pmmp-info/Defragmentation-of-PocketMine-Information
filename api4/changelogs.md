@@ -1136,94 +1136,43 @@ permissions:
     - `XpLevelUpSound`
 
 #### Utils
-- `Color`クラスは移動されました。現在では[`pocketmine/color`](https://github.com/pmmp/Color)パッケージ内の`pocketmine\color\Color`に存在します。
-- `UUID`クラスは削除されました。 [`ramsey/uuid`](https://github.com/ramsey/uuid)のバージョン4.1が代わりに使用されます。
-    - `UUID::fromData()`は`Ramsey\Uuid\Uuid::uuid3()`に置き換えられます
-    - `UUID::fromRandom()`は`Ramsey\Uuid\Uuid::uuid4()`に置き換えられます
-    - `UUID::fromBinary()`は`Ramsey\Uuid\Uuid::fromBytes()`に置き換えられます (`Ramsey\Uuid\Uuid::isValid()`で有効か確認してください)
-    - `UUID::toBinary()`は`Ramsey\Uuid\UuidInterface::getBytes()`で置き換えられます
-    - 詳細は <https://uuid.ramsey.dev/en/latest/introduction.html> で確認できます
-- `Terminal::hasFormattingCodes()`はフォーマットに用いるコードが利用できるかを自動的に検出しなくなりました。 代わりに`Terminal::init()`をパラメータなしで用いて初期化するか、`true`か`false`を与えて上書きする必要があります。
-- `Config->save()`はディスク書き込み時の例外を受け取らなくなりました。
-- 以下のクラスが追加されました。
+- `Color`クラスは削除されました。現在は[`pocketmine/color`](https://github.com/pmmp/Color)パッケージの中の`pocketmine\color\Color`にあります。
+- `UUID`クラスは削除されました。代わりに[`ramsey/uuid`](https://github.com/ramsey/uuid)のバージョン4.1が使用されています。
+    - `UUID::fromData()`は`Ramsey\Uuid\Uuid::uuid3()`により置き換えられます。
+    - `UUID::fromRandom()`は`Ramsey\Uuid\Uuid::uuid4()`により置き換えられます。
+    - `UUID::fromBinary()`は`Ramsey\Uuid\Uuid::fromBytes()`により置き換えられます。(`Ramsey\Uuid\Uuid::isValid()`を使用して有効性を確認してください)
+    - `UUID::toBinary()`は`Ramsey\Uuid\UuidInterface::getBytes()`により置き換えられます。
+    - より詳しい情報は https://uuid.ramsey.dev/en/latest/introduction.html から文献を確認してください。
+- `Terminal::hasFormattingCodes()`はフォーマットコードの有無を自動検知しなくなりました。その代わりに、初期化するためのパラメーターを持たない`Terminal::init()`を使用するか、`true`または`false`を用いてオーバーライドしなければなりません。
+- `Config->save()`はディスクへの出力中に投げられたエラーをキャッチしなくなりました。
+- 以下の新しいクラスが追加されました。
     - `InternetException`
     - `Internet`
     - `Process`
 - 以下のAPIメソッドが追加されました。
-    - `Config->getPath()`: ディスク上のConfigのパスを返します
-    - `Terminal::write()`: Minecraftフォーマットを使用したテキストを新たな行を作ることなく出力します
-    - `Terminal::writeLine()`: Minecraftフォーマットを使用したテキストを新たな行を作って出力します
-    - `Utils::recursiveUnlink()`: 再帰的にディレクトリ内のコンテンツとそのディレクトリを削除します
+    - `Config->getPath()`: ディスクにあるコンフィグまでのパスを返します。
+    - `Terminal::write()`: マインクラフト書式のテキスト行を、改行なしで出力します。
+    - `Terminal::writeLine()`: マインクラフト書式のテキスト行を、改行ありで出力します。
+    - `Utils::recursiveUnlink()`: ディレクトリとその内容物を再帰的に削除します。
 - 以下のAPIクラス定数が追加されました。
-    - `TextFormat::COLORS`: すべての既知のカラーコードのリスト
-    - `TextFormat::FORMATS`: すべての既知のフォーマットコードのリスト(例. イタリック,ボールド)。 (`RESET`は含まれません。これはフォーマットを追加せず _削除_ するためです。)
-- 以下の非推奨のAPIリダイレクトが削除されました。
-    - `Utils::execute()`: `Process`に移動されました。
-    - `Utils::getIP()`: `Internet`に移動されました。
-    - `Utils::getMemoryUsage()`: `Process`に移動されました。
-    - `Utils::getRealMemoryUsage()`: `Process`に移動されました。
-    - `Utils::getThreadCount()`: `Process`に移動されました。
-    - `Utils::getURL()`: `Internet`に移動されました。
-    - `Utils::kill()`: `Process`に移動されました。
-    - `Utils::postURL()`: `Internet`に移動されました。
-    - `Utils::simpleCurl()`: `Internet`に移動されました。
-- 以下のAPIフィールドは削除/隠蔽されました。
+    - `TextFormat::COLORS`: 全てのメジャーなカラーコードを列挙します。
+    - `TextFormat::FORMATS`: 全てのメジャーなフォーマットコードを列挙します(例 italic, bold)。(`RESET`は含まれていません。なぜなら、それはフォーマートを追加するというよりも、削除するものだからです。)
+- 以下の非推奨APIのリダイレクトは削除されました。
+    - `Utils::execute()`: `Process`に移動しました。
+    - `Utils::getIP()`: `Internet`に移動しました。
+    - `Utils::getMemoryUsage()`: `Process`に移動しました。
+    - `Utils::getRealMemoryUsage()`: `Process`に移動しました。
+    - `Utils::getThreadCount()`: `Process`に移動しました。
+    - `Utils::getURL()`: `Internet`に移動しました。
+    - `Utils::kill()`: `Process`に移動しました。
+    - `Utils::postURL()`: `Internet`に移動しました。
+    - `Utils::simpleCurl()`: `Internet`に移動しました。
+- 以下のAPIフィールドは削除あるいは隠されました。
     - `Utils::$ip`
     - `Utils::$online`
     - `Utils::$os`
-- 以下のAPIメソッドはシグネチャが変更されました。
-    - `Internet::simpleCurl()`は現在では`callable`ではなく`Closure`を`onSuccess`パラメータとして要求します
+- 以下のAPIメソッドはシグネチャーが変更されました。
+    - `Internet::simpleCurl()`は`onSuccess`パラメーターに`callable`ではなく`Closure`を要求するようになりました。
 - 以下のAPIメソッドは削除されました。
     - `TextFormat::toJSON()`
     - `Utils::getCallableIdentifier()`
-
-### Gameplay
-#### Blocks
-- 以下のブロックが実装されました
-    - bamboo
-    - bamboo sapling
-    - barrel
-    - barrier
-    - blast furnace
-    - blue ice
-    - carved pumpkin
-    - coral block
-    - daylight sensor
-    - dried kelp
-    - elements (from Minecraft: Education Edition)
-    - hard (stained and unstained) glass (from Minecraft: Education Edition)
-    - hard (stained and unstained) glass pane (from Minecraft: Education Edition)
-    - jukebox
-    - note block
-    - red, green, blue and purple torches (from Minecraft: Education Edition)
-    - sea pickle
-    - slime
-    - smoker
-    - underwater torches (from Minecraft: Education Edition)
-    - additional wood variants of the following:
-        - buttons
-        - pressure plates
-        - signs
-        - trapdoors
-    - stairs of the following materials:
-        - andesite (smooth and natural)
-        - diorite (smooth and natural)
-        - end stone
-        - end stone brick
-        - granite (smooth and natural)
-        - mossy cobblestone
-        - prismarine (natural, dark and bricks)
-        - red nether brick
-        - red sandstone (and variants)
-    - stone-like slabs of many variants
-- プレイヤーでないエンティティがベッドに落ちた際に跳ねるようになりました。
-- プレイヤーとmobはベッドに落ちた際にダメージが軽減されるようになりました。
-
-#### Items
-- 以下のアイテムが実装されました
-    - records
-    - compounds (from Minecraft: Education Edition)
-    - black, brown, blue and white dyes
-
-#### Inventory
-- オフハンドインベントリが実装されました。
