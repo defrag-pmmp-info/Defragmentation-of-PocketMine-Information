@@ -931,7 +931,7 @@ permissions:
       - `getBroadcastChannelSubscribers()`
     - `Player`に`pocketmine.broadcast.*`のいずれかの権限を与えると、自動的に対応するブロードキャストチャンネルに加入できます。（権限を削除すると登録も解除されます）
     - 権限を使わずにカスタムブロードキャストチャンネルを作成・登録できるようになりました。
-    - しかし、`Player`達が適切な権限を持っていなければ、内蔵ブロードキャストチャンネルから自動的に登録解除されるでしょう。
+    - しかし、`Player`達が適切な権限を持っていなければ、内蔵ブロードキャストチャンネルからは自動的に登録解除されるでしょう。
     - カスタムブロードキャストチャンネルからの自動的な登録/登録解除は新しい`Permissible`権限再計算コールバックAPI使用して実装できます。
 - 以下のAPIメソッドは削除されました。
     - `reloadWhitelist()`
@@ -955,3 +955,275 @@ permissions:
     - `getOfflinePlayerData()` 存在しないデータを生成しなくなりました。
 - 以下のAPIメソッドは名前が変更されました。
     - `getPlayer()` -> `getPlayerByPrefix()` (可能な場所では `getPlayerExact()` を代わりに使用することを検討してください)
+
+#### Level / World
+##### General
+- "world"の文脈での`Level`への言及は全て`World`に変更されました。
+    - 名前空間`pocketmine\level`は`pocketmine\world`に変更されました。
+    - "world"の文脈で`Level`を名前に含む全てのクラスの該当箇所は、`World`に変更されました。
+    - 例えば、`Position->getLevel()`は`Position->getWorld()`に変更され、`Position->level`は`Position->world`に変更されました。
+- `WorldManager`ユニットを`Server`から分割しました。
+    - `Server->findEntity()` -> `WorldManager->findEntity()`
+    - `Server->generateLevel()` -> `WorldManager->generateWorld()`
+    - `Server->getAutoSave()` -> `WorldManager->getAutoSave()`
+    - `Server->getDefaultLevel()` -> `WorldManager->getDefaultWorld()`
+    - `Server->getLevel()` -> `WorldManager->getWorld()`
+    - `Server->getLevelByName()` -> `WorldManager->getWorldByName()`
+    - `Server->getLevels()` -> `WorldManager->getWorlds()`
+    - `Server->isLevelGenerated()` -> `WorldManager->isWorldGenerated()`
+    - `Server->isLevelLoaded()` -> `WorldManager->isWorldLoaded()`
+    - `Server->loadLevel()` -> `WorldManager->loadWorld()`
+      - `WorldManager->loadWorld()` 要求された場合はワールドを変換できます。 (`$autoUpgrade`パラメーターが提供されている必要があります)
+    - `Server->setAutoSave()` -> `WorldManager->setAutoSave()`
+    - `Server->setDefaultLevel()` -> `WorldManager->setDefaultWorld()`
+    - `Server->unloadLevel()` -> `WorldManager->unloadWorld()`
+- `WorldManager->getAutoSaveTicks()`が追加され、自動セーブの間隔を操作できるようになりました。
+- 以下のクラスは追加されました。
+    - `BlockTransaction`: 検証条件付きでブロックの一括変更を行えます - 一つでも変更不可なブロックがある場合、変更全体が適用できなくなります。
+    - `ChunkListenerNoOpTrait`: チャンクリスナーの実装のための標準のno-opスタブを含みます。
+    - `ChunkListener`: 与えられたチャンクで発生したイベントを監視することができるインタフェースです。
+    - `TickingChunkLoader`: チャンクの時を刻むことに特化した`ChunkLoader`です。
+- `ChunkLoader`は`getX()`と`getZ()`の実装を必要としなくなりました。
+- `ChunkLoader`でチャンクがランダムに更新されることがなくなりました。この動作が必要なら`TickingChunkLoader`を実装してください。
+- 以下のクラスは改名されました。
+    - `pocketmine\world\utils\SubChunkIteratorManager` -> `pocketmine\world\utils\SubChunkExplorer`
+- 以下のAPIメソッドは追加されました。
+    - `World->registerChunkListener()`
+    - `World->unregisterChunkListener()`
+    - `World->getBlockAt()` (Vector3の代わりにint x/y/zを受け入れ、場合によってはより速くなります)
+    - `World->setBlockAt()` (Vector3の代わりにint x/y/zを受け入れ、場合によってはより速くなります)
+    - `Chunk->isDirty()` (`Chunk->hasChanged()`の置換)
+    - `Chunk->getDirtyFlag()` (より細かなコンポーネント・ベースのチャンクダーティフラッギングで、チャンクの変更されていない部分を保存することを回避するために使用されます)
+    - `Chunk->setDirty()`
+    - `Chunk->setDirtyFlag()`
+- 以下のAPIメソッドは削除されました。
+    - `ChunkLoader->getLoaderId()` (オブジェクトIDが使われるようになりました)
+    - `ChunkLoader->isLoaderActive()`
+    - `ChunkLoader->getPosition()`
+    - `ChunkLoader->getLevel()`
+    - `Chunk->fastSerialize()` (`FastChunkSerializer::serialize()`を代わりに使用してください)
+    - `Chunk->getBlockData()`
+    - `Chunk->getBlockDataColumn()`
+    - `Chunk->getBlockId()`
+    - `Chunk->getBlockIdColumn()`
+    - `Chunk->getBlockLight()`
+    - `Chunk->getBlockLightColumn()`
+    - `Chunk->getBlockSkyLight()`
+    - `Chunk->getBlockSkyLightColumn()`
+    - `Chunk->getMaxY()`
+    - `Chunk->getSubChunkSendCount()` (これはプロトコルの取り扱いに特化していました)
+    - `Chunk->getX()`
+    - `Chunk->getZ()`
+    - `Chunk->hasChanged()` (`Chunk->isDirty()`または`Chunk->getDirtyFlag()`を代わりに使用してください)
+    - `Chunk->isGenerated()`
+    - `Chunk->networkSerialize()` (`network\mcpe\serializer`の中にある`ChunkSerializer`を確認してください)
+    - `Chunk->populateSkyLight()` (`SkyLightUpdate->recalculateChunk()`を代わりに使用してください)
+    - `Chunk->recalculateHeightMap()` (`SkyLightUpdate`に移動しました)
+    - `Chunk->recalculateHeightMapColumn()` (`SkyLightUpdate`に移動しました)
+    - `Chunk->setAllBlockLight()`
+    - `Chunk->setAllBlockSkyLight()`
+    - `Chunk->setBlock()`
+    - `Chunk->setBlockData()`
+    - `Chunk->setBlockId()`
+    - `Chunk->setBlockLight()`
+    - `Chunk->setBlockSkyLight()`
+    - `Chunk->setChanged()` (`Chunk->setDirty()`または`Chunk->setDirtyFlag()`を代わりに使用してください)
+    - `Chunk->setGenerated()`
+    - `Chunk->setX()`
+    - `Chunk->setZ()`
+    - `Chunk::fastDeserialize()` (`FastChunkSerializer::deserialize()`を代わりに使用してください)
+    - `World->isFullBlock()`
+    - `World->getFullBlock()`
+    - `World->getBlockIdAt()`
+    - `World->setBlockIdAt()`
+    - `World->getBlockDataAt()`
+    - `World->setBlockDataAt()`
+    - `World->setBlockLightAt()`
+    - `World->setBlockSkyLightAt()`
+    - `World->getBlockSkyLightAt()` (場合によって、`World->getRealBlockSkyLightAt()`または`World->getPotentialBlockSkyLightAt()`を使用してください)
+    - `World->getHeightMap()` (誤解を招く名前であり、空の光の計算にのみ有益です - おそらく`getHighestBlockAt()`が求められているものでしょう)
+    - `World->setHeightMap()` (誤解を招く名前であり、空の光の計算にのみ有益です)
+    - `World->getChunkEntities()`
+    - `World->getChunkTiles()`
+    - `World->getTileById()`
+    - `World->checkSpawnProtection()`
+    - `World->updateBlockLight()`
+    - `World->updateSkyLight()`
+    - `World->isFullBlock()` (`Block->isFullCube()`を代わりに使用してください)
+    - `World->sendBlocks()`
+    - `World->sendTime()`
+    - `World->addGlobalPacket()`
+    - `World->broadcastGlobalPacket()`
+    - `World->addChunkPacket()`
+    - `World->broadcastLevelSoundEvent()`
+    - `World->broadcastLevelEvent()`
+    - `World->getTickRate()`
+    - `World->setTickRate()`
+    - `World::generateChunkLoaderId()`
+- 以下のAPIメソッドはシグネチャーが変更されました。
+    - `World->addParticle()`は`addParticle(Vector3 $pos, Particle $particle, ?Player[] $players = null) : void`のシグネチャーを持つようになります。
+    - `World->addSound()`は`addSound(?Vector3 $pos, Sound $sound, ?Player[] $players = null) : void`のシグネチャーを持つようになります。
+    - `World->getRandomTickedBlocks()`は`SplFixedArray`の代わりに`bool[]`を受け付けます。
+    - `World->addRandomTickedBlock()`は`int, int`の代わりに`Block`を受け付けます。
+    - `World->removeRandomTickedBlock()`は`int, int`の代わりに`Block`を受け付けます。
+    - `World->setBlock()`にあった`$direct`パラメーターは削除されました。
+    - `World->loadChunk()`は`?Chunk`を返し、`$create`パラメーターは削除されました。
+    - `World->getChunk()`は`$create`パラメーターを受け付けなくなりました。
+    - `World->updateAllLight()`は`Vector3`の代わりに`int, int, int`を受け付けます。
+    - `ChunkManager->setChunk()` (および`World`と`SimpleChunkManager`の中の注目に値する実装) は`$chunk`パラメーターにNULLを受け付けなくなりました。
+    - `Chunk->__construct()`は`array<int, SubChunk> $subChunks, ?list<CompoundTag> $entities, ?list<CompoundTag> $tiles, ?BiomeArray $biomeArray, ?HeightArray $heightArray`のシグネチャーを持つようになります。
+    - `Chunk->getSubChunk()`は`SubChunkInterface|null`の代わりに`SubChunk`を返します。(範囲外の座標では`InvalidArgumentException`を投げます)
+    - `Chunk->setSubChunk()`はもう`SubChunkInterface`を受け入れず、`$allowEmpty`パラメーターは削除されました。
+    - `WorldManager->generateWorld()` (以前の`Server->generateWorld()`) は`int $seed, class-string<Generator> $generator, mixed[] $options`の代わりに`WorldCreationOptions`を受け付けるようになりました。
+- 以下のAPIメソッドは改名または移動しました。
+    - `Level->getChunks()` -> `World->getLoadedChunks()`
+    - `Level->getCollisionCubes()` -> `World->getCollisionBoxes()`
+    - `World->getName()` -> `World->getDisplayName()`
+    - `World->populateChunk()`は`World->requestChunkPopulation()`と`World->orderChunkPopulation()`に分割されました。
+- 以下のAPIメソッドは動作が変更されました。
+    - `World->getChunk()`はディスクからチャンクを読み込もうとしなくなりました。チャンクがすでにメモリになかった場合、`null`が返されます。 (この動作は他の`ChunkManager`の実装と適切に調和します)
+    - `World->getHighestBlockAt()`は目標のX/Z列にブロックがなかった場合`-1`の代わりに`null`を返すようになりました。
+    - 以下のメソッドは未生成の地形を指定したときに`WorldException`を投げるようになりました。
+      - `World->getSafeSpawn()` (以前はただ黙って入力位置を返していました)
+      - `World->getHighestBlockAt()` (以前は-1を返していました)
+    - `World->loadChunk()`はディスクに指定のチャンクが存在しなかった時に空のチャンクを生成しなくなりました。
+    - `World->setChunk()`は`ChunkLoadEvent`と`ChunkListener->onChunkLoaded()`を以前存在していなかったチャンクを置き換えるときに呼び出します。
+    - `World->useBreakOn()`は指定の場所が未生成、または未ロードの（または生成のためにロックされている）チャンクに含まれていた場合に`false`を返すようになりました。
+    - `World->useItemOn()`は指定の場所が未生成、または未ロードの（または生成のためにロックされている）チャンクに含まれていた場合に`false`を返すようになりました。
+- `ChunkListener`インタフェースは`ChunkLoader`から分割されました。以下のメソッドは移動しました。
+    - `ChunkLoader->onBlockChanged()` -> `ChunkListener->onBlockChanged()`
+    - `ChunkLoader->onChunkChanged()` -> `ChunkListener->onChunkChanged()`
+    - `ChunkLoader->onChunkLoaded()` -> `ChunkListener->onChunkLoaded()`
+    - `ChunkLoader->onChunkPopulated()` -> `ChunkListener->onChunkPopulated()`
+    - `ChunkLoader->onChunkUnloaded()` -> `ChunkListener->onChunkUnloaded()`
+- `Location`は`pocketmine\entity\Location`に移動しました。
+
+##### Particles
+- `DestroyBlockParticle`は`BlockBreakParticle`に一貫性のために名前が変更されました。
+- `DustParticle->__construct()`は`pocketmine\color\Color`オブジェクトを`r, g, b, a`の代わりに受け付けるようになりました。
+- `pocketmine\world\particle\Particle`は`pocketmine\math\Vector3`を継承しなくなり、インタフェースに変換されました。
+- 以下の`Particle`が追加されました。
+    - `DragonEggTeleportParticle`
+    - `PunchBlockParticle`
+
+##### Sounds
+- `pocketmine\world\sound\Sound`は`pocketmine\math\Vector3`を継承しなくなり、インタフェースに変換されました。
+- `Sound->encode()`は`?\pocketmine\math\Vector3`を受け付けるようになりました。全体へのサウンドの場合は`NULL`を渡すことができます。
+- 以下のクラスが追加されました。
+    - `ArrowHitSound`
+    - `BlockBreakSound`
+    - `BlockPlaceSound`
+    - `BowShootSound`
+    - `BucketEmptyLavaSound`
+    - `BucketEmptyWaterSound`
+    - `BucketFillLavaSound`
+    - `BucketFillWaterSound`
+    - `ChestCloseSound`
+    - `ChestOpenSound`
+    - `EnderChestCloseSound`
+    - `EnderChestOpenSound`
+    - `ExplodeSound`
+    - `FlintSteelSound`
+    - `ItemBreakSound`
+    - `NoteInstrument`
+    - `NoteSound`
+    - `PaintingPlaceSound`
+    - `PotionSplashSound`
+    - `RedstonePowerOffSound`
+    - `RedstonePowerOnSound`
+    - `ThrowSound`
+    - `XpCollectSound`
+    - `XpLevelUpSound`
+
+#### Utils
+- `Color`クラスは移動されました。現在では[`pocketmine/color`](https://github.com/pmmp/Color)パッケージ内の`pocketmine\color\Color`に存在します。
+- `UUID`クラスは削除されました。 [`ramsey/uuid`](https://github.com/ramsey/uuid)のバージョン4.1が代わりに使用されます。
+    - `UUID::fromData()`は`Ramsey\Uuid\Uuid::uuid3()`に置き換えられます
+    - `UUID::fromRandom()`は`Ramsey\Uuid\Uuid::uuid4()`に置き換えられます
+    - `UUID::fromBinary()`は`Ramsey\Uuid\Uuid::fromBytes()`に置き換えられます (`Ramsey\Uuid\Uuid::isValid()`で有効か確認してください)
+    - `UUID::toBinary()`は`Ramsey\Uuid\UuidInterface::getBytes()`で置き換えられます
+    - 詳細は <https://uuid.ramsey.dev/en/latest/introduction.html> で確認できます
+- `Terminal::hasFormattingCodes()`はフォーマットに用いるコードが利用できるかを自動的に検出しなくなりました。 代わりに`Terminal::init()`をパラメータなしで用いて初期化するか、`true`か`false`を与えて上書きする必要があります。
+- `Config->save()`はディスク書き込み時の例外を受け取らなくなりました。
+- 以下のクラスが追加されました。
+    - `InternetException`
+    - `Internet`
+    - `Process`
+- 以下のAPIメソッドが追加されました。
+    - `Config->getPath()`: ディスク上のConfigのパスを返します
+    - `Terminal::write()`: Minecraftフォーマットを使用したテキストを新たな行を作ることなく出力します
+    - `Terminal::writeLine()`: Minecraftフォーマットを使用したテキストを新たな行を作って出力します
+    - `Utils::recursiveUnlink()`: 再帰的にディレクトリ内のコンテンツとそのディレクトリを削除します
+- 以下のAPIクラス定数が追加されました。
+    - `TextFormat::COLORS`: すべての既知のカラーコードのリスト
+    - `TextFormat::FORMATS`: すべての既知のフォーマットコードのリスト(例. イタリック,ボールド)。 (`RESET`は含まれません。これはフォーマットを追加せず _削除_ するためです。)
+- 以下の非推奨のAPIリダイレクトが削除されました。
+    - `Utils::execute()`: `Process`に移動されました。
+    - `Utils::getIP()`: `Internet`に移動されました。
+    - `Utils::getMemoryUsage()`: `Process`に移動されました。
+    - `Utils::getRealMemoryUsage()`: `Process`に移動されました。
+    - `Utils::getThreadCount()`: `Process`に移動されました。
+    - `Utils::getURL()`: `Internet`に移動されました。
+    - `Utils::kill()`: `Process`に移動されました。
+    - `Utils::postURL()`: `Internet`に移動されました。
+    - `Utils::simpleCurl()`: `Internet`に移動されました。
+- 以下のAPIフィールドは削除/隠蔽されました。
+    - `Utils::$ip`
+    - `Utils::$online`
+    - `Utils::$os`
+- 以下のAPIメソッドはシグネチャが変更されました。
+    - `Internet::simpleCurl()`は現在では`callable`ではなく`Closure`を`onSuccess`パラメータとして要求します
+- 以下のAPIメソッドは削除されました。
+    - `TextFormat::toJSON()`
+    - `Utils::getCallableIdentifier()`
+
+### Gameplay
+#### Blocks
+- 以下のブロックが実装されました
+    - bamboo
+    - bamboo sapling
+    - barrel
+    - barrier
+    - blast furnace
+    - blue ice
+    - carved pumpkin
+    - coral block
+    - daylight sensor
+    - dried kelp
+    - elements (from Minecraft: Education Edition)
+    - hard (stained and unstained) glass (from Minecraft: Education Edition)
+    - hard (stained and unstained) glass pane (from Minecraft: Education Edition)
+    - jukebox
+    - note block
+    - red, green, blue and purple torches (from Minecraft: Education Edition)
+    - sea pickle
+    - slime
+    - smoker
+    - underwater torches (from Minecraft: Education Edition)
+    - additional wood variants of the following:
+        - buttons
+        - pressure plates
+        - signs
+        - trapdoors
+    - stairs of the following materials:
+        - andesite (smooth and natural)
+        - diorite (smooth and natural)
+        - end stone
+        - end stone brick
+        - granite (smooth and natural)
+        - mossy cobblestone
+        - prismarine (natural, dark and bricks)
+        - red nether brick
+        - red sandstone (and variants)
+    - stone-like slabs of many variants
+- プレイヤーでないエンティティがベッドに落ちた際に跳ねるようになりました。
+- プレイヤーとmobはベッドに落ちた際にダメージが軽減されるようになりました。
+
+#### Items
+- 以下のアイテムが実装されました
+    - records
+    - compounds (from Minecraft: Education Edition)
+    - black, brown, blue and white dyes
+
+#### Inventory
+- オフハンドインベントリが実装されました。
