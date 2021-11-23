@@ -1249,19 +1249,19 @@ permissions:
 
 ### API changes
 - 以下のAPIメソッドが追加されました。
-  - `World->getChunkEntities()`
-  - `World->notifyNeighbourBlockUpdate()`
+    - `World->getChunkEntities()`
+    - `World->notifyNeighbourBlockUpdate()`
 - 以下のAPIメソッドは削除されました。
-  - `Chunk->getEntities()`
-  - `Chunk->getSavableEntities()`
-  - `Chunk->addEntity()`
-  - `Chunk->removeEntity()`
+    - `Chunk->getEntities()`
+    - `Chunk->getSavableEntities()`
+    - `Chunk->addEntity()`
+    - `Chunk->removeEntity()`
 - 以下のクラスが追加されました。
-  - `pocketmine\inventory\transaction\TransactionBuilderInventory`: 標準的な`Inventory`APIメソッドを用いて`InventoryTransaction`を作成することを容易にします。
+    - `pocketmine\inventory\transaction\TransactionBuilderInventory`: 標準的な`Inventory`APIメソッドを用いて`InventoryTransaction`を作成することを容易にします。
 - 以下のクラス定数が追加されました。
-  - `Chunk::EDGE_LENGTH`
-  - `Chunk::COORD_BIT_SIZE`
-  - `Chunk::COORD_MASK`
-  - `SubChunk::EDGE_LENGTH`
-  - `SubChunk::COORD_BIT_SIZE`
-  - `SubChunk::COORD_MASK`
+    - `Chunk::EDGE_LENGTH`
+    - `Chunk::COORD_BIT_SIZE`
+    - `Chunk::COORD_MASK`
+    - `SubChunk::EDGE_LENGTH`
+    - `SubChunk::COORD_BIT_SIZE`
+    - `SubChunk::COORD_MASK`
