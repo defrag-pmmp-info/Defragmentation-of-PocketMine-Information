@@ -1265,3 +1265,24 @@ permissions:
     - `SubChunk::EDGE_LENGTH`
     - `SubChunk::COORD_BIT_SIZE`
     - `SubChunk::COORD_MASK`
+
+## 4.0.0-BETA3
+
+### General
+- Minecraft: Bedrock Edition 1.17.30をサポートしました。
+- Minecraft: Bedrock Edition 1.17.1xのサポートを打ち切りました。
+- `tools/convert-world.php`は標準エラー出力を書くようになり、適切な終了コードを設定するようになりました。
+- 爆発はブロック更新の処理に標準的なメカニズムを使用するようになりました。以前は、あまりに非効率な標準のアルゴリズムが原因で特別なアルゴリズムを用いていました。これらの非効率が解消されたことで、爆発は他のものと変わらないほどにパフォーマンスへの影響を最小化しました。
+- コマンドの使用方法の文字列は自動的に翻訳されなくなります。(`Translatable`を最も基本的な文字列キーの代わりに使用してください)
+- コマンド説明の文字列は自動的に翻訳されなくなります。(`Translatable`を最も基本的な文字列キーの代わりに使用してください)
+
+### Fixes
+- `ItemFactory->isRegistered()`負のアイテムIDが渡されてもクラッシュしなくなりました。
+- かまどは設置されているチャンクのリロードのの後ものあとも後も動作を継続するようになりました。
+- 一部の場合において切断後10秒間再接続ができない問題を修正しました。
+
+### API changes
+- 以下のAPIメソッドが追加されました。
+    - `Liquid->getMinAdjacentSourcesToFormSource()`: 現在のブロックが水源・マグマ源になるためには付近にいくつの水源・マグマ源ブロックが必要であるかを返します。
+    - `Player->getPlayerInfo()`
+- `Liquid`の最小コストの流量計算のコードは`MinimumCostFlowCalculator`に分割されました。
