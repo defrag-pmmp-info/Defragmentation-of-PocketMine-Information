@@ -1179,3 +1179,53 @@ permissions:
     - `TextFormat::toJSON()`
     - `Utils::getCallableIdentifier()`
 
+### Gameplay
+#### Blocks
+- 以下のブロックが実装されました
+    - bamboo
+    - bamboo sapling
+    - barrel
+    - barrier
+    - blast furnace
+    - blue ice
+    - carved pumpkin
+    - coral block
+    - daylight sensor
+    - dried kelp
+    - elements (from Minecraft: Education Edition)
+    - hard (stained and unstained) glass (from Minecraft: Education Edition)
+    - hard (stained and unstained) glass pane (from Minecraft: Education Edition)
+    - jukebox
+    - note block
+    - red, green, blue and purple torches (from Minecraft: Education Edition)
+    - sea pickle
+    - slime
+    - smoker
+    - underwater torches (from Minecraft: Education Edition)
+    - additional wood variants of the following:
+        - buttons
+        - pressure plates
+        - signs
+        - trapdoors
+    - stairs of the following materials:
+        - andesite (smooth and natural)
+        - diorite (smooth and natural)
+        - end stone
+        - end stone brick
+        - granite (smooth and natural)
+        - mossy cobblestone
+        - prismarine (natural, dark and bricks)
+        - red nether brick
+        - red sandstone (and variants)
+    - stone-like slabs of many variants
+- プレイヤーでないエンティティがベッドに落ちた際に跳ねるようになりました。
+- プレイヤーとmobはベッドに落ちた際にダメージが軽減されるようになりました。
+
+#### Items
+- 以下のアイテムが実装されました
+    - records
+    - compounds (from Minecraft: Education Edition)
+    - black, brown, blue and white dyes
+
+#### Inventory
+- オフハンドインベントリが実装されました。
