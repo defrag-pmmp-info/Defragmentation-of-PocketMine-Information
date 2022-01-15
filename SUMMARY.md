@@ -1,4 +1,5 @@
 - [ようこそ](README.md)
+- [チュートリアル](/tutorial/)
 - [サーバー構築](/building/)
 - [プラグイン開発](/plugin-develop/)
 - [API4](/api4/)
