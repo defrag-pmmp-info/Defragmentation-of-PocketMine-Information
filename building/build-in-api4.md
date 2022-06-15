@@ -26,4 +26,3 @@ API4のものは現段階ではPre-releaseでありGitHubのreleasesからダウ
 
 ## ダウンロード後
 これ以降は[API3の手動インストール](/building/README.html#_2)と同様の手順で進められます。
-
