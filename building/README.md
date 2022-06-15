@@ -1,7 +1,5 @@
 # サーバー構築
-ここではサーバー構築について記述します
-API4.0.0(ベータ版)での構築は[API4.0.0での構築](./build-in-API4.html)を参照してください
-
+ここではサーバー構築について記述します。
 このページは [pmmp.readthedocs.io](https://pmmp.readthedocs.io/en/rtfd/installation/requirements.html)を参考にしています。
 
 ## https://get.pmmp.io の利用(Linux/MacOS 限定)
