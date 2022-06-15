@@ -563,7 +563,7 @@
   
     <li class="md-nav__item">
       <a href="api4/changelogs.html" class="md-nav__link">
-        API4 Changelogs全訳(41%完了)
+        API4 Changelogs全訳
       </a>
     </li>
   
@@ -860,7 +860,7 @@
         
           <li class="md-nav__item">
   <a href="#api4-changelogs" class="md-nav__link">
-    12. API4 Changelogs全訳(41%完了)
+    12. API4 Changelogs全訳
   </a>
   
 </li>
@@ -1055,7 +1055,7 @@
         
           <li class="md-nav__item">
   <a href="#api4-changelogs" class="md-nav__link">
-    12. API4 Changelogs全訳(41%完了)
+    12. API4 Changelogs全訳
   </a>
   
 </li>
@@ -1751,7 +1751,7 @@ So instead of spending the server's core tick time to do stuff that you don't ne
 </ul>
 <h2 id="api4-index-_8">開発者向け情報</h2>
 <h3 id="api4-index-devtools-api4">DevTools API4対応版の配布場所</h3>
-<p>poggit上でダウンロード可 <a href="https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools">https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools</a> の Build History:master により最新版がダウンロード可能</p></section><section class="print-page" id="api4-changelogs"><h1 id="api4-changelogs-api4-changelogs41">API4 Changelogs全訳(41%完了)</h1>
+<p>poggit上でダウンロード可 <a href="https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools">https://poggit.pmmp.io/ci/pmmp/DevTools/PocketMine-DevTools</a> の Build History:master により最新版がダウンロード可能</p></section><section class="print-page" id="api4-changelogs"><h1 id="api4-changelogs-api4-changelogs">API4 Changelogs全訳</h1>
 <h2 id="api4-changelogs-_1">訳に関して</h2>
 <p><a href="https://github.com/pmmp/PocketMine-MP/blob/a3f8546ac442d6bbb44dfedc19eb6d3e639a50b6/changelogs/4.0.md">https://github.com/pmmp/PocketMine-MP/blob/a3f8546ac442d6bbb44dfedc19eb6d3e639a50b6/changelogs/4.0.md</a> 版より翻訳</p>
 <p>翻訳漏れの無いように気を配りますが、書かれていない項目がある場合PRを送ってもらえると助かります。</p>
@@ -3283,6 +3283,247 @@ children:
 <h4 id="api4-changelogs-inventory_1">Inventory</h4>
 <ul>
 <li>オフハンドインベントリが実装されました。</li>
+</ul>
+<h2 id="api4-changelogs-400-beta2">4.0.0-BETA2</h2>
+<p>2021年9月10日リリース</p>
+<h3 id="api4-changelogs-general_3">General</h3>
+<ul>
+<li>ext-chunkutils 0.3.xが要求されるようになりました。</li>
+<li>ガベージコレクションの後のライトストレージのメモリ使用量を削減しました。</li>
+<li>一種類のブロックのみを含む均一なサブチャンクのメモリ使用量を削減しました。</li>
+<li>タイトルバーはヒープメモリの使用量を表示しなくなりました。(それはさておき、誰もそれが何かわかっていなかったようです。)</li>
+<li><code>/status</code>はヒープメモリの使用量を表示しなくなりました。</li>
+<li><code>start.sh</code>はPHPバイナリが見当たらないエラーにおいてPHP7を挙げることはなくなりました。</li>
+<li>到達距離のチェックによってプレイヤーが何かをすることを妨げられた時に、デバッグメッセージが記録されるようになりました。</li>
+</ul>
+<h3 id="api4-changelogs-fixes">Fixes</h3>
+<ul>
+<li>プレイヤーが未生成のチャンクに対して<code>/tp</code>を使用した(あるいは他のプレイヤーによってテレポートされた)時に切断される問題を修正しました。</li>
+<li>チャンクがアンロードされた時にブロックが更新されることで発生する可能性のあるメモリリークの問題を修正しました。</li>
+<li><code>Living-&gt;lookAt()</code>が目線の高さを考慮に入れていなかった動作を修正しました。</li>
+<li>草を設置したときにそれが勝手に入れ替わる(インベントリのアイテムを消費する)問題を修正しました。</li>
+<li>プレイヤーが壁の横に落下した時にダメージを受ける問題を修正しました。</li>
+</ul>
+<h3 id="api4-changelogs-api-changes">API changes</h3>
+<ul>
+<li>以下のAPIメソッドが追加されました。<ul>
+<li><code>World-&gt;getChunkEntities()</code></li>
+<li><code>World-&gt;notifyNeighbourBlockUpdate()</code></li>
+</ul>
+</li>
+<li>以下のAPIメソッドは削除されました。<ul>
+<li><code>Chunk-&gt;getEntities()</code></li>
+<li><code>Chunk-&gt;getSavableEntities()</code></li>
+<li><code>Chunk-&gt;addEntity()</code></li>
+<li><code>Chunk-&gt;removeEntity()</code></li>
+</ul>
+</li>
+<li>以下のクラスが追加されました。<ul>
+<li><code>pocketmine\inventory\transaction\TransactionBuilderInventory</code>: 標準的な<code>Inventory</code>APIメソッドを用いて<code>InventoryTransaction</code>を作成することを容易にします。</li>
+</ul>
+</li>
+<li>以下のクラス定数が追加されました。<ul>
+<li><code>Chunk::EDGE_LENGTH</code></li>
+<li><code>Chunk::COORD_BIT_SIZE</code></li>
+<li><code>Chunk::COORD_MASK</code></li>
+<li><code>SubChunk::EDGE_LENGTH</code></li>
+<li><code>SubChunk::COORD_BIT_SIZE</code></li>
+<li><code>SubChunk::COORD_MASK</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="api4-changelogs-400-beta3">4.0.0-BETA3</h2>
+<h3 id="api4-changelogs-general_4">General</h3>
+<ul>
+<li>Minecraft: Bedrock Edition 1.17.30をサポートしました。</li>
+<li>Minecraft: Bedrock Edition 1.17.1xのサポートを打ち切りました。</li>
+<li><code>tools/convert-world.php</code>は標準エラー出力を書くようになり、適切な終了コードを設定するようになりました。</li>
+<li>爆発はブロック更新の処理に標準的なメカニズムを使用するようになりました。以前は、あまりに非効率な標準のアルゴリズムが原因で特別なアルゴリズムを用いていました。これらの非効率が解消されたことで、爆発は他のものと変わらないほどにパフォーマンスへの影響を最小化しました。</li>
+<li>コマンドの使用方法の文字列は自動的に翻訳されなくなります。(<code>Translatable</code>を最も基本的な文字列キーの代わりに使用してください)</li>
+<li>コマンド説明の文字列は自動的に翻訳されなくなります。(<code>Translatable</code>を最も基本的な文字列キーの代わりに使用してください)</li>
+</ul>
+<h3 id="api4-changelogs-fixes_1">Fixes</h3>
+<ul>
+<li><code>ItemFactory-&gt;isRegistered()</code>負のアイテムIDが渡されてもクラッシュしなくなりました。</li>
+<li>かまどは設置されているチャンクのリロードのの後ものあとも後も動作を継続するようになりました。</li>
+<li>一部の場合において切断後10秒間再接続ができない問題を修正しました。</li>
+</ul>
+<h3 id="api4-changelogs-api-changes_1">API changes</h3>
+<ul>
+<li>以下のAPIメソッドが追加されました。<ul>
+<li><code>Liquid-&gt;getMinAdjacentSourcesToFormSource()</code>: 現在のブロックが水源・マグマ源になるためには付近にいくつの水源・マグマ源ブロックが必要であるかを返します。</li>
+<li><code>Player-&gt;getPlayerInfo()</code></li>
+</ul>
+</li>
+<li><code>Liquid</code>の最小コストの流量計算のコードは<code>MinimumCostFlowCalculator</code>に分割されました。</li>
+</ul>
+<h2 id="api4-changelogs-400-beta4">4.0.0-BETA4</h2>
+<p>2021年10月6日リリース</p>
+<h3 id="api4-changelogs-general_5">General</h3>
+<ul>
+<li>光の計算のパフィーマンスをメインスレッドから使えないデータをコピーしないようにすることで改善しました。</li>
+<li>リソースパックの読み込みでは<code>dependencies</code>と<code>capabilities</code>フィールドを<code>manifest.json</code>に書き込めるようになりました。(しかし、今のところそれを確認することはありません)</li>
+<li><code>/help</code>は<code>server.properties</code>に設定された言語によってローカライズされるようになりました。</li>
+<li>ワールドの読み込み、生成、変換に関する種類のメッセージは<code>server.properties</code>に設定された言語によってローカライズされるようになりました。</li>
+<li>コンパスはプレイヤーが異なるワールドにテレポートした後に、適切な（移動後の）ワールドのスポーン地点を指すようになりました。以前はプレイヤーが最初にスポーンしたワールドのスポーン地点を指し続けていました。</li>
+<li>CLIオプションの<code>--bootstrap</code>は削除されました。</li>
+<li>RakLib 0.14.2が要求されるようになりました。これにより以下の問題が修正されます。<ul>
+<li>クライアントの切断時のセッションの不適切な処理（タイムアウトのデバッグメッセージの原因となっていた）を修正しました。</li>
+<li>プレイヤーの転送がしばしば正しく動作していなかった問題を修正しました。</li>
+<li>時々切断画面が表示されなかった問題を修正しました。</li>
+</ul>
+</li>
+</ul>
+<h3 id="api4-changelogs-fixes_2">Fixes</h3>
+<ul>
+<li>UPnPがエラーに遭遇したときにクラッシュしなくなりました。</li>
+<li>インベントリトランザクションでクライアントが不正なNBTを持つアイテムを送った時にサーバーがクラッシュする問題を修正しました。</li>
+<li>古い権限構造がネストされたプラグインを読み込んだ時のクラッシュを修正しました。(プラグインは読み込みに失敗しますが、サーバーはクラッシュしなくなりました。)</li>
+<li>不正なNBTを持つ任意のアイテムで<code>/give</code>を使用するとサーバーがクラッシュする問題を修正しました。</li>
+<li>不正確に形式化されたAPIバージョンを持つプラグインを読み込むとサーバーがクラッシュする問題を修正しました。 (プラグインは読み込みに失敗しますが、サーバーはクラッシュしなくなりました。)</li>
+<li><code>PlayerLoginEvent</code>にてプレイヤーのゲームモードを変更したときにサーバーがクラッシュする問題を修正しました。</li>
+<li>プラグインのマニフェスト中の誤った<code>commands</code>の構造はより早く検知され、よりうまく処理されるようになりました。</li>
+<li>Windowsでクラッシュした時に、コンソールリーダーのサブプロセスが残ってしまいターミナルがおかしくなる問題を修正しました。</li>
+<li><code>PlayerLoginEvent</code>の途中でプレイヤーをキックした時の<code>Player</code>のメモリリークを修正しました。(これはシャットダウン時に<code>World</code>がリークしたエンティティについてレポートするきっかけになっていました)</li>
+<li><code>Projectile-&gt;move()</code>が与えられた<code>dx</code>/<code>dy</code>/<code>dz</code>パラメーターを無視し、自身の<code>motion</code>を代わりに使用するようになりました。</li>
+<li><code>BlockFactory-&gt;get()</code>が誤ったメタ値の<code>16</code>を受け付ける問題を修正しました。</li>
+<li><code>Block-&gt;isSameState()</code>がいくつかの種類のハーフブロックに偽の値を返す問題を修正しました。</li>
+<li>二重のハーフブロックを作るために互いのハーフブロックの上に同じ種類のハーフブロックを置くことができない問題を修正しました。</li>
+</ul>
+<h3 id="api4-changelogs-api-changes_2">API changes</h3>
+<ul>
+<li><code>plugin.yml</code>のプラグインのコマンドはそれぞれのコマンドに対する<code>permission</code>を設定しなければならなくなりました。以前は<code>permission</code>キーは任意であり、誰もがコマンドを使えてしまう原因になっていました。<ul>
+<li>この動作は潜在的な瀬絵キュリティの問題から削除されました。- <code>plugin.yml</code>における誤字は危険な機能が全員に公開されてしまう可能性があります。</li>
+<li>もし誰にでも使えるコマンドを作りたい場合は、<code>default</code>または<code>true</code>を設定した権限を設定し、それをコマンドの権限に割り当ててください。</li>
+</ul>
+</li>
+<li><code>plugin.yml</code>のプラグインの権限はそれぞれに<code>default</code>を宣言しなければならなくなりました。以前は<code>default</code>キーは任意でしたが、権限が全ての人に拒否されたり(PM4)、暗黙のうちにオペレーターに付与されたり(PM3)する原因でした。</li>
+</ul>
+<h4 id="api4-changelogs-block_1">Block</h4>
+<ul>
+<li>以下のクラスを追加しました。<ul>
+<li><code>pocketmine\block\utils\LeverFacing</code></li>
+</ul>
+</li>
+<li>以下のAPIメソッドを追加しました。<ul>
+<li><code>pocketmine\block\Lever-&gt;isActivated()</code></li>
+<li><code>pocketmine\block\Lever-&gt;setActivated()</code></li>
+<li><code>pocketmine\block\Lever-&gt;getFacing()</code></li>
+<li><code>pocketmine\block\Lever-&gt;setFacing()</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="api4-changelogs-world">World</h4>
+<ul>
+<li>以下のAPIメソッドのシグネチャーは変更されました。<ul>
+<li><code>Chunk-&gt;getSubChunks()</code>は<code>SplFixedArray&lt;SubChunk&gt;</code>の代わりに<code>array&lt;int, SubChunk&gt;</code>を返すようになりました。</li>
+</ul>
+</li>
+<li>以下のAPIメソッドは削除されました。<ul>
+<li><code>FastChunkSerializer::serialize()</code></li>
+<li><code>FastChunkSerializer::deserialize()</code></li>
+</ul>
+</li>
+<li>以下のAPIメソッドが追加されました。<ul>
+<li><code>FastChunkSerializer::serializeTerrain()</code>: ブロックとバイオームのみをシリアライズします。</li>
+<li><code>FastChunkSerializer::deserializeTerrain()</code>: <code>serializeTerrain()</code>の出力をでシリアライズします。</li>
+</ul>
+</li>
+</ul>
+<h4 id="api4-changelogs-utils_1">Utils</h4>
+<ul>
+<li>以下のAPIメソッドのシグネチャーは変更されました。<ul>
+<li><code>Process::kill()</code>は追加の<code>bool $subprocesses</code>パラメーターを要求するようになりました。</li>
+</ul>
+</li>
+</ul>
+<h2 id="api4-changelogs-400-beta5">4.0.0-BETA5</h2>
+<p>2021年10月12日リリース</p>
+<h3 id="api4-changelogs-general_6">General</h3>
+<ul>
+<li>例外のログフォーマットが変更されました。例外の情報は一つの大きなメッセージのブロックに記録されるようになりました。これによりコンソールの空間が節約され可読性が向上するとともに、不正な<code>ThreadedLoggerAttachment</code>が例外の出力を壊す可能性を引き下げます。</li>
+<li>ログメッセージはロガーアタッチメントを呼び出す前に<code>server.log</code>に出力されるようになりました。これによりロガーアタッチメントでエラーが発生した際にディスクに書き込まれない問題が修正されました。</li>
+<li>多くのプラグインを読み込んだ時の起動パフォーマンスを改善しました。</li>
+<li><code>pocketmine.yml</code>の中の<code>worlds</code>設定は、これ以降<code>generator</code>キーにジェネレーターの設定を付け加えることをサポートしません。(代わりに<code>preset</code>キーを使用してください)</li>
+<li><code>server.properties</code>や<code>pocketmine.yml</code>で未知のジェネレーターを使うとワールドの生成が失敗する要因になります。</li>
+<li><code>server.properties</code>や<code>pocketmine.yml</code>で無効/不正確なワールドジェネレーターのオプション(プリセット)を使用するとワールドの生成が失敗する要因になります。</li>
+<li>既存のワールドのジェネレーターオプションは読み込み前に有効になるようになりました。それらが無効である場合、サーバーはワールドを読み込むことができません。</li>
+<li>プラグイン読み込みのエラーを含む他のいくつかのログメッセージもローカライズされました。</li>
+</ul>
+<h3 id="api4-changelogs-fixes_3">Fixes</h3>
+<ul>
+<li><code>/give</code>でマインクラフトにないIDを用いてアイテムを与えようとしたときにサーバーがクラッシュする問題を修正しました。</li>
+<li>真偽値が求められる<code>server.properties</code>のオプションで整数型が与えられた時にサーバーがクラッシュする問題を修正しました。(例 <code>false</code>や<code>true</code>の代わりに<code>0</code>や<code>1</code>)</li>
+<li>実在しない<code>pocketmine.yml</code>の設定を確認する統計報告を修正しました。</li>
+<li>適切な権限がないコマンドの使用において正しいメッセージの代わりに<code>commands.generic.permission</code>が送られてしまっていた問題を修正しました。</li>
+<li>エンティティがダメージを受けていないにも関わらず、炎の中に留まっているように見える設定になっていた問題を修正しました。</li>
+<li><code>/gc</code>の出力の<code>Memory freed</code>で単位<code>MB</code>が重複していた問題を修正しました。</li>
+<li>ワールドの読み込みに失敗した場合にワールドを生成しようとする不具合を修正しました。</li>
+</ul>
+<h3 id="api4-changelogs-api_1">API</h3>
+<h4 id="api4-changelogs-block_2">Block</h4>
+<ul>
+<li>以下のAPIメソッドは名前が変更されました。<ul>
+<li><code>Block-&gt;getPositionOffset()</code> -&gt; <code>Block-&gt;getModelPositionOffset()</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="api4-changelogs-event_1">Event</h4>
+<ul>
+<li><code>@handleCancelled</code>というPhpDocのアノテーションはキャンセルできないイベントのイベントハンドラーに使われなくなりました。</li>
+<li>以下のAPIメソッドが追加されました。<ul>
+<li><code>StructureGrowEvent-&gt;getPlayer()</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="api4-changelogs-inventory_2">Inventory</h4>
+<ul>
+<li>以下のAPIメソッドが追加されました。<ul>
+<li><code>Inventory-&gt;getAddableItemQuantity()</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="api4-changelogs-scheduler_1">Scheduler</h4>
+<ul>
+<li><code>ClosureTask</code>は明確な返り値がないクロージャーを許可するようになりました。(アロー関数に便利です) </li>
+</ul>
+<h4 id="api4-changelogs-utils_2">Utils</h4>
+<ul>
+<li>以下のAPIメソッドが追加されました。<ul>
+<li><code>Config::parseProperties()</code></li>
+<li><code>Config::writeProperties()</code></li>
+<li><code>Config::parseList()</code></li>
+<li><code>Config::writeList()</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="api4-changelogs-world_1">World</h4>
+<ul>
+<li>以下のAPIメソッドのシグネチャーは変更されました。<ul>
+<li><code>GeneratorManager-&gt;registerGenerator()</code>は<code>\Closure $presetValidator</code>パラメーターを要求するようになりました。これはワールドとコンフィグのオプションをそれらに適用する前に確認するために使われます。</li>
+</ul>
+</li>
+</ul>
+<h2 id="api4-changelogs-400-beta6">4.0.0-BETA6</h2>
+<p>2021年10月19日リリース</p>
+<h3 id="api4-changelogs-general_7">General</h3>
+<ul>
+<li>Minecraft: Bedrock Edition 1.17.40をサポートしました。</li>
+<li>以前のバージョンのサポートを終了しました。</li>
+<li>CTRL+Cシグナルの処理は復元され、Windowsで使用できるようになりました。サーバー起動中にCTRL+Cを押下すると<code>/stop</code>が実行されたように振る舞います。</li>
+<li>新しいスクリプト<code>tools/generate-permission-doc.php</code>を全ての権限とその関係性のリストを含むマークダウンファイルの生成のために追加しました。将来的には、これは公式の文献を保守するために使用される予定ですが、プラグイン開発者も彼ら自身の目的のために有用であることに気付くでしょう。</li>
+<li><a href="https://packagist.org/packages/respect/validation"><code>respect/validation</code></a>はもう中核的な依存関係にはありません。</li>
+</ul>
+<h3 id="api4-changelogs-fixes_4">Fixes</h3>
+<ul>
+<li>大きすぎるアイテムIDのアイテムを<code>/give</code>で与えようとした時、あるいは<code>/clear</code>で存在しないアイテムを削除しようとしたときにサーバーがクラッシュする問題を修正しました。<ul>
+<li><code>LegacyStringToItemParser</code>は独占的に使われるようになり、数字のIDはもう解析されません。</li>
+</ul>
+</li>
+</ul>
+<h3 id="api4-changelogs-gameplay_1">Gameplay</h3>
+<ul>
+<li>ドロップされたアイテムスタックからいくつかのアイテムを拾うことができるようになりました。これによりほぼ満杯のインベントリでアイテムを拾えない種々のバグが修正されます。</li>
 </ul></section><h1 class='nav-section-title-end'>Ended: API4</h1>
                         <h1 class='nav-section-title' id='section-単項記事'>
                             単項記事 <a class='headerlink' href='#section-単項記事' title='Permanent link'>↵</a>
